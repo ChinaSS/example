@@ -19,32 +19,6 @@ define(["jquery"],function($){
                 }]
             },
              {
-                name: 'role4resourceTree',
-                func: ['$http', function ($http) {
-                    return {
-                        restrict: 'A',
-                        link: function ($scope, element, attrs) {
-                            require(["RoleDir/roleDirective"], function (dircet) {
-                                dircet.role4resourceTree($scope, element, attrs);
-                            });
-                        }
-                    }
-                }]
-            },
-             {
-                name: 'treeDict',
-                func: ['$http', function ($http) {
-                    return {
-                        restrict: 'A',
-                        link: function ($scope, element, attrs) {
-                            require(["dictTreeDir/dictTreeDirective"], function (dircet) {
-                                dircet.treeDict($scope, element, attrs);
-                            });
-                        }
-                    }
-                }]
-             },
-             {
                 name: 'treeType',
                 func: ['$http', function ($http) {
                     return {

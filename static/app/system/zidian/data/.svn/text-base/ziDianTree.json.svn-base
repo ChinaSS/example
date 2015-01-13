@@ -1,9 +1,0 @@
-[
-    { "code": "ZD001", "pCode":"root", "name": "性别"},
-    { "code": "ZD003", "pCode":"root", "name": "生肖"},
-    { "code": "ZD004", "pCode":"root", "name": "星座"},
-    { "code": "ZD002", "pCode":"root", "name": "职务类别"},
-    { "code": "ZD002", "pCode":"root", "name": "文联职位"},
-    { "code": "ZD002", "pCode":"root", "name": "协会职务"},
-    { "code": "ZD002", "pCode":"root", "name": "行政职务"}
-]
