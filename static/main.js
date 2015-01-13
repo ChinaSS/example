@@ -100,7 +100,7 @@ require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.v
  });
 
 function getServer(){
-    return "/Examples"
+    return "/example"
 }
 
 /*

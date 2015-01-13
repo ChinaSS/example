@@ -41,5 +41,14 @@
             {"name":"表单模板"},
             {"name":"侧边栏模板"}
         ]
+    },
+    {   "name":"系统管理",
+        "iCoin":"fa-cog",
+        "sidebars":[
+            {"name":"流程管理","href":"#Flow"},
+            {"name":"组织管理","href":"#Org"},
+            {"name":"消息中心","href":"#Msg"},
+            {"name":"权限管理","href":"#Auth"}
+        ]
     }
 ]
