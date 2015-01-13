@@ -1,0 +1,12 @@
+<div class="col-xs-2">
+    <hr style="margin-top:43px;margin-bottom: 10px"/>
+    <ul id="menuList" class="ztree"></ul>
+</div>
+<div class="col-xs-10">
+    <div id="mainGrid">
+    </div>
+</div>
+<div>
+    <div ng-include src="data.template.edit"></div>
+</div>
+

@@ -1,0 +1,16 @@
+/**
+* 应用统一样式
+*/
+.notNull{color: red;}
+.none{display:none;}
+.col-sm-pull-0-5 {right: 5.33333333%;}
+.cs-calendar{position: absolute;margin-top: -21px;right: 85px;}
+
+/*分开输入日期年月日样式*/
+.app-date input{
+	display:inline !important;
+	margin-right:4px
+}
+.app-date .app-year{width:55px}
+.app-date .app-month{width:40px}
+.app-date .app-day{width:40px}

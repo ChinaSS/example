@@ -1,0 +1,70 @@
+<div id="roleEditPanel" style="display:none">
+    <form id="roleFormId">
+    <div style="float:left">
+        <div style="padding:10px;font-size:24px"><i class="fa fa-home"></i>&nbsp;{{role.entity.roleName}}</div>
+    </div>
+    <div style="float:right;padding-top:8px;padding-right:33px">
+        <button type="button" class="btn btn-default" style="width:98px;text-align:left" ng-click="role.saveEntity()">
+            <i class="fa fa-save"></i>&nbsp;保存
+        </button>
+    </div>
+    
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" style="clear:both">
+        <li class="active"><a data-target="#roleInfo" role="tab" data-toggle="tab">基本信息</a></li>
+        <li><a data-target="#refResourceInfo" role="tab" data-toggle="tab">资源信息</a></li>
+        <li><a data-target="#refUserInfo" role="tab" data-toggle="tab">用户信息</a></li>
+    </ul>
+   <!-- Tab panes -->
+    <div class="tab-content">
+		<!-- 基本信息 -->
+	    <div id="roleInfo" class="tab-pane active" style="margin-top:40px">
+	        <div class="affix-section">
+	            <div class="row">
+	
+	                <div class="col-md-12 form-horizontal">
+	                    <div class="form-group">
+	                        <label for="resourcesName" class="col-sm-3 control-label"><span style="color:red">*</span>角色名称:</label>
+	                        <div class="col-sm-8">
+	                            <input id="roleName" name="roleName" type="text" class="form-control" ng-model="role.entity.roleName">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-md-12 form-horizontal">
+	                    <div class="form-group">
+	                        <label for="resourcesType" class="col-sm-3 control-label">角色描述:</label>
+	                        <div class="col-sm-8">
+	                            <textarea id="roleDesc" name="roleDesc" class="form-control" ng-model="role.entity.roleDesc" rows="5"></textarea>
+	                        </div>
+	                    </div>
+	                </div>
+	              </div>
+	        </div>
+	    </div>
+	    <!-- 资源信息 -->
+	    <div id="refResourceInfo" class="tab-pane" style="margin-top:40px" ng-show="role.isModify(role.entity)">
+	    	<div class="col-xs-12">
+		    	<ul role4resource-tree class="ztree"></ul>
+			</div>
+	    </div>
+	     <!-- 用户信息 -->
+	    <div id="refUserInfo" class="tab-pane" style="margin-top:5px" ng-show="role.isModify(role.entity)">
+    		<div class="row">
+				<div class="col-md-12 form-horizontal">
+					<div class="form-group">
+						<label for="" class="col-sm-3 control-label">姓名:</label>
+						<div class="col-sm-6">
+							<input id="role2userUserName" type="text" class="form-control" ng-model="role.refUserInfo.userName">
+						</div>
+						<div class="col-sm-3">
+							<input type="button" value="查询"  ng-click="role.refUserInfo.queryClick()"/>
+						</div>
+					</div>
+				</div>
+			</div>
+	        <div id="role2userListId"></div>
+	    </div>
+	    
+	</div>    
+    </form>
+</div>

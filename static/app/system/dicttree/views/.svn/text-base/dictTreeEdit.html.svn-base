@@ -1,0 +1,60 @@
+<div id="dictTreeEditPanel" style="display:none">
+    <form id="dictTreeFormId">
+    <div style="float:left">
+        <div style="padding:10px;font-size:24px"><i class="fa fa-home"></i>&nbsp;</div>
+    </div>    
+    <div style="float:right;padding-top:8px;padding-right:33px">
+        <button type="button" class="btn btn-default" style="width:98px;text-align:left" ng-click="dictTree.saveEntity()">
+            <i class="fa fa-save"></i>&nbsp;保存
+        </button>
+    </div>
+
+    <div class="tab-pane active" style="margin-top:40px">
+        <div class="affix-section">
+            <h3 id="link1">&nbsp;{{dictTree.entity.dictName}}</h3>
+            <div class="row">
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="dictName" class="col-sm-3 control-label"><span class="notNull">*</span>代码名称:</label>
+                        <div class="col-sm-8">
+                            <input id="dictName" name="dictName" type="text" class="form-control" ng-model="dictTree.entity.dictName">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="dictCode" class="col-sm-3 control-label"><span class="notNull">*</span>代码:</label>
+                        <div class="col-sm-8">
+                            <input id="dictCode" name="dictCode" type="text" class="form-control" ng-model="dictTree.entity.dictCode">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="dictPcode" class="col-sm-3 control-label"><span class="notNull">*</span>父级代码:</label>
+                        <div class="col-sm-8">
+                            <input id="dictPcode" name="dictPcode"  type="text" class="form-control" ng-model="dictTree.entity.dictPcode">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="dictType" class="col-sm-3 control-label"><span class="notNull">*</span>类型:</label>
+                        <div class="col-sm-8">
+                            <input id="dictType" name="dictType"  type="text" class="form-control" ng-model="dictTree.entity.dictType">
+                        </div>
+                    </div>
+                </div>                
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="orderNum" class="col-sm-3 control-label">排序:</label>
+                        <div class="col-sm-8">
+                            <input id="orderNum"  name="orderNum"  type="text" class="form-control" ng-model="dictTree.entity.orderNum">
+                        </div>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
