@@ -41,10 +41,10 @@
     {   "name":"系统管理",
         "iCoin":"fa-cog",
         "sidebars":[
-            {"name":"流程管理","href":"#Flow"},
-            {"name":"组织管理","href":"#Org"},
-            {"name":"消息中心","href":"#Msg"},
-            {"name":"权限管理","href":"#Auth"}
+            {"name":"流程管理","href":"#flow"},
+            {"name":"组织管理","href":"#org"},
+            {"name":"消息中心","href":"#msg"},
+            {"name":"权限管理","href":"#auth"}
         ]
     }
 ]

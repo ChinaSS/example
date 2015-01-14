@@ -1,7 +1,7 @@
 /*
 HomeApp模块
  */
-define(["app/directive","core/directive","app/routerMap","Angular","Angular-route"],function(appDirective,coreDirective,routerMap,angular){
+define(["app/directive","core/directive","app/routerMap","core/routerMap","Angular","Angular-route"],function(appDirective,coreDirective,appRouterMap,coreRouterMap,angular){
     var HomeApp = angular.module('HomeApp', ["ngRoute"]);
 
     //基础控制器
@@ -34,7 +34,8 @@ define(["app/directive","core/directive","app/routerMap","Angular","Angular-rout
     }]);
 
     //扩展路由&控制器
-    routerExtend(routerMap,HomeApp);
+    routerExtend(coreRouterMap,HomeApp);
+    routerExtend(appRouterMap,HomeApp);
 
     //扩展指令
     directiveExtend(coreDirective,HomeApp);

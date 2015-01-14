@@ -18,6 +18,7 @@ require.config({
         "HomeApp":"homeApp",
         /*目录地址映射*/
         "UtilDir":"modules/util",
+        "OrgDir":"core/system/org",
         /*CSS文件路径映射*/
         "ZTreeCss":"modules/zTree/css/zTreeStyle/zTreeStyle",
         "WebUploaderCss":"modules/webuploader/css/webuploader",

@@ -1,0 +1,7 @@
+[
+    { "id": "root", "name": "角色目录","open": true},
+    { "id": "CW", "pId":"root", "name": "财务相关"},
+    { "id": "GongWen", "pId":"root", "name": "公文相关"},
+    { "id": 2, "pId":"root", "name": "采购部"},
+    { "id": 3, "pId":"root", "name": "销售部"}
+]
