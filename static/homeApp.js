@@ -54,7 +54,7 @@ define(["app/directive","core/directive","app/routerMap","core/routerMap","Angul
                     console.log("router init error! ctrlName:"+config.ctrlName+", routerPath:"+config.routerPath);
                     console.log(config);
                 }
-                app.controller(config.ctrlName, ["$compile", '$scope', function($compile,$scope){
+                app.controller(config.ctrlName, ["$compile", '$scope','$routeParams', function($compile,$scope,$routeParams){
                     require([config.ctrlUrl], function (ctrl) {
                         if(!ctrl){
                             console.log("controller init error! ctrlName: "+config.ctrlName);
