@@ -4,7 +4,8 @@
 define(function(){
     require.config({
         paths:{
-            "examplesDir":"app/examples"
+            "examplesDir":"app/examples",
+            "demoViewDir":"app/demoView"
         }
     });
 });
