@@ -60,7 +60,7 @@ define(["app/directive","core/directive","app/routerMap","core/routerMap","Angul
                             console.log("controller init error! ctrlName: "+config.ctrlName);
                             console.log(config);
                         }
-                        ctrl($compile, $scope);
+                        ctrl($compile, $scope,$routeParams);
                     });
                 }]);
                 app.config(['$routeProvider',
