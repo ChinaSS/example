@@ -6,7 +6,7 @@ define(["jquery","UtilDir/util","CodeMirror","css!CodeMirrorCSS"],function($,Uti
         //初始化代码编辑面板
         var editor = CodeMirror.fromTextArea(document.getElementById("exampleSource"), {
             lineWrapping:true, //是否显示scroll
-            lineNumbers: false, //是否显示number
+            lineNumbers: true, //是否显示number
             styleActiveLine: true,
             matchBrackets: true,
             mode:"htmlmixed",
