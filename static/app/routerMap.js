@@ -8,7 +8,7 @@ define(function() {
              */
             {
                 ctrlName : "ep_DialogCtrl",                                 //ctrl名称
-                ctrlUrl : "examplesDir/util/dialog/dialogCtrl",             //ctrl路径
+                ctrlUrl : "ExamplesDir/util/dialog/dialogCtrl",             //ctrl路径
                 routerPath : '/dialog',                                     //访问路径
                 templateUrl : 'app/examples/util/dialog/views/dialog.html'  //html文件
             },
@@ -18,7 +18,7 @@ define(function() {
              */
             {
                 ctrlName : "ep_fileUploadCtrl",
-                ctrlUrl : "examplesDir/util/fileUpload/fileUploadCtrl",
+                ctrlUrl : "ExamplesDir/util/fileUpload/fileUploadCtrl",
                 routerPath : '/fileUpload',
                 templateUrl : 'app/examples/util/fileUpload/views/fileUpload.html'
             }

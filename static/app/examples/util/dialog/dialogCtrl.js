@@ -1,4 +1,4 @@
-define(["jquery","UtilDir/util","examplesDir/common"],function($,Util,Common){
+define(["jquery","UtilDir/util","ExamplesDir/common"],function($,Util,Common){
 
     return function($compile,$scope){
         //CodeMirror初始化

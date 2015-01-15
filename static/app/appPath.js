@@ -4,9 +4,8 @@
 define(function(){
     require.config({
         paths:{
-            "examplesDir":"app/examples",
-            "CodeMirror":"modules/codemirror/codemirror.min",
-            "CodeMirrorCSS":"modules/codemirror/codemirror",
+            "ExamplesDir":"app/examples",
+            "CMDir":"modules/codemirror/"
         }
     });
 });
