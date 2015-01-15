@@ -20,6 +20,7 @@ define(["jquery","CodeMirror","css!CodeMirrorCSS"],function($){
     };
 
     return {
-        "codeMirrorInit":codeMirrorInit
+        "codeMirrorInit":codeMirrorInit,
+        "examplesPath":"app/examples"
     }
 });
