@@ -9,7 +9,6 @@
                  {"name":"typeahead","href":"#typeahead"},
                  {"name":"treeSearch","href":"#treeSearch"},
                  {"name":"inputSelect","href":"#inputSelect"},
-                 {"name":"DemoView","href":"#demoView/dialog"},
                  {"name":"弹出框","href":"#dialog"},
                  {"name":"表格","href":"#grid"},
                  {"name":"附件上传","href":"#fileUpload"},
