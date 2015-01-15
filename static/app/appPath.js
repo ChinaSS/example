@@ -5,7 +5,6 @@ define(function(){
     require.config({
         paths:{
             "examplesDir":"app/examples",
-            "demoViewDir":"app/demoView",
             "CodeMirror":"modules/codemirror/codemirror.min",
             "CodeMirrorCSS":"modules/codemirror/codemirror",
         }
