@@ -1,13 +1,7 @@
+
 {
-    "layout":[
-        {"name":"用户名","field":"UserName"},
-        {"name":"姓名","field":"Name"},
-        {"name":"员工编号","field":"UserCode"},
-        {"name":"办公电话","field":"OfficePhone"},
-        {"name":"移动电话","field":"Phone"},
-        {"name":"邮件","field":"EMail"}
-    ],
-    "data":[
+    "allDataCount":100,
+    "curPageData":[
         {
             "UserName":"zhangsan",
             "Name":"张三",

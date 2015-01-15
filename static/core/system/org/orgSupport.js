@@ -1,7 +1,7 @@
 /**
  * Created by YiYing on 2015/1/14.
  */
-define(["ZTree","css!ZTreeCss"],function(){
+define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
 
     var sysPath = "core/system";
 
@@ -33,12 +33,13 @@ define(["ZTree","css!ZTreeCss"],function(){
                     },
                     callback: {
                         onClick:function (event, treeId, treeNode) {
-                            require(["viewFrame"],function(VF){
+                            showPersonList(treeNode.id);
+                            /*require(["viewFrame"],function(VF){
                                 var VFParam = VF.config;
                                 VFParam.title = "组织-"+treeNode.name;
                                 //查询出该组织节点下的所有人员信息
                                 $.ajax({
-                                    "url":"lib/core/org/data/Persons.json",
+                                    "url":sysPath+"/org/data/Persons.json",
                                     "dataType":"json",
                                     "success":function(data){
                                         $scope.$apply(function () {
@@ -47,15 +48,14 @@ define(["ZTree","css!ZTreeCss"],function(){
                                     }
                                 });
                             });
-
-                            $("#orgMainId").hide();
-                            $("#orgPersonListId").show();
-                            //单击节点展开
-                            $.fn.zTree.getZTreeObj("orgtree").expandNode(treeNode);
                             //显示组织相关操作
                             $scope.$apply(function () {
                                 $scope.opt.curSelectOrg = treeNode.id;
-                            });
+                            });*/
+
+                            $("#orgMainId").hide();
+                            //单击节点展开
+                            $.fn.zTree.getZTreeObj("orgtree").expandNode(treeNode);
                         }
                     }
                 };
@@ -150,6 +150,47 @@ define(["ZTree","css!ZTreeCss"],function(){
         createDeptTree($("#orgtree"));
         createRoleTree($("#roletree"));
         createConfigTree($("#orgConfigTree"));
+    };
+
+
+    var showPersonList = function(id){
+        //面板清空
+        $("#orgShowListPanel").empty().show();
+
+        var config = {
+            id:"OrgPersonList",
+            placeAt:"orgShowListPanel",          //存放Grid的容器ID
+            pageSize:20,                         //一页多少条数据
+            layout:[
+                {name:"用户名",field:"UserName",click:function(e){
+                    //console.log(e.data);
+                    /*var id = e.data.row.resourcesId;
+                    $.ajax({
+                        "url":getServer()+"/permission/query?resId="+id,
+                        async:false,
+                        dataType:"json",
+                        "success":function(d){
+                            //设置资源数据
+                            $scope.$apply(function () {
+                                $scope.resource.entity = d.entity;
+                                $scope.resource.type = dict.resourceType();
+                            });
+                            showSlidebar();
+                        }
+                    });*/
+                }},
+                {name:"姓名",field:"Name"},
+                {name:"员工编号",field:"UserCode"},
+                {name:"办公电话",field:"OfficePhone"},
+                {name:"移动电话",field:"Phone"},
+                {name:"邮件",field:"EMail"}
+            ],
+            data:{
+                "type":"URL",
+                "value":sysPath+"/org/data/Persons.json"
+            }
+        };
+        grid.init(config);
     };
 
     return {
