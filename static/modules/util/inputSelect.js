@@ -49,16 +49,25 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             return cache[config.id];
         }
     }
-    
+    function bindDocumentEvent(input){
+        $(document).bind(selectEvent,function(event){
+            if ($(event.target).is("."+input.config.inputClass)||$(event.target).is("."+input.config.panelClass)||$(event.target).parents("."+input.config.panelClass).length>0) {return false};
+            input.hidePanel();
+        });
+    }
     function bindEvent(input){
         //输入框点击事件
         input.$input.on(selectEvent,function(event){
-            input.togglePanel();
-            if(input.$panel.is(":hidden")){return;}
-            $(document).bind(selectEvent,function(event){
-                if ($(event.target).is("."+input.config.inputClass)||$(event.target).is("."+input.config.panelClass)||$(event.target).parents("."+input.config.panelClass).length>0) {return false};
-                input.hidePanel();
-            });
+            if(input.$panel.is(":hidden")){
+                $(".inputPanel:visible").siblings(".inputSelect").each(function(){
+                    cache[this.id].hidePanel();
+                });
+                input.togglePanel();
+            }else{
+                input.togglePanel();
+                return;
+            }
+            bindDocumentEvent(input);
         }).on("focus",function(){
             $(this).blur();
         });
@@ -66,6 +75,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             event.preventDefault();
             event.stopPropagation();
             input.showPanel();
+            bindDocumentEvent(input);
             var item = $(this).parent()[0];
             input.fillInput(item.firstChild.nodeValue,item.id);
             input.$panel.find("input:checked").each(function(){
@@ -75,7 +85,6 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                     return false;
                 }
             });
-
         });
         //面板点击事件
         if (input.config.type=="checkbox") {
@@ -111,6 +120,10 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             if (typeof object === "object" && object.constructor === Object){
                 $.extend(Input.fn,object);
             }
+        },
+        refreshPanel : function (data) {
+            this.config.data = data;
+            this.getData();
         },
         dataInit : function(data){ //data 为id数组
             var dataObj={},
@@ -152,7 +165,9 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             this.$panel = $("<div class='inputPanel'></div>");
             this.$content = $("<div class='inputContent'></div>");
             this.$panel.append("<div class='panelData'></div>");
-            this.$input.parent().append(this.$panel).append(this.$content);
+            this.$input.parent().append(this.$panel).append(this.$content).css({
+                "position" : "relative"
+            });
             this.$content.css({
                 "top" : this.$input.parent().css("padding-top"),
                 "left" : this.$input.parent().css("padding-left")
@@ -269,9 +284,6 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
         },
         showPanel : function(){
             if(!this.$panel[0].style.width){
-                this.$panel.parent().css({
-                    "position" : "relative"
-                });
                 this.$panel.css({
                     "top" : this.$input.outerHeight()*1+this.$input.parent().css("padding-top")*1,
                     "left" : this.$input.parent().css("padding-left"),

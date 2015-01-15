@@ -2,8 +2,18 @@ define(["jquery","UtilDir/util","CodeMirror","css!CodeMirrorCSS"],function($,Uti
 
     return function($compile,$scope){
         var path = "app/examples/util";
+
+        //初始化代码编辑面板
+        var editor = CodeMirror.fromTextArea(document.getElementById("exampleSource"), {
+            lineWrapping:true, //是否显示scroll
+            lineNumbers: false, //是否显示number
+            styleActiveLine: true,
+            matchBrackets: true,
+            mode:"htmlmixed",
+            viewportMargin: Infinity
+        });
         $scope.runJS = function(){
-            var link = $compile($("#exampleSource").val());
+            var link = $compile(editor.getValue());
             $("#exampleInstance").empty().html(link($scope));
         };
 
@@ -13,15 +23,5 @@ define(["jquery","UtilDir/util","CodeMirror","css!CodeMirrorCSS"],function($,Uti
                 width:"800px"
             });
         };
-
-        CodeMirror.fromTextArea(document.getElementById("exampleSource"), {
-            lineWrapping:true, //是否显示scroll
-            lineNumbers: false, //是否显示number
-            styleActiveLine: true,
-            matchBrackets: true,
-            mode:"htmlmixed",
-            viewportMargin: Infinity
-        });
-
     };
 });

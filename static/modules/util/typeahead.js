@@ -5,7 +5,7 @@
         data : data,        //数据地址
         filter : false,     //是否对数据启用前端匹配
         lazyMatch : true,   //延迟匹配,默认为true
-        dataFormat : null,  //用于自定义每列数据的格式化输出,接受一个数据参数
+        dataFormat : null,  //用于自定义每列数据输出格式的对象数组
         callback : null     //绑定功能函数
     }
 */
@@ -22,7 +22,7 @@ define(["jquery","css!UtilDir/css/typeahead.css"],function($){
                 id : "id",
                 data : "data"
             },
-            dataFormat : null, //function(data){处理数据格式,并返回html结构}
+            dataFormat : null, //
             callback : function(data){
                 console.log(data);
             }
@@ -94,7 +94,11 @@ define(["jquery","css!UtilDir/css/typeahead.css"],function($){
                 $(event.target).addClass("cur");
             }).
             delegate("a","mousedown",function(event){
-                modal.lastContent = $(this).text();
+                if(!!modal.config.dataFormat){
+                    modal.lastContent = $(this).children("."+modal.config.key.data).text();
+                }else{
+                    modal.lastContent = $(this).text();
+                }
                 modal.doEnd(event,$(this));
             });
     }
@@ -158,22 +162,34 @@ define(["jquery","css!UtilDir/css/typeahead.css"],function($){
         fillSuggest : function(data){   //处理匹配数据并填充推荐列表
             var modal = this,
                 cur = "",
-                id = "",
+                dataFormat = modal.config.dataFormat,
                 lastContent= this.lastContent;
             modal.$suggest.empty();
             if(this.config.filter){
                 data = modal.dataFilter(data);
             }
             if (!!data.length) {
+                if(!!dataFormat){
+                    var formatHtml="";
+                    for(var j=0, length=dataFormat.length;j<length;j++){
+                        formatHtml+="<span style='width:"+(dataFormat[j]["width"]?dataFormat[j]["width"]:100/dataFormat.length)+"%'>"+dataFormat[j]["field"]+"</span>";
+                    }
+                    modal.$suggest.append("<p>"+formatHtml+"</p>");
+                }
                 for (var i = data.length; --i>-1;) {
                     var $cur = null;
                     cur = data[i];
-                    cur = (typeof cur == "object")?cur[this.config.key.data]:cur;
                     //格式化输出内容
-                    if (!!modal.config.dataFormat) {
-                        cur = modal.config.dataFormat(cur);
+                    if (!!dataFormat) {
+                        formatHtml="";
+                        for(j=0, length=dataFormat.length;j<length;j++){
+                            formatHtml+="<span class="+dataFormat[j]["key"]+" style='width:"+(dataFormat[j]["width"]?dataFormat[j]["width"]:100/dataFormat.length)+"%'>"+data[i][dataFormat[j]["key"]]+"</span>";
+                        }
+                        cur = formatHtml;
                     } else {
-                        cur = cur.replace(lastContent,"<span class='match'>"+lastContent+"</span>");
+                        cur = (typeof cur == "object")?cur[this.config.key.data]:cur;
+                        cur = cur.replace(lastContent,"<i class='match'>"+lastContent+"</i>");
+                        cur = "<span>"+cur+"</span>";
                     }
                     $cur = $("<a href='#'>"+cur+"</a>");
                     $cur.data("originData",data[i]);

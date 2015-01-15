@@ -12,17 +12,17 @@ ul,li{
     cursor: pointer;
     padding: 3px 10px;
     border: 1px solid #ccc;
-    background:rgb(228, 255, 240);
+    background: url("../images/selectIcon.png") no-repeat right center;
 }
 .inputContent{
     position : absolute;
     overflow-x : hidden;
-    padding: 6px 10px;
+    padding: 6px;
     max-width: 100%;
 }
 .inputContent a{
     padding: 0 3px;
-    margin-right: 5px;
+    margin-right: 2px;
     text-decoration: none;
     border: 1px solid #ddd;
     background-color: #eee;

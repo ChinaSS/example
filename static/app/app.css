@@ -1,16 +1,35 @@
-/**
-* 应用统一样式
-*/
-.notNull{color: red;}
-.none{display:none;}
-.col-sm-pull-0-5 {right: 5.33333333%;}
-.cs-calendar{position: absolute;margin-top: -21px;right: 85px;}
-
-/*分开输入日期年月日样式*/
-.app-date input{
-	display:inline !important;
-	margin-right:4px
+/*在线样例相关start*/
+.cs-example-source{
+	width:49%;
+	min-height: 400px;
+	border-right: 1px solid #c9c9c9;
+	float: left
 }
-.app-date .app-year{width:55px}
-.app-date .app-month{width:40px}
-.app-date .app-day{width:40px}
+.cs-example-source pre{
+	line-height: 1.5em!important;
+}
+.cs-example-instance{
+	float: left;
+	padding: 10px;
+}
+.cs-example-hr{
+	margin-top: 10px
+}
+/*在线样例相关end*/
+
+/*table add按钮样式*/
+.table-add{
+	margin-left: 5px;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 3px 5px;
+	cursor: pointer;
+	text-decoration: none;
+	font-family: Arial, 微软雅黑, 宋体, Tahoma, Helvetica, sans-serif;
+}
+.table-add:hover{
+	background-color: #2898e0;
+	border-radius: 3px;
+	text-decoration: none;
+	color: #fff;
+}

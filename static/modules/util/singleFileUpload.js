@@ -5,6 +5,7 @@ define(['WebUploader','jquery'],function(WebUploader,$){
 
     var init = function(options){
         var settings = {
+            remove:function(){},
             uploadSuccessExt:function(file, response){}
         };
         return new SimpleUpload($.extend(settings,options)).render();
@@ -37,8 +38,8 @@ define(['WebUploader','jquery'],function(WebUploader,$){
         this.$container = $(html);
         var _this = this;
         this.$img       = $('<i class="fa fa-cloud-upload"></i>');
-        this.$upload    = $('<i class="fa fa-upload""></i>').bind('click',function(){_this.startUpload()});
-        this.$remove    = $('<i class="fa fa-times"></i>').bind('click',function(){_this.remove()});
+        this.$upload    = $('<i class="fa fa-upload" title="上传"></i>').bind('click',function(){_this.startUpload()});
+        this.$remove    = $('<i class="fa fa-times" title="删除"></i>').bind('click',function(){_this.remove()});
         this.$container.append(this.$img).append(this.$upload).append(this.$remove);
         //添加附件上传组件到指定位置
         var placeAt     = this.settings.placeAt;
@@ -69,6 +70,7 @@ define(['WebUploader','jquery'],function(WebUploader,$){
         this.$img.show();
         this.$upload.hide();
         this.$remove.hide();
+        this.settings.remove.apply(this);
     };
 
     var InitUploader = function(simpleUpload,settings) {
@@ -87,7 +89,7 @@ define(['WebUploader','jquery'],function(WebUploader,$){
             resize: false
         };
 
-        var uploader = WebUploader.create($.extend(settings,def));
+        var uploader = WebUploader.create($.extend(def,settings));
 
 
 
