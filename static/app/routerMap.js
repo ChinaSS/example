@@ -21,6 +21,15 @@ define(function() {
                 ctrlUrl : "ExamplesDir/util/fileUpload/fileUploadCtrl",
                 routerPath : '/fileUpload',
                 templateUrl : 'app/examples/util/fileUpload/views/fileUpload.html'
+            },
+            /*
+             * 图片裁剪
+             */
+            {
+                ctrlName : "ep_crop",
+                ctrlUrl : "ExamplesDir/util/crop/cropCtrl",
+                routerPath : '/crop',
+                templateUrl : 'app/examples/util/crop/views/crop.html'
             }
         ]
     };

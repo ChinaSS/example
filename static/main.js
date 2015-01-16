@@ -12,6 +12,7 @@ require.config({
         "JQuery.validate.message":"modules/jquery/plugins/validate/localization/messages_zh",
         "ZTree":"modules/zTree/js/jquery.ztree.all-3.5.min",
         "WebUploader":"modules/webuploader/webuploader.min",
+        "Cropper":"modules/cropper/js/cropper",
         "Date":"modules/bootstrap/plugins/datetimepicker/js/datetimepicker.min",
         "DateCN":"modules/bootstrap/plugins/datetimepicker/js/datetimepicker.cn",
         "Util":"modules/util/util",
@@ -22,6 +23,7 @@ require.config({
         /*CSS文件路径映射*/
         "ZTreeCss":"modules/zTree/css/zTreeStyle/zTreeStyle",
         "WebUploaderCss":"modules/webuploader/css/webuploader",
+        "CropperCss":"modules/cropper/css/cropper.min",
         "DateCss":"modules/bootstrap/plugins/datetimepicker/css/datetimepicker.min"
     },
     shim:{
