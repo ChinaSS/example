@@ -5,7 +5,7 @@ define(["jquery",
         "css!CMDir/theme/cobalt",
         "css!CMDir/theme/mdn-like"],function($, Util){
 
-    var codeMirrorInit = function($compile, $scope, sourceUrl, docUrl,slideWidth){
+    var exampleInit = function($compile, $scope, sourceUrl, docUrl,slideWidth){
         require([ "text!" + sourceUrl ], function(source) {
             //把source添加到模板中
             document.getElementById("exampleSource").value = source;
@@ -35,6 +35,6 @@ define(["jquery",
     };
 
     return {
-        "codeMirrorInit":codeMirrorInit
+        "exampleInit":exampleInit
     }
 });
