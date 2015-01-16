@@ -24,8 +24,9 @@ define(["jquery",
                 $("#exampleInstance").empty().html(link($scope));
             };
             $scope.$digest();
+            
+            $scope.runJS();
         });
-
         $scope.showAPI = function() {
             Util.slidebar({
                 url : docUrl,

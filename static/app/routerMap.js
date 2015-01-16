@@ -8,7 +8,7 @@ define(function() {
 			 */
 			{
 				ctrlName : "ep_UtilCtrl", //ctrl名称
-				ctrlUrl : "ExamplesDir/util/util/dialogCtrl", //ctrl路径
+				ctrlUrl : "ExamplesDir/util/util/utilCtrl", //ctrl路径
 				routerPath : '/util', //访问路径
 				templateUrl : 'app/examples/common.html' //html文件
 			},

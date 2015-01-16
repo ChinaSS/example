@@ -1,26 +1,15 @@
+<h2>Alert</h2>
+<input type="text" id="alert_Area" text="" />
+<input type="submit" id="alertBtn" text="Click Me!" />
+<hr/>
 <script type="text/javascript">
-    require(["UtilDir/dialog"],function(Dialog){
-        //为弹出框增加操作按钮
-        var buttons = [];
-        buttons.push(
-                {name:"确定",callback:function(){
-                    //此处写扩展代码
-
-                    dialog.hide();
-                }}
-        );
-        var dialog = Dialog({
-            id:"BaseDialog",
-            cache:false,                 //是否缓存，默认为true
-            title:"BaseDialog",
-            width:"400px",
-            height:"100px",
-            dialogSize:"",               //modal-lg或modal-sm
-            body:"窗口中间内容",
-            buttons:buttons
-        });
-        //可以通过返回的dialog对象调用相关方法
-        dialog.setBody("修改内容");
-        dialog.show();
+    require(["jquery","UtilDir/util"],function($,Util){
+    	function initAlert(){
+    		$("#alert_Area").val("请输入Alert信息！");
+    	}
+    	initAlert();
+    	$("#alertBtn").click(function(){
+    		Util.alert($("#alert_Area").val());
+    	});
     })
 </script>
