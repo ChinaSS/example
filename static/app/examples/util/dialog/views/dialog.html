@@ -14,15 +14,16 @@
                 //为弹出框增加操作按钮
                 var buttons = [];
                 buttons.push(
-                        {name:"确定",callback:function(){
-                            //此处写扩展代码
+                    {name:"确定",callback:function(){
+                        //此处写扩展代码
 
-                        }}
+                        dialog.hide();
+                    }}
                 );
                 var dialog = Dialog({
-                    id:"TestDialog",
+                    id:"BaseDialog",
                     cache:false,                 //是否缓存，默认为true
-                    title:"测试窗口",
+                    title:"BaseDialog",
                     width:"400px",
                     height:"100px",
                     dialogSize:"",               //modal-lg或modal-sm
