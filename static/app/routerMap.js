@@ -10,7 +10,7 @@ define(function() {
                 ctrlName : "ep_DialogCtrl",                                 //ctrl名称
                 ctrlUrl : "ExamplesDir/util/dialog/dialogCtrl",             //ctrl路径
                 routerPath : '/dialog',                                     //访问路径
-                templateUrl : 'app/examples/util/dialog/views/dialog.html'  //html文件
+                templateUrl : 'app/examples/common.html'                    //html文件
             },
             /*
              * 附件上传样例
