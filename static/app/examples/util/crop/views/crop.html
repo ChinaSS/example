@@ -1,0 +1,56 @@
+<button ng-click="showAPI()" class="btn btn-info" style="margin-right: 20px;">
+    <i class="fa fa-bookmark"></i>&nbsp;&nbsp;API
+</button>
+<button ng-click="runJS()" class="btn btn-primary">
+    <i class="fa fa-play-circle"></i>&nbsp;&nbsp;运行
+</button>
+
+<hr class="cs-example-hr">
+<div class="cs-example-source">
+    <textarea id="exampleSource">
+        <h2>crop样例</h2>
+        <!-- javascript -->
+        <script type="text/javascript">
+            require(["UtilDir/crop", "UtilDir/dialog"], function(Crop, Dialog){
+                //包装dialog
+                var dialog = Dialog({
+                    id:"CropDialog",
+                    cache:false,                 //是否缓存，默认为true
+                    title:"图片裁剪-弹出",
+                    width:"750px",
+                    height:"350px",
+                    dialogSize:"",               //modal-lg或modal-sm
+                    body:"窗口中间内容"
+                });
+                //设置html
+                dialog.setBody("<div id='cropper'></div>");
+                //初始化Crop
+                var crop = Crop.init({
+                    //Crop的初始化选择器
+                    id : "#cropper",
+                    ratio : 16 / 9,
+                    //图片提交上传地址
+                    url : "http://localhost:8080/test",
+                    //图片上传时额外参数
+                    formData : {
+                        "aaa" : "aaa",
+                        "bbb" : "bbb"
+                    },
+                    success : function(file, response) {
+                        alert("裁剪成功！");
+                    },
+                    error : function(file, reason) {
+                        alert("裁剪失败！");
+                    }
+                });
+                //弹出窗口
+                dialog.show();
+            })
+        </script>
+    </textarea>
+</div>
+
+<div id="exampleInstance" class="cs-example-instance" style="overflow: auto">
+</div>
+
+

@@ -12,7 +12,7 @@
                  {"name":"弹出框","href":"#dialog"},
                  {"name":"表格","href":"#grid"},
                  {"name":"附件上传","href":"#fileUpload"},
-                 {"name":"个人头像裁剪","href":"#"}
+                 {"name":"图片裁剪","href":"#crop"}
              ]
             },
             {"name":"第三方组件",
