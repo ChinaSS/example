@@ -2,9 +2,40 @@
 <button ng-click="showAPI()" class="btn btn-info" style="margin-right: 20px;">
     <i class="fa fa-bookmark"></i>&nbsp;&nbsp;API
 </button>
-<button ng-click="runJS()" class="btn btn-primary">
+<button ng-click="runJS()" class="btn btn-primary" style="margin-right: 20px;">
     <i class="fa fa-play-circle"></i>&nbsp;&nbsp;运行
 </button>
+<button ng-click="helpInfo()" class="btn btn-default" style="margin-right: 20px;">
+    <i class="fa fa-info-circle"></i>&nbsp;&nbsp;提示
+</button>
+<!-- Split button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    选择代码编辑框主题<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="javascript:void(0);" ng-click="selectTheme('cobalt')">cobalt</a></li>
+    <li><a href="javascript:void(0);" ng-click="selectTheme('eclipse')">eclipse</a></li>
+    <li><a href="javascript:void(0);" ng-click="selectTheme('mdn-like')">mdn-like</a></li>
+    <li><a href="javascript:void(0);" ng-click="selectTheme('neat')">neat</a></li>
+    <li><a href="javascript:void(0);" ng-click="selectTheme('neo')">neo</a></li>
+    <li><a href="javascript:void(0);" ng-click="selectTheme('rubyblue')">rubyblue</a></li>
+    <li><a href="javascript:void(0);" ng-click="selectTheme('solarized light')">solarized light</a></li>
+    <li><a href="javascript:void(0);" ng-click="selectTheme('solarized dark')">solarized dark</a></li>
+  </ul>
+</div>
+
+<div id="noticeDiv"
+	 class="alert alert-info alert-dismissible" 
+	 role="alert" style="margin: 20px 15px;">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong>Notice!</strong> 
+  <p>
+  	Try "<strong>Alt+/</strong> " to Auto Complete, support CSS\Javascript\Html! (支持Css、Javascript、Html的代码提示和自动补全)<br/>
+  	Try "<strong>Ctrl+J</strong> " to Jump to the tag mathing the one under the cursor! (寻找匹配标签中另一半标签的位置。)<br/>
+  	Try "<strong>Ctrl+Q</strong> " to Toggle folding code! (可以快速切换是否收缩代码。)<br/>
+  </p>
+</div>
 
 <hr class="cs-example-hr">
 <div class="cs-example-source">
