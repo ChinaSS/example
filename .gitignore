@@ -1,5 +1,4 @@
-.idea/*
+.idea/
+node_modules/
+mocks/
 .project
-node_modules/*
-mocks/*
-.idea/libraries/example_node_modules.xml
