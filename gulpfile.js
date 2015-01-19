@@ -2,14 +2,31 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),        // 重命名
     minifycss = require('gulp-minify-css'), // CSS压缩
     uglify = require('gulp-uglify'),        //js压缩
-    browserSync = require("browser-sync"),  //
+    concat  = require('gulp-concat'),          //合并文件
     clean = require('gulp-clean');          //清空文件夹
 
+var browserSync = require("browser-sync");
 var reload = browserSync.reload;
 
 /*gulp.task('default', function () {
 
  });*/
+
+//压缩合并js文件
+gulp.task('js', function () {
+    var amdOptimize = require('amd-optimize');
+    /*gulp.src(['static/app/examples/util/dialog*//*.js'])
+        .pipe(uglify())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest("static/app/examples/util/dialog"));*/
+    gulp.src(['static/core/system/org/*.js'],{ base: 'static/core/system' })
+        .pipe(amdOptimize('OrgDir', {baseURL: 'static/core/system'}))
+        .pipe(concat('main-bundle.js'))
+        .pipe(uglify())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest("static/core/system/org"));
+
+});
 
 function browerInit(prism){
     browserSync({
