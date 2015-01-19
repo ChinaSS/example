@@ -39,7 +39,7 @@ define(function() {
                 ctrlName : "ep_crop",
                 ctrlUrl : "ExamplesDir/util/crop/cropCtrl",
                 routerPath : '/crop',
-                templateUrl : 'app/examples/util/crop/views/crop.html'
+                templateUrl : 'app/examples/common.html'
             }
         ]
     };
