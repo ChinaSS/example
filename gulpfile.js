@@ -5,9 +5,11 @@ var gulp = require('gulp'),
     browserSync = require("browser-sync"),  //
     clean = require('gulp-clean');          //清空文件夹
 
-gulp.task('default', function () {
+var reload = browserSync.reload;
 
-});
+/*gulp.task('default', function () {
+
+ });*/
 
 function browerInit(prism){
     browserSync({
@@ -19,8 +21,6 @@ function browerInit(prism){
         }
     });
 }
-
-
 
 gulp.task("server:mock", function () {
     var prism = require("connect-prism");
@@ -36,7 +36,7 @@ gulp.task("server:mock", function () {
     browerInit(prism)
 });
 
-// 启动 browser-sync，并绑定代理
+//启动browser-sync,并绑定代理
 gulp.task("server:proxy", function () {
     var prism = require("connect-prism");
 
@@ -49,9 +49,14 @@ gulp.task("server:proxy", function () {
     browerInit(prism)
 });
 
+gulp.task("reload",function(){
+   gulp.src('**/*.html')
+        .pipe(reload({stream:true}));
+});
+
 // 纯前端开发模式，使用mock获取需要的数据
 gulp.task("dev", ["server:mock"], function () {
-
+    gulp.watch("**/*.html",["reload"])
 });
 
 // 完整开发模式，使用代理与服务端进行交互
