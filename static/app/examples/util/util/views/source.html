@@ -1,0 +1,15 @@
+<h2>Alert</h2>
+<input type="text" id="alert_Area" text="" />
+<input type="submit" id="alertBtn" text="Click Me!" />
+<hr/>
+<script type="text/javascript">
+    require(["jquery","UtilDir/util"],function($,Util){
+    	function initAlert(){
+    		$("#alert_Area").val("请输入Alert信息！");
+    	}
+    	initAlert();
+    	$("#alertBtn").click(function(){
+    		Util.alert($("#alert_Area").val());
+    	});
+    })
+</script>

@@ -66,7 +66,7 @@ define(["app/directive","core/directive","app/routerMap","core/routerMap","Angul
                 app.config(['$routeProvider',
                     function($routeProvider) {
                         $routeProvider.when(config.routerPath, {
-                            templateUrl : getStaticPath() + config.templateUrl,
+                            templateUrl : getStaticPath() +'/'+ config.templateUrl,
                             controller : config.ctrlName
                         });
                     }

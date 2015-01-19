@@ -5,7 +5,7 @@ define(function(){
     require.config({
         paths:{
             "ExamplesDir":"app/examples",
-            "CMDir":"modules/codemirror/"
+            "CMDir":"modules/codemirror"
         }
     });
 });
