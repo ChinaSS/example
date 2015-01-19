@@ -11,8 +11,8 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
     var createDeptTree = function(element){
         $.ajax({
             //静态数据
-            "url":sysPath+"/org/data/OrgTree.json",
-            //"url": util.getServerPath()+"/org/dept/v1/",
+            //"url":sysPath+"/org/data/OrgTree.json",
+            "url": getServer()+"/v1/org/dept",
             "success":function(data) {
                 //数据转换
                 //console.log(data)

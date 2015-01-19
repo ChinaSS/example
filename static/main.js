@@ -111,5 +111,5 @@ function getServer(){
  * @returns {string}
  */
 function getStaticPath(){
-	return getServer()+"/static/";
+	return getServer()+"/static";
 }
