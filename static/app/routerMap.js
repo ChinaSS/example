@@ -23,8 +23,16 @@ define(function() {
                 templateUrl : 'app/examples/common.html'                    //html文件
             },
             /*
-             * 附件上传样例
-             * ep_DialogCtrl
+             * 单附件上传样例
+             */
+            {
+                ctrlName : "ep_singleFileUploadCtrl",
+                ctrlUrl : "ExamplesDir/util/singleFileUpload/singleFileUploadCtrl",
+                routerPath : '/singleFileUpload',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * 多附件上传样例
              */
             {
                 ctrlName : "ep_fileUploadCtrl",

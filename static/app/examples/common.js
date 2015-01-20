@@ -46,6 +46,20 @@ define(["jquery",
 
     var exampleInit = function($compile, $scope, sourceUrl, docUrl,slideWidth){
     	var editor;
+    	var $noticeDiv=$("#noticeDiv");
+    	var flag=true;  //  初始化加载
+    	//  默认提示信息
+    	var defaultInfo="<strong>Notice!</strong>" +
+						"<p>Try \"<strong>Alt+/</strong>\" to Auto Complete, " +
+						"support CSS\Javascript\Html! " +
+						"(支持Css、Javascript、Html的代码提示和自动补全)<br/>  	" +
+						"Try \"<strong>Ctrl+J</strong>\" to Jump to the tag " +
+						"mathing the one under the cursor! (寻找匹配标签中另一半标签的位置。)<br/>  	" +
+						"Try \"<strong>Ctrl+Q</strong>\" to Toggle folding code! " +
+						"(可以快速切换是否收缩代码。)<br/></p>";
+    	//  提交成功提示信息
+    	var successInfo="<strong>Submit Successful!</strong>";
+    	
     	require([ "text!" + sourceUrl ], function(source) {
             //把source添加到模板中
             document.getElementById("exampleSource").value = source;
@@ -53,17 +67,20 @@ define(["jquery",
             editor = CodeMirror.fromTextArea(document.getElementById("exampleSource"), {
                 theme:"eclipse",
                 mode:"htmlmixed",
-                lineWrapping:true,          //是否显示scroll
-                lineNumbers: true,          //是否显示number
-                viewportMargin: Infinity,
-                styleActiveLine: true,
-                matchBrackets: true,
-                matchTags: {bothTags: true},
-                foldGutter: true,
-//                lint: true,
+                lineWrapping:true,          //	是否显示scroll
+                lineNumbers: true,          //	是否显示number
+                viewportMargin: Infinity,   //	视窗最大化
+                styleActiveLine: true,      //	是否开启活动行高亮
+                matchBrackets: true,		//	是否开启括号匹配
+                matchTags: {bothTags: true},//	开启全标签匹配
+                foldGutter: true,			//	开启代码收缩
+//                lint: true,				//	开启代码查错，但是不支持html、css、javascript混编
+                
+                //	行号集成显示的类型
                 gutters: ["CodeMirror-linenumbers", 
                           "CodeMirror-foldgutter",
-                          "CodeMirror-lint-markers"],
+                          "CodeMirror-lint-markers"],	
+                //	扩展支持的快捷键
                 extraKeys: {
                 	"Alt-/": "autocomplete",
                 	"Ctrl-J": "toMatchingTag",
@@ -72,42 +89,60 @@ define(["jquery",
                 
             });
             $scope.runJS = function(){
+            	if(!flag){
+            		showHelpInfo($noticeDiv,successInfo,"alert-success",3000);
+            	}
                 var link = editor ? $compile(editor.getValue()) : "编辑区域未能正常初始化！";
                 $("#exampleInstance").empty().html(link($scope));
             };
             $scope.$digest();
             
             $scope.runJS();
+            flag=false;   //  关闭初始化加载的flag
         });
+    	//  加载api
         $scope.showAPI = function() {
             Util.slidebar({
                 url : docUrl,
                 width : slideWidth || "800px"
             });
         };
+        //   默认提示信息
         $scope.helpInfo=function(){
-        	$("#noticeDiv").css("display","block");
-        	showHelpInfo();
-        };
+        	showHelpInfo($noticeDiv,defaultInfo,"alert-info");
+        	$noticeDiv.mouseenter(function(){
+        		$noticeDiv.clearQueue();
+        	});
+        	$noticeDiv.mouseleave(function(){
+        		$noticeDiv.fadeOut("normal");
+        	});
+        	
+        }
+        //   选择主题
         $scope.selectTheme=function(theme){
         	editor ? editor.setOption("theme", theme) : "";
-        };
+        }
+        
+        showHelpInfo($noticeDiv,defaultInfo,"alert-info",3500);
+        
+        //   显示提示信息，并自动隐藏
+        function showHelpInfo($div,info,cssClass,delay){
+        	var delayint=delay?delay:3500;
+        	$div.clearQueue();
+        	$div.empty().html(function(i,text){
+        		$div.removeClass();
+        		$div.addClass("alert");
+        		$div.addClass(cssClass);
+        		$div.fadeIn("normal");
+        		return info;
+    		});
+        	$div.delay(delayint).fadeOut("normal");
+        }
 
-        //自动隐藏提示信息
-        (function showHelpInfo(){
-            var timeId = setTimeout(function(){
-                $("#noticeDiv").css("display","none");
-                clearTimeout(timeId);
-            },3000);
-        })();
-
-        //滚动条美化
-        /*require(["Scroll"],function(Scroll){
-            $("div[class='cs-example-source']").slimScroll();
-        })*/
     };
 
     return {
         "exampleInit":exampleInit
     }
 });
+

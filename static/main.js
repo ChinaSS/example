@@ -103,14 +103,26 @@ require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.v
     })
 });
 
-function getServer(){
-    return "/example"
-}
+(function(w){
 
-/*
- * 全局静态资源路径
- * @returns {string}
- */
-function getStaticPath(){
-    return getServer()+"/static";
-}
+    //静态文件目录名称
+    var staticDir = "/static";
+    var projectName = document.location.pathname.substring(0,document.location.pathname.indexOf(staticDir+"/"));
+    /**
+     * 得到项目名称
+     * 默认为:8080（即origin）与static目录之间的部分
+     * https://chinass.github.io/example/static/index.html即项目名称为example
+     * @returns {*}
+     */
+    w.getServer = function(){
+        return projectName;
+    };
+
+    /*
+     * 全局静态资源路径
+     * @returns {string}
+     */
+    w.getStaticPath = function(){
+        return getServer()+staticDir;
+    }
+})(window);
