@@ -58,8 +58,25 @@ define(function() {
                 ctrlUrl : "ExamplesDir/util/inputSelect/inputSelectCtrl",
                 routerPath : '/inputSelect',
                 templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * treeDialog
+             */
+            {
+                ctrlName : "ep_treeDialog",
+                ctrlUrl : "ExamplesDir/collaboration/treeDialog/treeDialogCtrl",
+                routerPath : '/treeDialog',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * treeDialog
+             */
+            {
+                ctrlName : "ep_treeAndGridDialog",
+                ctrlUrl : "ExamplesDir/collaboration/treeAndGridDialog/treeAndGridDialogCtrl",
+                routerPath : '/treeAndGridDialog',
+                templateUrl : 'app/examples/common.html'
             }
-
         ]
     };
 });

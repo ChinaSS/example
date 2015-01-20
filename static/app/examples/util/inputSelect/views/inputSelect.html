@@ -1,7 +1,5 @@
 <h2>inputSelect样例</h2>
-<h3>数据源：<a target="_blank" href="app/examples/util/typeahead/views/data.json">data.json</a></h3>
-<h4>亲，输入 “北” 或 “海” 试试</h4>
-<span id="result">您的选择结果是：</span>
+<blockquote>数据源：<a target="_blank" href="app/examples/util/typeahead/views/data.json">data.json</a></blockquote>
 <!--------------------------以下是调用代码-------------------------->
 <!-- html -->
 <div id="test" style="height: 30px;"></div>
@@ -13,8 +11,12 @@
         inputSelect({
             //要渲染的input的id
             id : "test",
+            //下拉框的类型：selected/checked
+            type : "select",
             //数据源：可以是数组，也可以是url地址
             data :"app/examples/util/inputSelect/views/data.json",
+            //启用文本搜索
+            searchAble : true,
             //选择之后回调方法
             callback : function(data) {
                 $("#result").text("您的选择结果是：" + data.data);

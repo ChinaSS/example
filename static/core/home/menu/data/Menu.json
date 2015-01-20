@@ -26,8 +26,8 @@
             },
             {"name":"组件组合",
              "sidebars":[
-                 {"name":"treeDialog","href":"#"},
-                 {"name":"treeAndGridDialog","href":"#"}
+                 {"name":"treeDialog","href":"#treeDialog"},
+                 {"name":"treeAndGridDialog","href":"#treeAndGridDialog"}
              ]
             },
             {"name":"其它样例",
