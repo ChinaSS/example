@@ -1,1 +1,62 @@
-<h1 id="Util">Util</h1>
+<h1 id="util">Util</h1>
+<p>该组件主要放一些代码量较少、常用的公共方法  </p>
+<p><strong>注意：</strong>
+该模块依赖dialog.js，且规定在requireJS的config中定义为<code>Dialog</code>  </p>
+<h2 id="alert-">alert方法</h2>
+<atom-text-editor class="editor" callattachhooks="true" gutter-hidden="" data-grammar="source js" data-encoding="utf8"><div class="underlayer"></div><div class="overlayer"></div></atom-text-editor>
+<h2 id="confirm-">confirm方法</h2>
+<atom-text-editor class="editor" callattachhooks="true" gutter-hidden="" data-grammar="source js" data-encoding="utf8"><div class="underlayer"></div><div class="overlayer"></div></atom-text-editor>
+<h2 id="contentdialog-">contentDialog方法</h2>
+<atom-text-editor class="editor" callattachhooks="true" gutter-hidden="" data-grammar="source js" data-encoding="utf8"><div class="underlayer"></div><div class="overlayer"></div></atom-text-editor>
+<h2 id="slidebar-">slidebar方法</h2>
+<blockquote>
+<p>侧边弹出栏</p>
+</blockquote>
+<h4 id="-">参数说明</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th style="text-align:center">是否可选</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">id</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center"><code>当侧边栏的html已经在页面上时使用</code>,侧边栏html根节点id</td>
+</tr>
+<tr>
+<td style="text-align:center">url</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">远程加载侧边栏html模板，从远程拿过来后会自动追加到body上</td>
+</tr>
+<tr>
+<td style="text-align:center">width</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">侧边栏宽度</td>
+</tr>
+<tr>
+<td style="text-align:center">cache</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">是否需要缓存，默认为true，当通过url远程加载模板时，只加载一次</td>
+</tr>
+<tr>
+<td style="text-align:center">allowClick</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">数组，侧边栏之外的区域可以点击不关闭侧边栏的DOM节点</td>
+</tr>
+</tbody>
+</table>
+<h4 id="-">样例</h4>
+<atom-text-editor class="editor" callattachhooks="true" gutter-hidden="" data-grammar="source js" data-encoding="utf8"><div class="underlayer"></div><div class="overlayer"></div></atom-text-editor>
+<h2 id="template-">template方法</h2>
+<blockquote>
+<p>简单模板引擎</p>
+</blockquote>
+<h4 id="-">占位替换样例</h4>
+<atom-text-editor class="editor" callattachhooks="true" gutter-hidden="" data-grammar="source js" data-encoding="utf8"><div class="underlayer"></div><div class="overlayer"></div></atom-text-editor>
+<h4 id="for-if-else-">for与if...else...综合样例</h4>
+<atom-text-editor class="editor" callattachhooks="true" gutter-hidden="" data-grammar="text html basic" data-encoding="utf8"><div class="underlayer"></div><div class="overlayer"></div></atom-text-editor>
+<atom-text-editor class="editor" callattachhooks="true" gutter-hidden="" data-grammar="source js" data-encoding="utf8"><div class="underlayer"></div><div class="overlayer"></div></atom-text-editor>
