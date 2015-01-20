@@ -40,7 +40,26 @@ define(function() {
                 ctrlUrl : "ExamplesDir/util/crop/cropCtrl",
                 routerPath : '/crop',
                 templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * typeahead
+             */
+            {
+                ctrlName : "ep_typeahead",
+                ctrlUrl : "ExamplesDir/util/typeahead/typeaheadCtrl",
+                routerPath : '/typeahead',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * intputSelect
+             */
+            {
+                ctrlName : "ep_inputSelect",
+                ctrlUrl : "ExamplesDir/util/inputSelect/inputSelectCtrl",
+                routerPath : '/inputSelect',
+                templateUrl : 'app/examples/common.html'
             }
+
         ]
     };
 });

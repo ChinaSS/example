@@ -1,0 +1,29 @@
+<h2>typeahead样例</h2>
+<blockquote>数据源：<a target="_blank" href="app/examples/util/typeahead/views/data.json">data.json</a></blockquote>
+<p>您的选择结果是：<span id="result" class="text-primary"></span></p>
+<!--------------------------以下是调用代码-------------------------->
+<!-- html -->
+<input id="test" type="text" class="form-control" />
+<!-- javascript -->
+<script type="text/javascript">
+    //数据
+    require(["UtilDir/typeahead"], function(typeahead){
+        //初始化
+        typeahead({
+            //要渲染的input的id
+            id : "test",
+            //数据源：可以是数组，也可以是url地址
+            data :"app/examples/util/typeahead/views/data.json",
+            //数据格式
+            key:{
+                id : "id",      //id对应字段名
+                data: "data"    //显示名称对应字段名
+            },
+            //选择之后回调方法
+            callback : function(data) {
+                $("#result").text(data.data);
+            }
+        });
+        document.getElementById("test").focus();
+    })
+</script>
