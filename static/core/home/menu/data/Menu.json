@@ -11,7 +11,8 @@
                  {"name":"inputSelect","href":"#inputSelect"},
                  {"name":"弹出框","href":"#dialog"},
                  {"name":"表格","href":"#grid"},
-                 {"name":"附件上传","href":"#fileUpload"},
+                 {"name":"单附件上传","href":"#singleFileUpload"},
+                 {"name":"多附件上传","href":"#fileUpload"},
                  {"name":"图片裁剪","href":"#crop"}
              ]
             },

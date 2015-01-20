@@ -1,46 +1,3 @@
-<h2>单附件上传</h2>
-<hr/>
-<div class="well">
-    <div class="row">
-        <div class="col-md-12 form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-3 control-label">附件:</label>
-                <div class="col-sm-8" id="singleFileUploadId">
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-3 control-label">指令实现:</label>
-                <div class="col-sm-8" cs-single-upload>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        require(['UtilDir/singleFileUpload'],function(upload){
-            var settings = {
-                placeAt:"singleFileUploadId",
-                remove:function(){
-                    //点击删除时调用
-
-                },
-                uploadSuccessExt:function(file, response){
-                   //上传成功时调用
-
-                },
-                formData:{
-                    //向服务器发送额外数据
-                    bizType:'10'
-                }
-            };
-            upload.init(settings);
-        })
-    </script>
-</div>
-<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <h2>多附件上传</h2>
 <hr/>
 <div>
@@ -57,17 +14,23 @@
         <div cs-file-upload="upload"></div>
     </div>
     <script>
-        require(["UtilDir/fileUpload"],function(FileUpload){
+        require(["UtilDir/fileUpload"],function(upload){
             var settings = {
                 placeAt:"fileUploadId",
                 formData:{
                     bizType:'10'        //额外发送的参数
                 },
                 data:[
-                    {name:'测试文档.doc',size:"10M",uploadDate:"2014-11-23",backEndData:{entity:{fileId:"DAFDA2355DSAFDSA"}}}
+                    {
+                        name:'测试文档.doc',
+                        size:"10M",
+                        uploadDate:"2014-11-23",
+                        //附件上传成功时后端返回的数据
+                        responseData:{entity:{fileId:"DAFDA2355DSAFDSA"}}
+                    }
                 ],
                 downloadFile:function(file){
-                    window.location = getServer() + '/file/download?fileId=' + file.backEndData.entity.fileId + '&bizType=' + config.formData.bizType;
+                    window.location = getServer() + '/file/download?fileId=' + file.responseData.entity.fileId + '&bizType=' + config.formData.bizType;
                 },
                 delFile:function(file){
 
@@ -79,7 +42,7 @@
 
                 }
             };
-            var upload = FileUpload.init(settings);
+            var fileUpload = upload.init(settings);
         });
     </script>
 </div>
