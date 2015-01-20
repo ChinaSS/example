@@ -88,19 +88,23 @@ define(["jquery",
         $scope.helpInfo=function(){
         	$("#noticeDiv").css("display","block");
         	showHelpInfo();
-        }
+        };
         $scope.selectTheme=function(theme){
         	editor ? editor.setOption("theme", theme) : "";
-        }
-        //   自动隐藏提示信息
-        showHelpInfo();
-        function showHelpInfo(){
-        	var timeId = setTimeout(function(){
-            	$("#noticeDiv").css("display","none");
-            	clearTimeout(timeId);
+        };
+
+        //自动隐藏提示信息
+        (function showHelpInfo(){
+            var timeId = setTimeout(function(){
+                $("#noticeDiv").css("display","none");
+                clearTimeout(timeId);
             },3000);
-        }
-        
+        })();
+
+        //滚动条美化
+        /*require(["Scroll"],function(Scroll){
+            $("div[class='cs-example-source']").slimScroll();
+        })*/
     };
 
     return {
