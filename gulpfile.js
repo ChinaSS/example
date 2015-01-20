@@ -19,8 +19,41 @@ gulp.task('js', function () {
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest("static/app/examples/util/dialog"));*/
-    gulp.src(['static/core/system/org/*.js'],{ base: 'static/core/system' })
-        .pipe(amdOptimize('OrgDir', {baseURL: 'static/core/system'}))
+    gulp.src(['static/core/system/org/orgCtrl.js'])
+        .pipe(amdOptimize('orgCtrl', {
+            paths:{
+                "jquery":"empty:",
+                //基础模块配置
+                "Bootstrap":"static/modules/bootstrap/js/bootstrap.min",
+                "Ace-extra":"static/modules/ace/js/ace-extra.min",
+                "Ace":"static/modules/ace/js/ace",
+                "Angular":"static/modules/angular/angular.min",
+                "Angular-route":"static/modules/angular/angular-route.min",
+                "JQuery.validate":"static/modules/jquery/plugins/validate/jquery.validate.min",
+                "JQuery.validate.extra":"static/modules/jquery/plugins/validate/additional-methods",
+                "JQuery.validate.message":"static/modules/jquery/plugins/validate/localization/messages_zh",
+                "ZTree":"static/modules/zTree/js/jquery.ztree.all-3.5.min",
+                "WebUploader":"static/modules/webuploader/webuploader.min",
+                "Cropper":"static/modules/cropper/js/cropper",
+                "Date":"static/modules/bootstrap/plugins/datetimepicker/js/datetimepicker.min",
+                "DateCN":"static/modules/bootstrap/plugins/datetimepicker/js/datetimepicker.cn",
+                "Util":"static/modules/util/util",
+                "HomeApp":"homeApp",
+                /*目录地址映射*/
+                "UtilDir":"static/modules/util",
+                "OrgDir":"static/core/system/org",
+                /*CSS文件路径映射*/
+                "ZTreeCss":"static/modules/zTree/css/zTreeStyle/zTreeStyle",
+                "WebUploaderCss":"static/modules/webuploader/css/webuploader",
+                "CropperCss":"static/modules/cropper/css/cropper.min",
+                "DateCss":"static/modules/bootstrap/plugins/datetimepicker/css/datetimepicker.min"
+            },
+            //configFile : "static/main.js",
+            findNestedDependencies:true
+        }))
+        /*.pipe(amdOptimize.src("**//*orgCtrl.js", {
+            configFile : "static/main.js"
+        }))*/
         .pipe(concat('main-bundle.js'))
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))

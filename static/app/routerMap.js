@@ -7,10 +7,10 @@ define(function() {
 			 * ep_UtilCtrl
 			 */
 			{
-				ctrlName : "ep_UtilCtrl", //ctrl名称
-				ctrlUrl : "ExamplesDir/util/util/utilCtrl", //ctrl路径
-				routerPath : '/util', //访问路径
-				templateUrl : 'app/examples/common.html' //html文件
+				ctrlName : "ep_UtilCtrl",                                   //ctrl名称
+				ctrlUrl : "ExamplesDir/util/util/utilCtrl",                 //ctrl路径
+				routerPath : '/util',                                       //访问路径
+				templateUrl : 'app/examples/common.html'                    //html文件
 			},
             /*
              * dialog样例
@@ -30,7 +30,7 @@ define(function() {
                 ctrlName : "ep_fileUploadCtrl",
                 ctrlUrl : "ExamplesDir/util/fileUpload/fileUploadCtrl",
                 routerPath : '/fileUpload',
-                templateUrl : 'app/examples/util/fileUpload/views/fileUpload.html'
+                templateUrl : 'app/examples/common.html'
             },
             /*
              * 图片裁剪

@@ -15,6 +15,7 @@ require.config({
         "Cropper":"modules/cropper/js/cropper",
         "Date":"modules/bootstrap/plugins/datetimepicker/js/datetimepicker.min",
         "DateCN":"modules/bootstrap/plugins/datetimepicker/js/datetimepicker.cn",
+        "Scroll":"modules/jquery/plugins/jquery.slimscroll.min",
         "Util":"modules/util/util",
         "HomeApp":"homeApp",
         /*目录地址映射*/
@@ -78,7 +79,7 @@ require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.v
      * 未登录或session过期时ajax处理
      */
     $(document).ajaxSuccess(function (event,request,settings) {
-    	var data = request.responseJSON;
+        var data = request.responseJSON;
         if(request.getResponseHeader('LOGIN-AUTH') === 'login'){
             require(["UtilDir/util"],function(util){
                 util.confirm("您没有登录或会话已过期请重新登录，是否立即跳转到登录页？",function(){
@@ -86,10 +87,10 @@ require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.v
                 })
             });
         }else  if(data.status=="500"){
-        	alert(data.entity.msg+"\n"+data.entity.cause);
-        	console.log(data.entity.stackTrace);
+            alert(data.entity.msg+"\n"+data.entity.cause);
+            console.log(data.entity.stackTrace);
         }else if(data.status=="403"){
-        	alert("权限不足 禁止访问");
+            alert("权限不足 禁止访问");
         }
     }).ajaxSend(function () {
         require(["UtilDir/util"],function(util){
@@ -100,7 +101,7 @@ require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.v
             //处理没有被服务器捕获的异常, 可能服务器崩溃
         });
     })
- });
+});
 
 function getServer(){
     return "/example"
@@ -111,5 +112,5 @@ function getServer(){
  * @returns {string}
  */
 function getStaticPath(){
-	return getServer()+"/static";
+    return getServer()+"/static";
 }

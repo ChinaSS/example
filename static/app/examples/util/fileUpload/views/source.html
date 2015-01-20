@@ -1,0 +1,77 @@
+<h2>单附件上传</h2>
+<hr/>
+<div class="well">
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">附件:</label>
+                <div class="col-sm-8" id="singleFileUploadId">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">指令实现:</label>
+                <div class="col-sm-8" cs-single-upload>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        require(['UtilDir/singleFileUpload'],function(upload){
+            var settings = {
+                placeAt:"singleFileUploadId",
+                formData:{
+                    bizType:'10'
+                }
+            };
+            upload.init(settings);
+        })
+    </script>
+</div>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<h2>多附件上传</h2>
+<hr/>
+<div>
+    <div class="affix-section">
+        <h3>
+            <span>附件</span>
+        </h3>
+        <div id="fileUploadId"></div>
+    </div>
+    <hr>
+    <div class="affix-section">
+        <h3>
+            <span>指令实现</span>
+        </h3>
+        <div cs-file-upload="upload"></div>
+    </div>
+    <script>
+        require(["UtilDir/fileUpload"],function(FileUpload){
+            var settings = {
+                placeAt:"fileUploadId",
+                formData:{
+                    bizType:'10'        //额外发送的参数
+                },
+                data:[
+                    {name:'测试文档.doc',size:"10M",uploadDate:"2014-11-23",backEndData:{entity:{fileId:"DAFDA2355DSAFDSA"}}}
+                ],
+                downloadFile:function(file){
+                    window.location = getServer() + '/file/download?fileId=' + file.backEndData.entity.fileId + '&bizType=' + config.formData.bizType;
+                },
+                delFile:function(file){
+
+                },
+                uploadSuccessExt:function(file, response){
+
+                },
+                afterRenderFile:function (file) {
+
+                }
+            };
+            var upload = FileUpload.init(settings);
+        });
+    </script>
+</div>
