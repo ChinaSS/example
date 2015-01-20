@@ -103,8 +103,14 @@ require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.v
     })
 });
 
+var root;
+var staticDir="/static";
 function getServer(){
-    return "/example"
+	if(!root){
+		var pathname=document.location.pathname;
+		root=pathname.replace(eval('/\\'+staticDir+'///'),"");
+	}
+    return root;
 }
 
 /*
@@ -112,5 +118,5 @@ function getServer(){
  * @returns {string}
  */
 function getStaticPath(){
-    return getServer()+"/static";
+	return getServer()+staticDir;
 }
