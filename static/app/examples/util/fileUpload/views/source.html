@@ -23,7 +23,16 @@
         require(['UtilDir/singleFileUpload'],function(upload){
             var settings = {
                 placeAt:"singleFileUploadId",
+                remove:function(){
+                    //点击删除时调用
+
+                },
+                uploadSuccessExt:function(file, response){
+                   //上传成功时调用
+
+                },
                 formData:{
+                    //向服务器发送额外数据
                     bizType:'10'
                 }
             };
