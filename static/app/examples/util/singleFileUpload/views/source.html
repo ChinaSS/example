@@ -1,0 +1,53 @@
+<h2>单附件上传</h2>
+<hr/>
+<div class="well">
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">附件:</label>
+                <div class="col-sm-8" id="singleFileUploadId">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">指令实现:</label>
+                <div class="col-sm-8" cs-single-upload="upload">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        require(['UtilDir/singleFileUpload'],function(upload){
+            var settings = {
+                placeAt:"singleFileUploadId",
+                remove:function(){
+                    //点击删除时调用
+
+                },
+                uploadSuccessExt:function(file, response){
+                   //上传成功时调用
+
+                },
+                formData:{
+                    //向服务器发送额外数据
+                    bizType:'10'
+                }
+            };
+            upload.init(settings);
+        })
+    </script>
+</div>
+
+<blockquote>
+    <p>
+        说明：
+    </p>
+    <div class="alert alert-warning">
+        <p>
+            由于业务的复杂性，附件上传的指令实现不属于公共部分，项目可根据实际情况封装自己的附件上传指令，方便开发
+        </p>
+    </div>
+</blockquote>

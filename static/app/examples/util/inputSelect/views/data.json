@@ -1,0 +1,23 @@
+[
+  {
+    "id" : "1",
+    "name":"国籍",
+    "data":[
+      {"id":"101","name":"美国","checked":true},
+      {"id":"102","name":"英国"},
+      {"id":"103","name":"韩国","checked":true},
+      {"id":"104","name":"德国"},
+      {
+        "id":"105",
+        "name":"中国",
+        "data":[
+          {"id":"105001","name":"北京市","checked":true},
+          {"id":"105002","name":"河北省"},
+          {"id":"105003","name":"河南省","checked":true},
+          {"id":"105004","name":"辽宁省"},
+          {"id":"105005","name":"上海市","checked":true}
+        ]
+      }
+    ]
+  }
+]

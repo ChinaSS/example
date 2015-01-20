@@ -18,7 +18,33 @@ define(["jquery"],function($){
                     }
                 }]
             },
-             {
+            {
+                name: 'role4resourceTree',
+                func: ['$http', function ($http) {
+                    return {
+                        restrict: 'A',
+                        link: function ($scope, element, attrs) {
+                            require(["RoleDir/roleDirective"], function (dircet) {
+                                dircet.role4resourceTree($scope, element, attrs);
+                            });
+                        }
+                    }
+                }]
+            },
+            {
+                name: 'treeDict',
+                func: ['$http', function ($http) {
+                    return {
+                        restrict: 'A',
+                        link: function ($scope, element, attrs) {
+                            require(["dictTreeDir/dictTreeDirective"], function (dircet) {
+                                dircet.treeDict($scope, element, attrs);
+                            });
+                        }
+                    }
+                }]
+            },
+            {
                 name: 'treeType',
                 func: ['$http', function ($http) {
                     return {
@@ -31,7 +57,7 @@ define(["jquery"],function($){
                     }
                 }]
             },
-             {
+            {
                 name: 'codeUnique',
                 func: ['$http', function ($http) {
                     return {
@@ -44,38 +70,43 @@ define(["jquery"],function($){
                         }
                     }
                 }]
-            },            
-            /**
-             * 单一附件上传
-             */
+            },
+        /**
+         * 单一附件上传
+         */
             {
-                name:'csSFileUpload',
+                name:'csSingleUpload',
                 func:function(){
                     return {
                         restrict: 'A',
                         scope:{
-                            csSFileUpload : '='
+                            csSingleUpload : '='
                         },
                         link:function($scope, element, attrs){
-                            require(['UtilDir/simpleFileUpload'],function(SFU){
+                            require(['UtilDir/singleFileUpload'],function(SFU){
                                 var settings = {
+                                    placeAt:element,
+                                    remove:function(){
+                                        $scope.csSingleUpload.file = {};
+                                        $scope.csSingleUpload.response = {};
+                                        $scope.$digest();
+                                    },
                                     uploadSuccessExt:function(file, response){
-                                        //保存上传成功的附件ID
-                                        $scope.$apply(function(){
-                                            $scope.csSFileUpload.addFileId = response.entity.fileId;
-                                        });
+                                        $scope.csSingleUpload.file = file;
+                                        $scope.csSingleUpload.response = response;
+                                        $scope.$digest();
                                     }
                                 };
-                                SFU.init($.extend(settings,$scope.csFileUpload));
+                                SFU.init($.extend(settings,$scope.csSingleUpload));
                             });
                         }
 
                     }
                 }
             },
-            /**
-             * 附件上传列表指令
-             */
+        /**
+         * 附件上传列表指令
+         */
             {
                 name: 'csFileUpload',
                 func:function(){
@@ -96,11 +127,11 @@ define(["jquery"],function($){
                                     var settings = {
                                         placeAt:element,
                                         /*formData:{
-                                            bizType:'10'
-                                        },
-                                        data:[
-                                            {name:'测试文档.doc',size:"10M",uploadDate:"2014-11-23",backEndData:{entity:{fileId:"DAFDA2355DSAFDSA"}}}
-                                        ],*/
+                                         bizType:'10'
+                                         },
+                                         data:[
+                                         {name:'测试文档.doc',size:"10M",uploadDate:"2014-11-23",backEndData:{entity:{fileId:"DAFDA2355DSAFDSA"}}}
+                                         ],*/
                                         data:[],
                                         downloadFile:function(file){
                                             window.location = getServer() + '/file/download?fileId=' + file.backEndData.entity.fileId + '&bizType=' + config.formData.bizType;
@@ -114,6 +145,14 @@ define(["jquery"],function($){
                                                     for(var i= 0;i<addFileId.length;i++){
                                                         if(needAddId==addFileId[i]){
                                                             $scope.csFileUpload.addFileId.splice(i, 1);
+                                                        }
+                                                    }
+                                                }
+                                                var addFiles = $scope.csFileUpload.addFiles;
+                                                if(addFiles){
+                                                    for(var i= 0;i<addFiles.length;i++){
+                                                        if(needAddId == addFiles[i].fileId){
+                                                            $scope.csFileUpload.addFiles.splice(i, 1);
                                                             return false;
                                                         }
                                                     }
@@ -132,12 +171,17 @@ define(["jquery"],function($){
                                             //保存上传成功的附件ID
                                             $scope.$apply(function(){
                                                 var addFileId = $scope.csFileUpload.addFileId;
+                                                var addFile = null;
                                                 if(addFileId){
                                                     addFileId.push(response.entity.fileId);
+                                                    addFile = {fileId: response.entity.fileId,file:file};
+
                                                 }else{
                                                     addFileId = [response.entity.fileId];
+                                                    addFile = {fileId: response.entity.fileId,file:file};
                                                 }
                                                 $scope.csFileUpload.addFileId = addFileId;
+                                                $scope.csFileUpload.addFiles.push(addFile);
                                             });
                                         },
                                         afterRenderFile:function (file) {
@@ -158,13 +202,22 @@ define(["jquery"],function($){
 
                                 //初始化附件上传组件
                                 var upload = uploadInit();
+                                $scope.csFileUpload.clear = function(){
+                                    upload.clear();
+                                    $scope.csFileUpload.data = [];
+                                    $scope.csFileUpload.delFileId = [];
+                                    $scope.csFileUpload.addFileId = [];
+                                    $scope.csFileUpload.addFiles = [];
+                                };
                                 //监听取已上传附件列表的URL是否改变
                                 $scope.$watch('csFileUpload.searchURL',function(){
                                     //控件内容清空
                                     upload.clear();
                                     //$scope.$apply(function(){
-                                        $scope.csFileUpload.delFileId = [];
-                                        $scope.csFileUpload.addFileId = [];
+                                    $scope.csFileUpload.delFileId = [];
+                                    $scope.csFileUpload.addFileId = [];
+                                    $scope.csFileUpload.addFiles = [];
+
                                     //});
                                     //获取已上传的附件列表
                                     $.ajax({

@@ -1,0 +1,25 @@
+<h2>inputSelect样例</h2>
+<h3>数据源：<a target="_blank" href="app/examples/util/typeahead/views/data.json">data.json</a></h3>
+<h4>亲，输入 “北” 或 “海” 试试</h4>
+<span id="result">您的选择结果是：</span>
+<!--------------------------以下是调用代码-------------------------->
+<!-- html -->
+<div id="test" style="height: 30px;"></div>
+<!-- javascript -->
+<script type="text/javascript">
+    //数据
+    require(["UtilDir/inputSelect"], function(inputSelect){
+        //初始化
+        inputSelect({
+            //要渲染的input的id
+            id : "test",
+            //数据源：可以是数组，也可以是url地址
+            data :"app/examples/util/inputSelect/views/data.json",
+            //选择之后回调方法
+            callback : function(data) {
+                $("#result").text("您的选择结果是：" + data.data);
+            }
+        });
+        document.getElementById("test").focus();
+    })
+</script>

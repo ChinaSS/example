@@ -1,27 +1,17 @@
-define(["jquery","UtilDir/util","CodeMirror","css!CodeMirrorCSS"],function($,Util){
+define(["jquery","ExamplesDir/common"],function($,Common){
 
     return function($compile,$scope){
-        var path = "app/examples/util";
-
-        //初始化代码编辑面板
-        var editor = CodeMirror.fromTextArea(document.getElementById("exampleSource"), {
-            lineWrapping:true, //是否显示scroll
-            lineNumbers: true, //是否显示number
-            styleActiveLine: true,
-            matchBrackets: true,
-            mode:"htmlmixed",
-            viewportMargin: Infinity
-        });
-        $scope.runJS = function(){
-            var link = $compile(editor.getValue());
-            $("#exampleInstance").empty().html(link($scope));
-        };
-
-        $scope.showAPI = function(){
-            Util.slidebar({
-                url:path+"/fileUpload/views/doc.html",
-                width:"800px"
-            });
+        //样例初始化
+        Common.exampleInit($compile,$scope,
+            "ExamplesDir/util/fileUpload/views/source.html",        //演示代码路径
+            "ExamplesDir/util/fileUpload/views/doc.html"            //文档路径
+        );
+        //附件上传参数
+        $scope.upload = {
+            searchURL:getServer()+"/caiji/opus/file?opusId=8a9494814a2775db014a28e5206f0007",
+            formData:{
+                bizType:'10'
+            }
         };
     };
 });
