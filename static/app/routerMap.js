@@ -84,6 +84,33 @@ define(function() {
                 ctrlUrl : "ExamplesDir/collaboration/treeAndGridDialog/treeAndGridDialogCtrl",
                 routerPath : '/treeAndGridDialog',
                 templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * fontawesome
+             */
+            {
+                ctrlName : "ep_fontawesome",
+                ctrlUrl : "ExamplesDir/thirdParty/fontawesome/fontCtrl",
+                routerPath : '/fontawesome',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * echarts
+             */
+            {
+                ctrlName : "ep_eCharts",
+                ctrlUrl : "ExamplesDir/thirdParty/ECharts/eChartsCtrl",
+                routerPath : '/ECharts',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * mCustomScrollbar
+             */
+            {
+                ctrlName : "ep_mCustomScrollbar",
+                ctrlUrl : "ExamplesDir/thirdParty/mCustomScrollbar/mcScrollbarCtrl",
+                routerPath : '/mcScrollbar',
+                templateUrl : 'app/examples/common.html'
             }
         ]
     };
