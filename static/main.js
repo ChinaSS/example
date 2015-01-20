@@ -107,6 +107,7 @@ require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.v
 
     //静态文件目录名称
     var staticDir = "/static";
+    var projectName = document.location.pathname.substring(0,document.location.pathname.indexOf(staticDir+"/"));
     /**
      * 得到项目名称
      * 默认为:8080（即origin）与static目录之间的部分
@@ -114,7 +115,7 @@ require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.v
      * @returns {*}
      */
     w.getServer = function(){
-        return document.location.pathname.substring(0,document.location.pathname.indexOf(staticDir+"/"));
+        return projectName;
     };
 
     /*
