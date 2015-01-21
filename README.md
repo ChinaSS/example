@@ -23,6 +23,6 @@
 * [ECharts](http://echarts.baidu.com/  )  图表
 * [webuploader](http://fex.baidu.com/webuploader/ ) 附件上传组件
 * [datetimepicker](http://www.bootcss.com/p/bootstrap-datetimepicker/) 日期选择组件
-* [slimScroll](http://rocha.la/jQuery-slimScroll) 滚动条美化组件
+* [mCustomScrollbar](http://manos.malihu.gr/jquery-custom-content-scroller/) 滚动条美化组件，支持内容滚动，同一组织还提供类似跳转到锚点的滚动、缩略图滚动等等。
 * [angular](http://www.ngnice.com/docs/guide) 前端MVC框架，这里是部分翻译成中文的文档，完整版可以去官网查看
 * [gulp](http://gulpjs.com/) 前端构建工具，常用于文件压缩、合并等
