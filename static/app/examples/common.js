@@ -21,6 +21,7 @@ define(["jquery",
         "CMDir/mode/xml/xml",
         "CMDir/mode/javascript/javascript",
         "CMDir/mode/htmlmixed/htmlmixed",
+        "CMDir/addon/scroll/simplescrollbars",
         
 //        "http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js",
 //        "https://rawgithub.com/zaach/jsonlint/79b553fb65c192add9066da64043458981b3972b/lib/jsonlint.js",
@@ -39,7 +40,8 @@ define(["jquery",
         "css!CMDir/theme/rubyblue",
         "css!CMDir/theme/solarized",
         "css!CMDir/addon/hint/show-hint",
-        "css!CMDir/addon/fold/foldgutter"
+        "css!CMDir/addon/fold/foldgutter",
+        "css!CMDir/addon/scroll/simplescrollbars"
 //        ,
 //        "css!CMDir/addon/lint/lint"
         ],function($, Util,CodeMirror){     
@@ -60,6 +62,13 @@ define(["jquery",
     	//  提交成功提示信息
     	var successInfo="<strong>Submit Successful!</strong>";
     	
+    	//  增加对well样式的横排支持
+    	var wellUpdateCss="<!-- 下面的样式请勿修改！ -->" +
+    			"<script type=\"text/javascript\">" +
+    			"require([\"jquery\"], function($) {" +
+    			"$(\".well\").attr(\"style\", \"display: inline-flex; width: 100%;\");" +
+    			"});</script>";
+    	
     	require([ "text!" + sourceUrl ], function(source) {
             //把source添加到模板中
             document.getElementById("exampleSource").value = source;
@@ -75,7 +84,7 @@ define(["jquery",
                 matchTags: {bothTags: true},//	开启全标签匹配
                 foldGutter: true,			//	开启代码收缩
 //                lint: true,				//	开启代码查错，但是不支持html、css、javascript混编
-                
+                scrollbarStyle:"overlay",    //  替换滚动条样式 overlay、simple
                 //	行号集成显示的类型
                 gutters: ["CodeMirror-linenumbers", 
                           "CodeMirror-foldgutter",
@@ -92,7 +101,7 @@ define(["jquery",
             	if(!flag){
             		showHelpInfo($noticeDiv,successInfo,"alert-success",3000);
             	}
-                var link = editor ? $compile(editor.getValue()) : "编辑区域未能正常初始化！";
+                var link = editor ? $compile(editor.getValue()+wellUpdateCss) : "编辑区域未能正常初始化！";
                 $("#exampleInstance").empty().html(link($scope));
             };
             $scope.$digest();

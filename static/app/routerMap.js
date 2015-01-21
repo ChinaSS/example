@@ -66,8 +66,52 @@ define(function() {
                 ctrlUrl : "ExamplesDir/util/inputSelect/inputSelectCtrl",
                 routerPath : '/inputSelect',
                 templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * treeDialog
+             */
+            {
+                ctrlName : "ep_treeDialog",
+                ctrlUrl : "ExamplesDir/collaboration/treeDialog/treeDialogCtrl",
+                routerPath : '/treeDialog',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * treeDialog
+             */
+            {
+                ctrlName : "ep_treeAndGridDialog",
+                ctrlUrl : "ExamplesDir/collaboration/treeAndGridDialog/treeAndGridDialogCtrl",
+                routerPath : '/treeAndGridDialog',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * fontawesome
+             */
+            {
+                ctrlName : "ep_fontawesome",
+                ctrlUrl : "ExamplesDir/thirdParty/fontawesome/fontCtrl",
+                routerPath : '/fontawesome',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * echarts
+             */
+            {
+                ctrlName : "ep_eCharts",
+                ctrlUrl : "ExamplesDir/thirdParty/ECharts/eChartsCtrl",
+                routerPath : '/ECharts',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * mCustomScrollbar
+             */
+            {
+                ctrlName : "ep_mCustomScrollbar",
+                ctrlUrl : "ExamplesDir/thirdParty/mCustomScrollbar/mcScrollbarCtrl",
+                routerPath : '/mcScrollbar',
+                templateUrl : 'app/examples/common.html'
             }
-
         ]
     };
 });

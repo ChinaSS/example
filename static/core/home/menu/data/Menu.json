@@ -20,18 +20,18 @@
              "sidebars":[
                  {"name":"树","href":"#"},
                  {"name":"日期","href":"#"},
-                 {"name":"图表","href":"#"},
-                 {"name":"图标","href":"#"},
-                 {"name":"滚动条美化","href":"#"}
+                 {"name":"图表","href":"#ECharts"},
+                 {"name":"图标","href":"#fontawesome"},
+                 {"name":"滚动条美化","href":"#mcScrollbar"}
              ]
             },
             {"name":"组件组合",
              "sidebars":[
-                 {"name":"treeDialog","href":"#"},
-                 {"name":"treeAndGridDialog","href":"#"}
+                 {"name":"treeDialog","href":"#treeDialog"},
+                 {"name":"treeAndGridDialog","href":"#treeAndGridDialog"}
              ]
             },
-            {"name":"其它样例",
+            {"name":"模板",
              "sidebars":[
                  {"name":"表单模板"},
                  {"name":"侧边栏模板"}

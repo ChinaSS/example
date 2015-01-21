@@ -1,0 +1,1056 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Google Chrome Frame -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!-- Reset iPhone Viewport & Initial Scale -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jQuery custom content scroller &#8211; 		malihu
+					 | web design</title>
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"db7070827b3169ce75f729d7c7134972",petok:"d7deda0a71d55950169672e1fdbc893151ce4986-1421747131-1800",zone:"malihu.gr",rocket:"0",apps:{}}];CloudFlare.push({"apps":{"ape":"679da64ef4829e2c22162bcf60816676"}});!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=919620257c/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
+//]]>
+</script>
+<link rel="shortcut icon" href="http://manos.malihu.gr/wp-content/themes/malihu/images/favicon.ico" type="image/x-icon">
+<!-- HTML5 and css3 media queries - old IE enabling scripts -->
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<!-- rss, pingback url, archives etc. -->
+<link rel="alternate" type="text/xml" title="malihu Posts RSS feed - RSS .92" href="http://feeds.feedburner.com/malihu" />
+<link rel="alternate" type="application/rss+xml" title="malihu Posts RSS feed - RSS 2.0" href="http://feeds.feedburner.com/malihu" />
+<link rel="alternate" type="application/atom+xml" title="malihu Posts RSS feed - Atom 0.3" href="http://feeds.feedburner.com/malihu" />
+<link rel="alternate" type="application/rss+xml" title="malihu Comments RSS feed" href="http://feeds.feedburner.com/CommentsForMalihu" />
+<link href='http://fonts.googleapis.com/css?family=Damion|Oswald|Alice' rel='stylesheet' type='text/css'>
+<link rel="alternate" type="application/rss+xml" title="malihu &raquo; jQuery custom content scroller Comments Feed" href="http://manos.malihu.gr/jquery-custom-content-scroller/feed/" />
+<link rel='shortlink' href='http://manos.malihu.gr/?p=197' />
+<!-- CSS -->
+<link rel="stylesheet" href="http://manos.malihu.gr/wp-content/themes/malihu/style.css" />
+</head>
+
+<body id="top">
+	<header class="clearfix">
+			<div class="logo"><a href="http://manos.malihu.gr">malihu</a></div>
+			<span class="tagline">web design</span>
+			<nav>
+				<ul class="clearfix">
+					<li><a href="http://feeds.feedburner.com/malihu" title="RSS feed" target="_blank" class="gen-icon social-rss"><span><svg version="1.1" viewBox="0 0 32 32" preserveAspectRatio="xMinYMin meet"><g></g><path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path></svg></span></a></li>
+					<li><a href="https://twitter.com/malihu" title="@Twitter" target="_blank" class="gen-icon social-twitter"><span><svg version="1.1" viewBox="0 0 32 32" preserveAspectRatio="xMinYMin meet"><g></g><path d="M32 6.076c-1.177 0.522-2.443 0.875-3.771 1.034 1.355-0.813 2.396-2.099 2.887-3.632-1.269 0.752-2.674 1.299-4.169 1.593-1.198-1.276-2.904-2.073-4.792-2.073-3.626 0-6.565 2.939-6.565 6.565 0 0.515 0.058 1.016 0.17 1.496-5.456-0.274-10.294-2.888-13.532-6.86-0.565 0.97-0.889 2.097-0.889 3.301 0 2.278 1.159 4.287 2.921 5.465-1.076-0.034-2.088-0.329-2.974-0.821-0.001 0.027-0.001 0.055-0.001 0.083 0 3.181 2.263 5.834 5.266 6.437-0.551 0.15-1.131 0.23-1.73 0.23-0.423 0-0.834-0.041-1.235-0.118 0.835 2.608 3.26 4.506 6.133 4.559-2.247 1.761-5.078 2.81-8.154 2.81-0.53 0-1.052-0.031-1.566-0.092 2.905 1.863 6.356 2.95 10.064 2.95 12.076 0 18.679-10.004 18.679-18.68 0-0.285-0.006-0.568-0.019-0.849 1.283-0.926 2.396-2.082 3.276-3.398z"></path></svg></span></a></li>
+					<li><a href="http://www.facebook.com/malihuz" title="on Facebook" target="_blank" class="gen-icon social-fb"><span><svg version="1.1" viewBox="0 0 32 32" preserveAspectRatio="xMinYMin meet"><g></g><path d="M17.996 32h-5.996v-16h-4v-5.514l4-0.002-0.007-3.248c0-4.498 1.22-7.236 6.519-7.236h4.412v5.515h-2.757c-2.064 0-2.163 0.771-2.163 2.209l-0.008 2.76h4.959l-0.584 5.514-4.37 0.002-0.004 16z"></path></svg></span></a></li>
+					<li><a href="https://github.com/malihu" title="GitHub" target="_blank" class="gen-icon social-github"><span><svg version="1.1" viewBox="0 0 32 32" preserveAspectRatio="xMinYMin meet"><g></g><path d="M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM25.502 25.502c-1.235 1.235-2.672 2.204-4.272 2.881-0.406 0.172-0.819 0.323-1.238 0.453v-2.398c0-1.26-0.432-2.188-1.297-2.781 0.542-0.052 1.039-0.125 1.492-0.219s0.932-0.229 1.438-0.406 0.958-0.388 1.359-0.633 0.786-0.563 1.156-0.953 0.68-0.833 0.93-1.328 0.448-1.089 0.594-1.781 0.219-1.456 0.219-2.289c0-1.615-0.526-2.99-1.578-4.125 0.479-1.25 0.427-2.609-0.156-4.078l-0.391-0.047c-0.271-0.031-0.758 0.083-1.461 0.344s-1.492 0.688-2.367 1.281c-1.24-0.344-2.526-0.516-3.859-0.516-1.344 0-2.625 0.172-3.844 0.516-0.552-0.375-1.075-0.685-1.57-0.93s-0.891-0.411-1.188-0.5-0.573-0.143-0.828-0.164-0.419-0.026-0.492-0.016-0.125 0.021-0.156 0.031c-0.583 1.479-0.635 2.839-0.156 4.078-1.052 1.135-1.578 2.51-1.578 4.125 0 0.833 0.073 1.596 0.219 2.289s0.344 1.286 0.594 1.781 0.56 0.938 0.93 1.328 0.755 0.708 1.156 0.953 0.854 0.456 1.359 0.633 0.984 0.313 1.438 0.406 0.95 0.167 1.492 0.219c-0.854 0.583-1.281 1.51-1.281 2.781v2.445c-0.472-0.14-0.937-0.306-1.394-0.5-1.6-0.677-3.037-1.646-4.272-2.881s-2.204-2.672-2.881-4.272c-0.7-1.655-1.055-3.414-1.055-5.23s0.355-3.575 1.055-5.23c0.677-1.6 1.646-3.037 2.881-4.272s2.672-2.204 4.272-2.881c1.655-0.7 3.415-1.055 5.23-1.055s3.575 0.355 5.23 1.055c1.6 0.677 3.037 1.646 4.272 2.881s2.204 2.672 2.881 4.272c0.7 1.655 1.055 3.415 1.055 5.23s-0.355 3.575-1.055 5.23c-0.677 1.6-1.646 3.037-2.881 4.272z"></path></svg></span></a></li>
+				</ul>
+			</nav>
+	</header>
+	
+	<nav id="drawer-menu">
+		<div class="drawer">
+							<div id="drawer-about-section">
+					<h4><a href="http://manos.malihu.gr/about">Hello!</a></h4>
+					<p class="clearfix"><span class="malihu-avatar-medium"></span> <strong>I&rsquo;m Manos</strong> and this is my blog which is all about creating and sharing (free) stuff for developing websites.<br /> <a href="http://manos.malihu.gr/about#more-about">Read more</a> or <a href="http://manos.malihu.gr/contact">contact me</a>.</p>
+				</div>
+						<ul>
+				<li class="categories-list">
+					<h4>stuff</h4>
+					<ul>
+						<li><a href="http://manos.malihu.gr/category/plugins">Plugins</a></li>
+						<li><a href="http://manos.malihu.gr/category/templates-web-apps">Templates &amp; web apps</a></li>
+						<li><a href="http://manos.malihu.gr/category/tutorials-snippets">Tutorials &amp; snippets</a></li>
+						<li><a href="http://manos.malihu.gr/category/wordpress">WordPress</a></li>
+					</ul>
+				</li>
+									<li class="whats-new-list">		
+													<div id="text-4" class="whats-up widget_text"><h3>What’s new?</h3>			<div class="textwidget"><p>Updated <a href="http://manos.malihu.gr/jquery-custom-content-scroller/">Custom scrollbar plugin</a> to version 3.0.7.<br />
+<a href="http://manos.malihu.gr/jquery-thumbnail-scroller/">jQuery thumbnail scroller plugin</a> version 2.0.1 released (major update).<br />
+Updated <a href="http://wordpress.org/plugins/page-scroll-to-id/" target="_blank">Page scroll to id for WordPress</a> to version 1.5.8. </p>
+</div>
+		</div>						 
+						 
+					</li>
+								<li class="popular-list">
+					<h4>popular</h4>
+					<ul>
+						<li><a href="http://manos.malihu.gr/jquery-custom-content-scroller/">jQuery custom scrollbar</a></li>
+						<li><a href="http://manos.malihu.gr/page-scroll-to-id/">Page scroll to id</a></li>
+						<li><a href="http://manos.malihu.gr/jquery-thumbnail-scroller/">jQuery image/thumbnail scroller</a></li>
+					</ul>
+				</li>
+				<li class="tags-list">
+					<h4>tags</h4>
+					<ul class='wp-tag-cloud'>
+	<li><a href='http://manos.malihu.gr/tag/actionscript/' class='tag-link-47' title='4 topics' style='font-size: 14.6px;'>Actionscript</a></li>
+	<li><a href='http://manos.malihu.gr/tag/css-2/' class='tag-link-37' title='2 topics' style='font-size: 12.62px;'>css</a></li>
+	<li><a href='http://manos.malihu.gr/tag/image-gallery/' class='tag-link-30' title='3 topics' style='font-size: 13.7px;'>image gallery</a></li>
+	<li><a href='http://manos.malihu.gr/tag/jquery/' class='tag-link-4 current-tag' title='19 topics' style='font-size: 20px;'>jquery</a></li>
+	<li><a href='http://manos.malihu.gr/tag/navigation/' class='tag-link-16' title='7 topics' style='font-size: 16.4px;'>navigation</a></li>
+	<li><a href='http://manos.malihu.gr/tag/page-scroll-to-id/' class='tag-link-49' title='2 topics' style='font-size: 12.62px;'>page-scroll-to-id</a></li>
+	<li><a href='http://manos.malihu.gr/tag/single-page-template/' class='tag-link-46' title='1 topic' style='font-size: 11px;'>Single-page template</a></li>
+</ul>
+				</li>
+				<li>
+					<h4>archive</h4>
+					<a href="/blog/">View all articles chronologically</a>
+				</li>
+			</ul>
+		</div>
+		<a href="#" id="drawer-menu-toggle"><span></span><span></span><span></span></a>
+		<a href="#" id="drawer-menu-close">&times;</a>
+	</nav>
+		<section id="content" class="clearfix">
+		<section id="main">
+			<div class="articles">
+																		<article class="single">
+						<h1>jQuery custom content scroller</h1>
+						<p class="article-meta">
+															<span class="update-info">Last updated on Dec 29, 2014</span> 
+							 
+							Originally published on August 1, 2010 by <a href="http://manos.malihu.gr/author/admin/" title="Posts by malihu" rel="author">malihu</a>, under <a href="http://manos.malihu.gr/category/plugins/" rel="category tag">Plugins</a>.</p>
+						
+						<div class="links-ad">
+							<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- Links ad -->
+							<ins class="adsbygoogle"
+							     style="display:inline-block;width:468px;height:15px"
+							     data-ad-client="ca-pub-2489642366368969"
+							     data-ad-slot="8235110738"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+						
+						<div class="content clearfix">
+																<span class="featured-image">
+									<img width="400" height="300" src="http://manos.malihu.gr/wp-content/uploads/2014/10/custom-scrollbar.png" class=" wp-post-image" alt="jQuery custom content scroller" title="" />									</span>
+														<p>Highly customizable custom scrollbar jQuery plugin. Features include vertical and/or horizontal scrollbar(s), adjustable scrolling momentum, mouse-wheel (via <a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/brandonaaron/jquery-mousewheel');"  href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank">jQuery mousewheel plugin</a>), keyboard and touch support, ready-to-use themes and customization via CSS, RTL direction support, option parameters for full control of scrollbar functionality, methods for triggering actions like scroll-to, update, destroy etc., user-defined callbacks and more.</p>
+<p><span id="more-197"></span></p>
+<div class="main-links clearfix">
+<div><a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/complete_examples.html" title="View demo" class="demo-link" target="_blank">view demo</a> <a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/scrollbar_themes_demo.html" target="_blank">Scrollbar themes</a><br />
+<a href="#expand-info">more</a>
+<div class="expand-info"><a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/nested_scrollbars_demo.html" target="_blank">Nested scrollbars</a><br />
+<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/callbacks_example.html" target="_blank">Callbacks demo</a><br />
+<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/rtl_direction_demo.html" target="_blank">RTL direction</a><br />
+<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/disable_destroy_example.html" target="_blank">disable/destroy methods</a></div>
+</div>
+<div><a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/archive/master.zip');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/archive/master.zip" title="Download files" class="download-link malihu-dl-modal">download</a> <a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/releases');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/releases" target="_blank">Release archive</a><br />
+<a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin" target="_blank">Project on GitHub</a></div>
+</div>
+<p>Current version <strong>3.0.7</strong> (<a href="http://manos.malihu.gr/jquery-custom-content-scroller/2/">Changelog</a>)<br />
+<a href="#expand-info">Upgrading from version 2</a></p>
+<div class="expand-info">
+When upgrading from version <a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/tree/2.x');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/tree/2.x" target="_blank">2.x</a> to <a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/tree/3.x');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/tree/3.x" target="_blank">3.x</a> it&#8217;s important to use version 3 CSS and .png files. Version 3 is backwards compatible but it&#8217;s also a huge overhaul. One significant change is that you don&#8217;t need to call the <em>update</em> method manually (the script does it automatically). For more info see <a href="http://manos.malihu.gr/jquery-custom-content-scroller/2/">changelog</a>. </p>
+<p>Version 2 is still maintained <del>and updated</del> <a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/tree/2.x');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/tree/2.x" target="_blank">here</a>.</p>
+<hr />
+</div>
+<ul class="post-main-links">
+<li><a href="#get-started-section" title="Usage guide" rel="ps2id">Get started</a></li>
+<li><a href="#configuration-section" title="Plugin options" rel="ps2id">Configuration</a></li>
+<li><a href="#methods-section" title="Plugin methods" rel="ps2id">Methods</a></li>
+<li><a href="#styling-section" title="Scrollbar styling and themes" rel="ps2id">Styling</a></li>
+<li><a href="#callbacks-section" title="User-defined callbacks" rel="ps2id">Callbacks</a></li>
+</ul>
+<h2 id="get-started-section">How to use it</h2>
+<p>Get started by <a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/archive/master.zip');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/archive/master.zip">downloading the archive</a> which contains the plugin files (and a large amount of HTML demos and examples). Extract and upload <em>jquery.mCustomScrollbar.concat.min.js</em>, <em>jquery.mCustomScrollbar.css</em> and <em>mCSB_buttons.png</em> to your web server (alternatively you can <a href="#expand-info">load plugin files from a CDN</a>). </p>
+<div class="expand-info">
+Instead of hosting the plugin files on your web server, you can load them directly from a CDN like <a onclick="javascript:pageTracker._trackPageview('/outgoing/www.jsdelivr.com/');"  href="http://www.jsdelivr.com/" target="_blank">jsdelivr</a>, Github etc.</p>
+<ul>
+<li><strong>jsdelivr</strong> versioned/minified
+<ul>
+<li>//cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.concat.min.js</li>
+<li>//cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.min.css</li>
+<li>//cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/mCSB_buttons.png</li>
+</ul>
+</li>
+<li><strong>Github</strong> latest/minified
+<ul>
+<li>//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js</li>
+<li>//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css</li>
+<li>//malihu.github.io/custom-scrollbar/mCSB_buttons.png</li>
+</ul>
+</li>
+</ul>
+<p></p>
+<hr />
+</div>
+<h3>HTML</h3>
+<p>Include <em>jquery.mCustomScrollbar.css</em> in the head tag your HTML document (<a href="#expand-info">more info</a>)</p>
+<div class="expand-info">
+<em><a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/blob/master/jquery.mCustomScrollbar.css');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/blob/master/jquery.mCustomScrollbar.css" target="_blank">jquery.mCustomScrollbar.css</a></em> contains the styling of the custom scrollbar and themes. It should normally be included in the head tag of your html (typically before any script tags). If you wish to reduce http requests and/or have all your website stylesheet in a single file, you should move/copy scrollbars styling in your main CSS document. </p>
+<p><em>mCSB_buttons.png</em> contains all the button arrows (up, down, left and right) as <a onclick="javascript:pageTracker._trackPageview('/outgoing/css-tricks.com/css-sprites/');"  href="http://css-tricks.com/css-sprites/" target="_blank">image sprites</a> for all scrollbar themes. The plugin archive contains the PSD source (source-files/mCSB_buttons.psd) so you can change them or add your own. This file should be in the same directory with plugin stylesheet. </p>
+<hr />
+</div>
+<pre data-language=&#8221;html&#8221;>
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/jquery.mCustomScrollbar.css&quot; /&gt;
+</pre>
+<p>Include jQuery library (if your project doesn&#8217;t use it already) and <em>jquery.mCustomScrollbar.concat.min.js</em> in the <a href="#expand-info">head tag or at the very bottom of your document, just before the closing body tag</a> </p>
+<div class="expand-info">
+Some frameworks and CMS include jQuery library in the head tag to make sure it&#8217;s loaded when other scripts request it. Usually, including .js files on the bottom of the HTML document (just before the closing body tag) is recommended for better performance. In any case, jQuery must be included first, before plugin scripts. </p>
+<hr />
+</div>
+<pre data-language=&#8221;html&#8221;>
+&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/path/to/jquery.mCustomScrollbar.concat.min.js&quot;&gt;&lt;/script&gt;
+</pre>
+<h3>CSS</h3>
+<p>The element(s) you want to add scrollbar(s) should have the typical CSS properties of an overflowed block which are a height (or max-height) value, an overflow value of auto (or hidden) and content long enough to require scrolling. For horizontal scrollbar, the element should have a width (or max-width) value set. </p>
+<p>If you prefer to set your element&#8217;s height/width via javascript, you can use the <a href="#plugin-data-setHeight" rel="ps2id"><code>setHeight</code></a>/<a href="#plugin-data-setWidth" rel="ps2id"><code>setWidth</code></a> option parameters.</p>
+<h3>Initialization</h3>
+<h4>Initialize via javascript</h4>
+<p>After files inclusion, call <em>mCustomScrollbar</em> function on the <a onclick="javascript:pageTracker._trackPageview('/outgoing/learn.jquery.com/using-jquery-core/selecting-elements/');"  href="http://learn.jquery.com/using-jquery-core/selecting-elements/" target="_blank">element selector</a> you want to add the scrollbar(s) </p>
+<pre data-language=&#8221;javascript&#8221;>
+&lt;script&gt;
+    (function($){
+        $(window).load(function(){
+            $(&quot;.content&quot;).mCustomScrollbar();
+        });
+    })(jQuery);
+&lt;/script&gt;
+</pre>
+<p><a href="#expand-info">more info</a> </p>
+<div class="expand-info">
+The code is wrapped in <code>(function($){ ... })(jQuery);</code>. This ensures no conflict between jQuery and other libraries using <code>$</code> shortcut (see <a onclick="javascript:pageTracker._trackPageview('/outgoing/learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/');"  href="http://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/" target="_blank">Avoiding Conflicts with Other Libraries</a> for more info). The plugin function is called on <code>$(window).load()</code> so it executes after all page elements (like images) are loaded. </p>
+<p>You can change the function selector <code>&quot;.content&quot;</code> to <a onclick="javascript:pageTracker._trackPageview('/outgoing/learn.jquery.com/using-jquery-core/selecting-elements/');"  href="http://learn.jquery.com/using-jquery-core/selecting-elements/" target="_blank">any selector you want</a> (an element id, class name, js variable etc.). For instance, if you want custom scrollbars to apply on the element with id <code>content-1</code>, you simply do: </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(&quot;#content-1&quot;).mCustomScrollbar();
+</pre>
+<p>You may also have <strong>multiple selectors</strong> by inserting comma separated values </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(&quot;.content,#content-1&quot;).mCustomScrollbar();
+</pre>
+<p>The above code adds custom scrollbars to a)every element with class name <code>content</code> and b)the element with id <code>content-1</code>. </p>
+<p>Additionally, you may want to call <em>mCustomScrollbar</em> multiple times within a page in order to set different options (<a href="#configuration-section" rel="_pageScroll2id">configuration and option parameters explained below</a>) for each selector </p>
+<pre data-language=&#8221;javascript&#8221;>
+&lt;script&gt;
+  (function($){
+    $(window).load(function(){
+      $(&quot;#vertical-content&quot;).mCustomScrollbar({
+        theme:&quot;light-3&quot;,
+        scrollButtons:{
+          enable:true
+        }
+      });
+      $(&quot;#horizontal-content&quot;).mCustomScrollbar({
+        axis:&quot;x&quot;,
+        theme:&quot;3d&quot;
+      });
+    });
+  })(jQuery);
+&lt;/script&gt;
+</pre>
+<hr />
+</div>
+<h4>Initialize via HTML</h4>
+<p>Add the class <code>mCustomScrollbar</code> to any element you want to add custom scrollbar(s) with default options. Optionally, set its axis via the HTML data attribute <code>data-mcs-axis</code> (e.g. <code>&quot;x&quot;</code> for horizontal and <code>&quot;y&quot;</code> for vertical) and its theme via <code>data-mcs-theme</code>. For example: </p>
+<pre data-language=&#8221;markup&#8221;>
+&lt;div class=&quot;mCustomScrollbar&quot; data-mcs-theme=&quot;dark&quot;&gt;
+  &lt;!-- your content --&gt;
+&lt;/div&gt;
+</pre>
+<h3>Basic configuration &amp; option parameters</h3>
+<h4>axis</h4>
+<p>By default, the script applies a vertical scrollbar. To add a horizontal or 2-axis scrollbars, invoke mCustomScrollbar function with the axis option set to <code>&quot;x&quot;</code> or <code>&quot;yx&quot;</code> respectively </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(&quot;.content&quot;).mCustomScrollbar({
+    axis:&quot;x&quot; // horizontal scrollbar
+});
+</pre>
+<pre data-language=&#8221;javascript&#8221;>
+$(&quot;.content&quot;).mCustomScrollbar({
+    axis:&quot;yx&quot; // vertical and horizontal scrollbar
+});
+</pre>
+<h4>theme</h4>
+<p>To quickly change the appearance of the scrollbar, set the theme option parameter to any of the <a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/scrollbar_themes_demo.html" target="_blank">ready-to-use themes</a> available in <a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/blob/master/jquery.mCustomScrollbar.css');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/blob/master/jquery.mCustomScrollbar.css" target="_blank">jquery.mCustomScrollbar.css</a>, for example:  </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(&quot;.content&quot;).mCustomScrollbar({
+    theme:&quot;dark&quot;
+});
+</pre>
+<div class="gen-ad-placeholder"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- general 468x60 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:468px;height:60px"
+     data-ad-client="ca-pub-2489642366368969"
+     data-ad-slot="6331497935"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<h2 id="configuration-section">Configuration</h2>
+<p>You can configure your scrollbar(s) using the following option parameters on <em>mCustomScrollbar</em> function<br />
+<strong>Usage</strong> <code>$(selector).mCustomScrollbar({ option: value });</code>
+<div id="plugin-data">
+<dl id="plugin-data-setWidth">
+<dt><pre data-language=&#8221;javascript&#8221;>setWidth: false</pre></dt>
+<dd>Set the width of your content (overwrites CSS width), value in pixels (integer) or percentage (string).</dd>
+</dl>
+<dl id="plugin-data-setHeight">
+<dt><pre data-language=&#8221;javascript&#8221;>setHeight: false</pre></dt>
+<dd>Set the height of your content (overwrites CSS height), value in pixels (integer) or percentage (string).</dd>
+</dl>
+<dl id="plugin-data-setTop">
+<dt><pre data-language=&#8221;javascript&#8221;>setTop: 0</pre></dt>
+<dd>Set the initial css top property of content, accepts string values (css top position).<br />
+		Example: <code>setTop: &quot;-100px&quot;</code>.</dd>
+</dl>
+<dl id="plugin-data-setLeft">
+<dt><pre data-language=&#8221;javascript&#8221;>setLeft: 0</pre></dt>
+<dd>Set the initial css left property of content, accepts string values (css left position).<br />
+		Example: <code>setLeft: &quot;-100px&quot;</code>.</dd>
+</dl>
+<dl id="plugin-data-axis">
+<dt><pre data-language=&#8221;javascript&#8221;>axis: &quot;string&quot;</pre></dt>
+<dd>Define content&#8217;s scrolling axis (the type of scrollbars added to the element: vertical and/of horizontal).<br />
+		Available values: <code>&quot;y&quot;</code>, <code>&quot;x&quot;</code>, <code>&quot;yx&quot;</code>. </p>
+<ul>
+<li><code>axis: &quot;y&quot;</code> &#8211; vertical scrollbar (default)</li>
+<li><code>axis: &quot;x&quot;</code> &#8211; horizontal scrollbar</li>
+<li><code>axis: &quot;yx&quot;</code> &#8211; vertical and horizontal scrollbars</li>
+</ul>
+</dd>
+</dl>
+<dl id="plugin-data-scrollbarPosition">
+<dt><pre data-language=&#8221;javascript&#8221;>scrollbarPosition: &quot;string&quot;</pre></dt>
+<dd>Set the position of scrollbar in relation to content.<br />
+	Available values: <code>&quot;inside&quot;</code>, <code>&quot;outside&quot;</code>.<br />
+	Setting <code>scrollbarPosition: &quot;inside&quot;</code> (default) makes scrollbar appear inside the element. Setting <code>scrollbarPosition: &quot;outside&quot;</code> makes scrollbar appear outside the element. Note that setting the value to <code>&quot;outside&quot;</code> requires your element (or parent elements) to have CSS <code>position: relative</code> (otherwise the scrollbar will be positioned in relation to document&#8217;s root element). </dd>
+</dl>
+<dl id="plugin-data-scrollInertia">
+<dt><pre data-language=&#8221;javascript&#8221;>scrollInertia: integer</pre></dt>
+<dd>Set the amount of scrolling momentum as animation duration in milliseconds.<br />
+	Higher value equals greater scrolling momentum which translates to smoother/more progressive animation. Set to <code>0</code> to disable.</dd>
+</dl>
+<dl id="plugin-data-autoDraggerLength">
+<dt><pre data-language=&#8221;javascript&#8221;>autoDraggerLength: boolean</pre></dt>
+<dd>Enable or disable auto-adjusting scrollbar dragger length in relation to scrolling amount (same bahavior with browser&#8217;s native scrollbar).<br />
+		Set <code>autoDraggerLength: false</code> when you want your scrollbar to (always) have a fixed size. </dd>
+</dl>
+<dl id="plugin-data-autoHideScrollbar">
+<dt><pre data-language=&#8221;javascript&#8221;>autoHideScrollbar: boolean</pre></dt>
+<dd>Enable or disable auto-hiding the scrollbar when inactive.<br />
+		Setting <code>autoHideScrollbar: true</code> will hide the scrollbar(s) when scrolling is idle and/or cursor is out of the scrolling area. </dd>
+</dl>
+<dl id="plugin-data-autoExpandScrollbar">
+<dt><pre data-language=&#8221;javascript&#8221;>autoExpandScrollbar: boolean</pre></dt>
+<dd>Enable or disable auto-expanding the scrollbar when cursor is over or dragging the scrollbar. </dd>
+</dl>
+<dl id="plugin-data-alwaysShowScrollbar">
+<dt><pre data-language=&#8221;javascript&#8221;>alwaysShowScrollbar: integer</pre></dt>
+<dd>Always keep scrollbar(s) visible, even when there&#8217;s nothing to scroll. </p>
+<ul>
+<li><code>alwaysShowScrollbar: 0</code> &#8211; disable (default)</li>
+<li><code>alwaysShowScrollbar: 1</code> &#8211; keep dragger rail visible</li>
+<li><code>alwaysShowScrollbar: 2</code> &#8211; keep all scrollbar components (dragger, rail, buttons etc.) visible</li>
+</ul>
+</dd>
+</dl>
+<dl id="plugin-data-snapAmount">
+<dt><pre data-language=&#8221;javascript&#8221;>snapAmount: integer</pre></dt>
+<dd>Make scrolling snap to a multiple of a fixed number of pixels. Useful in cases like scrolling tabular data, image thumbnails or slides and you need to prevent scrolling from stopping half-way your elements. Note that your elements must be of equal width or height in order for this to work properly.</dd>
+</dl>
+<dl id="plugin-data-snapOffset">
+<dt><pre data-language=&#8221;javascript&#8221;>snapOffset: integer</pre></dt>
+<dd>Set an offset (in pixels) for the snapAmount option. Useful when for example you need to offset the snap amount of table rows by the table header. </dd>
+</dl>
+<dl id="plugin-data-mouseWheel-enable">
+<dt><pre data-language=&#8221;javascript&#8221;>mouseWheel:{ enable: boolean }</pre></dt>
+<dd>Enable or disable content scrolling via mouse-wheel.</dd>
+</dl>
+<dl id="plugin-data-mouseWheel-scrollAmount">
+<dt><pre data-language=&#8221;javascript&#8221;>mouseWheel:{ scrollAmount: integer }</pre></dt>
+<dd>Set the mouse-wheel scrolling amount (in pixels). The default value <code>&quot;auto&quot;</code> adjusts scrolling amount according to scrollable content length.</dd>
+</dl>
+<dl id="plugin-data-mouseWheel-axis">
+<dt><pre data-language=&#8221;javascript&#8221;>mouseWheel:{ axis: &quot;string&quot; }</pre></dt>
+<dd>Define the mouse-wheel scrolling axis when both vertical and horizontal scrollbars are present.<br />
+		Set <code>axis: &quot;y&quot;</code> (default) for vertical or <code>axis: &quot;x&quot;</code> for horizontal scrolling.</dd>
+</dl>
+<dl id="plugin-data-mouseWheel-preventDefault">
+<dt><pre data-language=&#8221;javascript&#8221;>mouseWheel:{ preventDefault: boolean }</pre></dt>
+<dd>Prevent the default behaviour which automatically scrolls the parent element when end or beginning of scrolling is reached (same bahavior with browser&#8217;s native scrollbar).</dd>
+</dl>
+<dl id="plugin-data-mouseWheel-deltaFactor">
+<dt><pre data-language=&#8221;javascript&#8221;>mouseWheel:{ deltaFactor: integer }</pre></dt>
+<dd>Set the number of pixels one wheel notch scrolls. The default value &#8220;auto&#8221; uses the OS/browser value.</dd>
+</dl>
+<dl id="plugin-data-mouseWheel-normalizeDelta">
+<dt><pre data-language=&#8221;javascript&#8221;>mouseWheel:{ normalizeDelta: boolean }</pre></dt>
+<dd>Enable or disable mouse-wheel (delta) acceleration. Setting <code>normalizeDelta: true</code> translates mouse-wheel delta value to -1 or 1.</dd>
+</dl>
+<dl id="plugin-data-mouseWheel-invert">
+<dt><pre data-language=&#8221;javascript&#8221;>mouseWheel:{ invert: boolean }</pre></dt>
+<dd>Invert mouse-wheel scrolling direction. Set to <code>true</code> to scroll down or right when mouse-wheel is turned upwards.</dd>
+</dl>
+<dl id="plugin-data-mouseWheel-disableOver">
+<dt><pre data-language=&#8221;javascript&#8221;>mouseWheel:{ disableOver: [array] }</pre></dt>
+<dd>Set the tags that disable mouse-wheel when cursor is over them.<br />
+		Default value: <pre data-language=&#8221;javascript&#8221;>[&quot;select&quot;,&quot;option&quot;,&quot;keygen&quot;,&quot;datalist&quot;,&quot;textarea&quot;]</pre></dd>
+</dl>
+<dl id="plugin-data-scrollButtons-disableOver">
+<dt><pre data-language=&#8221;javascript&#8221;>scrollButtons:{ enable: boolean }</pre></dt>
+<dd>Enable or disable scrollbar buttons.</dd>
+</dl>
+<dl id="plugin-data-scrollButtons-scrollAmount">
+<dt><pre data-language=&#8221;javascript&#8221;>scrollButtons:{ scrollAmount: integer }</pre></dt>
+<dd>Set the buttons scrolling amount (in pixels). The default value <code>&quot;auto&quot;</code> adjusts scrolling amount according to scrollable content length.</dd>
+</dl>
+<dl id="plugin-data-scrollButtons-scrollType">
+<dt><pre data-language=&#8221;javascript&#8221;>scrollButtons:{ scrollType: &quot;string&quot; }</pre></dt>
+<dd>Define the buttons scrolling type/behavior. </p>
+<ul>
+<li><code>scrollType: &quot;stepless&quot;</code> &#8211; continuously scroll content while pressing the button (default)</li>
+<li><code>scrollType: &quot;stepped&quot;</code> &#8211; each button click scrolls content by a certain amount (defined in scrollAmount option above)</li>
+</ul>
+</dd>
+</dl>
+<dl id="plugin-data-scrollButtons-tabindex">
+<dt><pre data-language=&#8221;javascript&#8221;>scrollButtons:{ tabindex: integer }</pre></dt>
+<dd>Set a tabindex value for the buttons. </dd>
+</dl>
+<dl id="plugin-data-keyboard-enable">
+<dt><pre data-language=&#8221;javascript&#8221;>keyboard:{ enable: boolean }</pre></dt>
+<dd>Enable or disable content scrolling via the keyboard.<br />
+		The plugin supports the directional arrows (top, left, right and down), page-up (PgUp), page-down (PgDn), Home and End keys. </dd>
+</dl>
+<dl id="plugin-data-keyboard-scrollAmount">
+<dt><pre data-language=&#8221;javascript&#8221;>keyboard:{ scrollAmount: integer }</pre></dt>
+<dd>Set the keyboard arrows scrolling amount (in pixels). The default value <code>&quot;auto&quot;</code> adjusts scrolling amount according to scrollable content length.</dd>
+</dl>
+<dl id="plugin-data-keyboard-scrollType">
+<dt><pre data-language=&#8221;javascript&#8221;>keyboard:{ scrollType: &quot;string&quot; }</pre></dt>
+<dd>Define the keyboard arrows scrolling type/behavior. </p>
+<ul>
+<li><code>scrollType: &quot;stepless&quot;</code> &#8211; continuously scroll content while pressing the arrow key (default)</li>
+<li><code>scrollType: &quot;stepped&quot;</code> &#8211; each key release scrolls content by a certain amount (defined in scrollAmount option above)</li>
+</ul>
+</dd>
+</dl>
+<dl id="plugin-data-contentTouchScroll">
+<dt><pre data-language=&#8221;javascript&#8221;>contentTouchScroll: integer</pre></dt>
+<dd>Enable or disable content touch-swipe scrolling for touch-enabled devices.<br />
+		To completely disable, set <code>contentTouchScroll: false</code>.<br />
+		Integer values define the axis-specific minimum amount required for scrolling momentum (default: <code>25</code>).</dd>
+</dl>
+<dl id="plugin-data-advanced-autoExpandHorizontalScroll">
+<dt><pre data-language=&#8221;javascript&#8221;>advanced:{ autoExpandHorizontalScroll: boolean }</pre></dt>
+<dd>Auto-expand content horizontally (for <code>&quot;x&quot;</code> or <code>&quot;yx&quot;</code> axis).<br />
+		If set to <code>true</code>, content will expand horizontally to accomodate any floated/inline-block elements.</dd>
+</dl>
+<dl id="plugin-data-advanced-autoScrollOnFocus">
+<dt><pre data-language=&#8221;javascript&#8221;>advanced:{ autoScrollOnFocus: &quot;string&quot; }</pre></dt>
+<dd>Set the list of elements/selectors that will auto-scroll content to their position when focused.<br />
+		For example, when pressing TAB key to focus input fields, if the field is out of the viewable area the content will scroll to its top/left position (same bahavior with browser&#8217;s native scrollbar).<br />
+		To completely disable this functionality, set <code>autoScrollOnFocus: false</code>.<br />
+		Default: <pre data-language=&#8221;javascript&#8221;>&quot;input,textarea,select,button,datalist,keygen,a[tabindex],area,object,[contenteditable=&#039;true&#039;]&quot;</pre></dd>
+</dl>
+<dl id="plugin-data-advanced-updateOnContentResize">
+<dt><pre data-language=&#8221;javascript&#8221;>advanced:{ updateOnContentResize: boolean }</pre></dt>
+<dd>Update scrollbar(s) automatically on content, element or viewport resize.<br />
+		The value should be <code>true</code> (default) for fluid layouts/elements, adding/removing content dynamically, hiding/showing elements etc.</dd>
+</dl>
+<dl id="plugin-data-advanced-updateOnImageLoad">
+<dt><pre data-language=&#8221;javascript&#8221;>advanced:{ updateOnImageLoad: boolean }</pre></dt>
+<dd>Update scrollbar(s) automatically each time an image inside the element is fully loaded.<br />
+		The value should be <code>true</code> (default) when your content contains images.</dd>
+</dl>
+<dl id="plugin-data-advanced-updateOnSelectorChange">
+<dt><pre data-language=&#8221;javascript&#8221;>advanced:{ updateOnSelectorChange: &quot;string&quot; }</pre></dt>
+<dd>Update scrollbar(s) automatically when the amount and size of specific selectors changes.<br />
+		Useful when you need to update the scrollbar(s) automatically, each time a type of element is added, removed or changes its size.<br />
+		For example, setting <code>updateOnSelectorChange: &quot;ul li&quot;</code> will update scrollbars each time list-items inside the element are changed.<br />
+		Setting the value to <code>true</code>, will update scrollbars each time any element is changed.<br />
+		To disable (default) set to <code>false</code>. </dd>
+</dl>
+<dl id="plugin-data-advanced-releaseDraggableSelectors">
+<dt><pre data-language=&#8221;javascript&#8221;>advanced:{ releaseDraggableSelectors: &quot;string&quot; }</pre></dt>
+<dd>Add extra selector(s) that&#8217;ll release scrollbar dragging upon mouseup, pointerup, touchend etc.<br />
+		Example: <code>releaseDraggableSelectors: &quot;.myClass, #myID&quot;</code> </dd>
+</dl>
+<dl id="plugin-data-theme">
+<dt><pre data-language=&#8221;javascript&#8221;>theme: &quot;string&quot;</pre></dt>
+<dd>Set the scrollbar theme.<br />
+		<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/scrollbar_themes_demo.html" target="_blank">View all ready-to-use themes</a><br />
+		All themes are contained in <a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/blob/master/jquery.mCustomScrollbar.css');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/blob/master/jquery.mCustomScrollbar.css" target="_blank">plugin&#8217;s CSS file (jquery.mCustomScrollbar.css)</a>.<br />
+		Default theme: <code>&quot;light&quot;</code></dd>
+</dl>
+<dl id="plugin-data-callbacks-onInit">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onInit: function(){}
+}</pre></dt>
+<dd>A function to call when scrollbars have initialized (<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/callbacks_example.html" target="_blank">demo</a>).<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onInit:function(){
+      console.log(&quot;scrollbars initialized&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onScrollStart">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onScrollStart: function(){}
+}</pre></dt>
+<dd>A function to call when scrolling starts (<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/callbacks_example.html" target="_blank">demo</a>).<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onScrollStart:function(){
+      console.log(&quot;scrolling started...&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onScroll">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onScroll: function(){}
+}</pre></dt>
+<dd>A function to call when scrolling is completed (<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/callbacks_example.html" target="_blank">demo</a>).<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onScroll:function(){
+      console.log(&quot;content scrolled...&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-whileScrolling">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      whileScrolling: function(){}
+}</pre></dt>
+<dd>A function to call while scrolling is active (<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/callbacks_example.html" target="_blank">demo</a>).<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    whileScrolling:function(){
+      console.log(&quot;scrolling...&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onTotalScroll">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onTotalScroll: function(){}
+}</pre></dt>
+<dd>A function to call when scrolling is completed and content is scrolled all the way to the end (bottom/right) (<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/callbacks_example.html" target="_blank">demo</a>).<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onTotalScroll:function(){
+      console.log(&quot;scrolled to end of content.&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onTotalScrollBack">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onTotalScrollBack: function(){}
+}</pre></dt>
+<dd>A function to call when scrolling is completed and content is scrolled back to the beginning (top/left) (<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/callbacks_example.html" target="_blank">demo</a>).<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onTotalScrollBack:function(){
+      console.log(&quot;scrolled back to the beginning of content.&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onTotalScrollOffset">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onTotalScrollOffset: integer
+}</pre></dt>
+<dd>Set an offset for the onTotalScroll option.<br />
+		For example, setting <code>onTotalScrollOffset: 100</code> will trigger the onTotalScroll callback 100 pixels before the end of scrolling is reached.</dd>
+</dl>
+<dl id="plugin-data-callbacks-onTotalScrollBackOffset">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onTotalScrollBackOffset: integer
+}</pre></dt>
+<dd>Set an offset for the onTotalScrollBack option.<br />
+		For example, setting <code>onTotalScrollBackOffset: 100</code> will trigger the onTotalScrollBack callback 100 pixels before the beginning of scrolling is reached.</dd>
+</dl>
+<dl id="plugin-data-callbacks-alwaysTriggerOffsets">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      alwaysTriggerOffsets: boolean
+}</pre></dt>
+<dd>Set the behavior of calling onTotalScroll and onTotalScrollBack offsets.<br />
+		By default, callback offsets will trigger repeatedly while content is scrolling within the offsets.<br />
+		Set <code>alwaysTriggerOffsets: false</code> when you need to trigger onTotalScroll and onTotalScrollBack callbacks once, each time scroll end or beginning is reached.</dd>
+</dl>
+<dl id="plugin-data-callbacks-onOverflowY">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onOverflowY: function(){}
+}</pre></dt>
+<dd>A function to call when content becomes long enough and vertical scrollbar is added.<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onOverflowY:function(){
+      console.log(&quot;Vertical scrolling required&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onOverflowX">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onOverflowX: function(){}
+}</pre></dt>
+<dd>A function to call when content becomes wide enough and horizontal scrollbar is added.<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onOverflowX:function(){
+      console.log(&quot;Horizontal scrolling required&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onOverflowYNone">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onOverflowYNone: function(){}
+}</pre></dt>
+<dd>A function to call when content becomes short enough and vertical scrollbar is removed.<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onOverflowYNone:function(){
+      console.log(&quot;Vertical scrolling is not required&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onOverflowXNone">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onOverflowXNone: function(){}
+}</pre></dt>
+<dd>A function to call when content becomes narrow enough and horizontal scrollbar is removed.<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onOverflowXNone:function(){
+      console.log(&quot;Horizontal scrolling is not required&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onUpdate">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onUpdate: function(){}
+}</pre></dt>
+<dd>A function to call when scrollbar(s) are updated.<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onUpdate:function(){
+      console.log(&quot;Scrollbars updated&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onImageLoad">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onImageLoad: function(){}
+}</pre></dt>
+<dd>A function to call each time an image inside the element is fully loaded and scrollbar(s) are updated.<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onImageLoad:function(){
+      console.log(&quot;Image loaded&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-callbacks-onSelectorChange">
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks:{
+      onSelectorChange: function(){}
+}</pre></dt>
+<dd>A function to call each time a type of element is added, removed or changes its size and scrollbar(s) are updated.<br />
+		Example: <br />
+	<pre data-language=&#8221;javascript&#8221;>callbacks:{
+    onSelectorChange:function(){
+      console.log(&quot;Scrollbars updated&quot;);
+    }
+}</pre></dd>
+</dl>
+<dl id="plugin-data-live">
+<dt><pre data-language=&#8221;javascript&#8221;>live: &quot;string&quot;</pre></dt>
+<dd>Enable or disable applying scrollbar(s) on all elements matching the current selector, now and in the future.<br />
+		Set <code>live: true</code> when you need to add scrollbar(s) on elements that do not yet exist in the page. These could be elements added by other scripts or plugins after some action by the user takes place (e.g. lightbox markup may not exist untill the user clicks a link).<br />
+		If you need at any time to disable or enable the live option, set <code>live: &quot;off&quot;</code> and <code>&quot;on&quot;</code> respectively.<br />
+		You can also tell the script to disable live option after the first invocation by setting <code>live: &quot;once&quot;</code>. </dd>
+</dl>
+<dl id="plugin-data-liveSelector">
+<dt><pre data-language=&#8221;javascript&#8221;>liveSelector: &quot;string&quot;</pre></dt>
+<dd>Set the matching set of elements (instead of the current selector) to add scrollbar(s), now and in the future.</dd>
+</dl>
+</div>
+<h2 id="methods-section">Plugin methods</h2>
+<p>Ways to execute various plugin actions programmatically from within your script(s). </p>
+<h3 id="methods-section-update">update</h3>
+<p><strong>Usage</strong> <code>$(selector).mCustomScrollbar(&quot;update&quot;);</code>
+<p>Call the <em>update</em> method to <strong>manually update existing scrollbars</strong> to accomodate new content or resized element(s). This method is by default called automatically by the script (via <code>updateOnContentResize</code> option) when the element itself, its content or scrollbar size changes. </p>
+<p><a href="#expand-info">view examples</a> </p>
+<div class="expand-info">
+<pre data-language=&#8221;javascript&#8221;>
+/* initialize plugin with auto-update options disabled */
+$(selector).mCustomScrollbar({
+  advanced:{
+    updateOnContentResize: false,
+    updateOnImageLoad: false
+  }
+});
+
+/* at some point in your js script/code update scrollbar manually */
+$(selector).mCustomScrollbar(&quot;update&quot;);
+</pre>
+<hr />
+</div>
+<h3 id="methods-section-scrollTo">scrollTo</h3>
+<p><strong>Usage</strong> <code>$(selector).mCustomScrollbar(&quot;scrollTo&quot;,position,options);</code> </p>
+<p>Call the <em>scrollTo</em> method to <strong>programmatically scroll the content</strong> to the position parameter (<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/scrollTo_demo.html" target="_blank">demo</a>). </p>
+<h4>position parameter</h4>
+<p> </p>
+<p>Position parameter can be: </p>
+<ul>
+<li><code>&quot;string&quot;</code>
+<ul>
+<li>e.g. element selector: <code>&quot;#element-id&quot;</code></li>
+<li>e.g. special pre-defined position: <code>&quot;bottom&quot;</code></li>
+<li>e.g. number of pixels less/more: <code>&quot;-=100&quot;</code>/<code>&quot;+=100&quot;</code></li>
+</ul>
+</li>
+<li><code>integer</code>
+<ul>
+<li>e.g. number of pixels: <code>100</code></li>
+</ul>
+</li>
+<li><code>[array]</code>
+<ul>
+<li>e.g. different y/x position: <code>[100,50]</code></li>
+</ul>
+</li>
+<li><code>object/function</code>
+<ul>
+<li>e.g. jQuery object: <code>$(&quot;#element-id&quot;)</code></li>
+<li>e.g. js object: <code>document.getelementbyid(&quot;element-id&quot;)</code></li>
+<li>e.g. function: <code>function(){ return 100; }</code></li>
+</ul>
+</li>
+</ul>
+<p>Pre-defined position strings: </p>
+<ul>
+<li><code>&quot;bottom&quot;</code> &#8211; scroll to bottom</li>
+<li><code>&quot;top&quot;</code> &#8211; scroll to top</li>
+<li><code>&quot;right&quot;</code> &#8211; scroll to right</li>
+<li><code>&quot;left&quot;</code> &#8211; scroll to left</li>
+<li><code>&quot;first&quot;</code> &#8211; scroll to the position of the first element within content</li>
+<li><code>&quot;last&quot;</code> &#8211; scroll to the position of the last element within content</li>
+</ul>
+<p><a href="#expand-info">view examples</a> </p>
+<div class="expand-info">
+Scroll to element with id &#8220;#el-1&#8243; </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar(&quot;scrollTo&quot;,&quot;#el-1&quot;);
+</pre>
+<p>Scroll to top </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar(&quot;scrollTo&quot;,&quot;top&quot;);
+</pre>
+<p>Scroll by 100 pixels down or right </p>
+<pre data-language=&#8221;javascript&#8221;>
+var val=100;
+$(selector).mCustomScrollbar(&quot;scrollTo&quot;,&quot;-=&quot;+val);
+</pre>
+<p>Scroll by 100 pixels up or left </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar(&quot;scrollTo&quot;,&quot;+=100&quot;);
+</pre>
+<p>Scroll by 100 pixels down and by 50 pixels right </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar(&quot;scrollTo&quot;,[&quot;-=100&quot;,&quot;-=50&quot;]);
+</pre>
+<p>Scroll to the fifth paragraph </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar(&quot;scrollTo&quot;,$(&quot;p:eq(4)&quot;));
+</pre>
+<p>Scroll to the last element within your content </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar(&quot;scrollTo&quot;,&quot;last&quot;);
+</pre>
+<p>Scroll to some variable value</p>
+<pre data-language=&#8221;javascript&#8221;>
+var val=document.getelementbyid(&quot;element-id&quot;);
+$(selector).mCustomScrollbar(&quot;scrollTo&quot;,val);
+</pre>
+<p>Scroll to 300 pixels </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar(&quot;scrollTo&quot;,300);
+</pre>
+<hr />
+</div>
+<h4>Method options</h4>
+<p> </p>
+<div id="plugin-data">
+<dl>
+<dt><pre data-language=&#8221;javascript&#8221;>scrollInertia: integer</pre></dt>
+<dd>Scroll-to duration, value in milliseconds.<br />
+		Example:<br />
+	<pre data-language=&#8221;javascript&#8221;>$(selector).mCustomScrollbar(&quot;scrollTo&quot;,&quot;bottom&quot;,{
+    scrollInertia:3000
+});</pre></dd>
+</dl>
+<dl>
+<dt><pre data-language=&#8221;javascript&#8221;>scrollEasing: &quot;string&quot;</pre></dt>
+<dd>Scroll-to animation easing, values: <code>&quot;linear&quot;</code>, <code>&quot;easeOut&quot;</code>, <code>&quot;easeInOut&quot;</code>.<br />
+		Example:<br />
+	<pre data-language=&#8221;javascript&#8221;>$(selector).mCustomScrollbar(&quot;scrollTo&quot;,&quot;bottom&quot;,{
+    scrollEasing:&quot;easeOut&quot;
+});</pre></dd>
+</dl>
+<dl>
+<dt><pre data-language=&#8221;javascript&#8221;>moveDragger: boolean</pre></dt>
+<dd>Scroll scrollbar dragger (instead of content).<br />
+		Example:<br />
+	<pre data-language=&#8221;javascript&#8221;>$(selector).mCustomScrollbar(&quot;scrollTo&quot;,80,{
+    moveDragger:true
+});</pre></dd>
+</dl>
+<dl>
+<dt><pre data-language=&#8221;javascript&#8221;>timeout: integer</pre></dt>
+<dd>Set a timeout for the method (the default timeout is 60 ms in order to work with automatic scrollbar update), value in milliseconds.<br />
+		Example:<br />
+	<pre data-language=&#8221;javascript&#8221;>$(selector).mCustomScrollbar(&quot;scrollTo&quot;,&quot;top&quot;,{
+    timeout:1000
+});</pre></dd>
+</dl>
+<dl>
+<dt><pre data-language=&#8221;javascript&#8221;>callbacks: boolean</pre></dt>
+<dd>Trigger user defined callbacks after scroll-to completes.<br />
+		Example:<br />
+	<pre data-language=&#8221;javascript&#8221;>$(selector).mCustomScrollbar(&quot;scrollTo&quot;,&quot;left&quot;,{
+    callbacks:false
+});</pre></dd>
+</dl>
+</div>
+<h3 id="methods-section-stop">stop</h3>
+<p><strong>Usage</strong> <code>$(selector).mCustomScrollbar(&quot;stop&quot;);</code>
+<p>Stops any running scrolling animations (usefull when you wish to interupt a previously <em>scrollTo</em> method call).  </p>
+<h3 id="methods-section-disable">disable</h3>
+<p><strong>Usage</strong> <code>$(selector).mCustomScrollbar(&quot;disable&quot;);</code> </p>
+<p>Calling <em>disable</em> method will <strong>temporarily disable the scrollbar</strong> (<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/disable_destroy_example.html" target="_blank">demo</a>). Disabled scrollbars can be re-enable by calling the <em>update</em> method. </p>
+<p>To disable the scrollbar and reset its content position, set the method&#8217;s <em>reset</em> parameter to <code>true</code> </p>
+<pre data-language=&#8221;javascript&#8221;>$(selector).mCustomScrollbar(&quot;disable&quot;,true);</pre>
+<p><a href="#expand-info">view examples</a> </p>
+<div class="expand-info">
+<pre data-language=&#8221;javascript&#8221;>
+/* initialize plugin */
+$(selector).mCustomScrollbar();
+
+/* at some point in your js script/code disable scrollbar */
+$(selector).mCustomScrollbar(&quot;disable&quot;);
+
+/* re-enable scrollbar as needed */
+$(selector).mCustomScrollbar(&quot;update&quot;);
+</pre>
+<hr />
+</div>
+<h3 id="methods-section-destroy">destroy</h3>
+<p><strong>Usage</strong> <code>$(selector).mCustomScrollbar(&quot;destroy&quot;);</code> </p>
+<p>Calling <em>destroy</em> method will <strong>completely remove the custom scrollbar</strong> and return the element to its original state (<a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/disable_destroy_example.html" target="_blank">demo</a>). </p>
+<p><a href="#expand-info">view examples</a> </p>
+<div class="expand-info">
+<pre data-language=&#8221;javascript&#8221;>
+/* initialize plugin */
+$(selector).mCustomScrollbar();
+
+/* at some point in your js script/code destroy scrollbar */
+$(selector).mCustomScrollbar(&quot;destroy&quot;);
+</pre>
+<hr />
+</div>
+<h2 id="styling-section">Scrollbar styling &amp; themes</h2>
+<p>You can design and visually customize your scrollbars with <strong>pure CSS</strong>, using <em><a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/malihu/malihu-custom-scrollbar-plugin/blob/master/jquery.mCustomScrollbar.css');"  href="https://github.com/malihu/malihu-custom-scrollbar-plugin/blob/master/jquery.mCustomScrollbar.css" target="_blank">jquery.mCustomScrollbar.css</a></em> which contains the default/basic styling and all scrollbar themes. </p>
+<p>The easiest/quickest way is to select a ready-to-use scrollbar theme. For example: </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar({
+  theme:&quot;dark&quot;
+});
+</pre>
+<p><a href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/scrollbar_themes_demo.html" target="_blank">View all ready-to-use themes</a></p>
+<p>You can modify the default styling or any theme either directly in <em>jquery.mCustomScrollbar.css</em> or by overwriting the CSS rules in another stylesheet. </p>
+<h3>Creating a new scrollbar theme</h3>
+<p>Create a name for your theme (e.g. &#8220;my-theme&#8221;) and set it as the value of the <em>theme</em> option </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar({
+    theme:&quot;my-theme&quot;
+});
+</pre>
+<p>Your element will get the class &#8220;mCS-my-theme&#8221; (your theme-name with &#8220;mCS&#8221; prefix), so you can create your CSS using the <code>.mCS-my-theme</code> in your rules. For instance: </p>
+<pre data-language=&#8221;css&#8221;>
+.mCS-my-theme.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background-color: red; }
+.mCS-my-theme.mCSB_scrollTools .mCSB_draggerRail{ background-color: white; } 
+/* and so on... */
+</pre>
+<p>In the same manner you can clone any existing theme (e.g. &#8220;dark&#8221;), change its selector (e.g. <code>.mCS-dark</code>) to your own theme name (e.g. <code>.mCS-my-theme</code>) and modify its CSS rules.</p>
+<h3>Scrollbar markup</h3>
+<p>The plugin applies specific id (unique) and/or classes to every scrollbar element/component, meaning that you can target and modify any scrollbar in more than one ways. </p>
+<p>For example, every element with a scrollbar gets a unique class in the form of <code>_mCS_1</code>, <code>_mCS_2</code> etc. Every scrollbar container element gets a unique id in the form of <code>mCSB_1_scrollbar_vertical</code>, <code>mCSB_2_scrollbar_vertical</code> etc. Every scrollbar dragger gets a unique id in the form of <code>mCSB_1_dragger_vertical</code>, <code>mCSB_2_dragger_vertical</code> etc. in addition to the class <code>mCSB_dragger</code>. All these mean that you can do stuff like: </p>
+<pre data-language=&#8221;css&#8221;>
+._mCS_1 .mCSB_dragger .mCSB_dragger_bar{ background-color: red; }
+
+._mCS_2 .mCSB_dragger .mCSB_dragger_bar{ background-color: green; }
+
+#mCSB_3_dragger_vertical .mCSB_dragger_bar{ background-color: blue; }
+
+#mCSB_1_scrollbar_vertical .mCSB_dragger{ height: 100px; }
+
+#mCSB_1_scrollbar_horizontal .mCSB_dragger{ width: 100px; }
+
+.mCSB_1_scrollbar .mCSB_dragger .mCSB_draggerRail{ width: 4px; }
+</pre>
+<p><a onclick="javascript:pageTracker._trackPageview('/downloads/wp-content/uploads/2012/07/scrollbar_layout.png');"  href="http://manos.malihu.gr/wp-content/uploads/2012/07/scrollbar_layout.png" target="_blank"><img src="http://manos.malihu.gr/wp-content/uploads/2012/07/scrollbar_layout.png" alt="Custom scrollbar layout" title="Custom scrollbar layout" width="400" height="560" class="alignnone size-full wp-image-579" /></a></p>
+<h2 id="callbacks-section">User-defined callbacks</h2>
+<p>You can trigger your own js function(s) by calling them inside <em>mCustomScrollbar</em> callbacks option parameter </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(&quot;.content&quot;).mCustomScrollbar({
+    callbacks:{
+        onScroll:function(){
+            myCustomFn(this);
+        }
+    }
+});
+
+function myCustomFn(el){
+    console.log(el.mcs.top);
+}
+</pre>
+<p>In the example above, each time a scroll event ends and content has stopped scrolling, the content&#8217;s top position will be logged in browser&#8217;s console. There are available callbacks for each step of the scrolling event: </p>
+<ul>
+<li><code>onScrollStart</code> &#8211; triggers the moment a scroll event starts</li>
+<li><code>whileScrolling</code> &#8211; triggers while scroll event is running</li>
+<li><code>onScroll</code> &#8211; triggers when a scroll event completes</li>
+<li><code>onTotalScroll</code> &#8211; triggers when content has scrolled all the way to bottom or right</li>
+<li><code>onTotalScrollBack</code> &#8211; triggers when content has scrolled all the way back to top or left</li>
+</ul>
+<p>You can set an offset value (pixels) for both <code>onTotalScroll</code> and <code>onTotalScrollBack</code> by setting <code>onTotalScrollOffset</code> and <code>onTotalScrollBackOffset</code> respectively (<a href="#expand-info">view example</a>). </p>
+<div class="expand-info">
+The following will trigger the callback function when content has scrolled to bottom minus 100 pixels </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(&quot;.content&quot;).mCustomScrollbar({
+    callbacks:{
+        onTotalScroll:function(){
+            console.log(&quot;scrolled to bottom&quot;);
+        },
+    onTotalScrollOffset:100
+    }
+});
+</pre>
+<hr />
+</div>
+<p>By default, <code>onTotalScroll</code> and <code>onTotalScrollBack</code> callbacks are triggered repeatedly. To prevent multiple calls when content is within their offset, set <code>alwaysTriggerOffsets</code> option to <code>false</code> (<a href="#expand-info">view example</a>).</p>
+<div class="expand-info">
+<pre data-language=&#8221;javascript&#8221;>
+$(&quot;.content&quot;).mCustomScrollbar({
+    callbacks:{
+        onTotalScroll:function(){
+            console.log(&quot;scrolled to bottom&quot;);
+        },
+    onTotalScrollOffset:100,
+    alwaysTriggerOffsets:false
+    }
+});
+</pre>
+<hr />
+</div>
+<p>Additional callbacks: </p>
+<ul>
+<li><a href="#plugin-data-callbacks-onInit" rel="ps2id"><code>onInit</code></a></li>
+<li><a href="#plugin-data-callbacks-onOverflowY" rel="ps2id"><code>onOverflowY</code></a></li>
+<li><a href="#plugin-data-callbacks-onOverflowX" rel="ps2id"><code>onOverflowX</code></a></li>
+<li><a href="#plugin-data-callbacks-onOverflowYNone" rel="ps2id"><code>onOverflowYNone</code></a></li>
+<li><a href="#plugin-data-callbacks-onOverflowXNone" rel="ps2id"><code>onOverflowXNone</code></a></li>
+<li><a href="#plugin-data-callbacks-onUpdate" rel="ps2id"><code>onUpdate</code></a></li>
+<li><a href="#plugin-data-callbacks-onImageLoad" rel="ps2id"><code>onImageLoad</code></a></li>
+<li><a href="#plugin-data-callbacks-onSelectorChange" rel="ps2id"><code>onSelectorChange</code></a></li>
+</ul>
+<h3>Returning values</h3>
+<p>The script returns a number of values and objects related to scrollbar that you can use in your own functions</p>
+<ul>
+<li><code>this</code> &#8211; the original element containing the scrollbar(s)</li>
+<li><code>this.mcs.content</code> &#8211; the original content wrapper as jquery object</li>
+<li><code>this.mcs.top</code> &#8211; content&#8217;s top position (pixels)</li>
+<li><code>this.mcs.left</code> &#8211; content&#8217;s left position (pixels)</li>
+<li><code>this.mcs.draggerTop</code> &#8211; scrollbar dragger&#8217;s top position (pixels)</li>
+<li><code>this.mcs.draggerLeft</code> &#8211; scrollbar dragger&#8217;s left position (pixels)</li>
+<li><code>this.mcs.topPct</code> &#8211; content vertical scrolling percentage</li>
+<li><code>this.mcs.leftPct</code> &#8211; content horizontal scrolling percentage</li>
+<li><code>this.mcs.direction</code> &#8211; content&#8217;s scrolling direction (y or x)</li>
+</ul>
+<p><a href="#expand-info">view examples</a> </p>
+<div class="expand-info">
+Load more content when scrolled to bottom</p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar({
+    callbacks:{
+        onTotalScroll:function(){
+            this.mcs.content.append(&quot;...&quot;);
+        }
+    }
+});
+</pre>
+<p>Run code when at least half of the content is scrolled </p>
+<pre data-language=&#8221;javascript&#8221;>
+$(selector).mCustomScrollbar({
+    callbacks:{
+        whileScrolling:function(){
+            var pct=this.mcs.topPct;
+            if(pos&gt;=50){
+              /* do something... */
+            }
+        }
+    }
+});
+</pre>
+<hr />
+</div>
+<h2>Plugin-specific jQuery expressions</h2>
+<div id="plugin-data">
+<dl>
+<dt><pre data-language=&#8221;javascript&#8221;>$(&quot;#myID:mcsInView&quot;)</pre></dt>
+<dd>Select element(s) in your content that are within scrollable viewport.<br />
+		As condition: <code>$(&quot;#myID&quot;).is(&quot;:mcsInView&quot;);</code></dd>
+</dl>
+<dl>
+<dt><pre data-language=&#8221;javascript&#8221;>$(&quot;.content:mcsOverflow&quot;)</pre></dt>
+<dd>Select overflowed element(s) with visible scrollbar.<br />
+		As condition: <code>$(&quot;.content&quot;).is(&quot;:mcsOverflow&quot;);</code></dd>
+</dl>
+</div>
+<h2>Plugin dependencies &amp; requirements</h2>
+<ul>
+<li><a onclick="javascript:pageTracker._trackPageview('/outgoing/jquery.com');"  href="http://jquery.com" target="_blank">jQuery</a> version 1.6.0 or higher</li>
+<li>Mouse-wheel support
+<ul>
+<li><a onclick="javascript:pageTracker._trackPageview('/outgoing/github.com/brandonaaron/jquery-mousewheel');"  href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank">jQuery mousewheel plugin</a></li>
+</ul>
+</li>
+</ul>
+<h2>License</h2>
+				<p><strong>This work is released under the <a onclick="javascript:pageTracker._trackPageview('/outgoing/opensource.org/licenses/MIT');" rel="license"  href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a></strong>. <br />You are free to use, study, improve and modify it wherever and however you like.</strong> <br />
+				<a onclick="javascript:pageTracker._trackPageview('/outgoing/opensource.org/licenses/MIT');" rel="license"  href="http://opensource.org/licenses/MIT" target="_blank">http://opensource.org/licenses/MIT</a> </p>
+				<p class="donate">Donating helps greatly in developing and updating free software and running this blog :)</p>
+				<div class="donate-link">
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="S9GGW9ZSSRS8G">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+				</div>
+						</div>
+						<p class="paging">Pages:  <span>1</span> <a href="http://manos.malihu.gr/jquery-custom-content-scroller/2/"><span>2</span></a></p>						<hr />
+						<footer>
+		<div class="content">
+			<div class="footer-section about contact">
+				<p><a href="http://manos.malihu.gr/about" title="About me">Manos Malihutsakis</a> blog. Creating and sharing (completely free) all kinds of web stuff. 
+									<br /><a href="http://manos.malihu.gr/contact">Contact me</a> at <span class="address"></span>.</p>
+							</div>
+			<p>The work published on this blog is licensed under the <a rel="license" href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>. Like to help? <a href="https://github.com/malihu/" target="_blank">contribute code on Github</a> or <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UYJ5G65M6ZA28" target="_blank">make a donation</a> :)</p>
+			<blockquote cite="http://www.gnu.org/philosophy/free-sw.html">&laquo;Free software&raquo; means software that respects users' freedom and community. Roughly, the users have the freedom to run, copy, distribute, study, change and improve the software. With these freedoms, the users (both individually and collectively) control the program and what it does for them. <span class="quote-source">&mdash; GNU, <em>The Free Software Definition</em></span></blockquote>
+			<a href="#top" class="back-to-top"><span><svg version="1.1" viewBox="0 0 24 24" preserveAspectRatio="xMinYMin meet"><g></g><path d="M20.561 9.439l-7.5-7.5c-0.586-0.586-1.535-0.586-2.121 0l-7.5 7.5c-0.586 0.586-0.586 1.536 0 2.121s1.536 0.586 2.121 0l4.939-4.939v14.379c0 0.828 0.672 1.5 1.5 1.5s1.5-0.672 1.5-1.5v-14.379l4.939 4.939c0.293 0.293 0.677 0.439 1.061 0.439s0.768-0.146 1.061-0.439c0.586-0.586 0.586-1.535 0-2.121z"></path></svg></span></a>
+		</div>
+	</footer>
+	<img alt='css.php' src="http://manos.malihu.gr/wp-content/plugins/cookies-for-comments/css.php?k=0e9dc04a18459b158cda1f04dcf3e422&amp;o=i&amp;t=1180011720" width='1' height='1' />
+<!-- tracker added by Ultimate Google Analytics plugin v1.6.0: http://www.oratransplant.nl/uga -->
+<script type='text/javascript' src='http://manos.malihu.gr/wp-content/plugins/akismet/_inc/form.js?ver=3.0.4'></script>
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.11.2.min.js'></script>
+<script type='text/javascript' src='http://manos.malihu.gr/wp-content/themes/malihu/js/custom.min.js'></script>
+<script type='text/javascript' src='http://manos.malihu.gr/wp-includes/js/comment-reply.min.js?ver=4.1'></script>
+	
+</body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+
+ Served from: manos.malihu.gr @ 2015-01-20 10:00:59 by W3 Total Cache -->
