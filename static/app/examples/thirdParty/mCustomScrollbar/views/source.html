@@ -1,10 +1,97 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<div class="showcase">
+	<div class="testInfo">
+		<span>Base</span>
+		<div id="case1" class="case">
+			test
+		</div>
+	</div>
+	<div class="testInfo">
+		<span>主题与按钮</span>
+		<div id="case2" class="case" >
+			test
+		</div>
+	</div>
+	<div class="testInfo">
+		<span>位置与动画时长</span>
+		<div id="case3" class="case">
+			test
+		</div>
+	</div>
+	<div class="testInfo">
+		<span>水平扩展及动画效果</span>
+		<div id="case4" class="case">
+			test
+		</div>
+	</div>
+	<div class="testInfo fat">
+		<span>图片浏览</span>
+		<div id="case5" class="case fat">
+			test
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//  基于应用文件名过程，因此将示例的代码均写在此段方法中！
+	require(["jquery", 
+			"MCScrollbarDir/jquery.mCustomScrollbar.min", 
+			"MCScrollbarDir/jquery.mCustomScrollbar.concat.min", 
+			"css!MCScrollbarDir/jquery.mCustomScrollbar.min", 
+			"css!ExamplesDir/thirdParty/mCustomScrollbar/views/case"
+			], function($) {
+		//   基本用法Default    --  洛神赋
+		require(["text!app/examples/thirdParty/mCustomScrollbar/views/txt/case1.txt"], function(text) {
+			$("#case1").html(text);  
+			$("#case1").mCustomScrollbar();
+		});
+		
+		//   主题及按钮    --  弟子规
+		require(["text!app/examples/thirdParty/mCustomScrollbar/views/txt/case2.txt"], function(text) {
+			$("#case2").html(text);  
+			$("#case2").mCustomScrollbar({
+				theme: "minimal-dark",
+				scrollButtons:{enable:true}
+			});
+		});
+		
+		//   滚动条位置，及动画时间设置    --  千字文
+		require(["text!app/examples/thirdParty/mCustomScrollbar/views/txt/case3.txt"], function(text) {
+			$("#case3").html(text);  
+			$("#case3").mCustomScrollbar({
+				theme: "rounded-dots-dark",
+				scrollButtons:{enable:true},
+				scrollInertia:1000,			 //  动画时间，以毫秒为单位，值越大越慢,0禁用
+				scrollbarPosition: "inside"  //  outside
+			});
+		});
+		
+		//   横向扩展、自动变粗（只对thin类型的有效）    --  三字经
+		require(["text!app/examples/thirdParty/mCustomScrollbar/views/txt/case4.txt"], function(text) {
+			$("#case4").html(text);  
+			$("#case4").mCustomScrollbar({
+				axis:"yx",
+				theme: "dark-thin",
+				scrollButtons:{enable:true},
+				autoExpandScrollbar:true,
+				advanced:{autoExpandHorizontalScroll:true}
+			});
+		});
+		//   图片浏览
+		require(["text!app/examples/thirdParty/mCustomScrollbar/views/txt/case5.html"], function(text) {
+			$("#case5").html(text);  
+			$("#case5").mCustomScrollbar({
+				axis:"x",
+				theme: "inset-2-dark",
+				scrollbarPosition:"outside",
+				scrollButtons:{enable:true,scrollType:"stepped"},
+				keyboard:{scrollType:"stepped"},
+				mouseWheel:{scrollAmount:188},
+				autoExpandScrollbar:true,
+				advanced:{autoExpandHorizontalScroll:true},
+				snapAmount:188,
+				snapOffset:65
+			});
+		});
+		
 
-</body>
-</html>
+	}); 
+</script>

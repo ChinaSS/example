@@ -78,6 +78,7 @@ define(["jquery",
                 mode:"htmlmixed",
                 lineWrapping:true,          //	是否显示scroll
                 lineNumbers: true,          //	是否显示number
+                maxHighlightLength:Infinity,//  最大化代码高亮行长度，默认是10000
                 viewportMargin: Infinity,   //	视窗最大化
                 styleActiveLine: true,      //	是否开启活动行高亮
                 matchBrackets: true,		//	是否开启括号匹配
