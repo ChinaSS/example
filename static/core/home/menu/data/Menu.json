@@ -31,7 +31,7 @@
                  {"name":"treeAndGridDialog","href":"#treeAndGridDialog"}
              ]
             },
-            {"name":"其它样例",
+            {"name":"模板",
              "sidebars":[
                  {"name":"表单模板"},
                  {"name":"侧边栏模板"}
