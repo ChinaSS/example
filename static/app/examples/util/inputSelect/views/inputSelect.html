@@ -1,6 +1,5 @@
 <h2>inputSelect样例</h2>
-
-<!--------------------------以下是调用代码-------------------------->
+<p>您的选择结果是：<span id="result" class="text-primary"></span></p>
 <!-- html -->
 <input id="test" class="form-control" />
 <!-- javascript -->
@@ -36,15 +35,18 @@
             //要渲染的input的id
             id : "test",
             //下拉框的类型：select单选/checkbox多选
-            type : "select",
+            type : "checkbox",
             //数据源：数组或url地址
             data :data,
             //启用文本搜索
             searchAble : true,
-            //选择之后回调方法
-            callback : function(data) {
-                console.log(data);
-                $("#result").text("您的选择结果是：" + data.data);
+            //选择之后回调方法：id，选择的id数组，data，选择的数据数组
+            callback : function(id, data) {
+                var str = "";
+                $.each(data, function(i, n){
+                    str += n["name"] + ";";
+                })
+                $("#result").text(str);
             }
         });
     })
