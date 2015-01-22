@@ -111,7 +111,7 @@ define(function() {
                 ctrlUrl : "ExamplesDir/thirdParty/mCustomScrollbar/mcScrollbarCtrl",
                 routerPath : '/mcScrollbar',
                 templateUrl : 'app/examples/common.html'
-            }
+            },
             /*
              * divFold
              */
