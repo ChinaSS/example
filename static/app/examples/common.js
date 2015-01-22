@@ -66,8 +66,9 @@ define(["jquery",
     	var wellUpdateCss="<!-- 下面的样式请勿修改！ -->" +
     			"<script type=\"text/javascript\">" +
     			"require([\"jquery\"], function($) {" +
+    			"if($(\".well\")){"+
     			"$(\".well\").attr(\"style\", \"display: inline-flex; width: 100%;\");" +
-    			"});</script>";
+    			"} });</script>";
     	
     	require([ "text!" + sourceUrl ], function(source) {
             //把source添加到模板中

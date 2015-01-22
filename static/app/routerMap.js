@@ -111,6 +111,15 @@ define(function() {
                 ctrlUrl : "ExamplesDir/thirdParty/mCustomScrollbar/mcScrollbarCtrl",
                 routerPath : '/mcScrollbar',
                 templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * divFold
+             */
+            {
+                ctrlName : "ep_divFold",
+                ctrlUrl : "ExamplesDir/thirdParty/divFold/divFoldCtrl",
+                routerPath : '/divfold',
+                templateUrl : 'app/examples/common.html'
             }
         ]
     };
