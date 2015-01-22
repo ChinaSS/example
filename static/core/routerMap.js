@@ -4,12 +4,11 @@ define(function() {
         //控制层配置
         configs : [
             /*
-             * dialog样例
-             * ep_DialogCtrl
+             * 组织机构
              */
             {
                 ctrlName : "core_OrgCtrl",                      //ctrl名称
-                ctrlUrl : "OrgDir/main.min",                     //ctrl路径
+                ctrlUrl : "OrgDir/orgCtrl",                     //ctrl路径
                 routerPath : '/org',                            //访问路径
                 templateUrl : sysPath+'/org/views/org.html'     //html文件
             }

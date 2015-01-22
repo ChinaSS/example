@@ -1,0 +1,16 @@
+
+{
+    "allDataCount":100,
+    "curPageData":[
+        {
+            "gwCode":"GW001",
+            "gwName":"经理",
+            "sort":"100"
+        },
+        {
+            "gwCode":"GW002",
+            "gwName":"副经理",
+            "sort":"100"
+        }
+    ]
+}
