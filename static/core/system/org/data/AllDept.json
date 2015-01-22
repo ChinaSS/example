@@ -1,0 +1,45 @@
+
+{
+    "allDataCount":100,
+    "curPageData":[
+        {
+            "deptId":"D001",
+            "deptCode":"D001",
+            "deptName":"产品研发部",
+            "leader":"李四",
+            "manager":"管理员",
+            "costCenterCode":"产品研发部",
+            "level":"二级",
+            "sort":"6",
+            "ou":"XX集团.产品研发部",
+            "pDeptName":"XX集团",
+            "pDeptId":"root"
+        },
+        {
+            "deptId":"D001",
+            "deptCode":"D001",
+            "deptName":"产品研发部",
+            "leader":"李四",
+            "manager":"管理员",
+            "costCenterCode":"产品研发部",
+            "level":"二级",
+            "sort":"6",
+            "ou":"XX集团.产品研发部",
+            "pDeptName":"XX集团",
+            "pDeptId":"root"
+        },
+        {
+            "deptId":"D001",
+            "deptCode":"D001",
+            "deptName":"产品研发部",
+            "leader":"李四",
+            "manager":"管理员",
+            "costCenterCode":"产品研发部",
+            "level":"二级",
+            "sort":"6",
+            "ou":"XX集团.产品研发部",
+            "pDeptName":"XX集团",
+            "pDeptId":"root"
+        }
+    ]
+}
