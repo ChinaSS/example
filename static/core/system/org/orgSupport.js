@@ -119,6 +119,8 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
             callback: {
                 onClick:function (event, treeId, treeNode) {
                     $("#orgShowListTitle").html("高级-"+treeNode.name);
+                    showListPanel();
+
                     switch(treeNode.id){
                         case "GWConfig":
                             showGWList();
@@ -127,13 +129,13 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
                             showZWList();
                             break;
                         case "AllDept":
-
+                            showAllDeptList();
                             break;
                         case "AllPerson":
-
+                            showPersonList();
                             break;
                         case "AllRole":
-
+                            showRoleList();
                             break;
                         case "RoleDir":
 
@@ -179,15 +181,6 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
     };
 
     /**
-     * 主页初始化
-     */
-    var orgMainInit = function(){
-        createDeptTree($("#orgtree"));
-        createRoleTree($("#roletree"));
-        createConfigTree($("#orgConfigTree"));
-    };
-
-    /**
      * 显示信息列表容器
      */
     var showListPanel = function(){
@@ -197,17 +190,28 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
         $("#orgShowListPanel").show();
     };
 
+
+    /**
+     * 主页初始化
+     */
+    var orgMainInit = function(){
+        createDeptTree($("#orgtree"));
+        createRoleTree($("#roletree"));
+        createConfigTree($("#orgConfigTree"));
+    };
+
+    //数据列表公共部分
+    var comConfig = {
+        placeAt:"orgShowListContent",        //存放Grid的容器ID
+        pageSize:12                          //一页多少条数据
+    };
     /**
      * 显示人员列表
      * @param id
      */
     var showPersonList = function(id){
-        showListPanel();
-
         var config = {
             id:"OrgPersonList",
-            placeAt:"orgShowListContent",        //存放Grid的容器ID
-            pageSize:12,                         //一页多少条数据
             layout:[
                 {name:"用户名",field:"UserName",click:function(e){
                     //console.log(e.data);
@@ -237,7 +241,7 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
                 "value":sysPath+"/org/data/Persons.json"
             }
         };
-        grid.init(config);
+        grid.init($.extend(config,comConfig));
     };
 
     /**
@@ -245,12 +249,8 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
      * @param id
      */
     var showRoleList = function(id){
-        showListPanel();
-
         var config = {
             id: "OrgRoleList",
-            placeAt: "orgShowListContent",        //存放Grid的容器ID
-            pageSize: 12,                         //一页多少条数据
             layout: [
                 {
                     name: "角色编号", field: "roleCode", click: function (e) {
@@ -268,19 +268,15 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
                 "value": sysPath + "/org/data/Roles.json"
             }
         };
-        grid.init(config);
+        grid.init($.extend(config,comConfig));
     };
 
     /**
      * 显示岗位列表
      */
     var showGWList = function(){
-        showListPanel();
-
         var config = {
             id: "OrgGWList",
-            placeAt: "orgShowListContent",
-            pageSize: 12,
             layout: [
                 {
                     name: "岗位编号", field: "gwCode", click: function (e) {
@@ -296,19 +292,15 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
                 "value": sysPath + "/org/data/GWs.json"
             }
         };
-        grid.init(config);
+        grid.init($.extend(config,comConfig));
     };
 
     /**
      * 显示职务列表
      */
     var showZWList = function(){
-        showListPanel();
-
         var config = {
             id: "OrgZWList",
-            placeAt: "orgShowListContent",
-            pageSize: 12,
             layout: [
                 {
                     name: "职务编号", field: "zwCode", click: function (e) {
@@ -324,7 +316,33 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
                 "value": sysPath + "/org/data/ZWs.json"
             }
         };
-        grid.init(config);
+        grid.init($.extend(config,comConfig));
+    };
+
+    /**
+     * 显示所有部门列表
+     */
+    var showAllDeptList = function(){
+        var config = {
+            id: "OrgAllDeptList",
+            layout: [
+                {
+                    name: "部门名称", field: "deptName", click: function (e) {
+                    //console.log(e.data);
+
+                }
+                },
+                {name: "部门编号", field: "deptCode"},
+                {name: "部门领导", field: "leader"},
+                {name: "所属组织", field: "pDeptName"},
+                {name: "序号", field: "sort"}
+            ],
+            data: {
+                "type": "URL",
+                "value": sysPath + "/org/data/AllDept.json"
+            }
+        };
+        grid.init($.extend(config,comConfig));
     };
 
     return {

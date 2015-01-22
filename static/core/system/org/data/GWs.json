@@ -11,6 +11,16 @@
             "gwCode":"GW002",
             "gwName":"副经理",
             "sort":"100"
+        },
+        {
+            "gwCode":"GW003",
+            "gwName":"部长",
+            "sort":"100"
+        },
+        {
+            "gwCode":"GW004",
+            "gwName":"总监",
+            "sort":"100"
         }
     ]
 }
