@@ -5,6 +5,6 @@ define(["jquery","ExamplesDir/common"],function($,Common){
         Common.exampleInit($compile,$scope,
             "ExamplesDir/thirdParty/fontawesome/views/source.html",        //演示代码路径
             "ExamplesDir/thirdParty/fontawesome/views/doc.html",           //文档路径
-            "800px");                                           //侧边栏宽度，可为空，默认800px
+            "900px");                                           //侧边栏宽度，可为空，默认800px
     };
 });

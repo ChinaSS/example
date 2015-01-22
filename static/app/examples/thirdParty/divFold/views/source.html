@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="links">
+    <h1>Folding Effects</h1>
+    <h2>Vertical Effects</h2>
+  	<ol>
+			<li><a href="javascript:;">Top</a></li>
+			<li><a href="javascript:;">Top translate</a></li>
+			<li><a href="javascript:;">Bottom</a></li>
+			<li><a href="javascript:;">Bottom translate</a></li>
+		</ol>
+		<h2>Horizontal Effects</h2>
+		<ol>
+			<li><a href="javascript:;">Left</a></li>
+			<li><a href="javascript:;">Left translate</a></li>
+			<li><a href="javascript:;">Right</a></li>
+			<li><a href="javascript:;">Right translate</a></li>
+		</ol>
+	</div>
+	<div id="target-container" class="targets">
+		<div class="pop">
+			<div class="anim vert">
+				<p>
+					Lorem ipsum dolor sit amet...
+				</p>
+			</div>
+		</div>
+		<div class="pop">
+			<div class="anim vert translate">
+				<img src="http://lorempixel.com/300/100/?123" width="300" height="100" alt="Random Image" />
+			</div>
+		</div>
+		<div class="pop bottom">
+			<div class="anim vert">
+				<p>Lorem ipsum dolor sit amet...</p>
+			</div>
+		</div>
+		<div class="pop bottom">
+			<div class="anim vert translate">
+				<p>Lorem ipsum dolor sit amet...</p>
+			</div>
+		</div>
+		<div class="pop">
+			<div class="anim horiz">
+				<img src="http://lorempixel.com/300/100/?456" width="300" height="100" alt="Random Image" />
+			</div>
+		</div>
+		<div class="pop">
+			<div class="anim horiz translate">
+				<p>Lorem ipsum dolor sit amet...</p>
+			</div>
+		</div>
+		<div class="pop right">
+			<div class="anim horiz">
+				<p>Lorem ipsum dolor sit amet...</p>
+			</div>
+		</div>
+		<div class="pop right">
+			<div class="anim horiz translate">
+				<img src="http://lorempixel.com/300/100/?789" width="300" height="100" alt="Random Image" />
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+require(["jquery","css!app/examples/thirdParty/divFold/views/divfold"],function($){
+	var $links = $(".links").find("a"),
+  	$targets = $("#target-container"),
+		$aTargets = $(".pop"),
+		current = 0;
+
+	$aTargets.each(function(){
+		$(this).remove();
+	});
+	$targets.css("display","block");
+
+	$links.each(function(i){
+		$(this).click(function(event){
+			event.preventDefault();
+			$($aTargets[current]).remove();
+			current = i;
+			$targets.append($aTargets[current]);
+		});
+	});
+
+	$targets.append($aTargets[current]);
+});
+	// @ sourceURL=fold_source.html
+</script>
