@@ -1,0 +1,179 @@
+<h1 id="grid">Grid</h1>
+<p>Grid为数据列表组件，遵循AMD标准，依赖<code>boostrap</code>、<code>jquery</code>、<code>grid.css</code></p>
+<p><strong>主要功能点如下：</strong></p>
+<ol>
+<li>自定义Title,工具栏</li>
+<li>异步加载数据,动态刷新</li>
+<li>支持前端排序/后端排序</li>
+<li>支持数据分页显示</li>
+</ol>
+<h2 id="-">组件展示</h2>
+<p><a href="http://chinass.github.io/Util/#gridDemo">在线Demo地址</a></p>
+<h2 id="-">样例代码</h2>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="source js"><span>define</span><span class="meta brace round js"><span>(</span></span><span class="meta brace square js"><span>[</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>FilePath</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta brace square js"><span>]</span></span><span class="meta delimiter object comma js"><span>,</span></span><span class="meta function js"><span class="storage type function js"><span>function</span></span><span class="punctuation definition parameters begin js"><span>(</span></span><span class="variable parameter function js"><span>Grid</span></span><span class="punctuation definition parameters end js"><span>)</span></span></span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="storage modifier js"><span>var</span></span><span>&nbsp;config&nbsp;</span><span class="keyword operator js"><span>=</span></span><span>&nbsp;</span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>DemoOne</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>用于缓存的ID,=placeAt</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;placeAt</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>DemoGirdDivId</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>存放Grid的容器ID</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pageSize</span><span class="keyword operator js"><span>:</span></span><span class="constant numeric js"><span>10</span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>每页数据条数</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title</span><span class="keyword operator js"><span>:</span></span><span class="string quoted single js"><span class="punctuation definition string begin js"><span>'</span></span><span>人员信息列表</span><span class="punctuation definition string end js"><span>'</span></span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>表格Title</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hidden</span><span class="keyword operator js"><span>:</span></span><span class="constant language boolean false js"><span>false</span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>表格是否可隐藏，只显示标题</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>checkbox</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>首列为单选[radio]还是多选[checkbox],默认checkbox</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pagination</span><span class="keyword operator js"><span>:</span></span><span class="constant language boolean true js"><span>true</span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>是否启用数据分页</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache</span><span class="keyword operator js"><span>:</span></span><span class="constant language boolean false js"><span>false</span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>是否启用缓存</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;realSort</span><span class="keyword operator js"><span>:</span></span><span class="constant language boolean false js"><span>false</span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>是否启用真排序</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sortParam</span><span class="keyword operator js"><span>:</span></span><span class="meta brace curly js"><span>{</span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>排序参数对象</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field</span><span class="keyword operator js"><span>:</span></span><span>&nbsp;</span><span class="constant language null js"><span>null</span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order</span><span class="keyword operator js"><span>:</span></span><span>&nbsp;</span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>desc</span><span class="punctuation definition string end js"><span>"</span></span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formData</span><span class="keyword operator js"><span>:</span></span><span class="punctuation section scope begin js"><span>{</span></span><span class="punctuation section scope end js"><span>}</span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>数据请求的额外参数</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key</span><span class="keyword operator js"><span>:</span></span><span class="punctuation section scope begin js"><span>{</span></span><span class="punctuation section scope end js"><span>}</span></span><span class="meta delimiter object comma js"><span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>前后台字段名转换</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layout</span><span class="keyword operator js"><span>:</span></span><span class="meta brace square js"><span>[</span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>表格字段数组</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>Name</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>Field</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>10%</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;align</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>center</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta function json js"><span class="entity name function js"><span>format</span></span><span>:</span><span class="storage type function js"><span>function</span></span><span class="punctuation definition parameters begin js"><span>(</span></span><span class="variable parameter function js"><span>obj</span></span><span class="punctuation definition parameters end js"><span>)</span></span></span><span class="meta brace curly js"><span>{</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>obj为当前行数据对象}</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace square js"><span>]</span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toolbar</span><span class="keyword operator js"><span>:</span></span><span class="meta brace square js"><span>[</span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>自定义工具栏</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>添加</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>fa-plus-circle</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta function json js"><span class="entity name function js"><span>callback</span></span><span>:</span><span class="storage type function js"><span>function</span></span><span class="punctuation definition parameters begin js"><span>(</span></span><span class="variable parameter function js"><span>event</span></span><span class="punctuation definition parameters end js"><span>)</span></span></span><span class="punctuation section scope begin js"><span>{</span></span><span class="punctuation section scope end js"><span>}</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace square js"><span>]</span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data</span><span class="keyword operator js"><span>:</span></span><span class="meta brace square js"><span>[</span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>使用已有数据对象</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>{</span></span><span>Name</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>张三1</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span><span>Sex</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>男</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span><span>Phone</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>123456</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span><span>Email</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>zhangsan@gmail.com</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span><span>Address</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>CQ</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta brace curly js"><span>}</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace square js"><span>]</span></span></span></div><div class="line"><span class="source js"><span class="punctuation whitespace comment leading js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>使用远程url作为数据源时,格式为&nbsp;data:{type:"URL",value:"url"}</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span><span class="punctuation terminator statement js"><span>;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;Grid</span><span class="meta brace round js"><span>(</span></span><span>config</span><span class="meta brace round js"><span>)</span></span><span class="punctuation terminator statement js"><span>;</span></span></span></div><div class="line"><span class="source js"><span class="meta brace curly js"><span>}</span></span><span class="meta brace round js"><span>)</span></span><span class="punctuation terminator statement js"><span>;</span></span></span></div></pre>
+<h1 id="api-">API说明</h1>
+<h2 id="function-">Function调用</h2>
+<blockquote>
+<p><code>Grid(config)</code> 初始化表格,返回Grid对象<br><code>Grid.getGrid(id)</code> 获取Grid对象<br><code>Grid.dropCache()</code> 清空Grid对象缓存<br><code>GridObj.getSelectedRow()</code> 获取当前Grid对象所有选中数据的数组  </p>
+</blockquote>
+<h2 id="config-">Config对象</h2>
+<table class="table table-bordered table-hover">
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">是否可选</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">id</td>
+<td style="text-align:center">覆盖</td>
+<td style="text-align:center">缓存所用id,可再次得到Grid对象,暂由 placeAt 覆盖赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">placeAt</td>
+<td style="text-align:center">必选</td>
+<td style="text-align:center">表格存放的容器id</td>
+</tr>
+<tr>
+<td style="text-align:center">pageSize</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">每页数据条数，默认10条</td>
+</tr>
+<tr>
+<td style="text-align:center">title</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">表格标题</td>
+</tr>
+<tr>
+<td style="text-align:center">hidden</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">是否赋值决定是否在title栏启用收起/展开表格内容功能图标,true收起,false展开</td>
+</tr>
+<tr>
+<td style="text-align:center">index</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">每列input选择框类型,radio/checkbox</td>
+</tr>
+<tr>
+<td style="text-align:center">pagination</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">是否启用数据分页</td>
+</tr>
+<tr>
+<td style="text-align:center">cache</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">是否启用缓存</td>
+</tr>
+<tr>
+<td style="text-align:center">realSort</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">是否启用真排序</td>
+</tr>
+<tr>
+<td style="text-align:center">sortParam</td>
+<td style="text-align:center">内部</td>
+<td style="text-align:center">排序参数对象,暂时仅支持内部使用</td>
+</tr>
+<tr>
+<td style="text-align:center">formData</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">数据请求的额外参数</td>
+</tr>
+<tr>
+<td style="text-align:center">key</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">前后台数据对象字段名转换,与pageinfo中字段名对应,key对象属性格式为,{后端字段:前端字段}</td>
+</tr>
+<tr>
+<td style="text-align:center">layout</td>
+<td style="text-align:center">必选</td>
+<td style="text-align:center">详见layout对象</td>
+</tr>
+<tr>
+<td style="text-align:center">toolbar</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">详见toolbar对象</td>
+</tr>
+<tr>
+<td style="text-align:center">data</td>
+<td style="text-align:center">必选</td>
+<td style="text-align:center">详见data对象</td>
+</tr>
+</tbody>
+</table>
+<h3 id="layout-">layout对象数组</h3>
+<blockquote>
+<p>表格列对象数组  </p>
+</blockquote>
+<table class="table table-bordered table-hover">
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">是否可选</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">必选</td>
+<td style="text-align:center">列标题名称</td>
+</tr>
+<tr>
+<td style="text-align:center">field</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">列字段名,与后端匹配,设置时该列可排序</td>
+</tr>
+<tr>
+<td style="text-align:center">width</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">列宽度,像素/百分比</td>
+</tr>
+<tr>
+<td style="text-align:center">format</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">列值格式化函数,接受每一行的数据对象</td>
+</tr>
+<tr>
+<td style="text-align:center">click</td>
+<td style="text-align:center">可选</td>
+<td style="text-align:center">列点击事件处理函数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="toolbar-">toolbar对象数组</h3>
+<blockquote>
+<p>操作栏按钮对象的数组，</p>
+</blockquote>
+<table class="table table-bordered table-hover">
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">是否可选</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center">必选</td>
+<td style="text-align:center">操作名称</td>
+</tr>
+<tr>
+<td style="text-align:center">class</td>
+<td style="text-align:center">必选</td>
+<td style="text-align:center">Icon图标，从<a href="http://fontawesome.io/icons/">这里</a>选择</td>
+</tr>
+<tr>
+<td style="text-align:center">callback</td>
+<td style="text-align:center">必选</td>
+<td style="text-align:center">点击事件处理函数，通过event.data得到grid对象</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-">data对象数组</h3>
+<blockquote>
+<p>data为直接数据源时,其对象的属性与layout数组对象中的field属性一一对应<br>data为远程数据源地址时，其格式为:<code>data:{type:"URL",value:"url"}</code>  </p>
+</blockquote>

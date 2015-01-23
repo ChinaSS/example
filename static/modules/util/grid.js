@@ -4,7 +4,7 @@
  * @param config
  Demo:
  {
-    id:"DemoOne",
+    id:"DemoOne",                       //用于缓存的ID
     placeAt:"DemoGirdDivId",            //存放Grid的容器ID
     pageSize:5,                         //一页多少条数据
     title:'人员信息列表',
@@ -32,11 +32,8 @@
     formData:{                                  //数据请求的额外参数
         name : 'value'
     },
-    dataFormat:{                                //前后台字段名转换
+    key:{                                //前后台字段名转换
         'data':'format'
-    },
-    trEvent:{
-        'mouseup':function(){}
     }
  }
  */
@@ -45,22 +42,28 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
     var cache={};
 
     function initGrid(config){
-        //创建表格对象
-        var grid = new Grid($.extend({
+        config = $.extend({
+            id : config.placeAt,
             pageSize: 10,
             pagination : true,
-            trEvent: {},
+            trEvent: {},     //数据行事件, 暂不可用
+            realSort : false,
             sortParam:{
                 field: null,
-                order: "desc"
+                order: null
             },
-            dataFormat:{
+            key:{
                 "allDataCount" : "dataCount",
                 "curPageData" : "pageData"
-            }
-        },config));
+            },
+            cache : true
+        },config);
+        //创建表格对象
+        var grid = new Grid(config);
         //添加缓存
-        cache[config.id] = grid;
+        if(config.cache){
+            cache[config.id] = grid;
+        }
         return grid;
     }
 
@@ -123,7 +126,6 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
             this.renderToolbar(type);
             this.renderTable(type);
             this.renderPagination(type);
-
         },
 
         renderTitle : function(type){
@@ -133,9 +135,9 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
             }
             if(!!type){
                 $title.empty().show();
-                var html = '<span class="title"></span>';
+                var html = '<span class="title"><i class="fa fa-table" style="color:#2898e0"></i></span>';
                 if(typeof(this._config.hidden)!="undefined"){
-                    html += '<i class="glyphicon'+this._config.hidden?' glyphicon-plus-sign':' glyphicon-minus-sign'+'"></i>';
+                    html += '<i class="glyphicon'+(this._config.hidden?' glyphicon-plus-sign':' glyphicon-minus-sign')+'"></i>';
                     //表格内容显示隐藏控制
                     $title.on('click','.glyphicon',function(e){
                         $title.siblings(".s_grid_content").slideToggle();
@@ -210,7 +212,7 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                                 $(this).children(".fa-sort").toggleClass("fa-sort-desc");
                             }
                             order = $(this).children(".fa-sort").is(".fa-sort-desc")?"desc":"asc";
-                            _this.sortTableData(field,order,false);
+                            _this.sortTableData(field,order,_this._config.realSort);
                         }
                     }
                 });
@@ -246,6 +248,7 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                 html += '<a title="刷新" class="refresh"><i class="glyphicon glyphicon-refresh"></i></a>';
                 html += '<span class="dataCount">共'+_this._pageInfo.dataCount+'条</span>';
                 html += '<span class="pageSize">每页<select>'+
+                        '<option value="5">5</option>'+
                         '<option value="10">10</option>'+
                         '<option value="20">20</option>'+
                         '<option value="50">50</option>'+
@@ -282,10 +285,11 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                         }
                         _this.renderTableData(true);
                     }).on("blur","input",function(){
-                        _this._pageInfo.pageNumber = $(this).val()*1;
+                        _this._pageInfo.pageNumber = Math.min($(this).val()*1,_this._pageInfo.pageCount);
                         _this.renderTableData(true);
                     }).on("change","select",function(){
                         _this._config.pageSize = $(this).val()*1;
+                        _this._pageInfo.pageNumber = 1;
                         _this.renderTableData(true);
                     });
                     $pagination.data("bindEvent",true);
@@ -311,7 +315,7 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
 
         renderData : function(type){
             var $tableBody = this._$gridPanel.find(".s_grid_table tbody");
-            $tableBody.empty();
+            $tableBody.empty().siblings("thead").find("input").removeAttr("checked");
             var _this = this;
                 var rows = _this._pageInfo.pageData,
                     $tr,trValue,tdValue;
@@ -375,9 +379,24 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
             if (this._config.data.type=="URL") {
                 this.getAjaxData(callback);
             } else {
-                this._pageInfo.pageData = this._config.data;
-                callback.call(this,true);
+                this.getCurPageData(callback);
             }
+        },
+        
+        getCurPageData : function (callback) {
+            var data = this._config.data,
+                pageNumber = this._pageInfo.pageNumber,
+                pageSize = this._config.pageSize,
+                curPageData=[],
+                startIndex,endIndex;
+            if(data.length>0){
+                this._pageInfo.dataCount = data.length;
+                startIndex = (pageNumber-1)*pageSize;
+                endIndex = Math.min(pageNumber*pageSize,data.length);
+                curPageData = data.slice(startIndex,endIndex);
+            }
+            this._pageInfo.pageData = curPageData;
+            callback.call(this,true);
         },
 
         getAjaxData : function(callback){
@@ -391,10 +410,9 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                     "pageNumber": _this._pageInfo.pageNumber
                 },_this._config.formData,_this._config.sortParam),
                 success: function(returnData){
-                    if(typeof _this._config.dataFormat!="undefined"){
-
+                    if(typeof _this._config.key!="undefined"){
+                        returnData = formatData(returnData,_this._config.key);
                     }
-                    returnData = formatData(returnData,_this._config.dataFormat);
                     $.extend(_this._pageInfo,returnData);
                     callback.call(_this,true);
                     return true;

@@ -23,6 +23,16 @@ define(function() {
                 templateUrl : 'app/examples/common.html'                    //html文件
             },
             /*
+             * grid样例
+             * ep_GridCtrl
+             */
+            {
+                ctrlName : "ep_GridCtrl",                                   //ctrl名称
+                ctrlUrl : "ExamplesDir/util/grid/gridCtrl",                 //ctrl路径
+                routerPath : '/grid',                                       //访问路径
+                templateUrl : 'app/examples/common.html'                    //html文件
+            },
+            /*
              * 单附件上传样例
              */
             {
