@@ -1,84 +1,119 @@
-<h2>dateTimePicker - <small><a href="http://www.ztree.me/v3/demo.php#_101" target="_blank">官方Demo</a></small></h2>
 <!-- html -->
-<blockquote>普通树</blockquote>
-<style>
-    .ztree{
-        border: 1px solid #617775;
-        background: #f0f6e4;
-        width: 250px;
-        height: 280px;
-        overflow-y: scroll;
-        overflow-x: auto;
-    }
-</style>
-<ul id="commonTree" class="ztree"></ul>
+<h2>dateTimePicker - <small><a href="http://www.bootcss.com/p/bootstrap-datetimepicker/demo.htm" target="_blank">官方Demo</a></small></h2>
 <hr/>
-<blockquote>选择树</blockquote>
-<ul id="checkTree" class="ztree"></ul>
+<div class="well">
+    <div class="container">
+        <form class="form-horizontal" role="form">
+            <!------------------ 日期 ------------------>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="date">日期</label>
+                <div class="col-md-6">
+                    <input id="date" class="form-control" type="text" />
+                </div>
+            </div>
+            <!------------------ 时间 ------------------>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="date">时间</label>
+                <div class="col-md-6">
+                    <input id="time" class="form-control" type="text" />
+                </div>
+            </div>
+            <!------------------ 组件 ------------------>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="date">组件</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input id="component" type="text" class="form-control">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <!------------------ 复杂 ------------------>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="date">复杂</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input id="complex" type="text" class="form-control">
+                        <a id="complex_del" class="input-group-addon"><i class="fa fa-times"></i></a>
+                        <a id="complex_show" class="input-group-addon"><i class="fa fa-calendar"></i></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <!-- javascript -->
 <script type="text/javascript">
-    require(["jquery", "ZTree","css!ZTreeCss"],function($){
-        //ztree的数据
-        var zNodes =[
-            { name:"父节点1 - 展开", open:true,
-                children: [
-                    { name:"父节点11 - 折叠",
-                        children: [
-                            { name:"叶子节点111"},
-                            { name:"叶子节点112"},
-                            { name:"叶子节点113"},
-                            { name:"叶子节点114"}
-                        ]},
-                    { name:"父节点12 - 折叠",
-                        children: [
-                            { name:"叶子节点121"},
-                            { name:"叶子节点122"},
-                            { name:"叶子节点123"},
-                            { name:"叶子节点124"}
-                        ]},
-                    { name:"父节点13 - 没有子节点", isParent:true}
-                ]},
-            { name:"父节点2 - 折叠",
-                children: [
-                    { name:"父节点21 - 展开", open:true,
-                        children: [
-                            { name:"叶子节点211"},
-                            { name:"叶子节点212"},
-                            { name:"叶子节点213"},
-                            { name:"叶子节点214"}
-                        ]},
-                    { name:"父节点22 - 折叠",
-                        children: [
-                            { name:"叶子节点221"},
-                            { name:"叶子节点222"},
-                            { name:"叶子节点223"},
-                            { name:"叶子节点224"}
-                        ]},
-                    { name:"父节点23 - 折叠",
-                        children: [
-                            { name:"叶子节点231"},
-                            { name:"叶子节点232"},
-                            { name:"叶子节点233"},
-                            { name:"叶子节点234"}
-                        ]}
-                ]},
-            { name:"父节点3 - 没有子节点", isParent:true}
-        ];
-        //初始化commonTree
-        $.fn.zTree.init($("#commonTree"), {}, zNodes);
-
-        //checkTree setting
-        var setting = {
-            check: {
-                enable: true
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            }
-        };
-        //初始化checkTree
-        $.fn.zTree.init($("#checkTree"), setting, zNodes);
+    require(["jquery", "Date","DateCN", "css!DateCss"],function($){
+        /*------------------------ 日期 ------------------------- */
+        $("#date").datetimepicker({
+            //设置使用语言：cn是自定义的中文版本，还可以扩展其他语言版本
+            language : "cn",
+            //输出格式化
+            format : 'yyyy-mm-dd',
+            //直接选择‘今天’
+            todayBtn : true,
+            //设置最精确的时间选择视图
+            minView : 'month',
+            //高亮当天日期
+            todayHighlight : true,
+            //选择完毕后自动关闭
+            autoclose : true
+        });
+        /*------------------------ 时间 ------------------------- */
+        $("#time").datetimepicker({
+            //设置使用语言：cn是自定义的中文版本，还可以扩展其他语言版本
+            language : "cn",
+            //输出格式化
+            format : 'yyyy-mm-dd hh:ii:ss',
+            //直接选择‘今天’
+            todayBtn : true,
+            //设置最精确的时间选择视图
+            minView : 'hour',
+            //高亮当天日期
+            todayHighlight : true,
+            //显示“上午”“下午”
+            showMeridian : true,
+            //选择完毕后自动关闭
+            autoclose : true
+        });
+        /*------------------------ 组件 ------------------------- */
+        $("#component").datetimepicker({
+            //设置使用语言：cn是自定义的中文版本，还可以扩展其他语言版本
+            language : "cn",
+            //输出格式化
+            format : 'yyyy-mm-dd',
+            //直接选择‘今天’
+            todayBtn : true,
+            //设置最精确的时间选择视图
+            minView : 'month',
+            //高亮当天日期
+            todayHighlight : true,
+            //选择完毕后自动关闭
+            autoclose : true
+        });
+        /*------------------------ 复杂 ------------------------- */
+        $("#complex").datetimepicker({
+            //设置使用语言：cn是自定义的中文版本，还可以扩展其他语言版本
+            language : "cn",
+            //输出格式化
+            format : 'yyyy-mm-dd',
+            //直接选择‘今天’
+            todayBtn : true,
+            //设置最精确的时间选择视图
+            minView : 'month',
+            //高亮当天日期
+            todayHighlight : true,
+            //选择完毕后自动关闭
+            autoclose : true
+        });
+        /* 删除按钮 */
+        $("#complex_show").on("click", function(){
+            $('#complex').datetimepicker('show');
+        });
+        /* 显示按钮 */
+        $("#complex_del").on("click", function(){
+            $("#complex").val("");
+        });
     });
 </script>
