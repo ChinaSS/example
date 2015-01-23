@@ -86,6 +86,24 @@ define(function() {
                 templateUrl : 'app/examples/common.html'
             },
             /*
+             * zTree
+             */
+            {
+                ctrlName : "ep_zTree",
+                ctrlUrl : "ExamplesDir/thirdParty/zTree/zTreeCtrl",
+                routerPath : '/zTree',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
+             * zTree
+             */
+            {
+                ctrlName : "ep_dateTimePicker",
+                ctrlUrl : "ExamplesDir/thirdParty/dateTimePicker/dateTimePickerCtrl",
+                routerPath : '/dateTimePicker',
+                templateUrl : 'app/examples/common.html'
+            },
+            /*
              * fontawesome
              */
             {

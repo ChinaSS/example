@@ -17,8 +17,8 @@
             },
             {"name":"第三方组件",
              "sidebars":[
-                 {"name":"树","href":"#"},
-                 {"name":"日期","href":"#"},
+                 {"name":"树","href":"#zTree"},
+                 {"name":"日期","href":"#dateTimePicker"},
                  {"name":"图表","href":"#ECharts"},
                  {"name":"图标","href":"#fontawesome"},
                  {"name":"Div折叠","href":"#divfold"},
