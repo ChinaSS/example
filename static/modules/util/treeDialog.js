@@ -58,7 +58,7 @@ define(["UtilDir/dialog","ZTree","css!ZTreeCss"],function(Dialog,zTree){
             treeId = config.treeId?config.treeId:"system_zTree_dialogTree";
         this.callback = config.callback;
         //初始化dialog
-        this.dialog = Dialog({id:"system_dialog_treeDialog",title:config.title,dialogSize:"modal-sm",modal:"hide"});
+        this.dialog = Dialog({id:"system_dialog_treeDialog",title:config.title,height:"250px",dialogSize:"modal-sm",modal:"hide"});
         this.dialog.setBody("<div id='"+treeId+"' class='ztree'></div>");
         this.dialog.setFoot([
             { 
