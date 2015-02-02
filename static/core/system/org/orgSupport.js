@@ -1,7 +1,7 @@
 /**
  * Created by YiYing on 2015/1/14.
  */
-define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
+define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util){
 
     var sysPath = "core/system";
 
@@ -34,6 +34,7 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
                     callback: {
                         onClick:function (event, treeId, treeNode) {
                             $("#orgShowListTitle").html("组织-"+treeNode.name);
+                            showListPanel();
                             showPersonList(treeNode.id);
                             /*require(["viewFrame"],function(VF){
                                 var VFParam = VF.config;
@@ -90,6 +91,7 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
                     callback: {
                         onClick:function (event, treeId, treeNode) {
                             $("#orgShowListTitle").html("角色-"+treeNode.name);
+                            showListPanel();
                             //查询出该节点下的所有角色信息
                             showRoleList(treeNode.id);
                             /*//显示角色相关操作
@@ -141,13 +143,13 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
 
                             break;
                         case "NoDeptPerson":
-
+                            showPersonList();
                             break;
                         case "LockPerson":
-
+                            showPersonList();
                             break;
                         case "LockDept":
-
+                            showAllDeptList();
                             break;
                         case "Log":
 
@@ -203,7 +205,7 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
     //数据列表公共部分
     var comConfig = {
         placeAt:"orgShowListContent",        //存放Grid的容器ID
-        pageSize:12                          //一页多少条数据
+        pageSize:10                          //一页多少条数据
     };
     /**
      * 显示人员列表
@@ -229,6 +231,7 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
                             showSlidebar();
                         }
                     });*/
+                    showPersonSidebar();
                 }},
                 {name:"姓名",field:"Name"},
                 {name:"员工编号",field:"UserCode"},
@@ -280,9 +283,9 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
             layout: [
                 {
                     name: "岗位编号", field: "gwCode", click: function (e) {
-                    //console.log(e.data);
-
-                }
+                        //console.log(e.data);
+                        showGWSidebar();
+                    }
                 },
                 {name: "岗位名称", field: "gwName"},
                 {name: "序号", field: "sort"}
@@ -304,9 +307,9 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
             layout: [
                 {
                     name: "职务编号", field: "zwCode", click: function (e) {
-                    //console.log(e.data);
-
-                }
+                        //console.log(e.data);
+                        showZWSidebar();
+                    }
                 },
                 {name: "职务名称", field: "zwName"},
                 {name: "序号", field: "sort"}
@@ -330,7 +333,7 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
                     name: "部门名称", field: "deptName", click: function (e) {
                     //console.log(e.data);
 
-                }
+                    }
                 },
                 {name: "部门编号", field: "deptCode"},
                 {name: "部门领导", field: "leader"},
@@ -343,6 +346,45 @@ define(["UtilDir/grid","ZTree","css!ZTreeCss"],function(grid){
             }
         };
         grid.init($.extend(config,comConfig));
+    };
+
+    /******************************侧边栏**********************************/
+    //弹出人员侧边栏
+    var showPersonSidebar = function(){
+        util.slidebar({
+            url:getStaticPath()+"/core/system/org/views/orgPerson.html",
+            width:"800px"
+        });
+    };
+    //弹出部门侧边栏
+    var showDeptSidebar = function(){
+        util.slidebar({
+            url:getStaticPath()+"/core/system/org/views/orgDept.html",
+            width:"800px"
+        });
+    };
+    //弹出角色目录侧边栏
+    var showRoleDirSidebar = function(){
+        util.slidebar({
+            url:getStaticPath()+"/core/system/org/views/orgDept.html",
+            width:"800px"
+        });
+    };
+    //弹出岗位侧边栏
+    var showGWSidebar = function(){
+        util.slidebar({
+            url:getStaticPath()+"/core/system/org/views/orgGW.html",
+            //id:"EditGWPanel",
+            width:"500px"
+        });
+    };
+    //弹出职务侧边栏
+    var showZWSidebar = function(){
+        util.slidebar({
+            url:getStaticPath()+"/core/system/org/views/orgZW.html",
+            //id:"EditZWPanel",
+            width:"500px"
+        });
     };
 
     return {

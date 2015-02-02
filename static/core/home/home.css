@@ -23,17 +23,6 @@ a{
 }
 
 /*start 侧边弹出栏*/
-.sidebar_detail {
-    height: 100%;
-    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
-    border: 1px solid rgba(0,0,0,.2);
-    position: absolute;
-    z-index: 3000;
-    top: 0;
-    padding: 10px;
-    background-color: white;
-    overflow-y:scroll
-}
 .tab-content>div{
     padding: 10px;
 }
