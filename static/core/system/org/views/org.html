@@ -1,19 +1,21 @@
-<!-- 操作栏 -->
-<button type="button" class="btn btn-default"><i class="fa fa-cog"></i>&nbsp;组织配置</button>
-<button type="button" class="btn btn-default" ng-show="opt.curTab=='orgTab'" ng-click="importOrg()"><i class="fa fa-upload"></i>&nbsp;部门导入</button>
-<button type="button" class="btn btn-default" ng-show="opt.curTab=='orgTab'" ng-click="importPerson()"><i class="fa fa-upload"></i>&nbsp;员工导入</button>
-<button type="button" class="btn btn-default" ng-show="opt.curTab=='roleTab'" ng-click="importRoleDir()"><i class="fa fa-upload"></i>&nbsp;角色目录导入</button>
-<button type="button" class="btn btn-default" ng-show="opt.curTab=='roleTab'" ng-click="importRole()"><i class="fa fa-upload"></i>&nbsp;角色导入</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectConfig=='GW'" ng-click="importGW()"><i class="fa fa-upload"></i>&nbsp;岗位导入</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectConfig=='ZW'" ng-click="importZW()"><i class="fa fa-upload"></i>&nbsp;职务导入</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectOrg" ng-click="editDept()"><i class="fa fa-edit"></i>&nbsp;编辑部门</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectOrg" ng-click="addDept()"><i class="fa fa-plus-circle"></i>&nbsp;新增部门</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectOrg" ng-click="addPerson()"><i class="fa fa-plus-circle"></i>&nbsp;新增人员</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectRole" ng-click="editRoleDir()"><i class="fa fa-edit"></i>&nbsp;编辑目录</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectRole" ng-click="addRoleDir()"><i class="fa fa-plus-circle"></i>&nbsp;新增目录</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectRole"><i class="fa fa-plus-circle"></i>&nbsp;新增角色</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectConfig=='GW'" ng-click="addGW()"><i class="fa fa-plus-circle"></i>&nbsp;新增岗位</button>
-<button type="button" class="btn btn-default" ng-show="opt.curSelectConfig=='ZW'" ng-click="addZW()"><i class="fa fa-plus-circle"></i>&nbsp;新增职务</button>
+<!-- 操作栏 避免全局对象，所有的事件通过ID绑定-->
+<div id="org_toolbar">
+    <button type="button" class="btn btn-default" id="btn_orgConfig"><i class="fa fa-cog"></i>&nbsp;组织配置</button>
+    <button type="button" class="btn btn-default" id="btn_importOrg"><i class="fa fa-upload"></i>&nbsp;部门导入</button>
+    <button type="button" class="btn btn-default" id="btn_importPerson"><i class="fa fa-upload"></i>&nbsp;员工导入</button>
+    <button type="button" class="btn btn-default" id="btn_importRoleDir"><i class="fa fa-upload"></i>&nbsp;角色目录导入</button>
+    <button type="button" class="btn btn-default" id="btn_importRole"><i class="fa fa-upload"></i>&nbsp;角色导入</button>
+    <button type="button" class="btn btn-default" id="btn_importGW"><i class="fa fa-upload"></i>&nbsp;岗位导入</button>
+    <button type="button" class="btn btn-default" id="btn_importZW"><i class="fa fa-upload"></i>&nbsp;职务导入</button>
+    <button type="button" class="btn btn-default" id="btn_editDept"><i class="fa fa-edit"></i>&nbsp;编辑部门</button>
+    <button type="button" class="btn btn-default" id="btn_addDept"><i class="fa fa-plus-circle"></i>&nbsp;新增部门</button>
+    <button type="button" class="btn btn-default" id="btn_addPerson"><i class="fa fa-plus-circle"></i>&nbsp;新增人员</button>
+    <button type="button" class="btn btn-default" id="btn_editRoleDir"><i class="fa fa-edit"></i>&nbsp;编辑目录</button>
+    <button type="button" class="btn btn-default" id="btn_addRoleDir"><i class="fa fa-plus-circle"></i>&nbsp;新增目录</button>
+    <button type="button" class="btn btn-default" id="btn_addRole"><i class="fa fa-plus-circle"></i>&nbsp;新增角色</button>
+    <button type="button" class="btn btn-default" id="btn_addGW"><i class="fa fa-plus-circle"></i>&nbsp;新增岗位</button>
+    <button type="button" class="btn btn-default" id="btn_addZW"><i class="fa fa-plus-circle"></i>&nbsp;新增职务</button>
+</div>
 
 
 <hr style="margin-top:5px;margin-bottom:10px">
@@ -22,9 +24,9 @@
 <div class="col-xs-3">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li ng-click="switchTab('orgTab')" class="active" style="width:33%"><a href="#orgTreePanel" role="tab" data-toggle="tab">组织</a></li>
-        <li ng-click="switchTab('roleTab')" style="width:34%"><a href="#orgRolePanel" role="tab" data-toggle="tab">角色</a></li>
-        <li ng-click="switchTab('configTab')" style="width:33%"><a href="#orgConfig" role="tab" data-toggle="tab">高级</a></li>
+        <li id="li_orgTab" class="active" style="width:33%"><a href="#orgTreePanel" role="tab" data-toggle="tab">组织</a></li>
+        <li id="li_roleTab" style="width:34%"><a href="#orgRolePanel" role="tab" data-toggle="tab">角色</a></li>
+        <li id="li_configTab" style="width:33%"><a href="#orgConfig" role="tab" data-toggle="tab">高级</a></li>
     </ul>
 
     <!-- Tab panes -->

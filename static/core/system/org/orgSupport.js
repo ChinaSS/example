@@ -57,6 +57,8 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
 
                             //单击节点展开
                             $.fn.zTree.getZTreeObj("orgtree").expandNode(treeNode);
+                            //显示组织相关操作
+                            toolbarDisplay(["btn_importOrg","btn_importPerson","btn_editDept","btn_addDept","btn_addPerson"])
                         }
                     }
                 };
@@ -94,12 +96,10 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                             showListPanel();
                             //查询出该节点下的所有角色信息
                             showRoleList(treeNode.id);
-                            /*//显示角色相关操作
-                            $scope.$apply(function () {
-                                $scope.opt.curSelectRole = treeNode.id;
-                            });*/
                             //单击节点展开
                             $.fn.zTree.getZTreeObj("roletree").expandNode(treeNode);
+                            //显示角色相关操作
+                            toolbarDisplay(["btn_importRoleDir","btn_importRole","btn_editRoleDir","btn_addRoleDir","btn_addRole"])
                         }
                     }
                 };
@@ -156,14 +156,14 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                             break;
                     }
 
-                    /*//显示相关操作
+                    //显示相关操作
                     if(treeNode.id=="GWConfig"){
-                        $scope.$apply(function () {$scope.opt.curSelectConfig = "GW";});
+                        toolbarDisplay(["btn_importGW","btn_addGW"]);       //显示岗位导入、新增岗位
                     }else if(treeNode.id=="ZWConfig"){
-                        $scope.$apply(function () {$scope.opt.curSelectConfig = "ZW";});
+                        toolbarDisplay(["btn_importZW","btn_addZW"]);       //显示职位导入、新增职务
                     }else{
-                        $scope.$apply(function () {$scope.opt.curSelectConfig = "";});
-                    }*/
+                        toolbarDisplay([])
+                    }
                 }
             }
         };
@@ -200,6 +200,8 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         createDeptTree($("#orgtree"));
         createRoleTree($("#roletree"));
         createConfigTree($("#orgConfigTree"));
+        //默认显示组织导入、人员导入
+        toolbarDisplay(["btn_importOrg","btn_importPerson"]);
     };
 
     //数据列表公共部分
@@ -349,6 +351,13 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
 
     /******************************侧边栏**********************************/
+    //弹出组织配置
+    var showConfigSidebar = function(){
+        util.slidebar({
+            url:getStaticPath()+"/core/system/org/views/orgConfig.html",
+            width:"800px"
+        });
+    };
     //弹出人员侧边栏
     var showPersonSidebar = function(){
         util.slidebar({
@@ -386,6 +395,30 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
             width:"500px"
         });
     };
+
+    /******************************操作栏相关**********************************/
+    var toolbarDisplay = function(arr){
+        //隐藏全部按钮(第一个组织配置除外)
+        $("#org_toolbar>button").not(":first").css({"display":"none"});
+        //显示指定id按钮
+        for(var i= 0,id;id=arr[i++];){
+            $("#"+id).css({"display":""});
+        }
+    };
+
+    /******************************页签切换事件绑定**********************************/
+    $("#li_orgTab").bind("click",function(){
+        //显示组织导入、人员导入
+        toolbarDisplay(["btn_importOrg","btn_importPerson"]);
+    });
+    $("#li_roleTab").bind("click",function(){
+        //显示角色目录导入、角色导入
+        toolbarDisplay(["btn_importRoleDir","btn_importRole"]);
+    });
+    $("#li_configTab").bind("click",function(){
+        //隐藏所有
+        toolbarDisplay([]);
+    });
 
     return {
         orgMainInit:orgMainInit

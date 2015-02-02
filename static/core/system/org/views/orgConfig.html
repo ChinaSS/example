@@ -1,0 +1,46 @@
+<div id="EditZWPanel">
+    <div style="float:left">
+        <div style="padding:10px;font-size:24px"><i class="fa fa-folder-o"></i>&nbsp;组织配置</div>
+    </div>
+    <div style="float:right;padding-top:8px;padding-right:33px">
+        <button type="button" class="btn btn-default" style="width:98px;text-align:left">
+            <i class="fa fa-save"></i>&nbsp;保存
+        </button>
+    </div>
+
+
+    <div class="tab-pane active" style="margin-top:40px">
+        <div class="affix-section">
+            <h3 id="link1">职务信息</h3>
+            <div class="row">
+
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="zwName" class="col-sm-3 control-label">职务名称:</label>
+                        <div class="col-sm-8">
+                            <input id="zwName" type="text" class="form-control" ng-model="Org.ZW.zwName">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="zwCode" class="col-sm-3 control-label">职务编号:</label>
+                        <div class="col-sm-8">
+                            <input id="zwCode" type="text" class="form-control" ng-model="Org.ZW.zwCode">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="ZWSort" class="col-sm-3 control-label">显示序号:</label>
+                        <div class="col-sm-8">
+                            <input id="ZWSort" type="text" class="form-control" ng-model="Org.ZW.sort" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
