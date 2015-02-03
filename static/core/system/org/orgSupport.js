@@ -397,6 +397,10 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
 
     /******************************操作栏相关**********************************/
+    /**
+     * 操作栏显示隐藏公共方法
+     * @param arr
+     */
     var toolbarDisplay = function(arr){
         //隐藏全部按钮(第一个组织配置除外)
         $("#org_toolbar>button").not(":first").css({"display":"none"});
@@ -406,19 +410,300 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         }
     };
 
+    $("#btn_orgConfig").click(function(){ showConfigSidebar() });
+    $("#btn_importOrg").click(function(){ importOrg() });
+    $("#btn_importPerson").click(function(){ importPerson() });
+    $("#btn_importRoleDir").click(function(){ importRoleDir() });
+    $("#btn_importRole").click(function(){ importRole() });
+    $("#btn_importGW").click(function(){ importGW() });
+    $("#btn_importZW").click(function(){ importZW() });
+    $("#btn_editDept").click(function(){ editDept() });
+    $("#btn_addDept").click(function(){ addDept() });
+    $("#btn_addPerson").click(function(){ addPerson() });
+    $("#btn_editRoleDir").click(function(){ editRoleDir() });
+    $("#btn_addRoleDir").click(function(){ addRoleDir() });
+    $("#btn_addRole").click(function(){  });
+    $("#btn_addGW").click(function(){ addGW() });
+    $("#btn_addZW").click(function(){ addZW() });
+
+
     /******************************页签切换事件绑定**********************************/
-    $("#li_orgTab").bind("click",function(){
+    $("#li_orgTab").click(function(){
         //显示组织导入、人员导入
         toolbarDisplay(["btn_importOrg","btn_importPerson"]);
     });
-    $("#li_roleTab").bind("click",function(){
+    $("#li_roleTab").click(function(){
         //显示角色目录导入、角色导入
         toolbarDisplay(["btn_importRoleDir","btn_importRole"]);
     });
-    $("#li_configTab").bind("click",function(){
+    $("#li_configTab").click(function(){
         //隐藏所有
         toolbarDisplay([]);
     });
+
+
+    /******************************组织相关**********************************/
+    //组织导入
+    var importOrg = function(){
+        var mapping = {
+            "ServiceBeanName":"OrgDeptService",
+            "ServiceMethodName":"importDept",
+            "EntityClassName":"com.css.org.entity.OrgDept",
+            "部门ID":"deptId","部门编号":"deptCode","部门名称":"deptName","部门领导":"leader","部门领导编号":"leaderCode",
+            "管理人员":"manager","管理人员编号":"managerCode","成本中心代码":"costCenterCode","部门级别":"level",
+            "显示序号":"sort","所属部门名称":"pDeptName","所属部门ID":"pDeptId","部门OU":"ou",
+            "部门信息1":"extend1","部门信息2":"extend2","部门信息3":"extend3","部门信息4":"extend4",
+            "部门信息5":"extend5","部门信息6":"extend6","部门信息7":"extend7","部门信息8":"extend8",
+            "部门信息9":"extend9","部门信息10":"extend10","部门信息11":"extend11","部门信息12":"extend12",
+            "部门信息13":"extend13","部门信息14":"extend14","部门信息15":"extend15","部门信息16":"extend16",
+            "部门信息17":"extend17","部门信息18":"extend18","部门信息19":"extend19","部门信息20":"extend20"
+        };
+        importExcel({
+            "title":"组织导入",
+            "templeteURL":sysPath+"/org/views/importDept.html",
+            "mapping":mapping
+        });
+    };
+    //人员导入
+    var importPerson = function(){
+            var mapping = {
+                "ServiceBeanName":"OrgUserService",
+                "ServiceMethodName":"importUser",
+                "EntityClassName":"com.css.org.entity.OrgUser",
+                "员工编号":"userCode","用户名称":"userName","性别":"sex","生日":"birthday","办公电话":"officePhone",
+                "移动电话":"phone","传真":"fax","邮箱":"email","职务名称":"zw",
+                "职务编号":"zwCode","显示序号":"sort","是否冻结":"locked",
+                "所属部门":"deptName","部门ID":"deptId","兼职部门":"jzDeptName","兼职部门ID":"jzDeptId",
+                "人员信息1":"extend1","人员信息2":"extend2","人员信息3":"extend3","人员信息4":"extend4",
+                "人员信息5":"extend5","人员信息6":"extend6","人员信息7":"extend7","人员信息8":"extend8",
+                "人员信息9":"extend9","人员信息10":"extend10","人员信息11":"extend11","人员信息12":"extend12",
+                "人员信息13":"extend13","人员信息14":"extend14","人员信息15":"extend15","人员信息16":"extend16",
+                "人员信息17":"extend17","人员信息18":"extend18","人员信息19":"extend19","人员信息20":"extend20"
+            };
+            importExcel({
+                "title":"人员导入",
+                "templeteURL":sysPath+"/org/views/importPerson.html",
+                "mapping":mapping
+            });
+    };
+    //部门编辑
+    var editDept = function(){
+        var deptId = $scope.opt.curSelectOrg;
+        //获取当前需要编辑的部门对象数据
+        $http.get('lib/core/org/data/Dept.json').success(function(data) {
+            //$http.get(util.getServerPath()+"/org/dept/v1/"+deptId).success(function(data) {
+            $scope.$parent.Org.Dept = $.extend($scope.$parent.Org.Dept,data);
+        });
+        //弹出部门编辑侧边栏
+        showDeptSidebar();
+    };
+    //新增部门
+    var addDept = function(){
+        $scope.$parent.Org.Dept = $.extend($scope.$parent.Org.Dept,{
+            "DeptInfo":{},
+            "Members":[],
+            "GW":[],
+            "Extends":{}
+        });
+        showDeptSidebar();
+    };
+    //新增人员
+    var addPerson = function(){
+        $scope.$parent.Org.Person = $.extend($scope.$parent.Org.Person,{
+            "PersonInfo":{},
+            "Roles":[],
+            "GW":[],
+            "Extends":{}
+        });
+        showPersonSidebar();
+    };
+    //人员编辑
+    var editPerson = function(userCode){
+        //更新当前编辑人员scope
+        $http.get('lib/core/org/data/Person.json').success(function(data) {
+            //更新职务对象
+            for(var i= 0,item;item=$scope.$parent.Org.Person.ZWList[i++];){
+                data.PersonInfo.BaseInfo.ZW.id==item.id ? data.PersonInfo.BaseInfo.ZW=item :"";
+            }
+            $scope.$parent.Org.Person = $.extend($scope.$parent.Org.Person,data);
+        });
+        //弹出侧边栏
+        showPersonSidebar();
+    };
+
+
+    /*****************角色相关**************/
+    //角色目录导入
+    var importRoleDir = function(){
+        var mapping = {
+            "ServiceBeanName":"OrgRoleDirService",
+            "ServiceMethodName":"importRoleDir",
+            "EntityClassName":"com.css.org.entity.OrgRoleDir",
+            "目录名称":"dirName","目录编号":"dirCode","父目录编号":"pDirCode"
+        };
+        importExcel({
+            "title":"角色目录导入",
+            "templeteURL":sysPath+"/org/views/importRoleDir.html",
+            "mapping":mapping
+        });
+    };
+    //角色导入
+    var importRole = function(){
+        var mapping = {
+            "ServiceBeanName":"OrgRoleService",
+            "ServiceMethodName":"importRole",
+            "EntityClassName":"com.css.org.entity.OrgRole",
+            "角色编号":"roleCode","角色名称":"roleName","管理人员编号":"managerCode",
+            "所属目录编号":"dirCode","序号":"sort"
+        };
+        importExcel({
+            "title":"角色导入",
+            "templeteURL":sysPath+"/org/views/importRole.html",
+            "mapping":mapping
+        });
+    };
+    //编辑角色目录
+    var editRoleDir = function(){
+        var deptId = $scope.opt.curSelectRole;
+        $http.get('lib/core/org/data/RoleDir.json').success(function(data) {
+            $scope.$parent.Org.RoleDir = data;
+        });
+        showRoleDirSidebar();
+    };
+    //新增角色目录
+    var addRoleDir = function(){
+        $scope.$parent.Org.RoleDir = {};
+        showRoleDirSidebar();
+    };
+    //新增角色
+    var addRole = function(){
+
+    };
+    //编辑角色
+    var editRole = function(){
+
+    };
+
+    /*****************岗位相关**************/
+    //岗位导入
+    var importGW = function(){
+        var mapping = {
+            "ServiceBeanName":"OrgGwService",
+            "ServiceMethodName":"importGw",
+            "EntityClassName":"com.css.org.entity.OrgGw",
+            "岗位名称":"gwName","岗位编号":"gwCode","显示序号":"sort"
+        };
+        importExcel({
+            "title":"岗位导入",
+            "templeteURL":sysPath+"/org/views/importGW.html",
+            "mapping":mapping
+        });
+    };
+    //新增岗位
+    var addGW = function(){
+        $scope.$parent.Org.GW = {};
+        showGWSidebar();
+    };
+    //编辑岗位
+    var editGW = function(){
+
+    };
+
+    /*****************职务相关**************/
+    //职务导入
+    var importZW = function(){
+        var mapping = {
+            "ServiceBeanName":"OrgZwService",
+            "ServiceMethodName":"importZw",
+            "EntityClassName":"com.css.org.entity.OrgZw",
+            "职务名称":"zwName","职务编号":"zwCode","显示序号":"sort"
+        };
+        importExcel({
+            "title":"职务导入",
+            "templeteURL":sysPath+"/org/views/importZW.html",
+            "mapping":mapping
+        });
+    };
+    //新增职务
+    var addZW = function(){
+        $scope.$parent.Org.ZW = {};
+        showZWSidebar();
+    };
+    //编辑职务
+    var editZW = function(){
+
+    };
+
+
+    /**
+     * Excel导入前端公共接口
+     * @param param
+     */
+    var importExcel = function(param){
+        require(["UtilDir/dialog",
+                "WebUploader",
+                "text!"+param.templeteURL,
+                "css!WebUploaderCss"
+            ],
+            function(Dialog,WebUploader,body){
+                var dialog = Dialog({
+                    id:"system_importExcelDialog",
+                    title:param.title,
+                    cache:false,
+                    body:body
+                });
+                //附件上传控件初始化
+                var uploader = WebUploader.create({
+                    swf:getStaticPath()+'/modules/webuploader/Uploader.swf',
+                    server: getServer()+"/util/v1/excel",
+                    accept:{
+                        title:"excel",
+                        //extensions: 'xsl,xslx',
+                        mimeTypes:["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"].join(",")
+                    },
+                    pick:{
+                        id:'#ImportExcelPanel',
+                        multiple:false
+                    }
+                });
+                //设置上传按钮
+                dialog.setFoot([{name:"开始上传",callback:function(){
+                    uploader.upload();
+                }}]);
+                //设置样式，必须uploader初始化后才能设置
+                var panel = $("#ImportExcelPanel");
+                panel.children(":first").css({
+                    "width": "100px",
+                    "height": "25px",
+                    "padding": "3px"
+                });
+                panel.children(":last").css({"background": "#00b7ee"});
+                panel.find("label").hover(function() {
+                    panel.children(":last").css({"background": "#00b7ee"});
+                }, function() {
+                    panel.children(":last").css({"background": "#00a2d4"});
+                });
+                //把附件增加到待上传列表中
+                uploader.on( 'fileQueued', function(file) {
+                    $("#importExcelInfo").show();
+                    $("#importExcelFileName").html(file.name);
+                });
+                //附件上传数据发送之前触发
+                uploader.on( 'uploadBeforeSend', function(object,data,headers) {
+                    data["formData"] = JSON.stringify(param.mapping);
+                    $("#importExcelStatus").html("开始导入，请耐心等待...");
+                });
+                //附件上传成功后触发
+                uploader.on( 'uploadSuccess', function( file,response ) {
+                    $("#importExcelStatus").html(response.status=="success"?"导入成功,共"+response.count+"条":"导入失败");
+                    //错误信息
+                    var errorInfo = response.excelTransformInfo?"<strong>Excel转换错误信息：</strong><br/>"+decodeURI(response.excelTransformInfo):"";
+                    errorInfo+= response.importInfo?"<strong>导入错误信息：</strong><br/>"+decodeURI(response.importInfo):"";
+                    $("#importExcelErrorInfo").html(errorInfo);
+                });
+            }
+        );
+    };
 
     return {
         orgMainInit:orgMainInit

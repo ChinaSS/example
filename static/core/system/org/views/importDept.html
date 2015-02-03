@@ -1,0 +1,29 @@
+一、请按照数据模板的格式准备要导入的数据。 <a href="core/system/org/importTemplete/部门导入.xlsx">下载数据模板</a>
+<div class="attention_content">
+    <p style="margin:0">注意事项：</p>
+    <ol>
+        <li>模板中的表头名称不可更改，表头行不能删除</li>
+        <li>表头列顺序、宽度可调整，单元格不支持公式计算</li>
+        <li>红色底色的为必填，黄色底色的为条件必填</li>
+        <li><strong>部门ID</strong>，<strong>部门名称</strong>为必填项，当填写<strong>部门领导</strong>，
+            <strong>管理人员</strong>，<strong>所属部门名称</strong>时，它们所对应的ID必填
+        </li>
+        <li><strong>部门ID</strong>不能重复，如果重复则视为修改</li>
+        <li>根节点的ID请用<strong>root</strong>命名</li>
+    </ol>
+</div>
+
+二、请选择需要导入的Excel文件。
+<!-- 此部分不需要修改，默认即可 start-->
+<div style="margin-left:20px;margin-top:5px;width:100px">
+    <div id="ImportExcelPanel">
+        <i class="glyphicon glyphicon-paperclip"></i>&nbsp;请选择文件
+    </div>
+</div>
+<div class="attention_content" id="importExcelInfo" style="display:none">
+    <div id="importExcelFileName"></div>
+    <p style="margin:0">状态：<span style="color:red" id="importExcelStatus">待上传</span></p>
+    <div id="importExcelErrorInfo">
+    </div>
+</div>
+<!-- 此部分不需要修改，默认即可 end-->
