@@ -1,5 +1,9 @@
 {
-    "zwCode":"ZW001",
-    "zwName":"高级职称",
-    "sort":"10"
+    "Org":{
+        "ZW":{
+            "zwCode":"ZW001",
+            "zwName":"高级职称",
+            "sort":"10"
+        }
+    }
 }

@@ -1,0 +1,12 @@
+{
+    "Org":{
+        "Role":{
+            "roleCode":"R001",
+            "roleName":"财务出纳",
+            "manager":"张三",
+            "dirName":"财务组",
+            "dirCode":"DIR001",
+            "sort":"100"
+        }
+    }
+}

@@ -39,6 +39,33 @@ a{
     font-weight: bold;
     border-bottom: 1px solid #bbb;
 }
+
+.tab-header{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+.tab-header .title{
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+}
+.tab-header .title .fa{
+    font-size: 18px;
+    margin-right: 8px;
+}
+.tab-header .tool{
+    float: right;
+    margin-right: 20px;
+}
+.single-panel{
+    padding-top: 15px;
+    border-top: 1px solid #bbb;
+}
+.query-form{
+    margin-top: 10px;
+    margin-left: -30px;
+}
 /*boostrap样式覆盖*/
 label{
     font-weight:normal !important

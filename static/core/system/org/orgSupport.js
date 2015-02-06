@@ -222,7 +222,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                             showSlidebar();
                         }
                     });*/
-                    showPersonSidebar();
+                    editPerson(e.data.row.UserCode);
                 }},
                 {name:"姓名",field:"Name"},
                 {name:"员工编号",field:"UserCode"},
@@ -248,8 +248,8 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
             layout: [
                 {
                     name: "角色编号", field: "roleCode", click: function (e) {
-                    //console.log(e.data);
-
+                        //console.log(e.data);
+                        editRole(e.data.row.roleCode);
                     }
                 },
                 {name: "角色名称", field: "roleName"},
@@ -275,7 +275,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                 {
                     name: "岗位编号", field: "gwCode", click: function (e) {
                         //console.log(e.data);
-                        showGWSidebar();
+                        editGW(e.data.row.gwCode);
                     }
                 },
                 {name: "岗位名称", field: "gwName"},
@@ -299,7 +299,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                 {
                     name: "职务编号", field: "zwCode", click: function (e) {
                         //console.log(e.data);
-                        showZWSidebar();
+                        editZW(e.data.row.zwCode);
                     }
                 },
                 {name: "职务名称", field: "zwName"},
@@ -348,11 +348,12 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         });
     };
     //弹出人员侧边栏
-    var showPersonSidebar = function(){
-        util.slidebar({
+    var showPersonSidebar = function(param){
+        util.slidebar($.extend({
             url:getStaticPath()+"/core/system/org/views/orgPerson.html",
+            cache:false,
             width:"800px"
-        });
+        },param));
     };
     //弹出部门侧边栏
     var showDeptSidebar = function(param){
@@ -363,27 +364,38 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         },param));
     };
     //弹出角色目录侧边栏
-    var showRoleDirSidebar = function(){
-        util.slidebar({
-            url:getStaticPath()+"/core/system/org/views/orgDept.html",
-            width:"800px"
-        });
+    var showRoleDirSidebar = function(param){
+        util.slidebar($.extend({
+            url:getStaticPath()+"/core/system/org/views/orgRoleDir.html",
+            cache:false,
+            width:"500px"
+        },param));
+    };
+    //弹出角色侧边栏
+    var showRoleSidebar = function(param){
+        util.slidebar($.extend({
+            url:getStaticPath()+"/core/system/org/views/orgRole.html",
+            cache:false,
+            width:"500px"
+        },param));
     };
     //弹出岗位侧边栏
-    var showGWSidebar = function(){
-        util.slidebar({
+    var showGWSidebar = function(param){
+        util.slidebar($.extend({
             url:getStaticPath()+"/core/system/org/views/orgGW.html",
             //id:"EditGWPanel",
+            cache:false,
             width:"500px"
-        });
+        },param));
     };
     //弹出职务侧边栏
-    var showZWSidebar = function(){
-        util.slidebar({
+    var showZWSidebar = function(param){
+        util.slidebar($.extend({
             url:getStaticPath()+"/core/system/org/views/orgZW.html",
             //id:"EditZWPanel",
+            cache:false,
             width:"500px"
-        });
+        },param));
     };
 
     /******************************操作栏相关**********************************/
@@ -414,7 +426,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     $("#btn_addPerson").click(function(){ addPerson() });
     $("#btn_editRoleDir").click(function(){ editRoleDir() });
     $("#btn_addRoleDir").click(function(){ addRoleDir() });
-    $("#btn_addRole").click(function(){  });
+    $("#btn_addRole").click(function(){ addRole() });
     $("#btn_addGW").click(function(){ addGW() });
     $("#btn_addZW").click(function(){ addZW() });
 
@@ -541,17 +553,11 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
     //新增部门
     var addDept = function(){
-        /*$scope.$parent.Org.Dept = $.extend($scope.$parent.Org.Dept,{
-            "DeptInfo":{},
-            "Members":[],
-            "GW":[],
-            "Extends":{}
-        });*/
         var deptNode = $.fn.zTree.getZTreeObj("orgtree").getSelectedNodes();
         showDeptSidebar({
             afterLoad:function(){
-                $("#org_deptName").html(deptNode[0].name);
-                $("#org_deptId").html(deptNode[0].id);
+                $("#pDeptName").val(deptNode[0].name);
+                $("#pDeptId").val(deptNode[0].id);
                 orgSidebarTools();
             }
         });
@@ -559,28 +565,67 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
 
     //新增人员
     var addPerson = function(){
-        $scope.$parent.Org.Person = $.extend($scope.$parent.Org.Person,{
-            "PersonInfo":{},
-            "Roles":[],
-            "GW":[],
-            "Extends":{}
+
+        showPersonSidebar({
+            afterLoad: function(){
+                initZW();
+            }
         });
-        showPersonSidebar();
     };
     //人员编辑
     var editPerson = function(userCode){
         //更新当前编辑人员scope
-        $http.get('lib/core/org/data/Person.json').success(function(data) {
+        /*$http.get('lib/core/org/data/Person.json').success(function(data) {
             //更新职务对象
             for(var i= 0,item;item=$scope.$parent.Org.Person.ZWList[i++];){
                 data.PersonInfo.BaseInfo.ZW.id==item.id ? data.PersonInfo.BaseInfo.ZW=item :"";
             }
             $scope.$parent.Org.Person = $.extend($scope.$parent.Org.Person,data);
+        });*/
+
+        //获取当前需要编辑的人员对象数据
+        $.ajax({
+            url:sysPath+"/org/data/Person.json",
+            dataType:"json",
+            success:function(data){
+                showPersonSidebar({
+                    afterLoad:function(){
+                        $("#org_PersonName").html(data.Org.Person.PersonInfo.BaseInfo.userName);
+                        $("#org_PersonDeptName").html(data.Org.Person.PersonInfo.DeptInfo.deptName);
+                        setNgModel("PersonBaseInfo",data);
+                        //职务初始化
+                        initZW(data.Org.Person.PersonInfo.BaseInfo.ZW);
+                        //性别与是否冻结
+                        $("input[type='radio'][name='sex'][value='"+data.Org.Person.PersonInfo.BaseInfo.sex+"']").attr("checked", "checked");
+                        $("input[type='radio'][name='locked'][value='"+data.Org.Person.PersonInfo.BaseInfo.locked+"']").attr("checked", "checked");
+                        setNgModel("PersonExtendInfo",data);
+                        //所属角色
+                        document.getElementById("T_PersonRoles").outerHTML = util.template("T_PersonRoles",data);
+                        //所属岗位
+                        document.getElementById("T_PersonGW").outerHTML = util.template("T_PersonGW",data);
+
+                    }
+                });
+            }
         });
-        //弹出侧边栏
-        showPersonSidebar();
     };
 
+    //职务初始化
+    var initZW = function(val){
+        $.ajax({
+            url:sysPath+"/org/data/ZWList.json",
+            dataType:"json",
+            success:function(data){
+                var sel = $("#sle_PersonZW");
+                //初始化人员操作界面的职务选择下拉
+                for(var i= 0,item;item=data[i++];){
+                    sel.append('<option value="'+item.id+'">'+item.name+'</option>');
+                }
+                //设置选中值
+                val && sel.val(val);
+            }
+        })
+    };
 
     /*****************角色相关**************/
     //角色目录导入
@@ -614,24 +659,42 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
     //编辑角色目录
     var editRoleDir = function(){
-        var deptId = $scope.opt.curSelectRole;
-        $http.get('lib/core/org/data/RoleDir.json').success(function(data) {
-            $scope.$parent.Org.RoleDir = data;
+        var deptId = getSelectTreeNodeId("roletree");
+        $.ajax({
+            url:sysPath+"/org/data/RoleDir.json",
+            dataType:"json",
+            success:function(data){
+                showRoleDirSidebar({
+                    afterLoad:function(){
+                        $("#org_RoleDirName").html(data.Org.RoleDir.dirName);
+                        setNgModel("tab_RoleDir",data);
+                    }
+                });
+            }
         });
-        showRoleDirSidebar();
     };
     //新增角色目录
     var addRoleDir = function(){
-        $scope.$parent.Org.RoleDir = {};
         showRoleDirSidebar();
     };
     //新增角色
     var addRole = function(){
-
+        showRoleSidebar();
     };
     //编辑角色
-    var editRole = function(){
-
+    var editRole = function(roleCode){
+        $.ajax({
+            url:sysPath+"/org/data/Role.json",
+            dataType:"json",
+            success:function(data){
+                showRoleSidebar({
+                    afterLoad:function(){
+                        $("#org_RoleName").html(data.Org.Role.roleName);
+                        setNgModel("tab_Role",data);
+                    }
+                });
+            }
+        });
     };
 
     /*****************岗位相关**************/
@@ -651,12 +714,22 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
     //新增岗位
     var addGW = function(){
-        $scope.$parent.Org.GW = {};
         showGWSidebar();
     };
     //编辑岗位
-    var editGW = function(){
-
+    var editGW = function(GWCode){
+        $.ajax({
+            url:sysPath+"/org/data/GW.json",
+            dataType:"json",
+            success:function(data){
+                showGWSidebar({
+                    afterLoad:function(){
+                        $("#org_GWName").html(data.Org.GW.gwName);
+                        setNgModel("tab_GW",data);
+                    }
+                });
+            }
+        });
     };
 
     /*****************职务相关**************/
@@ -676,12 +749,22 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
     //新增职务
     var addZW = function(){
-        $scope.$parent.Org.ZW = {};
         showZWSidebar();
     };
     //编辑职务
     var editZW = function(){
-
+        $.ajax({
+            url:sysPath+"/org/data/ZW.json",
+            dataType:"json",
+            success:function(data){
+                showZWSidebar({
+                    afterLoad:function(){
+                        $("#org_ZWName").html(data.Org.ZW.zwName);
+                        setNgModel("tab_ZW",data);
+                    }
+                });
+            }
+        });
     };
 
 

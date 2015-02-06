@@ -1,0 +1,52 @@
+<div>
+    <form id="entityForm">
+        <div class="tab-header">
+            <div class="title">
+                <i class="fa fa-home"></i><span id="org_RoleDirName"></span>
+            </div>
+            <div class="tool">
+                <button type="button" class="btn btn-default" ng-click="data.saveEntity()">
+                    <i class="fa fa-save"></i>保存
+                </button>
+            </div>
+        </div>
+        <div class="single-panel" id="tab_RoleDir">
+            <div class="row">
+
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="dirName" class="col-sm-3 control-label">目录名称:</label>
+                        <div class="col-sm-8">
+                            <input id="dirName" type="text" class="form-control" ng-model="Org.RoleDir.dirName">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="dirCode" class="col-sm-3 control-label">目录编号:</label>
+                        <div class="col-sm-8">
+                            <input id="dirCode" type="text" class="form-control" ng-model="Org.RoleDir.dirCode">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="PDirName" class="col-sm-3 control-label">父目录名称:</label>
+                        <div class="col-sm-8">
+                            <input id="PDirName" type="text" class="form-control" ng-model="Org.RoleDir.PDirName" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-horizontal">
+                    <div class="form-group">
+                        <label for="PDirCode" class="col-sm-3 control-label">父目录编号:</label>
+                        <div class="col-sm-8">
+                            <input id="PDirCode" type="text" class="form-control" ng-model="Org.RoleDir.PDirCode" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

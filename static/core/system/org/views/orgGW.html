@@ -1,19 +1,17 @@
-<div class="sidebar_detail" id="EditGWPanel">
-    <div style="float:left">
-        <div style="padding:10px;font-size:24px"><i class="fa fa-folder-o"></i>&nbsp;岗位名称</div>
-    </div>
-    <div style="float:right;padding-top:8px;padding-right:33px">
-        <button type="button" class="btn btn-default" style="width:98px;text-align:left">
-            <i class="fa fa-save"></i>&nbsp;保存
-        </button>
-    </div>
-
-
-    <div class="tab-pane active" style="margin-top:40px">
-        <div class="affix-section">
-            <h3 id="link1">基本信息</h3>
+<div>
+    <form id="GWForm">
+        <div class="tab-header">
+            <div class="title">
+                <i class="fa fa-home"></i><span id="org_GWName"></span>
+            </div>
+            <div class="tool">
+                <button type="button" class="btn btn-default">
+                    <i class="fa fa-save"></i>保存
+                </button>
+            </div>
+        </div>
+        <div class="single-panel" id="tab_GW">
             <div class="row">
-
                 <div class="col-md-12 form-horizontal">
                     <div class="form-group">
                         <label for="gwName" class="col-sm-3 control-label">岗位名称:</label>
@@ -41,6 +39,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </form>
 </div>

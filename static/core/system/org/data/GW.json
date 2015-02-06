@@ -1,5 +1,9 @@
 {
-    "gwCode":"GW001",
-    "gwName":"部门经理",
-    "sort":"10"
+    "Org":{
+        "GW":{
+            "gwCode":"GW001",
+            "gwName":"部门经理",
+            "sort":"10"
+        }
+    }
 }

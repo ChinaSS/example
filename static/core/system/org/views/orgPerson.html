@@ -1,12 +1,8 @@
 <div id="EditPersonPanel">
     <div style="float:left">
-        <div style="padding:10px;font-size:24px"><i class="menu-icon fa fa-user"></i>姓名</div>
-        <div style="padding-left:32px;font-size:13px;padding-bottom:14px"><span class="last">所属部门</span></div>
+        <div style="padding:10px;font-size:24px"><i class="menu-icon fa fa-user"></i><span id="org_PersonName"></span></div>
+        <div style="padding-left:32px;font-size:13px;padding-bottom:14px"><span class="last" id="org_PersonDeptName"></span></div>
     </div>
-    <!--<div style="float:right;padding-top:8px;padding-right:33px">
-        <button type="button" class="btn btn-default" style="width:98px;text-align:left"><i class="menu-icon fa fa-save"></i>&nbsp;保存</button><br/>
-        <button type="button" class="btn btn-default" style="margin-top:10px"><i class="menu-icon fa fa-save"></i>&nbsp;新增角色</button>
-    </div>-->
     <div style="float:right;padding-top:23px;padding-right:33px">
         <button type="button" class="btn btn-default" ng-click="Org.Person.save()"><i class="menu-icon fa fa-save"></i>&nbsp;保存</button>
     </div>
@@ -99,9 +95,9 @@
 
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
-                            <label for="ZW" class="col-md-4 col-sm-2 control-label">职务:</label>
+                            <label for="sle_PersonZW" class="col-md-4 col-sm-2 control-label">职务:</label>
                             <div class="col-md-8 col-sm-10">
-                                <select class="form-control" data-ng-model="Org.Person.PersonInfo.BaseInfo.ZW" id="ZW" data-ng-options="zw.name for zw in Org.Person.ZWList">
+                                <select class="form-control" id="sle_PersonZW" data-ng-model="Org.Person.PersonInfo.BaseInfo.ZW"  data-ng-options="zw.name for zw in Org.Person.ZWList">
                                     <option value="">-- 请选择 --</option>
                                 </select>
                             </div>
@@ -182,16 +178,31 @@
                     <td>管理人员</td>
                     <td style="width:50px">操作</td>
                 </tr>
-                <tr ng-repeat="role in Org.Person.Roles">
-                    <td style="text-align:center">{{$index+1}}</td>
-                    <td>{{ role.roleCode }}</td>
-                    <td>{{ role.roleName }}</td>
-                    <td>{{ role.dirName }}</td>
-                    <td>{{ role.manager }}</td>
-                    <td style="text-align:center;font-size:14px">
-                        <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delRole($index)"></i>
-                    </td>
-                </tr>
+                <!-- 模板 -->
+                <script id="T_PersonRoles" type="text/html">
+                    <%for(var i=0,item;item=Org.Person.Roles[i++];){%>
+                    <tr>
+                        <td style="text-align:center"><%=i%></td>
+                        <td><%=item.roleCode %></td>
+                        <td><%=item.roleName %></td>
+                        <td><%=item.dirName %></td>
+                        <td><%=item.manager %></td>
+                        <td style="text-align:center;font-size:14px">
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delRole($index)"></i>
+                        </td>
+                    </tr>
+                    <%}%>
+                    <!--<tr ng-repeat="role in Org.Person.Roles">
+                        <td style="text-align:center">{{$index+1}}</td>
+                        <td>{{ role.roleCode }}</td>
+                        <td>{{ role.roleName }}</td>
+                        <td>{{ role.dirName }}</td>
+                        <td>{{ role.manager }}</td>
+                        <td style="text-align:center;font-size:14px">
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delRole($index)"></i>
+                        </td>
+                    </tr>-->
+                </script>
             </table>
         </div>
         <div class="tab-pane" id="PersonGWInfo">
@@ -204,16 +215,31 @@
                     <td>所属部门名称</td>
                     <td style="width:50px">操作</td>
                 </tr>
-                <tr ng-repeat="gw in Org.Person.GW">
-                    <td style="text-align:center">{{$index+1}}</td>
-                    <td>{{ gw.gwCode }}</td>
-                    <td>{{ gw.gwName }}</td>
-                    <td>{{ gw.deptCode }}</td>
-                    <td>{{ gw.deptName }}</td>
-                    <td style="text-align:center;font-size:14px">
-                        <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delGW($index)"></i>
-                    </td>
-                </tr>
+                <!-- 模板 -->
+                <script id="T_PersonGW" type="text/html">
+                    <%for(var i=0,item;item=Org.Person.GW[i++];){%>
+                    <tr>
+                        <td style="text-align:center"><%=i%></td>
+                        <td><%=item.gwCode %></td>
+                        <td><%=item.gwName %></td>
+                        <td><%=item.deptCode %></td>
+                        <td><%=item.deptName %></td>
+                        <td style="text-align:center;font-size:14px">
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delGW($index)"></i>
+                        </td>
+                    </tr>
+                    <%}%>
+                    <!--<tr ng-repeat="gw in Org.Person.GW">
+                        <td style="text-align:center">{{$index+1}}</td>
+                        <td>{{ gw.gwCode }}</td>
+                        <td>{{ gw.gwName }}</td>
+                        <td>{{ gw.deptCode }}</td>
+                        <td>{{ gw.deptName }}</td>
+                        <td style="text-align:center;font-size:14px">
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delGW($index)"></i>
+                        </td>
+                    </tr>-->
+                </script>
             </table>
         </div>
         <div class="tab-pane" id="PersonExtendInfo">
