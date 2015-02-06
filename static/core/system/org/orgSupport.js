@@ -193,17 +193,6 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
 
 
-    /**
-     * 主页初始化
-     */
-    var orgMainInit = function(){
-        createDeptTree($("#orgtree"));
-        createRoleTree($("#roletree"));
-        createConfigTree($("#orgConfigTree"));
-        //默认显示组织导入、人员导入
-        toolbarDisplay(["btn_importOrg","btn_importPerson"]);
-    };
-
     //数据列表公共部分
     var comConfig = {
         placeAt:"orgShowListContent",        //存放Grid的容器ID
@@ -366,11 +355,12 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         });
     };
     //弹出部门侧边栏
-    var showDeptSidebar = function(){
-        util.slidebar({
+    var showDeptSidebar = function(param){
+        util.slidebar($.extend({
             url:getStaticPath()+"/core/system/org/views/orgDept.html",
+            cache:false,
             width:"800px"
-        });
+        },param));
     };
     //弹出角色目录侧边栏
     var showRoleDirSidebar = function(){
@@ -404,9 +394,11 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     var toolbarDisplay = function(arr){
         //隐藏全部按钮(第一个组织配置除外)
         $("#org_toolbar>button").not(":first").css({"display":"none"});
+        //默认显示组织配置
+        $("#btn_orgConfig").css({"display":"inline-block"});
         //显示指定id按钮
         for(var i= 0,id;id=arr[i++];){
-            $("#"+id).css({"display":""});
+            $("#"+id).css({"display":"inline-block"});
         }
     };
 
@@ -443,6 +435,20 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
 
 
     /******************************组织相关**********************************/
+    /**
+     * 取得选择的树节点id
+     * @param id
+     * @returns {*}
+     */
+    var getSelectTreeNodeId = function(id){
+        var nodes = $.fn.zTree.getZTreeObj(id).getSelectedNodes();
+        return nodes.length?nodes[0].id : false
+    };
+    var getSelectTreeNodeName = function(id){
+        var nodes = $.fn.zTree.getZTreeObj(id).getSelectedNodes();
+        return nodes.length?nodes[0].name : false
+    };
+
     //组织导入
     var importOrg = function(){
         var mapping = {
@@ -486,27 +492,71 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                 "mapping":mapping
             });
     };
+
+    //部门侧边栏操作按钮显示隐藏控制
+    var orgSidebarTools = function(){
+        $("#tab_DeptBaseInfo").click(function(){
+            $("#btn_orgDetpAddPerson").hide();
+            $("#btn_orgAddGW").hide();
+        });
+        $("#tab_DeptMembers").click(function(){
+            $("#btn_orgDetpAddPerson").show();
+            $("#btn_orgAddGW").hide();
+        });
+        $("#tab_DeptGWInfo").click(function(){
+            $("#btn_orgDetpAddPerson").hide();
+            $("#btn_orgAddGW").show();
+        });
+        $("#tab_DeptExtendInfo").click(function(){
+            $("#btn_orgDetpAddPerson").hide();
+            $("#btn_orgAddGW").hide();
+        })
+    };
     //部门编辑
     var editDept = function(){
-        var deptId = $scope.opt.curSelectOrg;
+        var deptId = getSelectTreeNodeId("orgtree");
         //获取当前需要编辑的部门对象数据
-        $http.get('lib/core/org/data/Dept.json').success(function(data) {
-            //$http.get(util.getServerPath()+"/org/dept/v1/"+deptId).success(function(data) {
-            $scope.$parent.Org.Dept = $.extend($scope.$parent.Org.Dept,data);
+        $.ajax({
+            url:sysPath+"/org/data/Dept.json",
+            dataType:"json",
+            success:function(data){
+                //弹出部门编辑侧边栏
+                showDeptSidebar({
+                    afterLoad:function(){
+                        $("#org_deptName").html(data.Org.Dept.DeptInfo.BaseInfo.deptName);
+                        $("#org_deptId").html(data.Org.Dept.DeptInfo.BaseInfo.deptId);
+                        setNgModel("DeptBaseInfo",data);
+                        setNgModel("DeptExtendInfo",data);
+                        //人员列表
+                        document.getElementById("T_DeptMembers").outerHTML = util.template("T_DeptMembers",data);
+                        //岗位列表
+                        document.getElementById("T_GWList").outerHTML = util.template("T_GWList",data);
+                        //页签切换时控制操作按钮的显示隐藏
+                        orgSidebarTools();
+                    }
+                });
+            }
         });
-        //弹出部门编辑侧边栏
-        showDeptSidebar();
+
     };
     //新增部门
     var addDept = function(){
-        $scope.$parent.Org.Dept = $.extend($scope.$parent.Org.Dept,{
+        /*$scope.$parent.Org.Dept = $.extend($scope.$parent.Org.Dept,{
             "DeptInfo":{},
             "Members":[],
             "GW":[],
             "Extends":{}
+        });*/
+        var deptNode = $.fn.zTree.getZTreeObj("orgtree").getSelectedNodes();
+        showDeptSidebar({
+            afterLoad:function(){
+                $("#org_deptName").html(deptNode[0].name);
+                $("#org_deptId").html(deptNode[0].id);
+                orgSidebarTools();
+            }
         });
-        showDeptSidebar();
     };
+
     //新增人员
     var addPerson = function(){
         $scope.$parent.Org.Person = $.extend($scope.$parent.Org.Person,{
@@ -703,6 +753,33 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                 });
             }
         );
+    };
+
+    var setNgModel = function(id,data){
+        //得到指定id面板中所有需要绑定的文本框对象
+        $("#"+id+" input[type='text'][ng-model]").each(function(index){
+            var arr = $(this).attr("ng-model").split(".");
+            var temp=data;
+            for(var i= 0,item;item=arr[i++];){
+                temp = temp[item];
+            }
+            $(this).val(temp);
+        });
+    };
+
+    var getNgModel = function(){
+
+    };
+
+    /**
+     * 主页初始化
+     */
+    var orgMainInit = function(){
+        //默认显示组织导入、人员导入
+        toolbarDisplay(["btn_importOrg","btn_importPerson"]);
+        createDeptTree($("#orgtree"));
+        createRoleTree($("#roletree"));
+        createConfigTree($("#orgConfigTree"));
     };
 
     return {

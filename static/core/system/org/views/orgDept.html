@@ -1,30 +1,26 @@
-<div class="sidebar_detail" id="EditDeptPanel" style="display:none">
+<div class="sidebar_detail" id="EditDeptPanel">
     <div style="float:left">
-        <div style="padding:10px;font-size:24px"><i class="fa fa-sitemap"></i>&nbsp;{{Org.Dept.DeptInfo.BaseInfo.deptName}}</div>
-        <div style="padding-left:32px;font-size:13px;padding-bottom:14px"><span class="last">部门ID：{{Org.Dept.DeptInfo.BaseInfo.deptId}}</span></div>
+        <div style="padding:10px;font-size:24px"><i class="fa fa-sitemap"></i>&nbsp;<span id="org_deptName"></span></div>
+        <div style="padding-left:32px;font-size:13px;padding-bottom:14px"><span class="last">部门ID：<span id="org_deptId"></span></span></div>
     </div>
     <div style="float:right;padding-top:8px;padding-right:33px">
-        <button type="button" class="btn btn-default" style="width:98px;text-align:left">
+        <button type="button" class="btn btn-default" style="width:98px;text-align:left" id="btn_orgDetpSave">
             <i class="fa fa-save"></i>&nbsp;保存
         </button><br/>
-        <button type="button" class="btn btn-default" style="margin-top:10px" ng-show="Org.Dept.curTab==2">
+        <button type="button" class="btn btn-default" style="margin-top:10px;display:none" id="btn_orgDetpAddPerson">
             <i class="fa fa-plus-circle"></i>&nbsp;新增成员
         </button>
-        <button type="button" class="btn btn-default" style="margin-top:10px" ng-show="Org.Dept.curTab==3">
+        <button type="button" class="btn btn-default" style="margin-top:10px;display:none" id="btn_orgAddGW">
             <i class="fa fa-plus-circle"></i>&nbsp;新增岗位
         </button>
     </div>
-    <!--<div style="float:right;padding-top:23px;padding-right:33px">
-        <button type="button" class="btn btn-default" ng-click="Org.Dept.save()"><i class="menu-icon fa fa-save"></i>&nbsp;保存</button>
-    </div>-->
-
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist" style="clear:both">
-        <li class="active" ng-click="Org.Dept.curTab=1"><a data-target="#DeptBaseInfo" role="tab" data-toggle="tab">部门信息</a></li>
-        <li ng-click="Org.Dept.curTab=2"><a data-target="#DeptMembers" role="tab" data-toggle="tab">成员列表</a></li>
-        <li ng-click="Org.Dept.curTab=3"><a data-target="#DeptGWInfo" role="tab" data-toggle="tab">岗位信息</a></li>
-        <li ng-click="Org.Dept.curTab=4"><a data-target="#DeptExtendInfo" role="tab" data-toggle="tab">扩展信息</a></li>
+        <li class="active" id="tab_DeptBaseInfo"><a data-target="#DeptBaseInfo" role="tab" data-toggle="tab">部门信息</a></li>
+        <li id="tab_DeptMembers"><a data-target="#DeptMembers" role="tab" data-toggle="tab">成员列表</a></li>
+        <li id="tab_DeptGWInfo"><a data-target="#DeptGWInfo" role="tab" data-toggle="tab">岗位信息</a></li>
+        <li id="tab_DeptExtendInfo"><a data-target="#DeptExtendInfo" role="tab" data-toggle="tab">扩展信息</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -155,16 +151,31 @@
                     <td>邮箱</td>
                     <td style="width:50px">操作</td>
                 </tr>
-                <tr ng-repeat="member in Org.Dept.Members">
-                    <td style="text-align:center">{{$index+1}}</td>
-                    <td>{{ member.userName }}</td>
-                    <td>{{ member.userCode }}</td>
-                    <td>{{ member.phone }}</td>
-                    <td>{{ member.email }}</td>
-                    <td style="text-align:center;font-size:14px">
-                        <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Dept.delMember($index)"></i>
-                    </td>
-                </tr>
+                <!-- 模板 -->
+                <script id="T_DeptMembers" type="text/html">
+                    <%for(var i=0,item;item=Org.Dept.Members[i++];){%>
+                    <tr>
+                        <td style="text-align:center"><%=i%></td>
+                        <td><%=item.userName %></td>
+                        <td><%=item.userCode %></td>
+                        <td><%=item.phone %></td>
+                        <td><%=item.email %></td>
+                        <td style="text-align:center;font-size:14px">
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Dept.delMember($index)"></i>
+                        </td>
+                    </tr>
+                    <%}%>
+                    <!--<tr ng-repeat="member in Org.Dept.Members">
+                        <td style="text-align:center">{{$index+1}}</td>
+                        <td>{{ member.userName }}</td>
+                        <td>{{ member.userCode }}</td>
+                        <td>{{ member.phone }}</td>
+                        <td>{{ member.email }}</td>
+                        <td style="text-align:center;font-size:14px">
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Dept.delMember($index)"></i>
+                        </td>
+                    </tr>-->
+                </script>
             </table>
         </div>
         <div class="tab-pane" id="DeptGWInfo">
@@ -177,17 +188,34 @@
                     <td>成员列表</td>
                     <td style="width:51px">操作</td>
                 </tr>
-                <tr ng-repeat="gw in Org.Dept.GW">
-                    <td style="text-align:center">{{$index+1}}</td>
-                    <td>{{ gw.gwName }}</td>
-                    <td>{{ gw.gwCode }}</td>
-                    <td>{{ gw.extend }}</td>
-                    <td>{{ gw.members }}</td>
-                    <td style="text-align:center;font-size:14px">
-                        <i class="fa fa-edit" style="cursor:pointer" title="编辑" ng-click="Org.Dept.editGW($index)"></i>
-                        <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Dept.delGW($index)"></i>
-                    </td>
-                </tr>
+
+                <!-- 模板 -->
+                <script id="T_GWList" type="text/html">
+                    <%for(var i=0,item;item=Org.Dept.GW[i++];){%>
+                    <tr>
+                        <td style="text-align:center"><%=i%></td>
+                        <td><%=item.gwName %></td>
+                        <td><%=item.gwCode %></td>
+                        <td><%=item.extend %></td>
+                        <td><%=item.members %></td>
+                        <td style="text-align:center;font-size:14px">
+                            <i class="fa fa-edit" style="cursor:pointer" title="编辑" ng-click="Org.Dept.editGW($index)"></i>
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Dept.delGW($index)"></i>
+                        </td>
+                    </tr>
+                    <%}%>
+                    <!--<tr ng-repeat="gw in Org.Dept.GW">
+                        <td style="text-align:center">{{$index+1}}</td>
+                        <td>{{ gw.gwName }}</td>
+                        <td>{{ gw.gwCode }}</td>
+                        <td>{{ gw.extend }}</td>
+                        <td>{{ gw.members }}</td>
+                        <td style="text-align:center;font-size:14px">
+                            <i class="fa fa-edit" style="cursor:pointer" title="编辑" ng-click="Org.Dept.editGW($index)"></i>
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Dept.delGW($index)"></i>
+                        </td>
+                    </tr>-->
+                </script>
             </table>
         </div>
         <div class="tab-pane" id="DeptExtendInfo">
