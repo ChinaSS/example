@@ -552,12 +552,31 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                         document.getElementById("T_GWList").outerHTML = util.template("T_GWList",data);
                         //页签切换时控制操作按钮的显示隐藏
                         orgSidebarTools();
+                        //部门保存
+                        $("#btn_orgDetpSave").click(orgDetpSave);
+                        //新增成员
+                        $("#btn_orgDetpAddPerson").click(orgDetpAddPerson);
+                        //新增岗位
+                        $("#btn_orgAddGW").click(orgAddGW);
                     }
                 });
             }
         });
+    };
+    //部门保存
+    var orgDetpSave = function(){
+        console.log(getNgModel("DeptBaseInfo"))
+    };
+    //新增成员
+    var orgDetpAddPerson = function(){
 
     };
+    //新增岗位
+    var orgAddGW = function(){
+
+    };
+
+
     //新增部门
     var addDept = function(){
         var deptNode = $.fn.zTree.getZTreeObj("orgtree").getSelectedNodes();
@@ -845,6 +864,11 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         );
     };
 
+    /**
+     * 设置指定面板中的数据
+     * @param id
+     * @param data
+     */
     var setNgModel = function(id,data){
         //得到指定id面板中所有需要绑定的文本框对象
         $("#"+id+" input[type='text'][ng-model]").each(function(index){
@@ -856,9 +880,17 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
             $(this).val(temp);
         });
     };
-
-    var getNgModel = function(){
-
+    /**
+     * 获取数据
+     * @param id
+     */
+    var getNgModel = function(id){
+        var obj = {};
+        $("#"+id+" input[type='text'][ng-model]").each(function(index){
+            var arr = $(this).attr("ng-model").split(".");
+            obj[arr[arr.length-1]] = $(this).val();
+        });
+        return obj;
     };
 
     /**
