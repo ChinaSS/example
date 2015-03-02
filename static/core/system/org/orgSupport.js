@@ -344,7 +344,8 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     var showConfigSidebar = function(){
         util.slidebar({
             url:getStaticPath()+"/core/system/org/views/orgConfig.html",
-            width:"800px"
+            close:true,
+            width:"500px"
         });
     };
     //弹出人员侧边栏
@@ -352,6 +353,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         util.slidebar($.extend({
             url:getStaticPath()+"/core/system/org/views/orgPerson.html",
             cache:false,
+            close:true,
             width:"800px"
         },param));
     };
@@ -360,6 +362,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         util.slidebar($.extend({
             url:getStaticPath()+"/core/system/org/views/orgDept.html",
             cache:false,
+            close:true,
             width:"800px"
         },param));
     };
@@ -368,6 +371,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         util.slidebar($.extend({
             url:getStaticPath()+"/core/system/org/views/orgRoleDir.html",
             cache:false,
+            close:true,
             width:"500px"
         },param));
     };
@@ -376,6 +380,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
         util.slidebar($.extend({
             url:getStaticPath()+"/core/system/org/views/orgRole.html",
             cache:false,
+            close:true,
             width:"500px"
         },param));
     };
@@ -385,6 +390,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
             url:getStaticPath()+"/core/system/org/views/orgGW.html",
             //id:"EditGWPanel",
             cache:false,
+            close:true,
             width:"500px"
         },param));
     };
@@ -394,6 +400,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
             url:getStaticPath()+"/core/system/org/views/orgZW.html",
             //id:"EditZWPanel",
             cache:false,
+            close:true,
             width:"500px"
         },param));
     };

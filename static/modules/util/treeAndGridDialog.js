@@ -46,7 +46,7 @@ define(["UtilDir/dialog","UtilDir/grid","ZTree","css!ZTreeCss"],function(Dialog,
         this.callback = config.callback;
         this.dialog = Dialog({id:"system_dialog_treeAndGridDialog",title:config.title,dialogSize:"modal-lg",modal:"hide"});
         this.dialog.setBody("<div id='"+treeId+"' style='width:20%;display:inline-block;vertical-align:top;' class='ztree'></div><div id='"+gridId+"' style='width:80%;display:inline-block;vertical-align:top;' class='grid'></div>");
-        this.grid = Grid.init($.extend(config.grid,{placeAt:gridId,id:gridId}));
+        this.grid = Grid($.extend(config.grid,{placeAt:gridId,id:gridId}));
         this.dialog.setFoot([
             {
                 name:"确定",
