@@ -6,7 +6,9 @@ define(function(){
         paths:{
             "ExamplesDir":"app/examples",
             "CMDir":"modules/codemirror",
-            "MCScrollbarDir":"modules/jquery/plugins/mCustomScrollbar"
+            "MCScrollbarDir":"modules/jquery/plugins/mCustomScrollbar",
+            "EchartsDir":"modules/echarts",
+            "Echarts":"modules/echarts/echarts"
         }
     });
 });

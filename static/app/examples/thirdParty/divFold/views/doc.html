@@ -1,1 +1,73 @@
 <h1>Div Folding</h1>
+<hr/>
+<div>
+    <blockquote>
+        <div class="alert alert-info">
+     <h3>注意：</h3>
+        <p>
+            div折叠这一功能可以只使用js中的控制方法，
+            主要涉及3种标签：
+            <ol>
+            	<li>点击的tab导航、或索引列表所在的父div的类名：例如下例中的<span>.links</span></li>
+            	<li>主要显示区域的id，如下例中的<span>#target-container</span></li>
+            	<li>被折叠的div的父div的类名，如下例中的<span>.pop</span></li>
+            </ol> 
+        </p>
+        </div>
+        <div class="alert alert-danger">
+        <p>
+        	该示例中使用CSS3的@keyframe实现的动画效果，因此对浏览器版本有一定要求。
+        	实际应用时，可以放弃该样式文件，根据项目需求，重新编写相关标签的样式即可。
+        </p>
+        </div>
+       </blockquote>   
+            其标签结构如下：<br/>
+        <pre id="demoStr">
+       
+            </pre>
+        
+  
+
+</div>
+<blockquote>
+<div>
+ 使用时，仅需将<span>divfold.js</span>载入，<br/>
+		方法为： divFold($links,$targetContainer,$pops);<br/>
+		参数依次对应上例中标签，可自行更改。<br/>
+		注意：这3个标签的层级结构需按照上述标签排列，调用divFold这一方法即可实现div折叠。<br/>
+		具体li、被折叠div的显示样式可自行设定。<br/>
+</div>
+</blockquote>
+
+
+
+<script type="text/javascript">
+    require(["jquery"],function($){
+        var demo="<div class=\"links\">\n"+
+        		 "<ul><li><a href=\"javascript:;\">A</a></li>\n"+
+        		 "\t<li><a href=\"javascript:;\">B</a></li>\n"+
+        		 "\t<li><a href=\"javascript:;\">C</a></li>\n"+
+        		 "\t<li><a href=\"javascript:;\">D</a></li>\n"+
+        		 "\t<li><a href=\"javascript:;\">E</a></li>\n"+
+        		 "</ul> </div>\n"+
+        		 "<div id=\"target-container\">\n"+
+				 "\t<div class=\"pop\">\n"+
+				 "\t\t<div id=\"case1\" >标签一</div>\n"+
+				 "\t</div>\n"+
+				 "\t<div class=\"pop\">\n"+
+				 "\t\t<div id=\"case2\">标签二</div>\n"+
+				 "\t</div>\n"+
+				 "\t<div class=\"pop\">\n"+
+				 "\t\t<div id=\"case3\">标签三</div>\n"+
+				 "\t</div>\n"+
+				 "\t<div class=\"pop\">\n"+
+				 "\t\t<div id=\"case4\">标签四</div>\n"+
+				 "\t</div>\n"+
+				 "\t<div class=\"pop\">\n"+
+				 "\t\t<div id=\"case5\">标签五</div>\n"+
+				 "\t</div>\n"+
+				 "</div>";
+        $("#demoStr").text(demo);
+    });
+    // @ sourceURL=divFold_doc.html
+</script>
