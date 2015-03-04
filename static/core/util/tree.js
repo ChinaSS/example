@@ -56,5 +56,5 @@ define(["jquery"],function($){
 		refreshTree : function(data){
 			this.renderTree(data);
 		}
-	}
+	};
 });
