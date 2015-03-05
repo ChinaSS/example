@@ -57,4 +57,6 @@ define(["jquery"],function($){
 			this.renderTree(data);
 		}
 	};
+
+	return treeInit;
 });
