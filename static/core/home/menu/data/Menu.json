@@ -45,7 +45,7 @@
             {"name":"流程管理","href":"#flow"},
             {"name":"组织管理","href":"#org"},
             {"name":"消息中心","href":"#msg"},
-            {"name":"权限管理","href":"#auth"}
+            {"name":"权限管理","href":"#acl"}
         ]
     }
 ]
