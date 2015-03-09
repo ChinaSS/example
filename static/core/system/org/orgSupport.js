@@ -565,7 +565,9 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
     //部门保存
     var orgDetpSave = function(){
-        console.log(getNgModel("DeptBaseInfo"))
+        console.log(getNgModel("DeptBaseInfo"));
+        //getNgModel("DeptExtendInfo")
+
     };
     //新增成员
     var orgDetpAddPerson = function(){
@@ -814,7 +816,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                 //附件上传控件初始化
                 var uploader = WebUploader.create({
                     swf:getStaticPath()+'/modules/webuploader/Uploader.swf',
-                    server: getServer()+"/util/v1/excel",
+                    server: getServer()+"/sword/importDept",
                     accept:{
                         title:"excel",
                         //extensions: 'xsl,xslx',
@@ -850,6 +852,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                 //附件上传数据发送之前触发
                 uploader.on( 'uploadBeforeSend', function(object,data,headers) {
                     data["formData"] = JSON.stringify(param.mapping);
+                    data["CONTROLLER_KEY)"] = "ExcelImportController";
                     $("#importExcelStatus").html("开始导入，请耐心等待...");
                 });
                 //附件上传成功后触发
