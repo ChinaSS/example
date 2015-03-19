@@ -1,0 +1,28 @@
+{
+  "allDataCount":100,
+  "curPageData":[{
+    "name":"艺术家模块",
+    "type":"资源分类",
+    "url":""
+  },{
+    "name":"艺术家添加",
+    "type":"资源实体",
+    "url":"/artist/put"
+  },{
+    "name":"艺术家删除",
+    "type":"资源实体",
+    "url":"/artist/delete"
+  },{
+    "name":"作品模块",
+    "type":"资源分类",
+    "url":""
+  },{
+    "name":"作品添加",
+    "type":"资源实体",
+    "url":"/opus/put"
+  },{
+    "name":"作品删除",
+    "type":"资源实体",
+    "url":"/opus/delete"
+  }]
+}

@@ -190,5 +190,37 @@ define(["jquery","css!UtilDir/css/util.css"],function($){
         };
     })();
 
+    /**
+     * 扩展util，添加util.Loading.show 和 util.Loading.hide
+     */
+    $.extend(util, {
+        Loading : {
+            show : function() {
+                if ($(".loading")[0]) {
+                    $(".loading").show();
+                } else {
+                    var imgUrl = getStaticPath() + "/modules/util/images/loading.gif";
+                    var template = '<div class="loading"><img src="' + imgUrl + '" alt="正在加载……" /></div>';
+                    $(template).appendTo($(document.body))
+                        .css({
+                            "width":"50px",
+                            "height":"50px",
+                            "position":"absolute",
+                            "left":"50%",
+                            "top":"50%",
+                            "margin-left":"-25px",
+                            "margin-top":"-25px",
+                            "z-index":9999
+                        });
+                }
+            },
+            hide : function() {
+                if ($(".loading")) {
+                    $(".loading").hide();
+                }
+            }
+        }
+    })
+
     return util;
 });

@@ -1,9 +1,130 @@
-/**
- * Created by YiYing on 2015/1/14.
- */
 define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util){
-
     var sysPath = "core/system";
+    /*
+    $.extend(util, {
+        Loading : {
+            show : function() {
+                if ($(".loading")[0]) {
+                    $(".loading").show();
+                } else {
+                    var imgUrl = sysPath + "/acl/images/loading.gif";
+                    var template = '<div class="loading"><img src="' + imgUrl + '" alt="正在加载……" /></div>';
+                    $(template).appendTo($(document.body))
+                        .css({
+                            "width":"50px",
+                            "height":"50px",
+                            "position":"absolute",
+                            "left":"50%",
+                            "top":"50%",
+                            "margin-left":"-25px",
+                            "margin-top":"-25px",
+                            "z-index":9999
+                        });
+                }
+            },
+            hide : function() {
+                if ($(".loading")) {
+                    $(".loading").hide();
+                }
+            }
+        }
+    })
+    .ajaxStart(function(){
+        util.loading.show();
+    }).ajaxStop(function(){
+        util.loading.hide();
+    })
+    */
+
+    /**
+     * 主页初始化
+     */
+    var init = function(){
+        createResTree();
+        createResGrid();
+    };
+
+    var createResTree = function() {
+        $.ajax({
+            url : sysPath + "/acl/data/treeRes.json",
+            success : function(data) {
+                var setting = {
+                    data: {
+                        simpleData: {
+                            enable: true
+                        }
+                    },
+                    callback : {
+                        onClick : function(event, treeId, treeNode, clickFlag) {
+                            createResGrid();
+                        }
+                    }
+                }
+                $.fn.zTree.init($("#tree_res"), setting, data);
+            }
+        });
+    }
+
+    var createResGrid = function(nodeid) {
+        grid({
+            id : "gridRes",
+            placeAt : "grid_res",
+            title : "资源列表",
+            index:"checkbox",
+            hidden:false,
+            pagination:true,
+            layout : [{
+                name:"资源名称",field:"name",click:function(e){editRes();}
+            },{
+                name:"资源地址",field:"url"
+            },{
+                name:"资源类型",field:"type"
+            }],
+            toolbar:[
+                {name:"添加",class:"fa fa-plus-circle",callback:function(event){ addRes(); }},
+                {name:"删除",class:"fa fa-trash-o",callback:function(event){ }},
+                {name:"刷新",class:"fa fa-refresh",callback:function(event){ }}
+            ],
+            data:{type:"URL",value:sysPath+"/acl/data/gridRes.json"}
+        })
+    }
+
+    //添加资源
+    function addRes() {
+        util.slidebar({
+            url:sysPath + "/acl/views/res.html",
+            width:"500px",
+            //close:true,
+            cache:false
+        });
+    }
+
+    //编辑资源
+    function editRes() {
+        util.slidebar({
+            url:sysPath + "/acl/views/res.html",
+            width:"500px",
+            cache:false,
+            afterLoad : function() {
+                $.ajax({
+                    url:sysPath + "/acl/data/res.json",
+                    success:function(data) {
+                        (function(data){
+                            var aEle = $("input,select");
+                            for (var name in data) {
+                                aEle.each(function(){
+                                    var eleName = $(this).attr("name") || $(this).attr("id");
+                                    if (eleName == name) {
+                                        $(this).val(data[name]);
+                                    }
+                                })
+                            }
+                        })(data);
+                    }
+                });
+            }
+        });
+    }
 
     /**
      * 创建部门树
@@ -565,9 +686,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
     //部门保存
     var orgDetpSave = function(){
-        console.log(getNgModel("DeptBaseInfo"));
-        //getNgModel("DeptExtendInfo")
-
+        console.log(getNgModel("DeptBaseInfo"))
     };
     //新增成员
     var orgDetpAddPerson = function(){
@@ -816,7 +935,7 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                 //附件上传控件初始化
                 var uploader = WebUploader.create({
                     swf:getStaticPath()+'/modules/webuploader/Uploader.swf',
-                    server: getServer()+"/sword/importDept",
+                    server: getServer()+"/util/v1/excel",
                     accept:{
                         title:"excel",
                         //extensions: 'xsl,xslx',
@@ -852,7 +971,6 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
                 //附件上传数据发送之前触发
                 uploader.on( 'uploadBeforeSend', function(object,data,headers) {
                     data["formData"] = JSON.stringify(param.mapping);
-                    data["CONTROLLER_KEY)"] = "ExcelImportController";
                     $("#importExcelStatus").html("开始导入，请耐心等待...");
                 });
                 //附件上传成功后触发
@@ -908,6 +1026,6 @@ define(["UtilDir/grid","UtilDir/util","ZTree","css!ZTreeCss"],function(grid,util
     };
 
     return {
-        orgMainInit:orgMainInit
+        init:init
     }
 });
