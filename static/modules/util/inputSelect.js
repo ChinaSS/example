@@ -118,7 +118,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                 input.config.onSelect?input.config.onSelect(obj):"";
             });
         } else if (input.config.type=="select") {
-            input.$panel.on(selectEvent,".item",function(event){
+            input.$panel.on("dblclick",".item,.node",function(event){
                 var id = $(this).children(".text").data("id"),
                     value = $(this).children(".text").text(),
                     obj={};
