@@ -21,6 +21,7 @@ require.config({
         /*目录地址映射*/
         "UtilDir":"modules/util",
         "OrgDir":"core/system/org",
+        "AclDir":"core/system/acl",
         /*CSS文件路径映射*/
         "ZTreeCss":"modules/zTree/css/zTreeStyle/zTreeStyle",
         "WebUploaderCss":"modules/webuploader/css/webuploader",
@@ -48,7 +49,7 @@ require.config({
 /*
  * 首页onload加载项
  */
-require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.validate.extra","app/appPath"],function(ace){
+require(["Ace","UtilDir/util","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.validate.extra","app/appPath"],function(ace,util){
     require(["HomeApp"], function () {
         angular.element(document).ready(function () {
             angular.bootstrap(document, ['HomeApp']);
@@ -100,6 +101,10 @@ require(["Ace","Bootstrap","JQuery.validate","JQuery.validate.message","JQuery.v
         require(["UtilDir/util"],function(util){
             //处理没有被服务器捕获的异常, 可能服务器崩溃
         });
+    }).ajaxStart(function(){
+        util.Loading.show();
+    }).ajaxStop(function(){
+        util.Loading.hide();
     })
 });
 

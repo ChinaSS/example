@@ -1,46 +1,36 @@
-<div id="EditZWPanel">
-    <div style="float:left">
-        <div style="padding:10px;font-size:24px"><i class="fa fa-folder-o"></i>&nbsp;组织配置</div>
-    </div>
-    <div style="float:right;padding-top:8px;padding-right:33px">
-        <button type="button" class="btn btn-default" style="width:98px;text-align:left">
-            <i class="fa fa-save"></i>&nbsp;保存
-        </button>
-    </div>
+<div style="float:left">
+    <div style="padding:10px;font-size:24px"><i class="fa fa-cog"></i>组织配置</div>
+</div>
+<div style="float:right;padding-top:23px;padding-right:33px">
+    <button type="button" class="btn btn-default"><i class="menu-icon fa fa-save"></i>&nbsp;保存</button>
+</div>
 
 
-    <div class="tab-pane active" style="margin-top:40px">
-        <div class="affix-section">
-            <h3 id="link1">职务信息</h3>
-            <div class="row">
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" style="clear:both">
+    <li class="active"><a data-target="#ConfigBaseInfo" role="tab" data-toggle="tab">基本信息</a></li>
+    <!--<li><a data-target="#PersonRoleInfo" role="tab" data-toggle="tab">所属角色</a></li>
+    <li><a data-target="#PersonGWInfo" role="tab" data-toggle="tab">所属岗位</a></li>-->
+</ul>
 
-                <div class="col-md-12 form-horizontal">
-                    <div class="form-group">
-                        <label for="zwName" class="col-sm-3 control-label">职务名称:</label>
-                        <div class="col-sm-8">
-                            <input id="zwName" type="text" class="form-control" ng-model="Org.ZW.zwName">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 form-horizontal">
-                    <div class="form-group">
-                        <label for="zwCode" class="col-sm-3 control-label">职务编号:</label>
-                        <div class="col-sm-8">
-                            <input id="zwCode" type="text" class="form-control" ng-model="Org.ZW.zwCode">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12 form-horizontal">
-                    <div class="form-group">
-                        <label for="ZWSort" class="col-sm-3 control-label">显示序号:</label>
-                        <div class="col-sm-8">
-                            <input id="ZWSort" type="text" class="form-control" ng-model="Org.ZW.sort" readonly>
-                        </div>
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="ConfigBaseInfo">
+        <div class="row">
+            <div class="col-md-12 form-horizontal">
+                <div class="form-group">
+                    <label for="defaultPassword" class="col-md-3 col-sm-2 control-label">默认密码:</label>
+                    <div class="col-md-9 col-sm-10">
+                        <input id="defaultPassword" type="password" class="form-control" ng-model="Org.config.password">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--<div class="tab-pane" id="PersonRoleInfo">
 
+    </div>
+    <div class="tab-pane" id="PersonGWInfo">
+
+    </div>-->
 </div>

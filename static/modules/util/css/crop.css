@@ -38,10 +38,10 @@
 }
 .cs_cropper_preview_md{
 	width: 200px;
+	/*height: 90px;*/
 	overflow: hidden;
 	margin: 0 auto;
 	margin-top: 10px;
-	/*border: 1px solid #eee;*/
 	border-radius: 3px;
 }
 /*

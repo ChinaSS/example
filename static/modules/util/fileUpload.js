@@ -6,6 +6,7 @@ define(['WebUploader','jquery','css!UtilDir/css/util.css','css!WebUploaderCss'],
      */
     var init = function(options){
         var settings = {
+            type:"simple",
             placeAt:"",                                                     //附件上传组件所放位置
             auto: false,                                                    //是否自动上传
             swf: getStaticPath() + 'modules/webuploader/Uploader.swf',      //flash地址

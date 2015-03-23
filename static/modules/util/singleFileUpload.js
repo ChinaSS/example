@@ -1,7 +1,7 @@
 /**
  * Created by YiYing on 2014/12/14.
  */
-define(['WebUploader','jquery','css!UtilDir/css/util.css','css!WebUploaderCss'],function(WebUploader,$){
+define(['WebUploader','jquery'],function(WebUploader,$){
 
     var init = function(options){
         var settings = {

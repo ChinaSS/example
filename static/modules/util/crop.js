@@ -61,11 +61,11 @@ define(["WebUploader", "css!WebUploaderCss", "Cropper", "css!CropperCss", "css!U
 						'<div class="cs_cropper_wrap">' + 
 							'<div class="cs_cropper_preview">' + 
 								'<h2 class="cs_cropper_preview_txt">预览：</h2>' + 
-								'<div class="cs_cropper_preview_md">' + '</div>' +
-							'</div>' +
-							'<div class="cs_cropper_view">' + 
-								'<img src="modules/util/images/cropper2.jpg" alt="请选择图片" />' +
+								'<div class="cs_cropper_preview_md"></div>' + 
 							'</div>' + 
+							'<div class="cs_cropper_view">' +
+								'<img src="modules/util/images/cropper2.jpg" alt="请选择图片" />' +
+							'</div>' +
 						'</div>' +
 					'</div>';
 			var selector = self.options.id,

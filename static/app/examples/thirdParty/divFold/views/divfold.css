@@ -1,21 +1,4 @@
 
-.container {
-    width: 100%;
-    height: 100%;
-}
-
-h1 {
-    color: pink;
-    font-weight: bold;
-    font-size: 2em;
-    line-height: 1.3em;
-}
-
-h2 {
-    color: lightBlue;
-    font-size: 1.5em;
-    line-height: 1.3em;
-}
 
 .links {
     float: left;
@@ -38,6 +21,8 @@ h2 {
     position: relative;
     padding-top: 45px;
     min-height: 300px;
+    top: 360px;
+	left: -420px;
 }
 
 ol {
