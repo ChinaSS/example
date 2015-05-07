@@ -1,6 +1,7 @@
 define(["jquery","ExamplesDir/common"],function($,Common){
 
-    return function($compile,$scope){
+    return function($compile,$scope,$routeParams){
+        console.log($routeParams.uuid);
         //样例初始化
         Common.exampleInit($compile,$scope,
             "ExamplesDir/util/grid/views/source.html",        //演示代码路径

@@ -24,10 +24,10 @@ require(["UtilDir/grid"], function(Grid){
             {name:"地址",field:"Address",hidden:true,format:function(obj){console.log(obj);return "BJ"}}
         ],
         toolbar:[
-            {name:"添加",class:"fa fa-plus-circle",callback:function(event){console.log('添加')}},
-            {name:"删除",class:"fa fa-trash-o",callback:function(event){console.log('删除')}},
-            {name:"查询",class:"fa fa-search",callback:function(event){console.log(event.data)}},
-            {name:"导出",class:"fa fa-download",callback:function(event){console.log('导出')}}
+            {name:"添加",icon:"fa fa-plus-circle",callback:function(event){console.log('添加')}},
+            {name:"删除",icon:"fa fa-trash-o",callback:function(event){console.log('删除')}},
+            {name:"查询",icon:"fa fa-search",callback:function(event){console.log(event.data)}},
+            {name:"导出",icon:"fa fa-download",callback:function(event){console.log('导出')}}
         ],
         data:[
             {Name:"张三",Sex:"男",Phone:"123456",Email:"",Address:"BJ"},

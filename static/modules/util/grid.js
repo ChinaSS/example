@@ -22,10 +22,13 @@
         {name:"地址",field:"Address",hidden:true,format:function(obj){console.log(obj);return "BJ"}}
     ],
     toolbar:[
-        {name:"添加",class:"fa fa-plus-circle",callback:function(event){console.log('添加')}},
-        {name:"删除",class:"fa fa-trash-o",callback:function(event){console.log('删除')}},
-        {name:"查询",class:"fa fa-search",callback:function(event){console.log(event.data)}},
-        {name:"导出",class:"fa fa-download",callback:function(event){console.log('导出')}}
+        {name:"添加",icon:"fa fa-plus-circle",callback:function(event){console.log('添加')}},
+        {name:"删除",icon:"fa fa-trash-o",callback:function(event){console.log('删除')}},
+        {name:"查询",icon:"fa fa-search",callback:function(event){console.log(event.data)}},
+        {name:"导出",icon:"fa fa-download",callback:function(event){console.log('导出')}}
+    ],
+    trEvent:[
+        {type:"click",callback:function(event){}}
     ],
     data:[{Name:"张三",Sex:"男",Phone:"123456",Email:"",Address:"BJ"},{Name:"张三",Sex:"男",Phone:"123456",Email:"",Address:"BJ"}]
     //data:{type:"URL",value:""}                                //只要data值的类型数组都视为假分页，为对象视为真分页
@@ -42,11 +45,11 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
     var cache={};
 
     function initGrid(config){
-        config = $.extend({
+        var _config = $.extend({
             id : config.placeAt,
             pageSize: 10,
             pagination : true,
-            trEvent: {},     //数据行事件, 暂不可用
+            trEvent: {},     //数据行事件
             realSort : false,
             sortParam:{
                 field: null,
@@ -56,13 +59,14 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                 "allDataCount" : "dataCount",
                 "curPageData" : "pageData"
             },
+            data:[],
             cache : true
         },config);
         //创建表格对象
-        var grid = new Grid(config);
+        var grid = new Grid(_config);
         //添加缓存
-        if(config.cache){
-            cache[config.id] = grid;
+        if(_config.cache){
+            cache[_config.id] = grid;
         }
         return grid;
     }
@@ -157,7 +161,7 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                     var $ul = $('<ul></ul>');
                     for(var i = 0, length=this._config.toolbar.length;i<length;i++){
                         var item = this._config.toolbar[i];
-                        $('<li '+(i==0?'class="first"':"")+'><a><i class="'+item.class+'"></i>'+ item.name +'</a></li>')
+                        $('<li '+(i==0?'class="first"':"")+'><a><i class="'+item.icon+'"></i>'+ item.name +'</a></li>')
                             .bind("click",this,item.callback)
                             .appendTo($ul);
                     }
@@ -346,7 +350,7 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
             if(--i<_this._config.pageSize){
                 var pageSize = _this._config.pageSize;
                 for(j=i;j<pageSize;j++){
-                    $tableBody.append('<tr class="emptyRow"></tr>');
+                    $tableBody.append('<tr class="emptyRow"><td>&nbsp;</td></tr>');
                 }
             }
             _this._layoutEventObj={};
@@ -379,8 +383,20 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                         $checkAll.removeAttr("checked");
                     }
                 });
+                for(var evt in this._config.trEvent){
+                    (function(trEvent){
+                        var type = evt;
+                        $tableBody.on(type,"tr",function(event){
+                            event.data = {
+                                "row" : _this._pageInfo.pageData[$(this).data("index")]
+                            };
+                            trEvent[type](event);
+                        });
+                    })(this._config.trEvent);
+                }
                 $tableBody.data("bindEvent",true);
             }
+
         },
 
         getData : function(callback){
@@ -461,6 +477,14 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
         },
         refresh : function(){
             this.renderTableData(true);
+        },
+        setData : function(callback){
+            if (!this._config.data.type) {
+                this._config.data = callback(this._config.data);
+                this.refresh();
+            }else{
+                console.log("data retrived from database!")
+            }
         }
     });
 

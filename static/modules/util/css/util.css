@@ -12,11 +12,13 @@ label{
 .col-sm-10{
     padding-left: 0px !important;
 }
+/*
 .form-control{
     height: 30px;
     padding: 3px 10px;
     font-size:13px;
 }
+*/
 /*end*/
 
 /*文本框后的图标样式*/
@@ -46,12 +48,34 @@ label{
 }
 
 /*侧边栏相关*/
+.cs-slidebar{
+	position: fixed;
+	top: 45px;
+	bottom: 0;
+	background: #fff;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	z-index: 1040;
+	box-shadow : 0 10px 10px 0 rgba(0, 0, 0, .3);
+    -webkit-box-shadow : 0 10px 10px 0 rgba(0, 0, 0, .3);
+    -moz-box-shadow : 0 10px 10px 0 rgba(0, 0, 0, .3);
+}
+.cs-slidebar-content{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 35px;
+	right: 0;
+	padding: 0 10px 0 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
 .cs-slidebar-left{
-    position: fixed;
-    height: 100%;
-    width: 18px;
-    margin-left: -20px;
+    position: absolute;
+    bottom: 0;
     top: 0;
+    left: 0;
+    width: 30px;
 }
 .cs-slidebar-left:hover{
     background-color: #E9E9E9;
@@ -59,12 +83,16 @@ label{
 }
 .cs-slidebar-close{
     color: #428BCA;
-    top: 50%
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
 }
 
 /*附件上传*/
 .cs-upload{
-    border: 1px #DDD solid;
+    border: 1px #CCC solid;
 }
 
 .cs-upload table td i:hover{
@@ -110,6 +138,9 @@ label{
 }
 
 /*简单附件上传*/
+.cs-sUpload{
+    position: relative;
+}
 .cs-sUpload .fa{
     position: absolute;
     top: 10px;
@@ -122,11 +153,15 @@ label{
     right: 26px;
 }
 .cs-sUpload .fa-upload{
-    right: 26px;
+    right: 9px;
+    display: none;
+}
+.cs-sUpload .fa-pause{
+    right: 45px;
     display: none;
 }
 .cs-sUpload .fa-times{
-    right: 45px;
+    right: 26px;
     display: none;
 }
 

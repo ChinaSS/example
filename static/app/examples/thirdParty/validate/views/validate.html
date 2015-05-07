@@ -1,0 +1,369 @@
+<!-- html -->
+<h2>jquery.validate - <small><a href="javascript:;" target="_blank">更多官方Demo</a></small></h2>
+<hr/>
+<blockquote>1.基本使用</blockquote>
+<div class="well">
+    <div class="row">
+        <form id="form_base" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_base">检验</label>
+                <div class="col-md-6">
+                    <input id="val1_base" name="val1_base" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-md-2 control-label sr-only"></label>
+                <div class="col-md-6">
+                    <button id="btn_submit_base" class="btn btn-success">校验</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<blockquote>2-1.扩展-编写规则方式-将规则写在标签中</blockquote>
+<div class="well">
+    <div class="row">
+        <form id="form_rule1" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_rule1">检验</label>
+                <div class="col-md-6">
+                    <input id="val1_rule1" name="val1_rule1" class="form-control required" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-md-2 control-label sr-only"></label>
+                <div class="col-md-6">
+                    <button id="btn_submit_rule1" class="btn btn-success">校验</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<blockquote>2-2.扩展-编写规则方式-将规则写在js中</blockquote>
+<div class="well">
+    <div class="row">
+        <form id="form_rule2" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_rule2">检验</label>
+                <div class="col-md-6">
+                    <input id="val1_rule2" name="val1_rule2" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-md-2 control-label sr-only"></label>
+                <div class="col-md-6">
+                    <button id="btn_submit_rule2" class="btn btn-success">校验</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<blockquote>3.扩展-编写多规则-单个元素对应多个规则</blockquote>
+<div class="well">
+    <div class="row">
+        <form id="form_rule" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_rule">检验1</label>
+                <div class="col-md-6">
+                    <input id="val1_rule" name="val1_rule" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val2_rule">email</label>
+                <div class="col-md-6">
+                    <input id="val2_rule" name="val2_rule" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val3_rule">url</label>
+                <div class="col-md-6">
+                    <input id="val3_rule" name="val3_rule" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-md-2 control-label sr-only"></label>
+                <div class="col-md-6">
+                    <button id="btn_submit_rule" class="btn btn-success">校验</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<blockquote>4.扩展-自定义校验规则</blockquote>
+<div class="well">
+    <div class="row">
+        <form id="form_rule_self" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_rule_self">检验</label>
+                <div class="col-md-6">
+                    <input id="val1_rule_self" name="val1_rule_self" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-md-2 control-label sr-only"></label>
+                <div class="col-md-6">
+                    <button id="btn_submit_rule_self" class="btn btn-success">校验</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<blockquote>5.扩展-单选、多选、下拉菜单</blockquote>
+<div class="well">
+    <div class="row">
+        <form id="form_other" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_rule_self">性别</label>
+                <div class="col-md-6">
+                    <label class="radio-inline">
+					  <input type="radio" name="radio" id="r1" value="option1"> 男
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="radio" id="r2" value="option2"> 女
+					</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_rule_self">爱好</label>
+                <div class="col-md-6">
+                    <label class="checkbox-inline">
+					  <input type="checkbox" name="checkbox" id="c1" value="option1"> 篮球
+					</label>
+					<label class="checkbox-inline">
+					  <input type="checkbox" name="checkbox" id="c2" value="option2"> 听歌
+					</label>
+					<label class="checkbox-inline">
+					  <input type="checkbox" name="checkbox" id="c3" value="option3"> 画画
+					</label>
+					<label class="checkbox-inline">
+					  <input type="checkbox" name="checkbox" id="c4" value="option3"> Dota
+					</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_rule_">民族</label>
+                <div class="col-md-6">
+                	<select id="select" name="select" >
+                		<option value=""></option>
+						<option value="1">汉族</option>
+						<option value="2">藏族</option>
+						<option value="3">维吾尔族</option>
+						<option value="4">回族</option>
+					</select>
+                </div>
+                
+            </div>
+            <div class="form-group">
+            	<label class="col-md-2 control-label sr-only"></label>
+                <div class="col-md-6">
+                    <button id="btn_submit_rule_self" class="btn btn-success">校验</button>
+                </div>
+            </div>
+            <div id="result"></div>
+        </form>
+    </div>
+</div>
+<blockquote>6.扩展-校验信息显示位置</blockquote>
+<div class="well">
+    <div class="row">
+        <form id="form_pos" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_pos">检验</label>
+                <div class="col-md-6">
+                    <input id="val1_pos" name="val1_pos" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-md-2 control-label sr-only"></label>
+                <div class="col-md-6">
+                    <button id="btn_submit_pos" class="btn btn-success">校验</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<blockquote>7.扩展-校验信息样式</blockquote>
+<div class="well">
+    <div class="row">
+        <form id="form_style" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="val1_style">检验</label>
+                <div class="col-md-6">
+                    <input id="val1_style" name="val1_style" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-md-2 control-label sr-only"></label>
+                <div class="col-md-6">
+                    <button id="btn_submit_style" class="btn btn-success">校验</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<style>
+	.error_class{
+		color:red;
+		font-style:italic;
+	}
+</style>
+<!-- javascript -->
+<script type="text/javascript">
+    require(["jquery", "JQuery.validate","JQuery.validate.extra", "JQuery.validate.message"],function($){
+    	/*
+       	1.基本使用
+    	(1)引入JQuery.validate、 JQuery.validate.extra、 JQuery.validate.message等js文件
+    		引用文件说明：
+    		jQuery.validate validate的核心js文件
+    		JQuery.validate.extra validate扩展的检验方法
+    		JQuery.validate.message 中文版提示信息（将默认的英文提示信息扩展为中文的）
+    	(2)调用检验方法
+	    	$("#form_base").validate({
+	    		rules : {
+					val1_base : "required"
+				}
+	    	})
+    	*/
+    	//初始化校验
+    	$("#form_base").validate({
+    		rules : {
+				val1_base : "required"
+			}
+    	})
+        $("#btn_submit_base").on("click", function(){
+        	//获取校验结果
+	    	var result = $("#form_base").valid();
+        })
+        /*
+    	2.扩展-编写校验规则方式
+    		编写规则有两种方式：
+    		<1>将规则写在标签中，如class="required"
+    			<input type="text" class="required" />
+    			*如果使用class="{required:true,minlength:5,messages:{required:'请输入内容'}}"，必须引入包：jquery.metadata.js
+    		<2>将规则写在js中[建议使用这种]
+    			$("#form_base").validate({
+    				rules : {
+    					//key为要校验的dom元素的id，value为要使用的校验规则
+    					val1_base : "required" 
+    				}
+    			})
+    	*/
+    	$("#form_rule1").validate({});
+    	$("#form_rule2").validate({
+    		rules : {
+	    		val1_rule2 : "required"
+    		}
+    	});
+        /*
+        3.扩展-编写规则-多个校验规则
+        	rules设置校验规则
+        		可以是一个字符串（表示一个验证规则），也可以是一个对象（多个验证规则）
+        	messages设置校验规则对应的提示信息
+        		跟rules设置相对应
+        */
+       	$("#form_rule").validate({
+        	rules : {
+        		val1_rule : "required",
+        		val2_rule : {
+        			required:true,
+        			email:true,
+        			minlength:5
+        		},
+        		val3_rule : {
+        			required:true,
+        			url:true
+        		}
+        	},
+        	messages : {
+        		val1_rule : "请填写信息",
+        		val2_rule : {
+        			required : "请填写email",
+        			minlength : "最少5个字符",
+        			email:"输入正确的email地址"
+        		},
+        		val3_rule : {
+        			required:"请填写url",
+        			url:"输入正确的url地址"
+        		}
+        	}
+        });
+        
+        /*
+        	4.扩展-添加自定义校验规则
+        */
+        //自定义规则
+ 		$.validator.addMethod("myvalidator", function(value, element, params){
+        	var reg = /[5-9]+/;
+        	var result = reg.test(value);
+        	return result;
+        }, "请输入5-9之间的数字");
+        //使用自定义规则
+        $("#form_rule_self").validate({
+        	rules : {
+	        	val1_rule_self : {
+	        		required : true,
+	        		myvalidator : ""
+	        	}
+        	}
+        });
+        /*
+        5.扩展-单选、多选、下拉 
+        */
+        $("#form_other").validate({
+        	rules : {
+        		radio : "required",
+        		checkbox : {
+        			required:true,
+        			minlength:2
+        		},
+        		select : "required"
+        	},
+        	messages : {
+        		radio:"请选择性别",
+        		checkbox:{
+        			required:"请选择爱好",
+        			minlength:"请选择至少2个爱好"
+        		},
+        		select:"请选择民族"
+        	},
+        	errorPlacement : function(error, element) {
+        		$(element).closest(".form-group").append(error);
+        	}
+        });
+        
+        /*
+        6.扩展错误信息显示位置
+        */
+        $("#form_pos").validate({
+        	rules : {
+        		val1_pos : "required"
+        	},
+        	messages : {
+        		val1_pos : "请填写信息"
+        	},
+        	errorPlacement : function(error, element) {
+        		$(element).closest(".form-group").append(error);
+        	}
+        })
+        /*
+        7.扩展错误信息显示样式
+        */
+        $("#form_style").validate({
+        	rules : {
+        		val1_style : "required"
+        	},
+        	errorClass : "error_class"
+        })
+        /*
+        jquery validate api分几种
+        1.jquery form对象，调用方式如：
+        	$("#form").validate({});
+        	其中validate方法包括一些可选参数，这些可选参数都有默认设置，如果想改变默认设置可以调用$.validator.setDefaults({});
+        2.validator对象,调用方式如下：先获取
+        	var validator = $("#form").validate({});
+        	varlidator.form();
+        3.Validator api，调用方式如下：
+        	$.validator.setDefaults({});
+        */
+    });
+</script>
