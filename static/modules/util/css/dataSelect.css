@@ -1,0 +1,156 @@
+body,ul,ol,li{
+    padding: 0;
+    margin: 0;
+}
+ul{
+    list-style: none;
+}
+.dataSelect{
+	height: 100%;
+}
+.dataSelect .mod{
+	width: 33.3%;
+	height: 100%;
+	float: left;
+	position: relative;
+	padding: 0 10px;
+	padding-top: 25px;
+	box-sizing:border-box;
+}
+.dataSelect .dataTree{
+	width: 30%;
+}
+.dataSelect .dataList{
+	width: 40%;
+}
+.dataSelect .selectList{
+	width: 30%;
+}
+.dataSelect .dataTree{
+	padding-left:20px;
+}
+.dataSelect .dataTree.hideTag{
+	padding-left: 10px;
+}
+.dataSelect .dataTree.hideTag .type{
+	display: none;
+}
+.dataSelect .mod .tree,.dataSelect .mod .list{
+	height: 100%;
+	border: 1px solid #eee;
+	overflow: auto;
+}
+.dataSelect .mod .info,.dataSelect .mod .search,.dataSelect .mod .tool{
+	position: absolute;
+	top: -5px;
+	left: 0px;
+	width: 100%;
+	padding: 0 10px;
+}
+.dataSelect .dataTree .info{
+	padding-right: 0px;
+}
+.dataSelect .dataTree .info div{
+	display: inline-block;
+	vertical-align: top;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  	white-space: nowrap;
+  	box-sizing:border-box;
+	padding-left: 10px;
+	width: 44%;
+	height: 26px;
+	line-height: 30px;
+	font-size: 14px;
+}
+.dataSelect .dataTree .info .curType{
+	width: 40%;
+}
+.dataSelect .dataTree .info .curPos{
+	width: 55%;
+}
+.dataSelect .dataTree .info div span{
+	padding-left: 5px;
+}
+.dataSelect .dataTree .type{
+	position: absolute;
+	left: -5px;
+	width: 25px;
+}
+/* 控制type标签显示隐藏 */
+.dataSelect .dataTree .type li.on{
+	background-color: #eee;
+}
+/* 控制tree显示隐藏 */
+.dataSelect .dataTree .tree .ztree{
+	display: none;
+}
+.dataSelect .dataTree .tree .ztree.on{
+	display: block;
+}
+.dataSelect .dataTree .type .nav>li>a{
+	line-height: 16px;
+  	font-size: 12px;
+  	padding: 4px 6px;
+}
+.dataSelect .dataTree .type .nav>li.active>a{
+	border-radius: 3px;
+	background-color: #337ab7;
+	color: #fff;
+}
+.dataSelect .search input,.dataSelect .tools .btn{
+	height: 26px;
+}
+.dataSelect .tool .btn{
+	line-height: 16px;
+	font-size: 16px;
+}
+.dataSelect .tools a{
+	margin-right: 5px;
+}
+
+.dataSelect .dataList .title{
+	background-color: #ddd;
+}
+.dataSelect .list{
+	-webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.dataSelect .list li{
+	cursor: pointer;
+}
+.dataSelect .list span{
+	display: inline-block;
+	box-sizing:border-box;
+	height: 22px;
+	line-height: 22px;
+	vertical-align: middle;
+	text-overflow:hidden;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.dataSelect .list .type{
+	width: 8%;
+	text-align: center;
+}
+.dataSelect .list .name{
+	width: 30%;
+}
+.dataSelect .list .code{
+	width: 25%;
+}
+.dataSelect .list .pname{
+	width: 37%;
+}
+
+.dataSelect .selectList .list ul{
+	padding: 5px;
+}
+.dataSelect .selectList .list li .text{
+	width: 100%;
+}
+.dataSelect .selectList .list li.cur{
+	background-color: #ddd;
+}

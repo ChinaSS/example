@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="CSSPackage" Name="示例流程包" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+<PackageHeader>
+<XPDLVersion>1.0</XPDLVersion>
+<Vendor>admin</Vendor>
+<Created>2007-10-09 13:57:36</Created>
+</PackageHeader>
+<RedefinableHeader PublicationStatus="RELEASED">
+<Author>admin</Author>
+<Version>1.0</Version>
+<Codepage>936</Codepage>
+<Countrykey>CN</Countrykey>
+</RedefinableHeader>
+<ConformanceClass GraphConformance="NON_BLOCKED"/>
+<Script Type="text/java" Version="1.0"/>
+<WorkflowProcesses>
+<WorkflowProcess AccessLevel="PUBLIC" Id="CSSPackage_HolidayProcess" Name="请假流程">
+<ProcessHeader DurationUnit="m">
+<Created>2007-09-07 13:39:33</Created>
+<Description>请假流程</Description>
+<Priority>1</Priority>
+<Limit>5</Limit>
+</ProcessHeader>
+<RedefinableHeader PublicationStatus="UNDER_TEST">
+<Author>FengWenhua</Author>
+<Version>1.0</Version>
+</RedefinableHeader>
+<DataFields>
+<DataField Id="userId" IsArray="FALSE" Name="请假者ID">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<Description>{text}</Description>
+</DataField>
+<DataField Id="documentId" IsArray="FALSE" Name="请假单号">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<Description>{text}</Description>
+</DataField>
+<DataField Id="days" IsArray="FALSE" Name="请假天数">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<InitialValue>1.00</InitialValue>
+<Description>{text}</Description>
+</DataField>
+<DataField Id="bucauseof" IsArray="FALSE" Name="请假理由">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<Description>{textarea}</Description>
+</DataField>
+<DataField Id="holidayType" IsArray="FALSE" Name="请假类型">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<InitialValue>事假</InitialValue>
+<Length>4</Length>
+<Description>{select|事假,病假,婚假,探亲假,产假,年假,其他}</Description>
+</DataField>
+<DataField Id="pass1" IsArray="FALSE" Name="组长意见">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<Description>{textarea}</Description>
+</DataField>
+<DataField Id="passOver1" IsArray="FALSE" Name="组长审核结果">
+<DataType>
+<BasicType Type="BOOLEAN"/>
+</DataType>
+<InitialValue>true</InitialValue>
+<Description>{select|true,同意;false,不同意}</Description>
+</DataField>
+<DataField Id="pass2" IsArray="FALSE" Name="副经理意见">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<Description>{textarea}</Description>
+</DataField>
+<DataField Id="passOver2" IsArray="FALSE" Name="副经理审核结果">
+<DataType>
+<BasicType Type="BOOLEAN"/>
+</DataType>
+<InitialValue>true</InitialValue>
+<Description>{select|true,同意;false,不同意}</Description>
+</DataField>
+<DataField Id="pass3" IsArray="FALSE" Name="总经理意见">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<Description>{textarea}</Description>
+</DataField>
+<DataField Id="passOver3" IsArray="FALSE" Name="总经理审核结果">
+<DataType>
+<BasicType Type="BOOLEAN"/>
+</DataType>
+<InitialValue>true</InitialValue>
+<Description>{select|true,同意;false,不同意}</Description>
+</DataField>
+<DataField Id="userName" IsArray="FALSE" Name="请假者名称">
+<DataType>
+<BasicType Type="STRING"/>
+</DataType>
+<Description>{text}</Description>
+</DataField>
+</DataFields>
+<Participants>
+<Participant Id="holiday_Wor1_Par1" Name="请假者">
+<ParticipantType Type="ROLE"/>
+<Description>请假者</Description>
+</Participant>
+<Participant Id="holiday_Wor1_Par2" Name="组长">
+<ParticipantType Type="ROLE"/>
+<Description>组长</Description>
+</Participant>
+<Participant Id="holiday_Wor1_Par3" Name="副经理">
+<ParticipantType Type="ROLE"/>
+<Description>副经理</Description>
+</Participant>
+<Participant Id="holiday_Wor1_Par4" Name="总经理">
+<ParticipantType Type="ROLE"/>
+<Description>总经理</Description>
+</Participant>
+<Participant Id="holiday_Wor1_Par5" Name="档案员">
+<ParticipantType Type="ROLE"/>
+</Participant>
+</Participants>
+<Activities>
+<Activity Id="holidayprocess_Act1" Name="填写请假单">
+<Description>填写请假单</Description>
+<Limit>1</Limit>
+<Implementation>
+<No/>
+</Implementation>
+<Performer>holiday_Wor1_Par1</Performer>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_OFFSET" Value="290,70"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_PARTICIPANT_ID" Value="holiday_Wor1_Par1"/>
+<ExtendedAttribute Name="bucauseof" Value="bucauseof"/>
+<ExtendedAttribute Name="days" Value="days"/>
+<ExtendedAttribute Name="documentId" Value="documentId"/>
+<ExtendedAttribute Name="holidayType" Value="holidayType"/>
+<ExtendedAttribute Name="userId" Value="userId"/>
+<ExtendedAttribute Name="userName" Value="userName,2"/>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="holidayprocess_Act2" Name="组长审批">
+<Description>组长审批</Description>
+<Implementation>
+<No/>
+</Implementation>
+<Performer>holiday_Wor1_Par2</Performer>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Split Type="XOR">
+<TransitionRefs>
+<TransitionRef Id="holidayprocess_Tra4"/>
+<TransitionRef Id="holidayprocess_Tra16"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_OFFSET" Value="290,50"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_PARTICIPANT_ID" Value="holiday_Wor1_Par2"/>
+<ExtendedAttribute Name="userId" Value="userId,1"/>
+<ExtendedAttribute Name="documentId" Value="documentId,1"/>
+<ExtendedAttribute Name="days" Value="days,1"/>
+<ExtendedAttribute Name="bucauseof" Value="bucauseof,1"/>
+<ExtendedAttribute Name="holidayType" Value="holidayType,1"/>
+<ExtendedAttribute Name="pass1" Value="pass1"/>
+<ExtendedAttribute Name="passOver1" Value="passOver1"/>
+<ExtendedAttribute Name="userName" Value="userName,1"/>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="holidayprocess_Act3" Name="副经理审批">
+<Description>副经理审批</Description>
+<Implementation>
+<No/>
+</Implementation>
+<Performer>holiday_Wor1_Par3</Performer>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Split Type="XOR">
+<TransitionRefs>
+<TransitionRef Id="holidayprocess_Tra12"/>
+<TransitionRef Id="holidayprocess_Tra18"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_OFFSET" Value="290,50"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_PARTICIPANT_ID" Value="holiday_Wor1_Par3"/>
+<ExtendedAttribute Name="userId" Value="userId,1"/>
+<ExtendedAttribute Name="documentId" Value="documentId,1"/>
+<ExtendedAttribute Name="days" Value="days,1"/>
+<ExtendedAttribute Name="bucauseof" Value="bucauseof,1"/>
+<ExtendedAttribute Name="holidayType" Value="holidayType,1"/>
+<ExtendedAttribute Name="pass1" Value="pass1,1"/>
+<ExtendedAttribute Name="passOver1" Value="passOver1,1"/>
+<ExtendedAttribute Name="pass2" Value="pass2"/>
+<ExtendedAttribute Name="passOver2" Value="passOver2"/>
+<ExtendedAttribute Name="userName" Value="userName,1"/>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="holidayprocess_Act4" Name="总经理审批">
+<Description>总经理审批</Description>
+<Implementation>
+<No/>
+</Implementation>
+<Performer>holiday_Wor1_Par4</Performer>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Split Type="AND">
+<TransitionRefs>
+<TransitionRef Id="holidayprocess_Tra19"/>
+<TransitionRef Id="holidayprocess_Tra34"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_OFFSET" Value="290,55"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_PARTICIPANT_ID" Value="holiday_Wor1_Par4"/>
+<ExtendedAttribute Name="userId" Value="userId,1"/>
+<ExtendedAttribute Name="documentId" Value="documentId,1"/>
+<ExtendedAttribute Name="days" Value="days,1"/>
+<ExtendedAttribute Name="bucauseof" Value="bucauseof,1"/>
+<ExtendedAttribute Name="holidayType" Value="holidayType,1"/>
+<ExtendedAttribute Name="pass1" Value="pass1,1"/>
+<ExtendedAttribute Name="passOver1" Value="passOver1,1"/>
+<ExtendedAttribute Name="pass2" Value="pass2,1"/>
+<ExtendedAttribute Name="passOver2" Value="passOver2,1"/>
+<ExtendedAttribute Name="pass3" Value="pass3"/>
+<ExtendedAttribute Name="passOver3" Value="passOver3"/>
+<ExtendedAttribute Name="userName" Value="userName,1"/>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="holidayprocess_Act5" Name="档案员存档">
+<Description>档案员存档</Description>
+<Implementation>
+<No/>
+</Implementation>
+<Performer>holiday_Wor1_Par5</Performer>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Join Type="XOR"/>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_OFFSET" Value="490,55"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_PARTICIPANT_ID" Value="holiday_Wor1_Par5"/>
+<ExtendedAttribute Name="userId" Value="userId,1"/>
+<ExtendedAttribute Name="documentId" Value="documentId,1"/>
+<ExtendedAttribute Name="days" Value="days,1"/>
+<ExtendedAttribute Name="bucauseof" Value="bucauseof,1"/>
+<ExtendedAttribute Name="holidayType" Value="holidayType,1"/>
+<ExtendedAttribute Name="pass1" Value="pass1,1"/>
+<ExtendedAttribute Name="passOver1" Value="passOver1,1"/>
+<ExtendedAttribute Name="pass2" Value="pass2,1"/>
+<ExtendedAttribute Name="passOver2" Value="passOver2,1"/>
+<ExtendedAttribute Name="pass3" Value="pass3,1"/>
+<ExtendedAttribute Name="passOver3" Value="passOver3,1"/>
+<ExtendedAttribute Name="userName" Value="userName,1"/>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="holidayprocess_Act8" Name="查看结果">
+<Description>查看结果</Description>
+<Implementation>
+<No/>
+</Implementation>
+<Performer>holiday_Wor1_Par1</Performer>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Join Type="XOR"/>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_OFFSET" Value="550,75"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_PARTICIPANT_ID" Value="holiday_Wor1_Par1"/>
+<ExtendedAttribute Name="userId" Value="userId,1"/>
+<ExtendedAttribute Name="documentId" Value="documentId,1"/>
+<ExtendedAttribute Name="days" Value="days,1"/>
+<ExtendedAttribute Name="bucauseof" Value="bucauseof,1"/>
+<ExtendedAttribute Name="holidayType" Value="holidayType,1"/>
+<ExtendedAttribute Name="pass1" Value="pass1,1"/>
+<ExtendedAttribute Name="passOver1" Value="passOver1,1"/>
+<ExtendedAttribute Name="pass2" Value="pass2,1"/>
+<ExtendedAttribute Name="passOver2" Value="passOver2,1"/>
+<ExtendedAttribute Name="pass3" Value="pass3,1"/>
+<ExtendedAttribute Name="passOver3" Value="passOver3,1"/>
+<ExtendedAttribute Name="userName" Value="userName,1"/>
+</ExtendedAttributes>
+</Activity>
+<Activity Id="holidayprocess_Act9" Name="路径">
+<Route/>
+<StartMode>
+<Automatic/>
+</StartMode>
+<FinishMode>
+<Automatic/>
+</FinishMode>
+<TransitionRestrictions>
+<TransitionRestriction>
+<Join Type="XOR"/>
+<Split Type="AND">
+<TransitionRefs>
+<TransitionRef Id="holidayprocess_Tra31"/>
+<TransitionRef Id="holidayprocess_Tra30"/>
+</TransitionRefs>
+</Split>
+</TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_OFFSET" Value="490,50"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_PARTICIPANT_ID" Value="holiday_Wor1_Par2"/>
+</ExtendedAttributes>
+</Activity>
+</Activities>
+<Transitions>
+<Transition From="holidayprocess_Act1" Id="holidayprocess_Tra2" To="holidayprocess_Act2">
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
+</Transition>
+<Transition From="holidayprocess_Act2" Id="holidayprocess_Tra4" Name="holidayprocess_Tra4" To="holidayprocess_Act9">
+<Condition Type="CONDITION">((passOver1==false) || (passOver1==true&amp;&amp;Double.parseDouble(days)&lt;=0.5) )</Condition>
+<Description>（组长审批不同意）或者（组长审批同意并且请假天数小于等于半天）</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
+</Transition>
+<Transition From="holidayprocess_Act3" Id="holidayprocess_Tra12" Name="holidayprocess_Tra12" To="holidayprocess_Act4">
+<Condition Type="CONDITION">passOver2==true&amp;&amp;Double.parseDouble(days)&gt;1</Condition>
+<Description>副经理审批同意并且请假天数大于1天</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
+</Transition>
+<Transition From="holidayprocess_Act2" Id="holidayprocess_Tra16" Name="holidayprocess_Tra16" To="holidayprocess_Act3">
+<Condition Type="CONDITION">passOver1==true&amp;&amp;Double.parseDouble(days)&gt;0.5</Condition>
+<Description>组长审批同意并且请假天数大于半天</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
+</Transition>
+<Transition From="holidayprocess_Act3" Id="holidayprocess_Tra18" Name="holidayprocess_Tra18" To="holidayprocess_Act9">
+<Condition Type="CONDITION">((passOver2==false) || (passOver2==true&amp;&amp;Double.parseDouble(days)&lt;=1) )</Condition>
+<Description>（副经理审批不同意）或者（副经理审批同意并且请假天数小于等于1天）</Description>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_BREAK_POINTS" Value="719,376-720,232"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
+</Transition>
+<Transition From="holidayprocess_Act4" Id="holidayprocess_Tra19" To="holidayprocess_Act5">
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_BREAK_POINTS" Value="361,680"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
+</Transition>
+<Transition From="holidayprocess_Act9" Id="holidayprocess_Tra30" To="holidayprocess_Act8">
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_BREAK_POINTS" Value="528,104"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
+</Transition>
+<Transition From="holidayprocess_Act9" Id="holidayprocess_Tra31" To="holidayprocess_Act5">
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
+</Transition>
+<Transition From="holidayprocess_Act4" Id="holidayprocess_Tra34" To="holidayprocess_Act8">
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_BREAK_POINTS" Value="609,531"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
+</Transition>
+</Transitions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_END_OF_WORKFLOW" Value="WFSTUDIO_GRAPH_PARTICIPANT_ID=holiday_Wor1_Par1,CONNECTING_ACTIVITY_ID=holidayprocess_Act8,X_OFFSET=673,Y_OFFSET=87,WFSTUDIO_GRAPH_TRANSITION_STYLE=NO_ROUTING_ORTHOGONAL,TYPE=END_DEFAULT"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_END_OF_WORKFLOW" Value="WFSTUDIO_GRAPH_PARTICIPANT_ID=holiday_Wor1_Par5,CONNECTING_ACTIVITY_ID=holidayprocess_Act5,X_OFFSET=631,Y_OFFSET=66,WFSTUDIO_GRAPH_TRANSITION_STYLE=NO_ROUTING_ORTHOGONAL,TYPE=END_DEFAULT"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_START_OF_WORKFLOW" Value="WFSTUDIO_GRAPH_PARTICIPANT_ID=holiday_Wor1_Par1,CONNECTING_ACTIVITY_ID=holidayprocess_Act1,X_OFFSET=189,Y_OFFSET=78,WFSTUDIO_GRAPH_TRANSITION_STYLE=NO_ROUTING_ORTHOGONAL,TYPE=START_DEFAULT"/>
+<ExtendedAttribute Name="proExtendAttribute" Value="proValue"/>
+<ExtendedAttribute Name="WFSTUDIO_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="holiday_Wor1_Par1;holiday_Wor1_Par2;holiday_Wor1_Par3;holiday_Wor1_Par4;holiday_Wor1_Par5"/>
+</ExtendedAttributes>
+</WorkflowProcess>
+</WorkflowProcesses>
+<ExtendedAttributes>
+<ExtendedAttribute Name="EDITING_TOOL" Value="中软睿剑流程定制工具"/>
+<ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="3.5-1-C-20080801-1400"/>
+<ExtendedAttribute Name="WFSTUDIO_CONFIGURATION" Value="default"/>
+</ExtendedAttributes>
+</Package>

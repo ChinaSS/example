@@ -12,8 +12,7 @@ function initTree($tree){
 }
 
 //延迟搜索
-function listener($elem){
-	var $tree=$elem.siblings("div");
+function listener($elem,$tree){
 	var trigger=null;
 	var lastContent=null;
 	$elem.on("keyup",function(event){

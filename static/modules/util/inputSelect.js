@@ -15,14 +15,43 @@
         name : "name",
         data : "data"
     },
+    selectNode : false,
     initData:[]
  }
 **/
 define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,search){
     var cache = {},
         selectEvent = "mouseup";
+    function toggleData(str,data){
+        var dataArr,tag,
+            newArr=[];
+        if (!data) {
+            dataArr = [];
+        }else{
+            dataArr = data.split(",");
+        }
+        for (var i = 0; i < dataArr.length; i++) {
+            if (dataArr[i]==str) {
+                tag=true;
+                continue;
+            }
+            newArr.push(dataArr[i]);
+        }
+        if (!tag) {
+            newArr.push(str);
+        }
+        return newArr.join(",");
+    }
     function init(config){
         return new Input(config);
+    }
+    function setDataSet(dataArr,dataSet,key){
+        for (var i = 0; i < dataArr.length; i++) {
+            dataSet[dataArr[i][key.id]] = dataArr[i];
+            if (dataArr[i][key.data]) {
+                setDataSet(dataArr[i][key.data],dataSet,key);
+            }
+        }
     }
 
     init.getInput = function(id){
@@ -32,6 +61,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
     function Input(config){
         var $input = $("#"+config.id);
         $input.addClass("inputSelect").wrap('<div class="inputWrapper"></div>');
+        config.type=="checkbox"?$input.addClass("multi"):false;
         if ($input.length!=1) {
             return cache[config.id];
         }
@@ -63,7 +93,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
     }
     function bindDocumentEvent(input){
         $(document).bind(selectEvent,function(event){
-            if ($(event.target).is("."+input.config.inputClass)||$(event.target).is("."+input.config.panelClass)||$(event.target).parents("."+input.config.panelClass).length>0) {return false};
+            if ($(event.target).is("."+input.config.inputClass+",."+input.config.panelClass+",.panelSearch")||$(event.target).parents("."+input.config.panelClass).length>0) {return false};
             input.hidePanel();
         });
     }
@@ -118,7 +148,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                 input.config.onSelect?input.config.onSelect(obj):"";
             });
         } else if (input.config.type=="select") {
-            input.$panel.on("dblclick",".item,.node",function(event){
+            input.$panel.on("dblclick",".item"+(input.config.selectNode?",.node":""),function(event){
                 var id = $(this).children(".text").data("id"),
                     value = $(this).children(".text").text(),
                     obj={};
@@ -130,7 +160,6 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                 input.hidePanel();
             });
         }
-        
     }
     Input.fn = Input.prototype = {
         extend : function(object){
@@ -148,6 +177,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             }
             dataObj = this.getCurrentData();
             for (i = 0,length=dataObj.length; i < length; i++) {
+                if (!dataObj[i]) {continue;}
                 idArray.push(dataObj[i][this.config.key.id]);
             }
             if(data.join(",")==idArray.join(",")){return;}
@@ -189,8 +219,10 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             search.treeInit(this.$panel.children(".panelData"));
             if (this.config.searchAble) {
                 var $panelSearch = $("<input class='panelSearch form-control'>");
-                this.$panel.prepend($panelSearch);
-                search.listen($panelSearch);
+                this.$panel.before($panelSearch).css({
+                    "padding-top" : $panelSearch.outerHeight()+"px"
+                });
+                search.listen($panelSearch,this.$panel.children(".panelData"));
             }
             this.getData();
         },
@@ -218,6 +250,14 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             this.dataInit(this.config.initData);
         },
         refreshPanel : function(data){
+            this._dataSet = {};
+            setDataSet(data,this._dataSet,this.config.key);
+            if (this.config.simpleData) {
+                data = simpleDataToTree(data,$.extend({
+                    rootCode : "root",
+                    data : this.config.key.data
+                },this.config.simpleData));
+            }
             this.config.data = data;
             this.$panel.children(".panelData").empty().append(this.initItem(data));
         },
@@ -260,6 +300,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                 this.$input.data("id",$.trim(id));
                 this.$input.val($.trim(val));
             } else if (this.config.type=="checkbox") { //多选
+                this.$input.val(toggleData(val,this.$input.val()));
                 $item = this.$content.children("#"+id);
                 if($item.length==0){
                     this.$content.append("<a id='"+id+"'>"+val+"<span class='remove'>x</span></a>");
@@ -272,17 +313,13 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             var obj,objArray=[];
             var _this = this;
             if (this.config.type=="select") { //单选
-                obj={};
-                obj[_this.config.key.id]=this.$input.data("id");
-                obj[_this.config.key.name]=this.$input.val();
-                objArray.push(obj);
+                obj = this._dataSet[this.$input.data("id")];
+                obj?objArray.push(obj):null;
             } else if (this.config.type=="checkbox") { //多选
                 this.$content.children("a").each(function(){
-                    obj={};
-                    obj[_this.config.key.id]=this.id;
-                    obj[_this.config.key.name]=this.firstChild.nodeValue;
-                    objArray.push(obj);
-                });   
+                    obj = this._dataSet[this.id];
+                    obj?objArray.push(obj):null;
+                });
             }
             return objArray;
         },
@@ -300,21 +337,21 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
         showPanel : function(){
             if(!this.$panel[0].style.width){
                 var left = parseFloat(this.$input.parent().css("padding-left")),
-                    width = this.$input.outerWidth()*parseFloat(this.config.panelCss.width);
-                left = this.config.panelCss.align=="left"?left:left+this.$input.outerWidth()*(1-parseFloat(this.config.panelCss.width));
+                    width = parseFloat(this.$input.outerWidth())*parseFloat(this.config.panelCss.width);
+                left = this.config.panelCss.align=="left"?left:left+parseFloat(this.$input.outerWidth())*(1-parseFloat(this.config.panelCss.width));
                 this.$panel.css({
-                    "top" : this.$input.outerHeight()*1+this.$input.parent().css("padding-top")*1,
                     "left" : left+"px",
                     "width" : width+"px",
                     "max-height" : this.$input.height()*10
                 });
-                this.$panel.children(".panelSearch").css({
+                this.$panel.siblings(".panelSearch").css({
                     "width" : this.$input.width()
                 });
             }
-            this.$panel.children(".panelSearch").val("");
+            this.$panel.siblings(".panelSearch").val("");
             search.reset(this.$panel.children(".panelData"));
             this.$panel.show();
+            this.$panel.siblings(".panelSearch").show();
         },
         hidePanel : function(){
             if(!!this.config.callback){
@@ -327,6 +364,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             }
             $(document).unbind(selectEvent);//隐藏panel时,解除document事件绑定
             this.$panel.hide();
+            this.$panel.siblings(".panelSearch").hide();
         },
         togglePanel : function(){
             this.$panel.is(":visible")?this.hidePanel():this.showPanel();
@@ -340,6 +378,37 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             }
         }
     });
+    function simpleDataToTree(data,key){
+        var pCodeObj = {},rootObj=null;
+        for (var i = 0,pcode; i < data.length; i++) {
+            pcode = data[i][key.pcode];
+            if (!pcode) {
+                !rootObj?(rootObj=data[i]):console.log(data[i]);
+            }else{
+                if(!pCodeObj[pcode]){
+                    pCodeObj[pcode] = [];
+                }
+                pCodeObj[pcode].push(data[i]);
+            }
+        }
+        dataArr = rootObj?[rootObj]:pCodeObj[key.rootCode];
+        appendData(dataArr,key,pCodeObj);
+        return dataArr;
+    }
+    function appendData(dataArr,key,pCodeObj){
+        var tempDataArr=[],curDataArr;
+        if(!dataArr||!dataArr.length){return;}
+        for (var i = 0; i < dataArr.length; i++) {
+            curDataArr = pCodeObj[dataArr[i][key.code]];
+            if (curDataArr&&curDataArr.length>0) {
+                dataArr[i][key.data] = curDataArr;
+                tempDataArr = tempDataArr.concat(curDataArr);
+            }
+        }
+        if (tempDataArr.length>0) {
+            appendData(tempDataArr,key,pCodeObj);
+        }   
+    }
     
     return init;
 });

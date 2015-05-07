@@ -1,0 +1,153 @@
+<h2>附件上传</h2>
+<h5>uploader与grid组合使用（<a href="#/uploaderAndGrid">传送门>></a>）</h5>
+<hr/>
+<div class="well">
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+            	<label class="col-sm-3 control-label">单文件simple模式:</label>
+                <div id="testFileUpload1" class="col-sm-8">
+    	
+   				 </div>
+            </div>
+            <div id="result1"> </div>
+        </div>
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+            	<label class="col-sm-3 control-label">单文件mixed模式:</label>
+                <div id="testFileUpload2" class="col-sm-8">
+    	
+   				 </div>
+            </div>
+            <div id="result2"> </div>
+        </div>
+    </div>
+</div>
+<div class="well">
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+            	<label class="col-sm-3 control-label">多文件simple模式:</label>
+                <div id="multiple1" class="col-md-12">
+    	
+   				 </div>
+            </div>
+            <div id="result3"> </div>
+        </div>
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+            	<label class="col-sm-3 control-label">多文件mixed模式:</label>
+                <div id="multiple2" class="col-md-12">
+    	
+   				 </div>
+            </div>
+            <div id="result4"> </div>
+        </div>
+    </div>
+</div>   
+<div class="well">
+	<div class="row">
+	<label class="col-sm-3 control-label">BBS图片上传:</label>
+	<div id="bbsUploader" class="col-md-12">
+	</div>
+	<div id="bbsImg" width="100%"> </div>
+	<blockquote class="col-md-12">
+    <p>
+        说明：
+    </p>
+    <div class="alert alert-warning">
+        <p>
+            该示例中未加入上传格式限制、具体格式需要在使用时添加。
+        </p>
+    </div>
+</blockquote>
+</div>
+</div>
+    <script>
+        require(['UtilDir/uploader/fileUploader','UtilDir/uploader/uploaderForBBS'],
+        function(FileUpload,BBSUploader){
+        //app/examples/util/fileUploader/views/
+            var opt1={
+            	callback:function(data){
+            		$("#result1").empty().text("FID:"+data.fid+"\n"+
+            				"FilePath:"+data.filePath+"\n");
+            	}
+            }
+            var ins1=FileUpload.createFileUploader("testFileUpload1",
+            								"single","simple",opt1);
+           
+            /* ---------------------------------------- */
+          
+            var opt2={
+            	parentDivId:"testFileUpload2",
+            	type:"single",
+            	mode:"mixed",
+            	options:{},   //  其他webUploader的options
+            	callback:function(data){
+            		$("#result2").empty().text("FID:"+data.fid+"\n"+
+            				"FilePath:"+data.filePath+"\n");
+            	}
+            }
+            var ins2=FileUpload.createFileUploaderBySettings(opt2);
+            
+            /* ---------------------------------------- */
+          
+          	var opt3={
+            	parentDivId:"multiple1",
+            	type:"multiple",
+            	mode:"simple",
+            	options:{},   //  其他webUploader的options
+            	callback:function(data){
+            		var itemArray=data;
+                    $(itemArray).each(function(i,obj){
+                  		$("#result3").append("FID:"+obj.result.fid+"\nFilePath:"+obj.result.filePath+"\n<br/>");
+                  	});
+                }
+            }
+            var ins3=FileUpload.createFileUploaderBySettings(opt3);
+             
+            /* ---------------------------------------- */
+          
+          	var opt4={
+            	parentDivId:"multiple2",
+            	type:"multiple",
+            	mode:"mixed",
+            	options:{},   //  其他webUploader的options
+            	callback:function(data){
+            		var itemArray=data;
+                    $(itemArray).each(function(i,obj){
+                  		$("#result4").append("FID:"+obj.result.fid+"\nFilePath:"+obj.result.filePath+"\n<br/>");
+                  	});
+            	}
+            }
+            var ins4=FileUpload.createFileUploaderBySettings(opt4);
+            
+            /*  bbs uploader   */
+           
+           var bbsOpt={
+           		parentDivId:"bbsUploader",
+            	options:{},   //  其他webUploader的options
+            	insert:function(url){
+            		$("#bbsImg").empty().html(url);
+            	}
+           }
+           var bbsuploader=BBSUploader.createBBSUploader(bbsOpt);
+           
+        });
+        
+     
+        
+        //@ sourceURL=fileUploader_Source.html
+    </script>
+	
+<blockquote>
+    <p>
+        说明：
+    </p>
+    <div class="alert alert-warning">
+        <p>
+            由于业务的复杂性，附件上传不存储任何业务信息，因此上传成功后，将根据预设的callback方法返回该文件的fid和filePath，由开发人员自行处理后续业务逻辑。
+        </p>
+    </div>
+</blockquote>
+

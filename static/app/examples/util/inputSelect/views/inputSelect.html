@@ -31,6 +31,17 @@
                 ]
             }
         ];
+        var dataSimple = [
+            {"id":"1","pid":"0","name":"测试1"},
+            {"id":"2","pid":"0","name":"测试2"},
+            {"id":"3","pid":"0","name":"测试3"},
+            {"id":"4","pid":"0","name":"测试4"},
+            {"id":"5","pid":"0","name":"测试5"},
+            {"id":"11","pid":"1","name":"国籍1"},
+            {"id":"12","pid":"1","name":"国籍2"},
+            {"id":"13","pid":"1","name":"国籍3"},
+            {"id":"0","name":"root"},
+        ];
         //初始化
         inputSelect({
             //要渲染的input的id
@@ -38,7 +49,11 @@
             //下拉框的类型：select单选/checkbox多选
             type : "checkbox",
             //数据源：数组或url地址
-            data :data,
+            data :dataSimple,
+            simpleData : {
+                code : "id",
+                pcode : "pid"
+            },
             //启用文本搜索
             searchAble : true,
             //选择之后回调方法：id，选择的id数组，data，选择的数据数组

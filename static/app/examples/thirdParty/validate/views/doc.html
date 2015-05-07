@@ -1,0 +1,26 @@
+<h1>jquery-validate</h1>
+<h2>API说明</h2>
+<p><a href="http://www.w3cschool.cc/jquery/jquery-plugin-validate.html" target="_blank">jquery-validate更详细Api</a></p>
+<h4>jquery validate api分几种</h4>
+<ol>
+<li>
+	<h5>jquery form对象，调用方式如：</h5>
+	<p>
+		$("#form").validate({});
+		其中validate方法包括一些可选参数，这些可选参数都有默认设置，如果想改变默认设置可以调用$.validator.setDefaults({});
+    </p>    	
+</li>
+<li>
+	<h5>validator对象,调用方式如下：先获取</h5>
+	<p>
+		var validator = $("#form").validate({});
+       	varlidator.form();
+	</p>
+</li>
+<li>
+	<h5>Validator api，调用方式如下：</h5>
+	<p>
+		$.validator.setDefaults({});
+	</p>
+</li>
+</ol>

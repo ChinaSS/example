@@ -1,0 +1,43 @@
+.cs-bbs-uploader ul {
+	list-style: none;
+	line-height:18px;
+}
+.cs-bbs-uploader ul li{
+	float: left;
+	margin-right:10px;
+}
+.cs-bbs-uploader ul li a{
+	padding: 5px;
+	border-radius: 5px;
+	display: inline-block;
+}
+.cs-bbs-uploader ul li a:hover {
+    background-color: #2898e0!important;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.cs-bbs-uploader ul li p{
+	vertical-align: middle;
+	margin: 5px 5px;
+	min-width: 240px;
+}
+.cs-bbs-uploader ul li span{
+	vertical-align: middle;
+	margin: 5px 5px;
+	display: block;
+}
+
+.cs-bbs-uploader ol{
+	margin-top:5px;
+}
+.cs-bbs-uploader ol li{
+	word-break: break-all;
+}
+.cs-bbs-uploader ol li a{
+	margin-left: 15px;
+}
+.cs-bbs-uploader ol li a:hover{
+	text-decoration: none;
+	color: #f60;
+}

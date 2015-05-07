@@ -62,14 +62,6 @@ define(["jquery",
     	//  提交成功提示信息
     	var successInfo="<strong>Submit Successful!</strong>";
     	
-    	//  增加对well样式的横排支持
-    	var wellUpdateCss="<!-- 下面的样式请勿修改！ -->" +
-    			"<script type=\"text/javascript\">" +
-    			"require([\"jquery\"], function($) {" +
-    			"if($(\".well\")){"+
-    			"$(\".well\").attr(\"style\", \"display: inline-flex; width: 100%;\");" +
-    			"} });</script>";
-    	
     	require([ "text!" + sourceUrl ], function(source) {
             //把source添加到模板中
             document.getElementById("exampleSource").value = source;
@@ -103,7 +95,7 @@ define(["jquery",
             	if(!flag){
             		showHelpInfo($noticeDiv,successInfo,"alert-success",3000);
             	}
-                var link = editor ? $compile(editor.getValue()+wellUpdateCss) : "编辑区域未能正常初始化！";
+                var link = editor ? $compile(editor.getValue()) : "编辑区域未能正常初始化！";
                 $("#exampleInstance").empty().html(link($scope));
             };
             $scope.$digest();
