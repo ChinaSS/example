@@ -1,7 +1,7 @@
 /**
  config = {
     id : id,        //element ID
-    type : selected,  //select,checkbox
+    multi : true,  //
     searchAble : true,    //当数据为多层级,需树状显示时, 并提供关键字检索功能
     data : url,     //url,[]
     panelCss : {
@@ -19,7 +19,7 @@
     initData:[]
  }
 **/
-define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,search){
+define(["jquery","./treeSearch","css!PDUtilDir/css/inputSelect.css"],function($,search){
     var cache = {},
         selectEvent = "mouseup";
     function toggleData(str,data){
@@ -61,12 +61,12 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
     function Input(config){
         var $input = $("#"+config.id);
         $input.addClass("inputSelect").wrap('<div class="inputWrapper"></div>');
-        config.type=="checkbox"?$input.addClass("multi"):false;
+        config.multi?$input.addClass("multi"):false;
         if ($input.length!=1) {
             return cache[config.id];
         }
         this.config = $.extend(true,{
-            type : "checkbox",
+            multi : true,
             searchAble : false,
             inputClass : "inputSelect",
             panelClass : "inputPanel",
@@ -134,7 +134,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             });
         });
         //面板点击事件
-        if (input.config.type=="checkbox") {
+        if (!!input.config.multi) {
             input.$panel.on(selectEvent,".item",function(event){
                 var id = $(this).children(".text").data("id"),
                     value = $(this).children(".text").text(),
@@ -147,7 +147,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                 input.fillInput(value,id);
                 input.config.onSelect?input.config.onSelect(obj):"";
             });
-        } else if (input.config.type=="select") {
+        } else if (!input.config.multi) {
             input.$panel.on("dblclick",".item"+(input.config.selectNode?",.node":""),function(event){
                 var id = $(this).children(".text").data("id"),
                     value = $(this).children(".text").text(),
@@ -187,13 +187,13 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                 dataObj[data[i]]=true;
             }
             this.clearInput();
-            if(this.config.type=="checkbox") {
+            if(!!this.config.multi) {
                 this.resetPanel();
             }
             if(dataObj.valueOf()=={}.valueOf()){return;}
             this.$panel.find(".item .text").each(function(){
                 if(dataObj[$(this).data("id")]){
-                    if (input.config.type=="checkbox") {
+                    if (!!input.config.multi) {
                         input.setCheckbox($(this).parent());
                     }
                     input.fillInput($(this).text(),$(this).data("id"));
@@ -254,9 +254,8 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
             setDataSet(data,this._dataSet,this.config.key);
             if (this.config.simpleData) {
                 data = simpleDataToTree(data,$.extend({
-                    rootCode : "root",
-                    data : this.config.key.data
-                },this.config.simpleData));
+                    rootId : "root"
+                },this.config.key));
             }
             this.config.data = data;
             this.$panel.children(".panelData").empty().append(this.initItem(data));
@@ -272,12 +271,12 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                 cur = items[i];
                 hasData = cur[data]&&cur[data].length>0;
                 if(!cur){continue;}
-                if (this.config.type=="select"||hasData) {
+                if (!this.config.multi||hasData) {
                     li =  "<a class='"+(hasData?"node":"item")+(lvl==0&&hasData?" open":"")+"'"+(hasData?"":" title='"+cur[name]+"'")+" style='padding-left:"+(10*lvl)+"px'>"+
                             "<span class='pic'></span>"+
                             "<span class='text' data-id="+cur[id]+">"+cur[name]+"</span>"+
                             "</a>";
-                } else if (this.config.type=="checkbox") {
+                } else if (!!this.config.multi) {
                     li =  "<a class='"+(hasData?"node":"item")+(lvl==0&&hasData?" open":"")+"'"+(hasData?"":" title='"+cur[name]+"'")+" style='padding-left:"+(10*lvl)+"px'>"+
                             "<input type='checkbox'>"+
                             "<span class='text' data-id="+cur[id]+">"+cur[name]+"</span>"+
@@ -296,10 +295,10 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                 this.$input.val(val);
                 return;
             }
-            if (this.config.type=="select") { //单选
+            if (!this.config.multi) { //单选
                 this.$input.data("id",$.trim(id));
                 this.$input.val($.trim(val));
-            } else if (this.config.type=="checkbox") { //多选
+            } else if (!!this.config.multi) { //多选
                 this.$input.val(toggleData(val,this.$input.val()));
                 $item = this.$content.children("#"+id);
                 if($item.length==0){
@@ -312,12 +311,12 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
         getCurrentData : function(){
             var obj,objArray=[];
             var _this = this;
-            if (this.config.type=="select") { //单选
+            if (!this.config.multi) { //单选
                 obj = this._dataSet[this.$input.data("id")];
                 obj?objArray.push(obj):null;
-            } else if (this.config.type=="checkbox") { //多选
+            } else if (!!this.config.multi) { //多选
                 this.$content.children("a").each(function(){
-                    obj = this._dataSet[this.id];
+                    obj = _this._dataSet[this.id];
                     obj?objArray.push(obj):null;
                 });
             }
@@ -325,9 +324,9 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
         },
         clearInput : function(){
             this.$input.val("");
-            if (this.config.type=="select") { //单选
+            if (!this.config.multi) { //单选
                 this.$input.data("id","");
-            } else if (this.config.type=="checkbox") { //多选
+            } else if (!!this.config.multi) { //多选
                 this.$content.empty();
             }
         },
@@ -381,7 +380,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
     function simpleDataToTree(data,key){
         var pCodeObj = {},rootObj=null;
         for (var i = 0,pcode; i < data.length; i++) {
-            pcode = data[i][key.pcode];
+            pcode = data[i][key.pid];
             if (!pcode) {
                 !rootObj?(rootObj=data[i]):console.log(data[i]);
             }else{
@@ -391,7 +390,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
                 pCodeObj[pcode].push(data[i]);
             }
         }
-        dataArr = rootObj?[rootObj]:pCodeObj[key.rootCode];
+        var dataArr = rootObj?[rootObj]:pCodeObj[key.rootId];
         appendData(dataArr,key,pCodeObj);
         return dataArr;
     }
@@ -399,7 +398,7 @@ define(["jquery","./treeSearch","css!UtilDir/css/inputSelect.css"],function($,se
         var tempDataArr=[],curDataArr;
         if(!dataArr||!dataArr.length){return;}
         for (var i = 0; i < dataArr.length; i++) {
-            curDataArr = pCodeObj[dataArr[i][key.code]];
+            curDataArr = pCodeObj[dataArr[i][key.id]];
             if (curDataArr&&curDataArr.length>0) {
                 dataArr[i][key.data] = curDataArr;
                 tempDataArr = tempDataArr.concat(curDataArr);

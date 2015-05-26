@@ -1,0 +1,58 @@
+<h2>多附件上传</h2>
+<hr/>
+<div>
+    <div class="affix-section">
+        <h3 style="padding-top: 0">
+            <span>附件</span>
+        </h3>
+        <div id="fileUploadId"></div>
+    </div>
+    <div class="affix-section">
+        <h3>
+            <span>指令实现</span>
+        </h3>
+        <div cs-file-upload="upload"></div>
+    </div>
+    <script>
+        require(["PDUtilDir/uploader/fileUpload"],function(upload){
+            var settings = {
+                placeAt:"fileUploadId",
+                formData:{
+                    bizType:'10'        //额外发送的参数
+                },
+                data:[
+                    {
+                        name:'测试文档.doc',
+                        size:"10M",
+                        uploadDate:"2014-11-23",
+                        //附件上传成功时后端返回的数据
+                        responseData:{entity:{fileId:"DAFDA2355DSAFDSA"}}
+                    }
+                ],
+                downloadFile:function(file){
+                    window.location = getServer() + '/file/download?fileId=' + file.responseData.entity.fileId + '&bizType=' + config.formData.bizType;
+                },
+                delFile:function(file){
+
+                },
+                uploadSuccessExt:function(file, response){
+
+                },
+                afterRenderFile:function (file) {
+
+                }
+            };
+            var fileUpload = upload.init(settings);
+        });
+    </script>
+</div>
+<blockquote>
+    <p>
+        说明：
+    </p>
+    <div class="alert alert-warning">
+        <p>
+            由于业务的复杂性，附件上传的指令实现不属于公共部分，项目可根据实际情况封装自己的附件上传指令，方便开发
+        </p>
+    </div>
+</blockquote>

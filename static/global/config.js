@@ -1,0 +1,63 @@
+/*
+ * require.js配置
+ */
+require.config({
+    paths:{
+        //基础模块配置
+        "Bootstrap":"static/modules/bootstrap/js/bootstrap.min",
+        "Ace-extra":"static/modules/ace/js/ace-extra.min",
+        "Ace":"static/modules/ace/js/ace",
+        "Angular":"static/modules/angular/angular.min",
+        "Angular-route":"static/modules/angular/angular-route.min",
+        "jquery":"static/modules/jquery/jquery-2.1.3.min",
+        "JQuery.validate":"static/modules/jquery/plugins/validate/jquery.validate.min",
+        "JQuery.validate.extra":"static/modules/jquery/plugins/validate/additional-methods",
+        "JQuery.validate.message":"static/modules/jquery/plugins/validate/localization/messages_zh",
+        "ZTree":"static/modules/zTree/js/jquery.ztree.all-3.5.min",
+        "WebUploader":"static/modules/webuploader/webuploader.min",
+        "Cropper":"static/modules/cropper/js/cropper",
+        "Date":"static/modules/bootstrap/plugins/datetimepicker/js/datetimepicker.min",
+        "DateCN":"static/modules/bootstrap/plugins/datetimepicker/js/datetimepicker.cn",
+        "Scroll":"static/modules/jquery/plugins/jquery.slimscroll.min",
+        "Echarts":"static/modules/echarts/echarts",
+        "FloatTouch":"static/modules/floatTouch/floatTouch",
+
+        /*第三方模块文件夹*/
+        "CMDir":"static/modules/codemirror",
+        "MCScrollbarDir":"static/modules/jquery/plugins/mCustomScrollbar",
+        "EchartsDir":"static/modules/echarts",
+
+        /*静态模块路径配置*/
+        "PDAppDir":"static/app",
+        "PDCoreDir":"static/core",
+        "PDGlobalDir":"static/global",
+        "PDUtilDir":"static/modules/util",
+        //"PDModuleDir":"static/modules",
+
+
+        /*CSS文件路径映射*/
+        "ZTreeCss":"static/modules/zTree/css/zTreeStyle/csTreeStyle",
+        "WebUploaderCss":"static/modules/webuploader/css/webuploader",
+        "CropperCss":"static/modules/cropper/css/cropper.min",
+        "DateCss":"static/modules/bootstrap/plugins/datetimepicker/css/datetimepicker.min",
+        "FloatTouchCss":"static/modules/floatTouch/css/floatTouch"
+    },
+    shim:{
+        "Bootstrap":["jquery"],
+        "Ace-extra":{},
+        "Angular":{"exports":"angular"},
+        "Angular-route":['Angular'],
+        "ZTree":["jquery"],
+        "DateCN":["Date"],
+        "JQuery.validate.extra":["JQuery.validate"],
+        "JQuery.validate.message":["JQuery.validate"],
+        "Uploader":["WebUploader"],
+        "FloatTouch":["jquery"]
+    },
+    map:{
+        '*':{
+            'css':"static/modules/requirejs/plugin/require-css/css.min",
+            'text':"static/modules/requirejs/plugin/text"
+        }
+    }
+});

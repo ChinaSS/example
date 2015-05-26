@@ -14,7 +14,7 @@
         callback : null     //绑定功能函数
     }
 */
-define(["jquery","css!UtilDir/css/typeahead.css"],function($){
+define(["jquery","css!PDUtilDir/css/typeahead.css"],function($){
     function TypeaheadInit(config){
         var _param = {
             id : null,

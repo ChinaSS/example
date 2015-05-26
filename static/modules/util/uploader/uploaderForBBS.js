@@ -1,10 +1,10 @@
 /**
  * 创建一个给bbs使用的上传面板
  */
-define(["UtilDir/uploader/uploader",
-        "UtilDir/util",
-        "css!UtilDir/css/util.css",
-        "css!UtilDir/css/uploader.css"],function(Uploader,Util){
+define(["PDUtilDir/uploader/uploader",
+        "PDUtilDir/util",
+        "css!PDUtilDir/css/util.css",
+        "css!PDUtilDir/css/uploader.css"],function(Uploader,Util){
 	var pickerName="bbs_upload_picker";
 	
 	/**

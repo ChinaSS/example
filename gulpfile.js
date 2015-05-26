@@ -1,38 +1,69 @@
-var gulp = require('gulp'),
-    rename = require('gulp-rename'),        // é‡å‘½å
-    minifycss = require('gulp-minify-css'), // CSSå‹ç¼©
-    uglify = require('gulp-uglify'),        //jså‹ç¼©
-    concat  = require('gulp-concat'),          //åˆå¹¶æ–‡ä»¶
-    clean = require('gulp-clean');          //æ¸…ç©ºæ–‡ä»¶å¤¹
+var gulp = require('gulp');
+var rjs = require('requirejs');
+gulp.task('build', function(cb){
+    rjs.optimize({
+        appDir: 'static',
+        baseUrl: './',
+        paths: {
+            "OrgDir":"core/system/org",
+            "jquery":"modules/jquery/jquery-2.1.3.min",
+            "UtilDir":"modules/util",
+            "WebUploader":"modules/webuploader/webuploader.min",
+            "WebUploaderCss":"modules/webuploader/css/webuploader",
+            "ZTree":"modules/zTree/js/jquery.ztree.all-3.5.min",
+            "ZTreeCss":"modules/zTree/css/zTreeStyle/zTreeStyle"
+        },
+        shim:{
+            "Bootstrap":["jquery"],
+            "Ace-extra":{},
+            "Angular":{"exports":"angular"},
+            "Angular-route":['Angular'],
+            "ZTree":["jquery"],
+            "DateCN":["Date"],
+            "JQuery.validate.extra":["JQuery.validate"],
+            "JQuery.validate.message":["JQuery.validate"],
+            "Uploader":["WebUploader"],
+            "FloatTouch":["jquery"]
+        },
+        map:{
+            '*':{
+                'css': 'modules/requirejs/plugin/require-css/css.min',
+                'text':'modules/requirejs/plugin/text'
+            }
+        },
+        dir: 'dist',
+        modules: [
+            {
+                name: 'PDOrgDir/orgCtrl',
+                exclude: [
+                    "jquery",
+                    "PDUtilDir/util",
+                    "PDUtilDir/grid",
+                    "PDUtilDir/dialog",
+                    "PDUtilDir/org/orgSelect",
+                    "ZTree",
+                    "css!ZTreeCss",
+                    "WebUploader",
+                    "css!WebUploaderCss"
+                ]
+            }
+        ],
+        findNestedDependencies:true,
+        fileExclusionRegExp: /^(r|build)\.js$/,
+        removeCombined: true
+    }, function(buildResponse){
+        // console.log('build response', buildResponse);
+        cb();
+    }, cb);
+});
+
+
+
+
+//¾²Ì¬Ä£°å¿ª·¢
 
 var browserSync = require("browser-sync");
 var reload = browserSync.reload;
-
-/*gulp.task('default', function () {
-
- });*/
-
-//å‹ç¼©åˆå¹¶jsæ–‡ä»¶
-gulp.task('js', function () {
-    var amdOptimize = require('amd-optimize');
-    gulp.src(['static/core/hbTest/a.js'])
-        .pipe(amdOptimize('a', {
-            paths:{
-                "hbTestDir":"static/core/hbTest"
-            },
-            //configFile : "static/main.js",
-            findNestedDependencies:true
-        }))
-        /*.pipe(amdOptimize.src("**//*orgCtrl.js", {
-            configFile : "static/main.js"
-        }))*/
-        .pipe(concat('all.js'))
-        .pipe(uglify())
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest("static/core/hbTest"));
-
-});
-
 function browerInit(prism){
     browserSync({
         server: {
@@ -50,7 +81,7 @@ gulp.task("server:mock", function () {
     prism.create({
         name: "APIServer",
         mode: "mock",
-        context: "/example/v1",
+        context: "/sword",
         host: "127.0.0.1",
         port: "8080",
         mockFilenameGenerator: "humanReadable"
@@ -58,7 +89,7 @@ gulp.task("server:mock", function () {
     browerInit(prism)
 });
 
-//å¯åŠ¨browser-sync,å¹¶ç»‘å®šä»£ç†
+//Æô¶¯browser-sync,²¢°ó¶¨´úÀí
 gulp.task("server:proxy", function () {
     var prism = require("connect-prism");
 
@@ -72,16 +103,17 @@ gulp.task("server:proxy", function () {
 });
 
 gulp.task("reload",function(){
-   gulp.src('**/*.html')
+    gulp.src('**/*.html')
         .pipe(reload({stream:true}));
 });
 
-// çº¯å‰ç«¯å¼€å‘æ¨¡å¼ï¼Œä½¿ç”¨mockè·å–éœ€è¦çš„æ•°æ®
+// ´¿Ç°¶Ë¿ª·¢Ä£Ê½£¬Ê¹ÓÃmock»ñÈ¡ĞèÒªµÄÊı¾İ
 gulp.task("dev", ["server:mock"], function () {
     gulp.watch("**/*.html",["reload"])
 });
 
-// å®Œæ•´å¼€å‘æ¨¡å¼ï¼Œä½¿ç”¨ä»£ç†ä¸æœåŠ¡ç«¯è¿›è¡Œäº¤äº’
+
+// ÍêÕû¿ª·¢Ä£Ê½£¬Ê¹ÓÃ´úÀíÓë·şÎñ¶Ë½øĞĞ½»»¥
 gulp.task("dev-full", ["server:proxy"], function () {
 
 });

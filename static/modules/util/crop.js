@@ -29,7 +29,7 @@
 		}
 	})
  */
-define(["WebUploader", "css!WebUploaderCss", "Cropper", "css!CropperCss", "css!UtilDir/css/crop.css", "jquery"], function(WebUploader){
+define(["WebUploader", "css!WebUploaderCss", "Cropper", "css!CropperCss", "css!PDUtilDir/css/crop.css", "jquery"], function(WebUploader){
 	
 	var init = function(options) {
 		var setting = {

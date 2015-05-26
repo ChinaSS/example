@@ -1,7 +1,7 @@
-define(["UtilDir/uploader/uploader",
-        "UtilDir/util",
-        "UtilDir/dialog",
-        "css!UtilDir/css/util.css"],function(Uploader,Util,Dialog){
+define(["PDUtilDir/uploader/uploader",
+        "PDUtilDir/util",
+        "PDUtilDir/dialog",
+        "css!PDUtilDir/css/util.css"],function(Uploader,Util,Dialog){
 	var pickerName="upload_picker";
 	/**
 	 * 提供json对象传参

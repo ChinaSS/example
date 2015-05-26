@@ -1,0 +1,9 @@
+<li ng-repeat="sidebar in sidebar.sidebars" class="{{hover}}">
+    <a href="{{ sidebar.href || 'javascript:;)' }}" class="{{sidebar.sidebars?'dropdown-toggle':''}}">
+        <i class="menu-icon fa {{ sidebar.icon || 'fa-caret-right' }}"></i>
+        <span class="menu-text"> {{ sidebar.name }} </span>
+        <b class="arrow {{sidebar.sidebars?'fa fa-angle-down':''}}"></b>
+    </a>
+    <b class="arrow"></b>
+    <ul ng-if="sidebar.sidebars" class="submenu" ng-include="templateUrl"></ul>
+</li>

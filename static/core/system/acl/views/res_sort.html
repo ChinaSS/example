@@ -1,0 +1,33 @@
+<div class="tab-header">
+    <div class="title">
+        <i class="fa fa-bars"></i><span>资源目录</span>
+    </div>
+    <div class="tool">
+        <button id="btn_resSort_save" class="btn btn-default"><i class="fa fa-save"></i>保存</button>
+    </div>
+</div>
+<div class="single-panel">
+    <form id="form_resSort" class="form-horizontal">
+        <input type="hidden" id="resId" name="resId" />
+        <input type="hidden" id="resPid" name="resPid" />
+        <input type="hidden" id="resType" name="resType" value="1"/>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="resName">目录名称</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="resName" name="resName" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="resDesc">目录描述</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="resDesc" name="resDesc" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="resParent">所属上级目录</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="resParent" name="resParent" readonly />
+            </div>
+        </div>
+    </form>
+</div>

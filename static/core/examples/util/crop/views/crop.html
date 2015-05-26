@@ -1,0 +1,53 @@
+<h2>crop图片裁剪样例</h2>
+<hr/>
+<div class="alert alert-info" role="alert">
+    <button id="btn" class="btn btn-success">click me!</button>
+</div>
+<!-- javascript -->
+<script type="text/javascript">
+    $("#btn").on("click", function(){
+        require(["PDUtilDir/crop", "PDUtilDir/dialog"], function(Crop, Dialog){
+            //包装dialog
+            var dialog = Dialog({
+                id:"CropDialog",
+                cache:false,                 //是否缓存，默认为true
+                title:"图片裁剪-弹出",
+                width:"750px",
+                height:"450px",
+                dialogSize:"",               //modal-lg或modal-sm
+                body:"窗口中间内容",
+                buttons:[{
+                    name: "确定",
+                    callback:function(){
+                        //图片裁剪后调用submit方法将数据提交至后台
+                        //crop.submit();
+                        alert("提交");
+                    }
+                }]
+            });
+            //设置html
+            dialog.setBody("<div id='cropper'></div>");
+            //初始化Crop
+            var crop = Crop.init({
+                //Crop的初始化选择器
+                id : "#cropper",
+                ratio : 4 / 3,
+                //图片提交上传地址
+                url : "http://localhost:8080/test",
+                //图片上传时额外参数
+                formData : {
+                    "aaa" : "aaa",
+                    "bbb" : "bbb"
+                },
+                success : function(file, response) {
+                    alert("裁剪成功！");
+                },
+                error : function(file, reason) {
+                    alert("裁剪失败！");
+                }
+            });
+            //弹出窗口
+            dialog.show();
+        })
+    });
+</script>

@@ -1,4 +1,4 @@
-define(["jquery","css!UtilDir/css/util.css"],function($){
+define(["jquery","css!PDUtilDir/css/util.css"],function($){
     var util = {};
     /**
      * 简单模板引擎
@@ -22,12 +22,12 @@ define(["jquery","css!UtilDir/css/util.css"],function($){
     })();
 
     /**
-     * 用法：require(["UtilDir/util"],function(u){u.alert("请填写基本信息！")})
+     * 用法：require(["PDUtilDir/util"],function(u){u.alert("请填写基本信息！")})
      * @param message
      * @param title
      */
     util.alert =function(message,title){
-        require(["UtilDir/dialog"],function(Dialog){
+        require(["PDUtilDir/dialog"],function(Dialog){
             var dialog = Dialog({id:"system_dialog_alert",title:(title?title:"系统信息"),modal:{backdrop:"static",show:true},dialogSize:"modal-sm"});
             dialog.setBody("<div style='min-height:30px;word-wrap:break-word;'>"+message+"</div>");
             $dialog = dialog.$getDialog();
@@ -37,13 +37,13 @@ define(["jquery","css!UtilDir/css/util.css"],function($){
     };
 
     /**
-     * 用法：require(["UtilDir/util"],function(u){u.confirm("确认提交？",function(){console.log("是")},function(){console.log("否")})})
+     * 用法：require(["PDUtilDir/util"],function(u){u.confirm("确认提交？",function(){console.log("是")},function(){console.log("否")})})
      * @param message
      * @param okCallback
      * @param cancelCallback
      */
     util.confirm = function(message,okCallback,cancelCallback){//整合回调函数成一个,利用回传参数判断是否成功
-        require(["UtilDir/dialog"],function(Dialog){
+        require(["PDUtilDir/dialog"],function(Dialog){
             var dialog = Dialog({id:"system_dialog_confirm",title:"提示信息",modal:{backdrop:"static",show:true},dialogSize:"modal-sm"});
             dialog.setBody(message);
             $dialog = dialog.$getDialog();
@@ -69,7 +69,7 @@ define(["jquery","css!UtilDir/css/util.css"],function($){
             id : "system_dialog_contentDialog",
             modal : "hide"
         },config.setting);
-        require(["UtilDir/dialog","text!"+config.template],function(Dialog,template){
+        require(["PDUtilDir/dialog","text!"+config.template],function(Dialog,template){
             dialog = Dialog(config.setting);
             dialog.setBody(template);
             config.afterLoad(dialog);

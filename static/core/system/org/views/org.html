@@ -1,26 +1,39 @@
 <!-- 组织结构相关CSS -->
 <style>
 #org_toolbar button{
-    display:none
+    display:none;
+    margin-bottom:3px
 }
 </style>
 <!-- 操作栏 避免全局对象，所有的事件通过ID绑定-->
 <div id="org_toolbar">
-    <button type="button" class="btn btn-default" id="btn_orgConfig"><i class="fa fa-cog"></i>&nbsp;组织配置</button>
-    <button type="button" class="btn btn-default" id="btn_importOrg"><i class="fa fa-upload"></i>&nbsp;部门导入</button>
-    <button type="button" class="btn btn-default" id="btn_importPerson"><i class="fa fa-upload"></i>&nbsp;员工导入</button>
-    <button type="button" class="btn btn-default" id="btn_importRoleDir"><i class="fa fa-upload"></i>&nbsp;角色目录导入</button>
-    <button type="button" class="btn btn-default" id="btn_importRole"><i class="fa fa-upload"></i>&nbsp;角色导入</button>
-    <button type="button" class="btn btn-default" id="btn_importGW"><i class="fa fa-upload"></i>&nbsp;岗位导入</button>
-    <button type="button" class="btn btn-default" id="btn_importZW"><i class="fa fa-upload"></i>&nbsp;职务导入</button>
-    <button type="button" class="btn btn-default" id="btn_editDept"><i class="fa fa-edit"></i>&nbsp;编辑部门</button>
-    <button type="button" class="btn btn-default" id="btn_addDept"><i class="fa fa-plus-circle"></i>&nbsp;新增部门</button>
-    <button type="button" class="btn btn-default" id="btn_addPerson"><i class="fa fa-plus-circle"></i>&nbsp;新增人员</button>
-    <button type="button" class="btn btn-default" id="btn_editRoleDir"><i class="fa fa-edit"></i>&nbsp;编辑目录</button>
-    <button type="button" class="btn btn-default" id="btn_addRoleDir"><i class="fa fa-plus-circle"></i>&nbsp;新增目录</button>
-    <button type="button" class="btn btn-default" id="btn_addRole"><i class="fa fa-plus-circle"></i>&nbsp;新增角色</button>
-    <button type="button" class="btn btn-default" id="btn_addGW"><i class="fa fa-plus-circle"></i>&nbsp;新增岗位</button>
-    <button type="button" class="btn btn-default" id="btn_addZW"><i class="fa fa-plus-circle"></i>&nbsp;新增职务</button>
+    <button type="button" class="btn btn-primary" id="btn_orgConfig"><i class="fa fa-cog"></i>&nbsp;组织配置</button>
+
+    <button type="button" class="btn btn-success" id="btn_importOrg"><i class="fa fa-upload"></i>&nbsp;部门导入</button>
+    <button type="button" class="btn btn-success" id="btn_addDept"><i class="fa fa-plus-circle"></i>&nbsp;新增部门</button>
+    <button type="button" class="btn btn-success" id="btn_editDept"><i class="fa fa-edit"></i>&nbsp;编辑部门</button>
+
+    <button type="button" class="btn btn-info" id="btn_importPerson"><i class="fa fa-upload"></i>&nbsp;员工导入</button>
+    <button type="button" class="btn btn-info" id="btn_addPerson"><i class="fa fa-plus-circle"></i>&nbsp;新增人员</button>
+
+    <button type="button" class="btn btn-success" id="btn_importRoleDir"><i class="fa fa-upload"></i>&nbsp;角色类别导入</button>
+    <button type="button" class="btn btn-success" id="btn_addRoleDir"><i class="fa fa-plus-circle"></i>&nbsp;新增类别</button>
+    <button type="button" class="btn btn-success" id="btn_editRoleDir"><i class="fa fa-edit"></i>&nbsp;编辑类别</button>
+    <button type="button" class="btn btn-success" id="btn_delRoleDir"><i class="fa fa-plus-circle"></i>&nbsp;删除类别</button>
+
+    <button type="button" class="btn btn-info" id="btn_importRole"><i class="fa fa-upload"></i>&nbsp;角色导入</button>
+    <button type="button" class="btn btn-info" id="btn_addRole"><i class="fa fa-plus-circle"></i>&nbsp;新增角色</button>
+    <button type="button" class="btn btn-info" id="btn_delRole"><i class="fa fa-plus-circle"></i>&nbsp;删除角色</button>
+
+    <button type="button" class="btn btn-success" id="btn_importGW"><i class="fa fa-upload"></i>&nbsp;岗位导入</button>
+    <button type="button" class="btn btn-success" id="btn_addGW"><i class="fa fa-plus-circle"></i>&nbsp;新增岗位</button>
+    <button type="button" class="btn btn-success" id="btn_delGW"><i class="fa fa-plus-circle"></i>&nbsp;删除岗位</button>
+
+    <button type="button" class="btn btn-success" id="btn_importZW"><i class="fa fa-upload"></i>&nbsp;职务导入</button>
+    <button type="button" class="btn btn-success" id="btn_addZW"><i class="fa fa-plus-circle"></i>&nbsp;新增职务</button>
+    <button type="button" class="btn btn-success" id="btn_delZW"><i class="fa fa-upload"></i>&nbsp;删除职务</button>
+
+    <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i>&nbsp;组织查询</button>
 </div>
 
 
@@ -50,11 +63,35 @@
 </div>
 <div class="col-xs-9">
     <div id="orgMainId">
-        主页面
+        <form class="form-horizontal" style="padding-bottom: 2px">
+            <div class="row">
+                <div class="col-sm-3" style="padding-right: 0">
+                    <div class="input-group" style="float: right;">
+                        <select class="form-control" id="orgSearchTypeSelect">
+                            <option selected value="user">人员</option>
+                            <option value="dept">部门</option>
+                            <option value="role">角色</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="姓名|编号|部门名称" id="orgSearchText">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button" id="orgSearchBtn">查询</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr style="margin-top:5px;margin-bottom:10px">
+        <div id="orgMainContent">
+
+        </div>
     </div>
     <div style="display:none" id="orgShowListPanel">
-        <div>
-            <h5 id="orgShowListTitle">组织-财务一组</h5>
+        <div class="bg-info" style="padding: 10px">
+            <span id="orgShowListTitle">组织-财务一组</span>
         </div>
         <div id="orgShowListContent"></div>
     </div>

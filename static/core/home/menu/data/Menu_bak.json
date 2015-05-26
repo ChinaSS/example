@@ -1,0 +1,56 @@
+[
+    {
+        "name":"开发样例",
+        "icon":"fa fa-bars",
+        "sidebars":[
+            {"name":"Util",
+             "sidebars":[
+                 {"name":"Util","href":"#util"},
+                 {"name":"typeahead","href":"#typeahead"},
+                 {"name":"inputSelect","href":"#inputSelect"},
+                 {"name":"弹出框","href":"#dialog"},
+                 {"name":"表格","href":"#grid"},
+                 {"name":"附件上传","href":"#fileUploader"},
+                 {"name":"图片裁剪","href":"#crop"},
+                 {"name":"人员选择","href":"#psnSelect"},
+                 {"name":"部门选择","href":"#deptSelect"}
+             ]
+            },
+            {"name":"第三方组件",
+             "sidebars":[
+                 {"name":"树","href":"#zTree"},
+                 {"name":"日期","href":"#dateTimePicker"},
+                 {"name":"表单验证","href":"#validate"}, 
+                 {"name":"图表","href":"#ECharts"},
+                 {"name":"图标","href":"#fontawesome"},
+                 {"name":"Div折叠","href":"#divfold"},
+                 {"name":"滚动条美化","href":"#mcScrollbar"},
+                 {"name":"DOM元素托管","href":"#floatTouch"}
+             ]
+            },
+            {"name":"组件组合",
+             "sidebars":[
+                 {"name":"treeDialog","href":"#treeDialog"},
+                 {"name":"treeAndGridDialog","href":"#treeAndGridDialog"},
+                 {"name":"uploaderAndGrid","href":"#uploaderAndGrid"} 
+             ] 
+            },
+            {"name":"模板",
+             "sidebars":[
+                 {"name":"表单模板"},
+                 {"name":"侧边栏模板"}
+             ]
+            }
+        ]
+    },
+    {   "name":"系统管理",
+        "icon":"fa-cog",
+        "sidebars":[
+            {"name":"流程管理","href":"#flow"},
+            {"name":"组织管理","href":"#org"},
+            {"name":"菜单管理","href":"#menu"},
+            {"name":"消息中心","href":"#msg"},
+            {"name":"权限管理","href":"#acl"}
+        ]
+    }
+]

@@ -1,7 +1,7 @@
 /**
  * Created by YiYing on 2014/12/14.
  */
-define(['WebUploader','jquery','css!UtilDir/css/util.css','css!WebUploaderCss'],function(WebUploader,$){
+define(['WebUploader','jquery','css!PDUtilDir/css/util.css','css!WebUploaderCss'],function(WebUploader,$){
 
     var init = function(options){
     //  因有些配置信息固定不可改，所以options需要预处理后再合并到settings中

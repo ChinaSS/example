@@ -5,7 +5,7 @@
                 <i class="fa fa-home"></i><span id="org_GWName"></span>
             </div>
             <div class="tool">
-                <button type="button" class="btn btn-default">
+                <button type="button" class="btn btn-default" id="saveOrgGWBtn">
                     <i class="fa fa-save"></i>保存
                 </button>
             </div>
@@ -14,17 +14,18 @@
             <div class="row">
                 <div class="col-md-12 form-horizontal">
                     <div class="form-group">
-                        <label for="gwName" class="col-sm-3 control-label">岗位名称:</label>
+                        <label for="gwCode" class="col-sm-3 control-label"><span class="requird">*</span>岗位编号:</label>
                         <div class="col-sm-8">
-                            <input id="gwName" type="text" class="form-control" ng-model="Org.GW.gwName">
+                            <input id="gwCode" name="gwCode" type="text" class="form-control" ng-model="Org.GW.gwCode">
+                            <input id="gwUuid" name="gwUuid" type="text" class="form-control" ng-model="Org.GW.gwUuid" style="display:none">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 form-horizontal">
                     <div class="form-group">
-                        <label for="gwCode" class="col-sm-3 control-label">岗位编号:</label>
+                        <label for="gwName" class="col-sm-3 control-label"><span class="requird">*</span>岗位名称:</label>
                         <div class="col-sm-8">
-                            <input id="gwCode" type="text" class="form-control" ng-model="Org.GW.gwCode">
+                            <input id="gwName" name="gwName" type="text" class="form-control" ng-model="Org.GW.gwName">
                         </div>
                     </div>
                 </div>
@@ -33,7 +34,7 @@
                     <div class="form-group">
                         <label for="GWSort" class="col-sm-3 control-label">显示序号:</label>
                         <div class="col-sm-8">
-                            <input id="GWSort" type="text" class="form-control" ng-model="Org.GW.sort" readonly>
+                            <input id="GWSort" type="text" class="form-control" ng-model="Org.GW.sort">
                         </div>
                     </div>
                 </div>

@@ -1,36 +1,377 @@
-<div style="float:left">
-    <div style="padding:10px;font-size:24px"><i class="fa fa-cog"></i>组织配置</div>
-</div>
-<div style="float:right;padding-top:23px;padding-right:33px">
-    <button type="button" class="btn btn-default"><i class="menu-icon fa fa-save"></i>&nbsp;保存</button>
-</div>
+<style>
+    #OrgConfigForm .col-md-6,#PersonExtendInfoForm .col-md-6,#DeptExtendInfoForm .col-md-6{
+        margin-bottom: 5px;
+    }
+</style>
+<div id="OrgConfigSilderbar">
+    <div style="float:left">
+        <div style="padding:10px;font-size:24px"><i class="fa fa-cog"></i>组织配置</div>
+    </div>
+    <div style="float:right;padding-top:23px;padding-right:33px">
+        <button type="button" class="btn btn-default" data-click-center="OrgConfigSaveBtn"><i class="menu-icon fa fa-save"></i>&nbsp;保存</button>
+    </div>
 
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" style="clear:both">
+        <li class="active"><a data-target="#ConfigBaseInfo" role="tab" data-toggle="tab">基本信息</a></li>
+        <li><a data-target="#DeptConfig" role="tab" data-toggle="tab">部门相关</a></li>
+        <li><a data-target="#PersonConfig" role="tab" data-toggle="tab">人员相关</a></li>
+    </ul>
 
-<!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist" style="clear:both">
-    <li class="active"><a data-target="#ConfigBaseInfo" role="tab" data-toggle="tab">基本信息</a></li>
-    <!--<li><a data-target="#PersonRoleInfo" role="tab" data-toggle="tab">所属角色</a></li>
-    <li><a data-target="#PersonGWInfo" role="tab" data-toggle="tab">所属岗位</a></li>-->
-</ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="ConfigBaseInfo">
+            <form id="OrgConfigForm" class=" form-horizontal">
+                <input  type="text" style="display: none" name="uuid">
 
-<!-- Tab panes -->
-<div class="tab-content">
-    <div class="tab-pane active" id="ConfigBaseInfo">
-        <div class="row">
-            <div class="col-md-12 form-horizontal">
-                <div class="form-group">
-                    <label for="defaultPassword" class="col-md-3 col-sm-2 control-label">默认密码:</label>
-                    <div class="col-md-9 col-sm-10">
-                        <input id="defaultPassword" type="password" class="form-control" ng-model="Org.config.password">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            <label for="defPassword" class="col-md-4 control-label"><span class="requird">*</span>默认密码:</label>
+                            <div class="col-md-8">
+                                <input id="defPassword" type="password" class="form-control" name="defPassword">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
+        </div>
+        <div class="tab-pane" id="DeptConfig">
+            <form id="DeptExtendInfoForm" class=" form-horizontal">
+
+                <div class="affix-section">
+                    <h3>部门扩展字段配置</h3>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend1" class="col-md-4 col-sm-2 control-label">部门信息1:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend1" type="text" class="form-control" name="extend1">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend2" class="col-md-4 col-sm-2 control-label">部门信息2:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend2" type="text" class="form-control" name="extend2">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend3" class="col-md-4 col-sm-2 control-label">部门信息3:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend3" type="text" class="form-control" name="extend3">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend4" class="col-md-4 col-sm-2 control-label">部门信息4:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend4" type="text" class="form-control" name="extend4">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend5" class="col-md-4 col-sm-2 control-label">部门信息5:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend5" type="text" class="form-control" name="extend5">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend6" class="col-md-4 col-sm-2 control-label">部门信息6:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend6" type="text" class="form-control" name="extend6">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend7" class="col-md-4 col-sm-2 control-label">部门信息7:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend7" type="text" class="form-control" name="extend7">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend8" class="col-md-4 col-sm-2 control-label">部门信息8:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend8" type="text" class="form-control" name="extend8">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend9" class="col-md-4 col-sm-2 control-label">部门信息9:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend9" type="text" class="form-control" name="extend9">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend10" class="col-md-4 col-sm-2 control-label">部门信息10:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend10" type="text" class="form-control" name="extend10">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend11" class="col-md-4 col-sm-2 control-label">部门信息11:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend11" type="text" class="form-control" name="extend11">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend12" class="col-md-4 col-sm-2 control-label">部门信息12:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend12" type="text" class="form-control" name="extend12">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend13" class="col-md-4 col-sm-2 control-label">部门信息13:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend13" type="text" class="form-control" name="extend13">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend14" class="col-md-4 col-sm-2 control-label">部门信息14:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend14" type="text" class="form-control" name="extend14">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend15" class="col-md-4 col-sm-2 control-label">部门信息15:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend15" type="text" class="form-control" name="extend15">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend16" class="col-md-4 col-sm-2 control-label">部门信息16:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend16" type="text" class="form-control" name="extend16">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend17" class="col-md-4 col-sm-2 control-label">部门信息17:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend17" type="text" class="form-control" name="extend17">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend18" class="col-md-4 col-sm-2 control-label">部门信息18:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend18" type="text" class="form-control" name="extend18">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend19" class="col-md-4 col-sm-2 control-label">部门信息19:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="Dextend19" type="text" class="form-control" name="extend19">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="Dextend20" class="col-md-4 col-sm-2 control-label">部门信息20:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input type="text" class="form-control" id="Dextend20" name="extend20">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tab-pane" id="PersonConfig">
+            <form id="PersonExtendInfoForm" class=" form-horizontal">
+                <div class="affix-section">
+                    <h3>人员扩展字段配置</h3>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend1" class="col-md-4 col-sm-2 control-label">用户信息1:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend1" type="text" class="form-control" name="extend1">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend2" class="col-md-4 col-sm-2 control-label">用户信息2:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend2" type="text" class="form-control" name="extend2">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend3" class="col-md-4 col-sm-2 control-label">用户信息3:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend3" type="text" class="form-control" name="extend3">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend4" class="col-md-4 col-sm-2 control-label">用户信息4:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend4" type="text" class="form-control" name="extend4">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend5" class="col-md-4 col-sm-2 control-label">用户信息5:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend5" type="text" class="form-control" name="extend5">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend6" class="col-md-4 col-sm-2 control-label">用户信息6:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend6" type="text" class="form-control" name="extend6">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend7" class="col-md-4 col-sm-2 control-label">用户信息7:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend7" type="text" class="form-control" name="extend7">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend8" class="col-md-4 col-sm-2 control-label">用户信息8:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend8" type="text" class="form-control" name="extend8">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend9" class="col-md-4 col-sm-2 control-label">用户信息9:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend9" type="text" class="form-control" name="extend9">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend10" class="col-md-4 col-sm-2 control-label">用户信息10:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend10" type="text" class="form-control" name="extend10">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend11" class="col-md-4 col-sm-2 control-label">用户信息11:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend11" type="text" class="form-control" name="extend11">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend12" class="col-md-4 col-sm-2 control-label">用户信息12:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend12" type="text" class="form-control" name="extend12">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend13" class="col-md-4 col-sm-2 control-label">用户信息13:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend13" type="text" class="form-control" name="extend13">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend14" class="col-md-4 col-sm-2 control-label">用户信息14:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend14" type="text" class="form-control" name="extend14">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend15" class="col-md-4 col-sm-2 control-label">用户信息15:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend15" type="text" class="form-control" name="extend15">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend16" class="col-md-4 col-sm-2 control-label">用户信息16:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend16" type="text" class="form-control" name="extend16">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend17" class="col-md-4 col-sm-2 control-label">用户信息17:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend17" type="text" class="form-control" name="extend17">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend18" class="col-md-4 col-sm-2 control-label">用户信息18:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend18" type="text" class="form-control" name="extend18">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend19" class="col-md-4 col-sm-2 control-label">用户信息19:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input id="extend19" type="text" class="form-control" name="extend19">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <label for="extend20" class="col-md-4 col-sm-2 control-label">用户信息20:</label>
+                        <div class="col-md-8 col-sm-10">
+                            <input type="text" class="form-control" id="extend20" name="extend20">
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <!--<div class="tab-pane" id="PersonRoleInfo">
-
-    </div>
-    <div class="tab-pane" id="PersonGWInfo">
-
-    </div>-->
 </div>

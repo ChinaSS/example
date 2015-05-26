@@ -1,0 +1,129 @@
+<h2>Uploader与Grid组合使用</h2>
+<hr/>
+<div class="testDiv well col-md-12" >
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+			<div id="upload_fileList" class=""> </div>
+        </div>
+    </div>
+</div>   
+<script>
+require(["PDUtilDir/uploader/fileUploader",
+         "PDUtilDir/grid",
+         "PDUtilDir/dialog",
+         "Bootstrap"],
+    	function(FileUpload,Grid,Dialog){
+	    	var uploaderInstance;
+	    	var uploadDialog;
+	    	var fileList=new Grid({
+	    		id:"upload_fileList",                       //用于缓存的ID
+		        placeAt:"upload_fileList",            //存放Grid的容器ID
+		        pageSize:6,                         //一页多少条数据
+		        title:'文件列表',
+		        hidden:false,                       //表格是否可隐藏，只显示标题
+	    	    index:"checkbox",                   //首列为单选[radio]还是多选[checkbox],默认checkbox
+		        pagination : true,                  //默认分页,
+		        cache:false,
+		        layout:[
+		            {name:"名称",field:"fileName"},
+		            {name:"id",field:"fid",hidden:true},
+		            {name:"大小",field:"size"},
+		            {name:"路径",field:"filePath"},
+		            {name:"MD5",field:"md5"}
+		        ],
+		        toolbar:[
+		            {
+		            	name:"添加",
+		            	class:"fa fa-plus-circle",
+		            	callback:function(event){
+	//	            		console.log('添加')
+		            		if(uploadDialog){
+		            			uploadDialog.show();
+		            		}else{
+		            			uploadDialog=createDialog();
+		            		}
+		            		
+		            	}
+		            },
+		            {name:"删除",class:"fa fa-trash-o",callback:function(event){console.log('删除');}}
+		        ],
+		        data:[]
+	    });
+	    	
+    	function createDialog(){
+    		//为弹出框增加操作按钮
+            var buttons = [];
+            buttons.push(
+                    {name:"确定",callback:function(){
+                        //此处写扩展代码
+
+                        dialog.hide();
+                    }}
+            );
+            var dialog = Dialog({
+                id:"fileManager_uploadDialog",
+                cache:true,                 //是否缓存，默认为true
+                title:"上传",
+                width:"400px",
+                height:"120px",
+                dialogSize:"",               //modal-lg或modal-sm
+                body:"窗口中间内容",
+                buttons:buttons
+            });
+            //可以通过返回的dialog对象调用相关方法
+            dialog.setBody("<div id=\"fileManager_Uploader\"> &nbsp;</div>");
+            dialog.show();
+            uploaderInstance=createUploader();
+            return dialog;
+    	}
+    	
+    	function createUploader(){
+    		var opt={
+                	parentDivId:"fileManager_Uploader",
+                	type:"single",
+                	mode:"mixed",
+                	options:{
+                		server:getServer()+"fileUpload"
+                	},   //  其他webUploader的options
+                	callback:function(sobj){
+                		var data=sobj.result;
+                		var fileName=data.file.name;
+                		var md5=data.md5;
+                		var size=sobj.uploader.formatSize(data.file.size, 2);
+                		fileList.setData(function(d){
+                			d.push({
+                    			fileName:fileName,
+                    			fid:data.fid,
+                    			size:size,
+                    			filePath:data.filePath,
+                    			md5:md5
+                    		});
+                			return d;
+                		});
+                		sobj.reset();
+                		uploadDialog.hide();
+                	}
+                };
+            var ins=FileUpload.createFileUploaderBySettings(opt);
+            return ins;
+    	}
+    	
+    });
+     
+        
+        //@ sourceURL=uploaderAndGrid_Source.html
+    </script>
+	
+<blockquote>
+    <p>
+        说明：
+    </p>
+    <div class="alert alert-warning">
+        <p>
+            因文件上传功能在使用时可能会遇到不同的展现需求，
+            因此可以根据具体的需求进行扩展，本例仅提供基于单文件mixed模式的uploader
+            与grid进行组合使用。（<a href="#/fileUploader">uploader传送门>></a>）
+        </p>
+    </div>
+</blockquote>
+

@@ -9,7 +9,7 @@
     pageSize:5,                         //一页多少条数据
     title:'人员信息列表',
     hidden:false,                       //表格是否可隐藏，只显示标题
-    index:"checkbox",                   //首列为单选[radio]还是多选[checkbox],默认checkbox
+    multi:true,                   //首列为单选[radio]还是多选[checkbox],默认checkbox
     pagination : true,                  //默认分页,
     cache:false,
     layout:[
@@ -41,7 +41,7 @@
  }
  */
 
-define(["jquery","css!UtilDir/css/grid.css"],function($){
+define(["jquery","css!PDUtilDir/css/grid.css"],function($){
     var cache={};
 
     function initGrid(config){
@@ -187,8 +187,8 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                 $tableHead.empty();
                 //render head
                 var html = "";
-                if(!!_this._config.index){
-                    html += '<th align="center"><input type="'+(_this._config.index=='checkbox'?'checkbox':'radio')+'"></th>';
+                if(typeof _this._config.multi != "undefined"){
+                    html += '<th align="center"><input type="'+(_this._config.multi?'checkbox':'radio')+'"></th>';
                 }
                 var layout = _this._config.layout;
                 for(var i=0,item;item=layout[i++];){
@@ -335,8 +335,8 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                 $tr = $("<tr></tr>");
                 $tr.data("index",i-1);
                 trValue = "";
-                if(!!_this._config.index){
-                    trValue += '<td align="center"><input type="'+(_this._config.index=='checkbox'?'checkbox':'radio')+'" name="gridSelect"></td>';
+                if(typeof _this._config.multi != "undefined"){
+                    trValue += '<td align="center"><input type="'+(_this._config.multi?'checkbox':'radio')+'" name="gridSelect"></td>';
                 }
                 for (var j=0,item;item=_this._config.layout[j++];) {
                     tdValue = row[item.field]?row[item.field]:"";
@@ -348,9 +348,10 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
                 $tableBody.append($tr);
             }
             if(--i<_this._config.pageSize){
-                var pageSize = _this._config.pageSize;
+                var pageSize = _this._config.pageSize,
+                    colspan = _this._config.layout.length+1;
                 for(j=i;j<pageSize;j++){
-                    $tableBody.append('<tr class="emptyRow"><td>&nbsp;</td></tr>');
+                    $tableBody.append('<tr class="emptyRow"><td colspan="'+colspan+'">&nbsp;</td></tr>');
                 }
             }
             _this._layoutEventObj={};
@@ -370,11 +371,11 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
 	                    _this._layoutEventObj[this.className](event);
                 	}
                 }).on("click","tr", function (event) {
-                    if(!_this._config.index){return false;}
+                    if(typeof _this._config.multi == "undefined"){return false;}
                     if(event.target.nodeName != "INPUT"){
                         toggleCheckbox($(this).find("input"));
                     }
-                    if(_this._config.index=="radio"){return true;}
+                    if(!_this._config.multi){return true;}
                     var unCheckedNum = $tableBody.find("tr input").not(":checked").length;
                     var $checkAll = _this._$gridPanel.find(".s_grid_table thead input");
                     if(unCheckedNum==0){
@@ -489,6 +490,7 @@ define(["jquery","css!UtilDir/css/grid.css"],function($){
     });
 
     function toggleCheckbox($input){
+        if (!$input.length) {return false}
         if($input.is(":checked")){
             $input.removeAttr("checked");
         }else{

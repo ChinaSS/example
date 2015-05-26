@@ -1,0 +1,86 @@
+<h2>托管面板</h2>
+<h4 class="text-muted">注意页面左下角的图标</h4>
+<hr/>
+<div class="testDiv well col-md-12" >
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+        		<blockquote class="col-md-12">
+    <p>
+        测试Div段：
+    </p>
+    <div class="alert alert-warning">
+        <p>
+            这里是测试文字块~~将会被托管到别的地方~~
+        </p>
+    </div>
+</blockquote>
+
+        </div>
+    </div>
+</div>   
+<div class="well">
+	<div class="row">
+	<button class="btn btn-success"  id="cloneBtn">
+		Clone窗体!
+	</button>
+	<button class="btn btn-success"  id="emptyBtn">
+		清除所有回显!
+	</button>
+	<button class="btn btn-default"  id="toggleBtn">
+		切换FloatTouch显隐
+	</button>
+	<p>
+        下面将是回显的位置：
+    </p>
+        <div class="col-md-12 form-horizontal">
+		<div id="resultDiv" width="100%"> </div>
+		</div>
+	</div>
+</div>
+    <script>
+        require(["FloatTouch","PDUtilDir/util",
+        	"MCScrollbarDir/jquery.mCustomScrollbar.min", 
+			"MCScrollbarDir/jquery.mCustomScrollbar.concat.min", 
+			"css!MCScrollbarDir/jquery.mCustomScrollbar.min"],
+        function(FloatTouch,Util){
+           var floatTouchDock=$.floatTouch({});
+           var iconUrl="";
+        // iconUrl="http://mimg.127.net/p/images/app/car_counter_32.png";
+           $("#cloneBtn").click(function(){
+           		var $dockItem=$(".testDiv:first").clone(true);
+           		//  显示名称，dom元素，icon的Url，回显的回调函数
+           		floatTouchDock.addItem("测试DockItem名称",$dockItem,iconUrl,function($dom){
+	           		//  回显用的函数
+	           		$("#resultDiv").append($dom);
+           		});
+           });
+           
+           $("#emptyBtn").click(function(){
+           		$("#resultDiv").empty();
+           });
+           
+           $("#toggleBtn").click(function(){
+           		floatTouchDock.toggle();
+           });
+        });
+        
+     
+        
+        //@ sourceURL=floatTouch_Source.html
+    </script>
+	
+<blockquote>
+    <p>
+        说明：
+    </p>
+    <div class="alert alert-warning">
+        <p>
+            1、由于该控件不易频繁使用，且自由度较大，因此需要慎重选择其使用方式。
+        </p>
+        <p>
+            2、该控件推荐使用mCustomScrollbar作为滚动条美化，
+            floatTouch内部判断该美化组件是否加载，若未加载，则使用系统自带滚动条。
+        </p>
+    </div>
+</blockquote>
+

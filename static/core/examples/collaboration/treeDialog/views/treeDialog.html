@@ -1,0 +1,49 @@
+<h2>组合样例treeDialog</h2>
+<hr/>
+<blockquote>ztree和dialog组合</blockquote>
+<div class="alert alert-info" role="alert">
+    <button id="btn" class="btn btn-success">click me!</button>
+</div>
+<!-- javascript -->
+<script type="text/javascript">
+    $("#btn").on("click", function(){
+        require(["PDExamplesDir/collaboration/treeDialog/treeDialog","jquery"],function(treeDialog,$){
+            //ztree的数据
+            var treeData = [
+                {"id":1,    "pId":0,    "name":"父节点1",  "t":"我有子节点",    "open":true},
+                {"id":11,   "pId":1,    "name":"子节点11", "t":"我的父节点是1"},
+                {"id":12,   "pId":1,    "name":"子节点12", "t":"我的父节点是1"},
+                {"id":13,   "pId":1,    "name":"子节点13", "t":"我的父节点是1"},
+                {"id":21,   "pId":2,    "name":"子节点21", "t":"我的父节点是2"},
+                {"id":22,   "pId":2,    "name":"子节点22", "t":"我的父节点是2"},
+                {"id":23,   "pId":2,    "name":"子节点23", "t":"我的父节点是2"},
+                {"id":3,    "pId":0,    "name":"父节点2",  "t":"我没有子节点",   "isParent":true}
+            ];
+            //调用
+            treeDialog({
+                //标题
+                title : "TreeDialog",
+                //数据对象或者url地址
+                data : treeData,
+                //树多选功能
+                selectMulti : true,
+                //回调方法
+                callback : function(data){
+                    var text = [];
+                    for(var i=data.length;i--;){
+                        text.push("我是 "+data[i].name+"\n");
+                    }
+                    console.log(text.join(""));
+                },
+                setting : {
+                    view : {
+                        showIcon : true
+                    }
+                }
+            });
+        });
+    });
+</script>
+<div class="alert alert-warning">
+    注：此样例只是为了演示ztree、dialog是怎么组合使用的，仅作参考
+</div>

@@ -1,0 +1,275 @@
+/**
+ * 	floatTouch css
+ */
+.floatTouchDock{
+	position: fixed;
+	left: 14px;
+	bottom: 14px;
+	z-index: 1200;
+}
+
+.floatTouchDock .touchPointer{
+	width: 52px;
+	height: 52px;
+	position: absolute;
+	left: -9px;
+	bottom: -9px;
+	cursor: pointer;
+	outline: 0;
+}
+
+.floatTouchDock .touchPointer .background{
+	position: absolute;
+	left: 9px;
+	bottom: 9px;
+	z-index: 20;
+	width: 32px;
+	height: 32px;
+	background-color: #aaa;
+	background-color: RGBA(114,114,114,.85);
+	border-radius: 32px;
+	box-shadow: 0 0 10px RGBA(0,0,0,.5);
+	-webkit-transition-property: box-shadow,border-radius;
+	-moz-transition-property: box-shadow,border-radius;
+	-ms-transition-property: box-shadow,border-radius;
+	-o-transition-property: box-shadow,border-radius;
+	transition-property: box-shadow,border-radius;
+	-webkit-transition-duration: .3s;
+	-moz-transition-duration: .3s;
+	-ms-transition-duration: .3s;
+	-o-transition-duration: .3s;
+	transition-duration: .3s;
+}
+.background .cell{
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	line-height: 0;
+	font-size: 0;
+	background-color: #5cb85c;
+	border: 1px solid #5cb85c;
+	left: 9px;
+	top: 9px;
+}
+
+.background .petal_L1 {
+	background: none!important;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+.background .petal_R1 {
+	left: 17px;
+	background-color: #5bc0de;
+	border: none!important;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+.background .petal_L2 {
+	top: 17px;
+	background: none!important;
+	border-color: #f0ad4e;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+.background .petal_R2 {
+	left: 17px;
+	top: 17px;
+	background: none!important;
+	border-color: #d9534f;
+	border-top-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+
+.notice{
+	overflow: hidden;
+	background-image: url(../images/dot.png);
+	background-position: 0 0;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	color: #fff;
+	text-align: center;
+	font-weight: 700;
+	line-height: 100px;
+	font-size: 0;
+}
+.floatTouchDock .touchPointer .background .notice{
+	right: -8px;
+	top: -8px;
+}
+
+/**
+ * 	点击后
+ */
+.floatTouchDock .touchPointer .pointOpen{
+	border: 2px solid #fff;
+	border-width: 0 2px 2px;
+	width: 36px;
+	height: 32px;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	border-bottom-right-radius: 32px;
+	border-bottom-left-radius: 32px;
+	box-shadow: 0 3px 5px RGBA(0,0,0,.5);
+	left: 7px;
+	bottom: 7px;	
+}
+
+/**
+ * 	item list css
+ */
+.floatTouchDock .touchList{
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+	zoom: 1;
+	z-index: 15;
+	background-color: #aaa;
+	background-color: RGBA(114,114,114,.85);
+	border-radius: 5px;
+	left: -5px;
+	bottom: 30px;
+	-webkit-transition-property: all;
+	-moz-transition-property: all;
+	-ms-transition-property: all;
+	-o-transition-property: all;
+	transition-property: all;
+	-webkit-transition-duration: .3s;
+	-moz-transition-duration: .3s;
+	-ms-transition-duration: .3s;
+	-o-transition-duration: .3s;
+	transition-duration: .3s;
+}
+/**
+ * 	展开list panel
+ */
+.floatTouchDock .touchList.touchListExtend{
+	left: -2px;
+	bottom: 28px;
+	border-bottom-left-radius: 0;
+	border-bottom: 0;
+	overflow: visible;
+	border: 2px solid #fff;
+}
+
+
+.floatTouchDock .touchList .touchListOpera{
+	position: absolute;
+	right: 4px;
+	top: 4px;
+	width: 70px;
+	text-align: right;
+	z-index: 20;
+	line-height:20px;
+}
+.touchListOpera a{
+	cursor: pointer;
+	position: relative;
+	width: 19px;
+	height: 20px;
+	color: #bbb;
+	outline: 0;
+	padding: 0 3px;
+}
+
+.touchListOpera a:hover{
+	width: 22px;
+	background-color:#666;
+	border-radius: 2px;
+	border: 1px solid #aaa;
+}
+
+.floatTouchDock .touchList .listBorderShadow{
+	box-shadow: 0 0 5px RGBA(0,0,0,.5);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.floatTouchDock .touchList .listBorderShadow_bottom{
+	width: 157px;
+	height: 2px;
+	bottom: -1px;
+	left: 31px;
+	box-shadow: 0 2px 5px RGBA(0,0,0,.5);
+	position: absolute;
+}
+.floatTouchDock .touchList .listBorderShadow.top{
+	box-shadow: 0 -2px 5px RGBA(0,0,0,.3);
+	height: 5px;
+	top: -2px;
+	left: 0;
+}
+.floatTouchDock .touchList .listBorderShadow.left{
+	box-shadow: -2px 0 5px RGBA(0,0,0,.3);
+	height: 101%;
+	width: 5px;
+	top: 0;
+	left: -2px;
+}
+.floatTouchDock .touchList .listBorderShadow.right{
+	box-shadow: 2px 0 5px RGBA(0,0,0,.3);
+	width: 5px;
+	top: 0;
+	right: -2px;
+}
+
+.floatTouchDock .touchList .touchListContainer{
+	height: 90%;
+	margin-top: 25px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-transition-property: all;
+	-moz-transition-property: all;
+	-ms-transition-property: all;
+	-o-transition-property: all;
+	transition-property: all;
+	-webkit-transition-duration: .5s;
+	-moz-transition-duration: .5s;
+	-ms-transition-duration: .5s;
+	-o-transition-duration: .5s;
+	transition-duration: .5s;
+}
+/**
+ * 	item
+ */
+.touchListContainer .itemBase{
+	cursor: pointer;
+	height: 41px;
+	width: 176px;
+	margin-left: 5px;
+	position: relative;
+	float: left;
+	line-height: 0;
+	display: inline;
+}
+.touchListContainer .itemBase:hover{
+	background-color:#666;
+	border-radius: 5px;
+	border: 1px solid #aaa;
+}
+.touchListContainer .itemBase .itemIcon{
+	width: 34px;
+	height: 34px;
+	cursor: pointer;
+	position: absolute;
+	top: 3px;
+	left: 7px;
+}
+.itemIcon img{
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+.touchListContainer .itemBase .itemName{
+	line-height: normal;
+	color: #ccc;
+	position: absolute;
+	top: 9px;
+	left: 46px;
+}

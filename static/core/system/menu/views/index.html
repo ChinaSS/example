@@ -1,0 +1,136 @@
+<style>
+    .menu_nav{
+        width: 400px;
+    }
+    .toolbar{
+    	padding: 0 0 10px 0;
+    	border-bottom: 1px solid #ccc;
+    }
+    #menuUpdate ul{
+    	padding: 0;
+    	margin: 0;
+    	list-style: none;
+    }
+    .menuTitle{
+    	height: 35px;
+    	line-height: 35px;
+    	padding: 0 0 0 10px;
+    	font-size: 14px;
+    	font-family: '微软雅黑';
+	}
+	#menu_tree_opr_tip{
+		display: none;
+	}
+	#tab_menuSet .tab-pane{
+		padding: 0;
+	}
+	.mb10{
+		margin-bottom: 10px;
+	}
+	.mb5{
+		margin-bottom: 5px;
+	}
+	.menuTitleTool {
+		padding-right: 5px;
+	}
+</style>
+<div class="menu_nav">
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li role="presentation" class="active"><a href="#tab_menu" role="tab" data-toggle="tab"><i class="fa fa-tasks"></i>&nbsp;菜单管理</a></li>
+        <li role="presentation"><a href="#tab_menuSet" role="tab" data-toggle="tab"><i class="fa fa-pagelines"></i>&nbsp;授权管理</a></li>
+        <li role="presentation"><a href="#tab_menuUpdate" role="tab" data-toggle="tab"><i class="fa fa-yelp"></i>&nbsp;查询变更</a></li>
+    </ul>
+</div>
+<div class="menu_tab">
+    <!-- Tab panes -->
+    <div class="tab-content">
+    	<!-- 菜单管理 -->
+        <div role="tabpanel" class="tab-pane active" id="tab_menu">
+        	<div class="alert alert-success mb10" role="alert">菜单管理，维护菜单目录和菜单实体</div>
+        	<div class="toolbar mb10">
+	        	<button id="btn_menu_refresh" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;刷新</button>
+	        	<button id="btn_menu_addSort" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;添加分类</button>
+	        	<button id="btn_menu_editSort" class="btn btn-default"><i class="fa fa-pencil"></i>&nbsp;编辑分类</button>
+	        	<button id="btn_menu_deleteSort" class="btn btn-default"><i class="fa fa-minus"></i>&nbsp;删除分类</button>
+	        	<span id="menu_tree_opr_tip" class="text-danger">请选中树节点</span>
+        	</div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="menuTitle mb5 bg-info"><span>菜单分类</span></div>
+                    <div id="tree_menuDir" class="ztree"></div>
+                </div>
+                <div class="col-md-9">
+                	<div class="menuTitle mb5 bg-info"><span>菜单信息列表</span></div>
+                    <div id="grid_menu">
+                    	
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 授权管理 -->
+        <div role="tabpanel" class="tab-pane" id="tab_menuSet">
+        	<div class="alert alert-success mb10" role="alert">授权管理，维护菜单授权。请添加要授权的用户、角色或者部门，勾选菜单信息，点击保存</div>
+        	<div class="toolbar mb10">
+        		<!-- 
+				<button id="btn_menuSet_refresh" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;刷新</button>
+				 -->
+				<button id="btn_menuSet_save" class="btn btn-default"><i class="fa fa-save"></i>&nbsp;保存</button>
+        	</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="menuTitle mb5 bg-info">
+								<span>用户列表</span>
+							</div>
+							<div id="grid_userSet"></div>
+						</div>
+						<div class="col-md-3">
+							<div class="menuTitle mb5 bg-info"><span>菜单信息</span></div>
+							<div id="treeCheck_menu" class="ztree"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+        <!-- 查询变更 -->
+        <div role="tabpanel" class="tab-pane" id="tab_menuUpdate">
+        	<div class="alert alert-success mb10" role="alert">查询变更管理，查找某个用户并列出该用户所拥有的菜单权限和用户关系，还可以变更每个用户关系的菜单权限。</div>
+        	<div class="toolbar mb10">
+				<button id="btn_menuUpdate_refresh" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;刷新</button>
+				<!-- 
+				<button id="btn_menuUpdate_save" class="btn btn-default"><i class="fa fa-save"></i>&nbsp;保存</button>
+				 -->
+        	</div>
+        	<div class="mb10 row">
+        		<div class="col-md-3 cold-sm-4">
+        			<input id="input_userSelect" type="text" class="form-control bg-success" placeholder="点此选择用户...">
+        		</div>
+        	</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="menuTitle mb5 bg-info"><span>用户拥有的所有菜单信息</span></div>
+							<div id="treeCheck_menuUpdate_all" class="ztree"></div>
+						</div>
+						<div class="col-md-4">
+							<div class="menuTitle mb5 bg-info">
+								<span>用户拥有的关系列表【点击行查看】</span>
+							</div>
+							<div id="grid_userUpdate"></div>
+						</div>
+						<div class="col-md-3">
+							<div class="menuTitle mb5 bg-info">
+								<span id="text_menuUpdate_userRelationName"></span>
+								<span>菜单信息</span>
+								<span style="cursor: pointer;" id="btn_menuUpdate_userRelationMenuSave"></span>
+							</div>
+							<div id="treeCheck_menuUpdate" class="ztree"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>

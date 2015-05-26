@@ -1,21 +1,22 @@
 <div id="EditPersonPanel">
     <div style="float:left">
         <div style="padding:10px;font-size:24px"><i class="menu-icon fa fa-user"></i><span id="org_PersonName"></span></div>
-        <div style="padding-left:32px;font-size:13px;padding-bottom:14px"><span class="last" id="org_PersonDeptName"></span></div>
+        <!--<div style="padding-left:32px;font-size:13px;padding-bottom:14px"><span class="last" id="org_PersonDeptName"></span></div>-->
     </div>
     <div style="float:right;padding-top:23px;padding-right:33px">
-        <button type="button" class="btn btn-default" ng-click="Org.Person.save()"><i class="menu-icon fa fa-save"></i>&nbsp;保存</button>
+        <button type="button" class="btn btn-default" id="savePsnBtn"><i class="menu-icon fa fa-save"></i>&nbsp;保存</button>
     </div>
 
 
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist" style="clear:both">
+    <ul class="nav nav-tabs" role="tablist" style="clear:both" id="PsnTabId">
         <li class="active"><a data-target="#PersonBaseInfo" role="tab" data-toggle="tab">人员信息</a></li>
         <li><a data-target="#PersonRoleInfo" role="tab" data-toggle="tab">所属角色</a></li>
         <li><a data-target="#PersonGWInfo" role="tab" data-toggle="tab">所属岗位</a></li>
         <li><a data-target="#PersonExtendInfo" role="tab" data-toggle="tab">扩展信息</a></li>
     </ul>
 
+    <form id="UserForm">
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="PersonBaseInfo">
@@ -24,17 +25,18 @@
                 <div class="row">
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
-                            <label for="userCode" class="col-md-4 col-sm-2 control-label">员工编号:</label>
+                            <label for="userCode" class="col-md-4 col-sm-2 control-label"><span class="requird">*</span>员工编号:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="userCode" type="text" class="form-control" ng-model="Org.Person.PersonInfo.BaseInfo.userCode">
+                                <input id="userCode" type="text" name="userCode" class="form-control">
+                                <input id="userUuid" type="text" name="userUuid" style="display:none">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
-                            <label for="userName" class="col-md-4 col-sm-2 control-label">用户名称:</label>
+                            <label for="userName" class="col-md-4 col-sm-2 control-label"><span class="requird">*</span>用户名称:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="userName" type="text" class="form-control" ng-model="Org.Person.PersonInfo.BaseInfo.userName">
+                                <input id="userName" type="text" name="userName" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -43,10 +45,10 @@
                             <label for="" class="col-md-4 col-sm-2 control-label">性别:</label>
                             <div class="col-md-8 col-sm-10">
                                 <label class="radio-inline">
-                                    <input type="radio" name="sex" value="男" ng-model="Org.Person.PersonInfo.BaseInfo.sex">男
+                                    <input type="radio" name="sex" value="男">男
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="sex" value="女" ng-model="Org.Person.PersonInfo.BaseInfo.sex">女
+                                    <input type="radio" name="sex" value="女">女
                                 </label>
                             </div>
                         </div>
@@ -56,7 +58,7 @@
                         <div class="form-group">
                             <label for="birthday" class="col-md-4 col-sm-2 control-label">生日:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="birthday" type="text" class="form-control" ng-model="Org.Person.PersonInfo.BaseInfo.birthday">
+                                <input id="birthday" type="text" name="birthday" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -64,7 +66,7 @@
                         <div class="form-group">
                             <label for="officePhone" class="col-md-4 col-sm-2 control-label">办公电话:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="officePhone" type="text" class="form-control" ng-model="Org.Person.PersonInfo.BaseInfo.officePhone">
+                                <input id="officePhone" type="text" name="officePhone" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -72,7 +74,7 @@
                         <div class="form-group">
                             <label for="phone" class="col-md-4 col-sm-2 control-label">移动电话:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="phone" type="text" class="form-control" ng-model="Org.Person.PersonInfo.BaseInfo.phone">
+                                <input id="phone" type="text" name="phone" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -80,7 +82,7 @@
                         <div class="form-group">
                             <label for="fax" class="col-md-4 col-sm-2 control-label">传真:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input type="text" class="form-control" id="fax" ng-model="Org.Person.PersonInfo.BaseInfo.fax">
+                                <input type="text" class="form-control" id="fax" name="fax">
                             </div>
                         </div>
                     </div>
@@ -88,7 +90,7 @@
                         <div class="form-group">
                             <label for="email" class="col-md-4 col-sm-2 control-label">邮箱:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input type="text" class="form-control" id="email" ng-model="Org.Person.PersonInfo.BaseInfo.email">
+                                <input type="text" class="form-control" id="email" name="email">
                             </div>
                         </div>
                     </div>
@@ -97,7 +99,7 @@
                         <div class="form-group">
                             <label for="sle_PersonZW" class="col-md-4 col-sm-2 control-label">职务:</label>
                             <div class="col-md-8 col-sm-10">
-                                <select class="form-control" id="sle_PersonZW" data-ng-model="Org.Person.PersonInfo.BaseInfo.ZW"  data-ng-options="zw.name for zw in Org.Person.ZWList">
+                                <select class="form-control" id="sle_PersonZW" name="zw">
                                     <option value="">-- 请选择 --</option>
                                 </select>
                             </div>
@@ -108,7 +110,7 @@
                         <div class="form-group">
                             <label for="sort" class="col-md-4 col-sm-2 control-label">显示序号:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="sort" type="text" class="form-control" ng-model="Org.Person.PersonInfo.BaseInfo.sort">
+                                <input id="sort" type="text" class="form-control" name="sort">
                             </div>
                         </div>
                     </div>
@@ -118,10 +120,10 @@
                             <label for="" class="col-md-4 col-sm-2 control-label">是否冻结:</label>
                             <div class="col-md-8 col-sm-10">
                                 <label class="radio-inline">
-                                    <input type="radio" name="locked" value="yes" ng-model="Org.Person.PersonInfo.BaseInfo.locked">是
+                                    <input type="radio" name="locked" value=1>是
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="locked" value="no" ng-model="Org.Person.PersonInfo.BaseInfo.locked">否
+                                    <input type="radio" name="locked" value=0 checked>否
                                 </label>
                             </div>
                         </div>
@@ -129,14 +131,14 @@
 
                 </div>
             </div>
-            <div class="affix-section">
+            <div class="affix-section" id="PsnDeptListDiv" style="display:none;">
                 <h3>部门信息</h3>
                 <div class="row">
-                    <div class="col-md-6 form-horizontal">
+                    <!--<div class="col-md-6 form-horizontal">
                         <div class="form-group">
                             <label for="deptName" class="col-md-4 col-sm-2 control-label">所属部门:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="deptName" type="text" class="form-control" readonly ng-model="Org.Person.PersonInfo.DeptInfo.deptName">
+                                <input id="deptName" type="text" class="form-control" readonly ng-model="Org.Person.DeptInfo.deptName">
                             </div>
                         </div>
                     </div>
@@ -144,7 +146,7 @@
                         <div class="form-group">
                             <label for="deptId" class="col-md-4 col-sm-2 control-label">部门ID:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="deptId" type="text" class="form-control" readonly ng-model="Org.Person.PersonInfo.DeptInfo.deptId">
+                                <input id="deptId" type="text" class="form-control" readonly ng-model="Org.Person.DeptInfo.deptId">
                             </div>
                         </div>
                     </div>
@@ -152,7 +154,7 @@
                         <div class="form-group">
                             <label for="JZDeptName" class="col-md-4 col-sm-2 control-label">兼职部门:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="JZDeptName" type="text" class="form-control" readonly ng-model="Org.Person.PersonInfo.DeptInfo.JZDeptName">
+                                <input id="JZDeptName" type="text" class="form-control" readonly ng-model="Org.Person.DeptInfo.JZDeptName">
                             </div>
                         </div>
                     </div>
@@ -160,72 +162,166 @@
                         <div class="form-group">
                             <label for="JZDeptId" class="col-md-4 col-sm-2 control-label">兼职部门编号:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="JZDeptId" type="text" class="form-control" readonly ng-model="Org.Person.PersonInfo.DeptInfo.JZDeptId">
+                                <input id="JZDeptId" type="text" class="form-control" readonly ng-model="Org.Person.DeptInfo.JZDeptId">
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="col-md-6 form-horizontal">
+                        <div class="form-group">
+                            <label for="deptName" class="col-md-4 col-sm-2 control-label">选择部门:</label>
+                            <div class="col-md-8 col-sm-10 has-feedback">
+                                <input id="deptName" type="text" class="form-control input-sm" readonly >
+                                <span class="glyphicon glyphicon-plus form-control-feedback"></span>
+
+                                <input id="deptCode" type="text"  style="display:none">
+                                <input id="deptUuid" type="text"  style="display:none">
+                                <input id="ou" type="text"  style="display:none">
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 form-horizontal">
+                        <div class="form-group">
+                            <label for="" class="col-md-4 col-sm-2 control-label">是否兼职:</label>
+                            <div class="col-md-8 col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" name="jzFlag" value="1">是
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="jzFlag" value="0" checked>否
+                                </label>
 
+                                <button class="btn btn-sm btn-success" style="float:right" id="addDeptBtn">添加</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding:0 10px 0 10px">
+                    <table class="table table-bordered table-hover" style="margin-top:10px" id="PsnDeptList">
+                        <tr>
+                            <td style="display: none">部门UUID</td>
+                            <td style="width:50px">序号</td>
+                            <td>部门名称</td>
+                            <td>部门编号</td>
+                            <td>部门OU</td>
+                            <td>是否兼职</td>
+                            <td style="width:50px">操作</td>
+                        </tr>
+                    </table>
+                    <!-- 模板 -->
+                    <script id="T_PersonDept" type="text/html">
+                        <tbody>
+                            <tr>
+                                <td style="display: none">部门UUID</td>
+                                <td style="width:50px">序号</td>
+                                <td>部门名称</td>
+                                <td>部门编号</td>
+                                <td>部门OU</td>
+                                <td>是否兼职</td>
+                                <td style="width:50px">操作</td>
+                            </tr>
+                            <%for(var i=0,item;item=Depts[i++];){%>
+                            <tr>
+                                <td style="display: none"><%=item.deptUuid %></td>
+                                <td style="text-align:center"><%=i%></td>
+                                <td><%=item.deptName %></td>
+                                <td><%=item.deptCode %></td>
+                                <td><%=item.ou %></td>
+                                <td><%=(item.jz?"是":"否") %></td>
+                                <td align="center">
+                                    <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除"></i>
+                                </td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </script>
                 </div>
             </div>
         </div>
         <div class="tab-pane" id="PersonRoleInfo">
-            <table class="table table-bordered table-hover" style="margin-top:10px">
+            <table class="table table-bordered table-hover" style="margin-top:10px" id="PsnRoleList">
                 <tr>
+                    <td style="display: none">角色UUID</td>
                     <td style="width:50px">序号</td>
                     <td>角色编号</td>
                     <td>角色名称</td>
-                    <td>所属目录</td>
-                    <td>管理人员</td>
+                    <td>所属分类</td>
+                    <td style="display: none">管理人员</td>
                     <td style="width:50px">操作</td>
                 </tr>
-                <!-- 模板 -->
-                <script id="T_PersonRoles" type="text/html">
-                    <%for(var i=0,item;item=Org.Person.Roles[i++];){%>
+            </table>
+            <!-- 模板 -->
+            <script id="T_PersonRoles" type="text/html">
+                <tbody>
                     <tr>
+                        <td style="display: none">角色UUID</td>
+                        <td style="width:50px">序号</td>
+                        <td>角色编号</td>
+                        <td>角色名称</td>
+                        <td>所属分类</td>
+                        <td style="display: none">管理人员</td>
+                        <td style="width:50px">操作</td>
+                    </tr>
+                    <%for(var i=0,item;item=Roles[i++];){%>
+                    <tr>
+                        <td style="display: none"><%=item.roleUuid %></td>
                         <td style="text-align:center"><%=i%></td>
                         <td><%=item.roleCode %></td>
                         <td><%=item.roleName %></td>
                         <td><%=item.dirName %></td>
-                        <td><%=item.manager %></td>
+                        <td style="display: none"><%=item.managerName %></td>
                         <td style="text-align:center;font-size:14px">
-                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delRole($index)"></i>
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除"></i>
                         </td>
                     </tr>
                     <%}%>
-                    <!--<tr ng-repeat="role in Org.Person.Roles">
-                        <td style="text-align:center">{{$index+1}}</td>
-                        <td>{{ role.roleCode }}</td>
-                        <td>{{ role.roleName }}</td>
-                        <td>{{ role.dirName }}</td>
-                        <td>{{ role.manager }}</td>
-                        <td style="text-align:center;font-size:14px">
-                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delRole($index)"></i>
-                        </td>
-                    </tr>-->
-                </script>
-            </table>
+                </tbody>
+
+                <!--<tr ng-repeat="role in Org.Person.Roles">
+                    <td style="text-align:center">{{$index+1}}</td>
+                    <td>{{ role.roleCode }}</td>
+                    <td>{{ role.roleName }}</td>
+                    <td>{{ role.dirName }}</td>
+                    <td>{{ role.manager }}</td>
+                    <td style="text-align:center;font-size:14px">
+                        <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delRole($index)"></i>
+                    </td>
+                </tr>-->
+            </script>
         </div>
         <div class="tab-pane" id="PersonGWInfo">
-            <table class="table table-bordered table-hover" style="margin-top:10px">
+            <table class="table table-bordered table-hover" style="margin-top:10px" id="PsnGwList">
                 <tr>
+                    <td style="display: none">岗位UUID</td>
                     <td style="width:50px">序号</td>
-                    <td>岗位编号</td>
-                    <td>岗位名称</td>
                     <td>所属部门编号</td>
                     <td>所属部门名称</td>
+                    <td>岗位编号</td>
+                    <td>岗位名称</td>
                     <td style="width:50px">操作</td>
                 </tr>
-                <!-- 模板 -->
-                <script id="T_PersonGW" type="text/html">
-                    <%for(var i=0,item;item=Org.Person.GW[i++];){%>
+            </table>
+            <!-- 模板 -->
+            <script id="T_PersonGW" type="text/html">
+                <tbody>
                     <tr>
+                        <td style="display: none">岗位UUID</td>
+                        <td style="width:50px">序号</td>
+                        <td>所属部门编号</td>
+                        <td>所属部门名称</td>
+                        <td>岗位编号</td>
+                        <td>岗位名称</td>
+                        <td style="width:50px">操作</td>
+                    </tr>
+                    <%for(var i=0,item;item=GWs[i++];){%>
+                    <tr>
+                        <td style="display: none"><%=item.gwUuid %></td>
                         <td style="text-align:center"><%=i%></td>
-                        <td><%=item.gwCode %></td>
-                        <td><%=item.gwName %></td>
                         <td><%=item.deptCode %></td>
                         <td><%=item.deptName %></td>
+                        <td><%=item.gwCode %></td>
+                        <td><%=item.gwName %></td>
                         <td style="text-align:center;font-size:14px">
-                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delGW($index)"></i>
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除"></i>
                         </td>
                     </tr>
                     <%}%>
@@ -239,15 +335,15 @@
                             <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Person.delGW($index)"></i>
                         </td>
                     </tr>-->
-                </script>
-            </table>
+                </tbody>
+            </script>
         </div>
         <div class="tab-pane" id="PersonExtendInfo">
             <div class="col-md-6 form-horizontal">
                 <div class="form-group">
                     <label for="extend1" class="col-md-4 col-sm-2 control-label">用户信息1:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend1" type="text" class="form-control" ng-model="Org.Person.Extends.extend1">
+                        <input id="extend1" type="text" class="form-control" name="extend1">
                     </div>
                 </div>
             </div>
@@ -255,7 +351,7 @@
                 <div class="form-group">
                     <label for="extend2" class="col-md-4 col-sm-2 control-label">用户信息2:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend2" type="text" class="form-control" ng-model="Org.Person.Extends.extend2">
+                        <input id="extend2" type="text" class="form-control" name="extend2">
                     </div>
                 </div>
             </div>
@@ -263,7 +359,7 @@
                 <div class="form-group">
                     <label for="extend3" class="col-md-4 col-sm-2 control-label">用户信息3:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend3" type="text" class="form-control" ng-model="Org.Person.Extends.extend3">
+                        <input id="extend3" type="text" class="form-control" name="extend3">
                     </div>
                 </div>
             </div>
@@ -271,7 +367,7 @@
                 <div class="form-group">
                     <label for="extend4" class="col-md-4 col-sm-2 control-label">用户信息4:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend4" type="text" class="form-control" ng-model="Org.Person.Extends.extend4">
+                        <input id="extend4" type="text" class="form-control" name="extend4">
                     </div>
                 </div>
             </div>
@@ -279,7 +375,7 @@
                 <div class="form-group">
                     <label for="extend5" class="col-md-4 col-sm-2 control-label">用户信息5:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend5" type="text" class="form-control" ng-model="Org.Person.Extends.extend5">
+                        <input id="extend5" type="text" class="form-control" name="extend5">
                     </div>
                 </div>
             </div>
@@ -287,7 +383,7 @@
                 <div class="form-group">
                     <label for="extend6" class="col-md-4 col-sm-2 control-label">用户信息6:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend6" type="text" class="form-control" ng-model="Org.Person.Extends.extend6">
+                        <input id="extend6" type="text" class="form-control" name="extend6">
                     </div>
                 </div>
             </div>
@@ -295,7 +391,7 @@
                 <div class="form-group">
                     <label for="extend7" class="col-md-4 col-sm-2 control-label">用户信息7:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend7" type="text" class="form-control" ng-model="Org.Person.Extends.extend7">
+                        <input id="extend7" type="text" class="form-control" name="extend7">
                     </div>
                 </div>
             </div>
@@ -303,7 +399,7 @@
                 <div class="form-group">
                     <label for="extend8" class="col-md-4 col-sm-2 control-label">用户信息8:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend8" type="text" class="form-control" ng-model="Org.Person.Extends.extend8">
+                        <input id="extend8" type="text" class="form-control" name="extend8">
                     </div>
                 </div>
             </div>
@@ -311,7 +407,7 @@
                 <div class="form-group">
                     <label for="extend9" class="col-md-4 col-sm-2 control-label">用户信息9:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend9" type="text" class="form-control" ng-model="Org.Person.Extends.extend9">
+                        <input id="extend9" type="text" class="form-control" name="extend9">
                     </div>
                 </div>
             </div>
@@ -319,7 +415,7 @@
                 <div class="form-group">
                     <label for="extend10" class="col-md-4 col-sm-2 control-label">用户信息10:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend10" type="text" class="form-control" ng-model="Org.Person.Extends.extend10">
+                        <input id="extend10" type="text" class="form-control" name="extend10">
                     </div>
                 </div>
             </div>
@@ -327,7 +423,7 @@
                 <div class="form-group">
                     <label for="extend11" class="col-md-4 col-sm-2 control-label">用户信息11:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend11" type="text" class="form-control" ng-model="Org.Person.Extends.extend11">
+                        <input id="extend11" type="text" class="form-control" name="extend11">
                     </div>
                 </div>
             </div>
@@ -335,7 +431,7 @@
                 <div class="form-group">
                     <label for="extend12" class="col-md-4 col-sm-2 control-label">用户信息12:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend12" type="text" class="form-control" ng-model="Org.Person.Extends.extend12">
+                        <input id="extend12" type="text" class="form-control" name="extend12">
                     </div>
                 </div>
             </div>
@@ -343,7 +439,7 @@
                 <div class="form-group">
                     <label for="extend13" class="col-md-4 col-sm-2 control-label">用户信息13:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend13" type="text" class="form-control" ng-model="Org.Person.Extends.extend13">
+                        <input id="extend13" type="text" class="form-control" name="extend13">
                     </div>
                 </div>
             </div>
@@ -351,7 +447,7 @@
                 <div class="form-group">
                     <label for="extend14" class="col-md-4 col-sm-2 control-label">用户信息14:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend14" type="text" class="form-control" ng-model="Org.Person.Extends.extend14">
+                        <input id="extend14" type="text" class="form-control" name="extend14">
                     </div>
                 </div>
             </div>
@@ -359,7 +455,7 @@
                 <div class="form-group">
                     <label for="extend15" class="col-md-4 col-sm-2 control-label">用户信息15:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend15" type="text" class="form-control" ng-model="Org.Person.Extends.extend15">
+                        <input id="extend15" type="text" class="form-control" name="extend15">
                     </div>
                 </div>
             </div>
@@ -367,7 +463,7 @@
                 <div class="form-group">
                     <label for="extend16" class="col-md-4 col-sm-2 control-label">用户信息16:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend16" type="text" class="form-control" ng-model="Org.Person.Extends.extend16">
+                        <input id="extend16" type="text" class="form-control" name="extend16">
                     </div>
                 </div>
             </div>
@@ -375,7 +471,7 @@
                 <div class="form-group">
                     <label for="extend17" class="col-md-4 col-sm-2 control-label">用户信息17:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend17" type="text" class="form-control" ng-model="Org.Person.Extends.extend17">
+                        <input id="extend17" type="text" class="form-control" name="extend17">
                     </div>
                 </div>
             </div>
@@ -383,7 +479,7 @@
                 <div class="form-group">
                     <label for="extend18" class="col-md-4 col-sm-2 control-label">用户信息18:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend18" type="text" class="form-control" ng-model="Org.Person.Extends.extend18">
+                        <input id="extend18" type="text" class="form-control" name="extend18">
                     </div>
                 </div>
             </div>
@@ -391,7 +487,7 @@
                 <div class="form-group">
                     <label for="extend19" class="col-md-4 col-sm-2 control-label">用户信息19:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="extend19" type="text" class="form-control" ng-model="Org.Person.Extends.extend19">
+                        <input id="extend19" type="text" class="form-control" name="extend19">
                     </div>
                 </div>
             </div>
@@ -399,11 +495,12 @@
                 <div class="form-group">
                     <label for="extend20" class="col-md-4 col-sm-2 control-label">用户信息20:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input type="text" class="form-control" id="extend20" ng-model="Org.Person.Extends.extend20">
+                        <input type="text" class="form-control" id="extend20" name="extend20">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    </form>
 </div>

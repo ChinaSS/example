@@ -1,7 +1,7 @@
 /**
  * Created by YiYing on 2015/2/10.
  */
-define(["UtilDir/org/dataSelect"],function(DataSelect){
+define(["PDUtilDir/org/dataSelect"],function(DataSelect){
     /**
      * 数据选择接口
      * @param param

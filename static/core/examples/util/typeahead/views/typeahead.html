@@ -1,0 +1,43 @@
+<h2>typeahead样例</h2>
+<hr/>
+<p class="text-danger">提示：请输入 “北” 或 “海” 试试</p>
+<p>您的选择结果是：<span id="result" class="text-primary"></span></p>
+
+<!--------------------------以下是调用代码-------------------------->
+<!-- html -->
+<input id="test" type="text" class="form-control" />
+<!-- javascript -->
+<script type="text/javascript">
+    //数据
+    require(["PDUtilDir/typeahead"], function(typeahead){
+        //数据
+        var data = [{
+            "id" : 1,    "data" : "北京"
+        }, {
+            "id" : 2,    "data" : "上海"
+        }, {
+            "id" : 3,    "data" : "北海"
+        }, {
+            "id" : 4,    "data" : "海淀"
+        }];
+        //初始化
+        typeahead({
+            //要渲染的input的id
+            id : "test",
+            //数据源：数组或url地址
+            data : data,
+            //进行前端筛选
+            filter : true,
+            //数据格式
+            key:{
+                id : "id",      //id对应字段名
+                data: "data"    //显示名称对应字段名
+            },
+            //选择之后回调方法
+            callback : function(data) {
+                $("#result").text(data.data);
+            }
+        });
+        document.getElementById("test").focus();
+    })
+</script>

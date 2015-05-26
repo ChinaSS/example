@@ -1,31 +1,32 @@
 <div>
-    <form id="entityForm">
+    <form id="RoleForm">
         <div class="tab-header">
             <div class="title">
                 <i class="fa fa-home"></i><span id="org_RoleName"></span>
             </div>
             <div class="tool">
-                <button type="button" class="btn btn-default">
+                <button type="button" class="btn btn-default" id="saveOrgRoleBtn">
                     <i class="fa fa-save"></i>保存
                 </button>
             </div>
         </div>
         <div class="single-panel" id="tab_Role">
             <div class="row">
-
+                <input id="uuid" type="text" class="form-control" ng-model="Org.Role.uuid" style="display: none"/>
                 <div class="col-md-12 form-horizontal">
                     <div class="form-group">
-                        <label for="roleName" class="col-sm-3 control-label">角色名称:</label>
+                        <label for="roleName" class="col-sm-3 control-label"><span class="requird">*</span>角色名称:</label>
                         <div class="col-sm-8">
-                            <input id="roleName" type="text" class="form-control" ng-model="Org.Role.roleName">
+                            <input id="roleName" type="text" name="roleName" class="form-control" ng-model="Org.Role.roleName">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 form-horizontal">
                     <div class="form-group">
-                        <label for="roleCode" class="col-sm-3 control-label">角色编号:</label>
+                        <label for="roleCode" class="col-sm-3 control-label"><span class="requird">*</span>角色编号:</label>
                         <div class="col-sm-8">
-                            <input id="roleCode" type="text" class="form-control" ng-model="Org.Role.roleCode">
+                            <input id="roleCode" type="text" name="roleCode" class="form-control" ng-model="Org.Role.roleCode">
+                            <input id="roleUuid" type="text" name="roleUuid" style="display: none" ng-model="Org.Role.roleUuid">
                         </div>
                     </div>
                 </div>
@@ -33,27 +34,65 @@
                     <div class="form-group">
                         <label for="roleSort" class="col-sm-3 control-label">序号:</label>
                         <div class="col-sm-8">
-                            <input id="roleSort" type="text" class="form-control" ng-model="Org.Role.sort">
+                            <input id="roleSort" type="text" name="sort" class="form-control" ng-model="Org.Role.sort">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-horizontal" style="display: none">
+                    <div class="form-group">
+                        <label for="managerName" class="col-sm-3 control-label">管理员:</label>
+                        <div class="col-sm-8">
+                            <input id="managerName" type="text" name="managerName" class="form-control" ng-model="Org.Role.managerName" readonly>
+                            <input id="managerUuid" type="text" name="managerUuid" class="form-control" ng-model="Org.Role.managerUuid" style="display: none"/>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 form-horizontal">
                     <div class="form-group">
-                        <label for="roleManager" class="col-sm-3 control-label">管理员:</label>
+                        <label for="dirName" class="col-sm-3 control-label">所属目录:</label>
                         <div class="col-sm-8">
-                            <input id="roleManager" type="text" class="form-control" ng-model="Org.Role.manager" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 form-horizontal">
-                    <div class="form-group">
-                        <label for="roleDirName" class="col-sm-3 control-label">所属目录:</label>
-                        <div class="col-sm-8">
-                            <input id="roleDirName" type="text" class="form-control" ng-model="Org.Role.dirName" readonly>
+                            <input id="dirName" type="text" name="dirName" class="form-control" ng-model="Org.Role.dirName">
+                            <input id="dirCode" type="text" name="dirCode" class="form-control" ng-model="Org.Role.dirCode" style="display: none"/>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="affix-section" id="RoleUserListDiv">
+            <h3 id="link0">
+                <span>人员列表</span>
+                <a class="table-add" id="role_addPsnBtn">
+                    <i class="fa fa-plus-circle" ></i>添加
+                </a>
+            </h3>
+            <!-- 不使用grid了,使用ng-repeat 做列表 -->
+            <table class="table table-bordered table-hover" style="margin-top:10px" id="RoleUserList">
+
+            </table>
+            <!-- 模板 -->
+            <script id="T_RolePsns" type="text/html">
+                <tbody>
+                    <tr>
+                        <td>人员名称</td>
+                        <td>人员编号</td>
+                        <td>所属部门</td>
+                        <td style="display: none">人员UUID</td>
+                        <td align="center" style="width:65px">操作</td>
+                    </tr>
+                    <%for(var i=0,item;item=members[i++];){%>
+                    <tr>
+                        <td><%=item.userName %></td>
+                        <td><%=item.userCode %></td>
+                        <td><%=item.deptName %></td>
+                        <td style="display:none"><%=item.userUuid %></td>
+                        <td align="center">
+                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除"></i>
+                        </td>
+                    </tr>
+                    <%}%>
+                </tbody>
+            </script>
         </div>
     </form>
 </div>

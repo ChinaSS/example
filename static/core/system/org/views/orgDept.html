@@ -1,7 +1,7 @@
 <div class="sidebar_detail" id="EditDeptPanel">
     <div style="float:left">
         <div style="padding:10px;font-size:24px"><i class="fa fa-sitemap"></i>&nbsp;<span id="org_deptName"></span></div>
-        <div style="padding-left:32px;font-size:13px;padding-bottom:14px"><span class="last">部门ID：<span id="org_deptId"></span></span></div>
+        <div style="padding-left:32px;font-size:13px;padding-bottom:14px"><span class="last">部门编号：<span id="org_deptCode"></span></span></div>
     </div>
     <div style="float:right;padding-top:8px;padding-right:33px">
         <button type="button" class="btn btn-default" style="width:98px;text-align:left" id="btn_orgDetpSave">
@@ -9,9 +9,6 @@
         </button><br/>
         <button type="button" class="btn btn-default" style="margin-top:10px;display:none" id="btn_orgDetpAddPerson">
             <i class="fa fa-plus-circle"></i>&nbsp;新增成员
-        </button>
-        <button type="button" class="btn btn-default" style="margin-top:10px;display:none" id="btn_orgAddGW">
-            <i class="fa fa-plus-circle"></i>&nbsp;新增岗位
         </button>
     </div>
 
@@ -26,47 +23,39 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="DeptBaseInfo">
-            <div class="affix-section">
+            <form id="DeptBaseInfoForm">
+                <div class="affix-section">
                 <h3 id="link1">基本信息</h3>
                 <div class="row">
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
-                            <label for="DdeptId" class="col-md-4 col-sm-2 control-label">部门ID:</label>
+                            <label for="DdeptName" class="col-md-4 col-sm-2 control-label"><span class="requird">*</span>部门名称:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="DdeptId" type="text" class="form-control" ng-model="Org.Dept.DeptInfo.BaseInfo.deptId">
+                                <input id="DdeptName" type="text" name="deptName" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
-                            <label for="DdeptCode" class="col-md-4 col-sm-2 control-label">部门编号:</label>
+                            <label for="deptCode" class="col-md-4 col-sm-2 control-label"><span class="requird">*</span>部门编号:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="DdeptCode" type="text" class="form-control" ng-model="Org.Dept.DeptInfo.BaseInfo.deptId">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 form-horizontal">
-                        <div class="form-group">
-                            <label for="DdeptName" class="col-md-4 col-sm-2 control-label">部门名称:</label>
-                            <div class="col-md-8 col-sm-10">
-                                <input id="DdeptName" type="text" class="form-control" ng-model="Org.Dept.DeptInfo.BaseInfo.deptName">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 form-horizontal">
-                        <div class="form-group">
-                            <label for="deptLevel" class="col-md-4 col-sm-2 control-label">部门级别:</label>
-                            <div class="col-md-8 col-sm-10">
-                                <input type="text" class="form-control" id="deptLevel" ng-model="Org.Dept.DeptInfo.BaseInfo.level">
+                                <input id="deptCode" type="text" class="form-control" name="deptCode">
+                                <!-- 部门树id -->
+                                <input id="deptTreeId" type="text" class="form-control" name="deptTreeId" style="display: none">
+                                <!-- 部门uuid -->
+                                <input id="deptUuid" type="text" class="form-control" name="deptUuid" style="display: none">
                             </div>
                         </div>
                     </div>
 
+                </div>
+                <div class="row">
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
                             <label for="DdeptLeader" class="col-md-4 col-sm-2 control-label">部门领导:</label>
-                            <div class="col-md-8 col-sm-10">
-                                <input id="DdeptLeader" type="text" class="form-control" ng-model="Org.Dept.DeptInfo.BaseInfo.leader">
+                            <div class="col-md-8 col-sm-10  has-feedback">
+                                <input id="DdeptLeader" type="text" class="form-control" name="leader" readonly placeholder="点击选择部门领导">
+                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
                             </div>
                         </div>
                     </div>
@@ -74,16 +63,18 @@
                         <div class="form-group">
                             <label for="DdeptLeaderCode" class="col-md-4 col-sm-2 control-label">部门领导编号:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="DdeptLeaderCode" type="text" class="form-control" ng-model="Org.Dept.DeptInfo.BaseInfo.leaderCode" readonly>
+                                <input id="DdeptLeaderCode" type="text" class="form-control" name="leaderCode" readonly>
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="row">
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
                             <label for="deptManager" class="col-md-4 col-sm-2 control-label">管理人员:</label>
-                            <div class="col-md-8 col-sm-10">
-                                <input id="deptManager" type="text" class="form-control" ng-model="Org.Dept.DeptInfo.BaseInfo.manager">
+                            <div class="col-md-8 col-sm-10 has-feedback">
+                                <input id="deptManager" type="text" class="form-control" name="manager" readonly placeholder="点击选择管理人员">
+                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
                             </div>
                         </div>
                     </div>
@@ -91,16 +82,19 @@
                         <div class="form-group">
                             <label for="deptManagerCode" class="col-md-4 col-sm-2 control-label">管理人员编号:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="deptManagerCode" type="text" class="form-control" ng-model="Org.Dept.DeptInfo.BaseInfo.managerCode" readonly>
+                                <input id="deptManagerCode" type="text" class="form-control" name="managerCode" readonly>
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="row">
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
                             <label for="costCenterCode" class="col-md-4 col-sm-2 control-label">成本中心编号:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input id="costCenterCode" type="text" class="form-control" ng-model="Org.Dept.DeptInfo.BaseInfo.costCenterCode">
+                                <input id="costCenterCode" type="text" class="form-control" name="costCenterCode">
+                                <!-- 成本中心名称 -->
+                                <input id="costCenterName" type="text" class="form-control" name="costCenterName" style="display: none">
                             </div>
                         </div>
                     </div>
@@ -109,41 +103,81 @@
                         <div class="form-group">
                             <label for="deptSort" class="col-md-4 col-sm-2 control-label">显示序号:</label>
                             <div class="col-md-8 col-sm-10">
-                                <input type="text" class="form-control" id="deptSort" ng-model="Org.Dept.DeptInfo.BaseInfo.sort">
+                                <input type="text" class="form-control" id="deptSort" name="sort">
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="row">
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
                             <label for="pDeptName" class="col-md-4 col-sm-2 control-label">所属部门名称:</label>
-                            <div class="col-md-8 col-sm-10">
-                                <input type="text" class="form-control" id="pDeptName" ng-model="Org.Dept.DeptInfo.BaseInfo.pDeptName">
+                            <div class="col-md-8 col-sm-10 has-feedback">
+                                <input type="text" class="form-control" id="pDeptName" name="pDeptName" readonly>
+                                <span class="glyphicon glyphicon-plus form-control-feedback"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 form-horizontal">
                         <div class="form-group">
-                            <label for="pDeptId" class="col-md-4 col-sm-2 control-label">所属部门ID:</label>
-                            <div class="col-md-8 col-sm-10">
-                                <input type="text" class="form-control" id="pDeptId" ng-model="Org.Dept.DeptInfo.BaseInfo.pDeptId" readonly>
+                            <label for="pDeptCode" class="col-md-4 col-sm-2 control-label">所属部门编号:</label>
+                            <div class="col-md-8 col-sm-10 has-feedback">
+                                <input type="text" class="form-control" id="pDeptCode" name="pDeptCode" readonly>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 form-horizontal" style="display: none">
+                        <div class="form-group">
+                            <label for="pDeptTreeId" class="col-md-4 col-sm-2 control-label">所属部门树ID:</label>
+                            <div class="col-md-8 col-sm-10">
+                                <input type="text" class="form-control" id="pDeptTreeId" name="pDeptTreeId" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-horizontal">
+                        <div class="form-group">
+                            <label for="deptLevel" class="col-md-4 col-sm-2 control-label">部门级别:</label>
+                            <div class="col-md-8 col-sm-10">
+                                <input type="text" class="form-control" id="deptLevel" name="level">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-horizontal">
+                        <div class="form-group">
+                            <label for="" class="col-md-4 col-sm-2 control-label">是否冻结:</label>
+                            <div class="col-md-8 col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" name="deleted" value=1>是
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="deleted" value=0 checked>否
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12 form-horizontal">
                         <div class="form-group">
                             <label for="deptOU" class="col-sm-2 control-label">部门OU:</label>
                             <div class="col-sm-10">
-                                <input id="deptOU" type="text" class="form-control" ng-model="Org.Dept.DeptInfo.BaseInfo.ou">
+                                <input id="deptOU" type="text" class="form-control" name="ou" readonly>
+                                <input type="text" name="ouDeptCode" style="display: none">
+                                <input type="text" name="ouDeptTreeId" style="display: none">
+                                <input type="text" name="ouDeptUuid" style="display: none">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </form>
         </div>
         <div class="tab-pane" id="DeptMembers">
-            <table class="table table-bordered table-hover" style="margin-top:10px">
+            <table class="table table-bordered table-hover" style="margin-top:10px" id="DeptPsnList">
                 <tr>
+                    <td style="display:none;">用户UUID</td>
                     <td style="width:50px">序号</td>
                     <td>用户名称</td>
                     <td>员工编号</td>
@@ -151,20 +185,33 @@
                     <td>邮箱</td>
                     <td style="width:50px">操作</td>
                 </tr>
+            </table>
                 <!-- 模板 -->
                 <script id="T_DeptMembers" type="text/html">
-                    <%for(var i=0,item;item=Org.Dept.Members[i++];){%>
-                    <tr>
-                        <td style="text-align:center"><%=i%></td>
-                        <td><%=item.userName %></td>
-                        <td><%=item.userCode %></td>
-                        <td><%=item.phone %></td>
-                        <td><%=item.email %></td>
-                        <td style="text-align:center;font-size:14px">
-                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Dept.delMember($index)"></i>
-                        </td>
-                    </tr>
-                    <%}%>
+                    <tbody>
+                        <tr>
+                            <td style="display:none;">用户UUID</td>
+                            <td style="width:50px">序号</td>
+                            <td>用户名称</td>
+                            <td>员工编号</td>
+                            <td>电话</td>
+                            <td>邮箱</td>
+                            <td style="width:50px">操作</td>
+                        </tr>
+                        <%for(var i=0,item;item=Members[i++];){%>
+                        <tr>
+                            <td style="display: none"><%=item.userUuid %></td>
+                            <td style="text-align:center"><%=i%></td>
+                            <td><%=item.userName %></td>
+                            <td><%=item.userCode %></td>
+                            <td><%=item.phone %></td>
+                            <td><%=item.email %></td>
+                            <td style="text-align:center;font-size:14px">
+                                <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除"></i>
+                            </td>
+                        </tr>
+                        <%}%>
+                    </tbody>
                     <!--<tr ng-repeat="member in Org.Dept.Members">
                         <td style="text-align:center">{{$index+1}}</td>
                         <td>{{ member.userName }}</td>
@@ -176,34 +223,91 @@
                         </td>
                     </tr>-->
                 </script>
-            </table>
         </div>
         <div class="tab-pane" id="DeptGWInfo">
-            <table class="table table-bordered table-hover" style="margin-top:10px">
+            <form id="DeptGWInfoForm">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="gwCode"><span class="requird">*</span>岗位编号</label>
+                            <div class="col-sm-8 has-feedback">
+                                <input class="form-control" type="text" id="gwCode" name="gwCode" placeholder="点击选择岗位" readonly>
+                                <input id="gwUuid" name="gwUuid" type="text" class="form-control" style="display:none">
+                                <span class="glyphicon glyphicon-plus form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="gwName">岗位名称</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="gwName" name="gwName" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group" style="display: none">
+                            <label class="col-sm-4 control-label">继承到下级</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+                                    <input type="radio" name="gwExtend" value="1" checked> 是
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="gwExtend" value="0"> 否
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="col-sm-4 control-label" for="gwMembers"><span class="requird">*</span>岗位成员</label>
+                            <div class="col-sm-8 has-feedback">
+                                <input class="form-control" type="text" id="gwMembers" name="gwMembers" readonly placeholder="点击选择人员">
+                                <input class="form-control" type="text" id="gwMembersCode" name="gwMembersCode" style="display: none">
+                                <input class="form-control" type="text" id="gwMembersUuid" name="gwMembersUuid" style="display: none">
+                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <button class="btn btn-sm btn-success" style="margin-top:-60px;float:right" id="addDeptGwBtn">添加</button>
+
+            <table class="table table-bordered table-hover" style="margin-top:10px" id="DeptGwList">
                 <tr>
+                    <td style="display: none;">岗位UUID</td>
                     <td style="width:50px">序号</td>
                     <td>岗位编号</td>
                     <td>岗位名称</td>
-                    <td>继承到下级组织</td>
+                    <td style="display: none">继承到下级组织</td>
                     <td>成员列表</td>
                     <td style="width:51px">操作</td>
                 </tr>
-
+            </table>
                 <!-- 模板 -->
                 <script id="T_GWList" type="text/html">
-                    <%for(var i=0,item;item=Org.Dept.GW[i++];){%>
-                    <tr>
-                        <td style="text-align:center"><%=i%></td>
-                        <td><%=item.gwName %></td>
-                        <td><%=item.gwCode %></td>
-                        <td><%=item.extend %></td>
-                        <td><%=item.members %></td>
-                        <td style="text-align:center;font-size:14px">
-                            <i class="fa fa-edit" style="cursor:pointer" title="编辑" ng-click="Org.Dept.editGW($index)"></i>
-                            <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除" ng-click="Org.Dept.delGW($index)"></i>
-                        </td>
-                    </tr>
-                    <%}%>
+                    <tbody>
+                        <tr>
+                            <td style="display: none;">岗位UUID</td>
+                            <td style="width:50px">序号</td>
+                            <td>岗位编号</td>
+                            <td>岗位名称</td>
+                            <td style="display: none">继承到下级组织</td>
+                            <td>成员列表</td>
+                            <td style="width:51px">操作</td>
+                        </tr>
+                        <%for(var i=0,item;item=GW[i++];){%>
+                        <tr>
+                            <td style="display: none"><%=item.gwUuid %></td>
+                            <td style="text-align:center"><%=i%></td>
+                            <td><%=item.gwName %></td>
+                            <td><%=item.gwCode %></td>
+                            <td style="display: none"><%=(item.gwExtend?"是":"否") %></td>
+                            <td><%=item.gwMembers %></td>
+                            <td style="text-align:center;font-size:14px">
+                                <!--<i class="fa fa-edit" style="cursor:pointer" title="编辑"></i>-->
+                                <i class="glyphicon glyphicon-trash" style="cursor:pointer" title="删除"></i>
+                            </td>
+                        </tr>
+                        <%}%>
+                    </tbody>
                     <!--<tr ng-repeat="gw in Org.Dept.GW">
                         <td style="text-align:center">{{$index+1}}</td>
                         <td>{{ gw.gwName }}</td>
@@ -216,14 +320,14 @@
                         </td>
                     </tr>-->
                 </script>
-            </table>
         </div>
         <div class="tab-pane" id="DeptExtendInfo">
+            <form id="DeptExtendInfoForm">
             <div class="col-md-6 form-horizontal">
                 <div class="form-group">
                     <label for="Dextend1" class="col-md-4 col-sm-2 control-label">部门信息1:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend1" type="text" class="form-control" ng-model="Org.Dept.Extends.extend1">
+                        <input id="Dextend1" type="text" class="form-control" name="extend1">
                     </div>
                 </div>
             </div>
@@ -231,7 +335,7 @@
                 <div class="form-group">
                     <label for="Dextend2" class="col-md-4 col-sm-2 control-label">部门信息2:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend2" type="text" class="form-control" ng-model="Org.Dept.Extends.extend2">
+                        <input id="Dextend2" type="text" class="form-control" name="extend2">
                     </div>
                 </div>
             </div>
@@ -239,7 +343,7 @@
                 <div class="form-group">
                     <label for="Dextend3" class="col-md-4 col-sm-2 control-label">部门信息3:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend3" type="text" class="form-control" ng-model="Org.Dept.Extends.extend3">
+                        <input id="Dextend3" type="text" class="form-control" name="extend3">
                     </div>
                 </div>
             </div>
@@ -247,7 +351,7 @@
                 <div class="form-group">
                     <label for="Dextend4" class="col-md-4 col-sm-2 control-label">部门信息4:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend4" type="text" class="form-control" ng-model="Org.Dept.Extends.extend4">
+                        <input id="Dextend4" type="text" class="form-control" name="extend4">
                     </div>
                 </div>
             </div>
@@ -255,7 +359,7 @@
                 <div class="form-group">
                     <label for="Dextend5" class="col-md-4 col-sm-2 control-label">部门信息5:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend5" type="text" class="form-control" ng-model="Org.Dept.Extends.extend5">
+                        <input id="Dextend5" type="text" class="form-control" name="extend5">
                     </div>
                 </div>
             </div>
@@ -263,7 +367,7 @@
                 <div class="form-group">
                     <label for="Dextend6" class="col-md-4 col-sm-2 control-label">部门信息6:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend6" type="text" class="form-control" ng-model="Org.Dept.Extends.extend6">
+                        <input id="Dextend6" type="text" class="form-control" name="extend6">
                     </div>
                 </div>
             </div>
@@ -271,7 +375,7 @@
                 <div class="form-group">
                     <label for="Dextend7" class="col-md-4 col-sm-2 control-label">部门信息7:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend7" type="text" class="form-control" ng-model="Org.Dept.Extends.extend7">
+                        <input id="Dextend7" type="text" class="form-control" name="extend7">
                     </div>
                 </div>
             </div>
@@ -279,7 +383,7 @@
                 <div class="form-group">
                     <label for="Dextend8" class="col-md-4 col-sm-2 control-label">部门信息8:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend8" type="text" class="form-control" ng-model="Org.Dept.Extends.extend8">
+                        <input id="Dextend8" type="text" class="form-control" name="extend8">
                     </div>
                 </div>
             </div>
@@ -287,7 +391,7 @@
                 <div class="form-group">
                     <label for="Dextend9" class="col-md-4 col-sm-2 control-label">部门信息9:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend9" type="text" class="form-control" ng-model="Org.Dept.Extends.extend9">
+                        <input id="Dextend9" type="text" class="form-control" name="extend9">
                     </div>
                 </div>
             </div>
@@ -295,7 +399,7 @@
                 <div class="form-group">
                     <label for="Dextend10" class="col-md-4 col-sm-2 control-label">部门信息10:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend10" type="text" class="form-control" ng-model="Org.Dept.Extends.extend10">
+                        <input id="Dextend10" type="text" class="form-control" name="extend10">
                     </div>
                 </div>
             </div>
@@ -303,7 +407,7 @@
                 <div class="form-group">
                     <label for="Dextend11" class="col-md-4 col-sm-2 control-label">部门信息11:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend11" type="text" class="form-control" ng-model="Org.Dept.Extends.extend11">
+                        <input id="Dextend11" type="text" class="form-control" name="extend11">
                     </div>
                 </div>
             </div>
@@ -311,7 +415,7 @@
                 <div class="form-group">
                     <label for="Dextend12" class="col-md-4 col-sm-2 control-label">部门信息12:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend12" type="text" class="form-control" ng-model="Org.Dept.Extends.extend12">
+                        <input id="Dextend12" type="text" class="form-control" name="extend12">
                     </div>
                 </div>
             </div>
@@ -319,7 +423,7 @@
                 <div class="form-group">
                     <label for="Dextend13" class="col-md-4 col-sm-2 control-label">部门信息13:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend13" type="text" class="form-control" ng-model="Org.Dept.Extends.extend13">
+                        <input id="Dextend13" type="text" class="form-control" name="extend13">
                     </div>
                 </div>
             </div>
@@ -327,7 +431,7 @@
                 <div class="form-group">
                     <label for="Dextend14" class="col-md-4 col-sm-2 control-label">部门信息14:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend14" type="text" class="form-control" ng-model="Org.Dept.Extends.extend14">
+                        <input id="Dextend14" type="text" class="form-control" name="extend14">
                     </div>
                 </div>
             </div>
@@ -335,7 +439,7 @@
                 <div class="form-group">
                     <label for="Dextend15" class="col-md-4 col-sm-2 control-label">部门信息15:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend15" type="text" class="form-control" ng-model="Org.Dept.Extends.extend15">
+                        <input id="Dextend15" type="text" class="form-control" name="extend15">
                     </div>
                 </div>
             </div>
@@ -343,7 +447,7 @@
                 <div class="form-group">
                     <label for="Dextend16" class="col-md-4 col-sm-2 control-label">部门信息16:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend16" type="text" class="form-control" ng-model="Org.Dept.Extends.extend16">
+                        <input id="Dextend16" type="text" class="form-control" name="extend16">
                     </div>
                 </div>
             </div>
@@ -351,7 +455,7 @@
                 <div class="form-group">
                     <label for="Dextend17" class="col-md-4 col-sm-2 control-label">部门信息17:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend17" type="text" class="form-control" ng-model="Org.Dept.Extends.extend17">
+                        <input id="Dextend17" type="text" class="form-control" name="extend17">
                     </div>
                 </div>
             </div>
@@ -359,7 +463,7 @@
                 <div class="form-group">
                     <label for="Dextend18" class="col-md-4 col-sm-2 control-label">部门信息18:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend18" type="text" class="form-control" ng-model="Org.Dept.Extends.extend18">
+                        <input id="Dextend18" type="text" class="form-control" name="extend18">
                     </div>
                 </div>
             </div>
@@ -367,7 +471,7 @@
                 <div class="form-group">
                     <label for="Dextend19" class="col-md-4 col-sm-2 control-label">部门信息19:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input id="Dextend19" type="text" class="form-control" ng-model="Org.Dept.Extends.extend19">
+                        <input id="Dextend19" type="text" class="form-control" name="extend19">
                     </div>
                 </div>
             </div>
@@ -375,11 +479,11 @@
                 <div class="form-group">
                     <label for="Dextend20" class="col-md-4 col-sm-2 control-label">部门信息20:</label>
                     <div class="col-md-8 col-sm-10">
-                        <input type="text" class="form-control" id="Dextend20" ng-model="Org.Dept.Extends.extend20">
+                        <input type="text" class="form-control" id="Dextend20" name="extend20">
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </div>
-
 </div>

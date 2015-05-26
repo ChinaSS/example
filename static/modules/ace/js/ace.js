@@ -1,4 +1,4 @@
-define(["jquery","UtilDir/util","Ace-extra"],function($,util){
+define(["jquery","PDUtilDir/util","Ace-extra"],function($,util){
 
     /**
      Required. Ace's Basic File to Initiliaze Different Parts & Some Variables.
@@ -715,7 +715,7 @@ define(["jquery","UtilDir/util","Ace-extra"],function($,util){
                 breadcrumb_items.push({'name': text, 'href': href});
             });
             //console.log(breadcrumb_items)
-            require(["text!core/home/views/breadcrumbs.html"],function(html){
+            require(["text!"+getStaticPath()+"/core/home/views/breadcrumbs.html"],function(html){
                 $(".breadcrumb").html(util.template(html,{items:breadcrumb_items}));
             });
         });

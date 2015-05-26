@@ -1,7 +1,7 @@
 define(["jquery"],function($){
 
     return function($compile,$scope){
-        require(["OrgDir/orgSupport"],function(orgSupport){
+        require(["PDOrgDir/orgSupport"],function(orgSupport){
             orgSupport.orgMainInit();
         });
     };

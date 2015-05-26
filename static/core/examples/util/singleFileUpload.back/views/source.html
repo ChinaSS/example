@@ -1,0 +1,110 @@
+<h2>单附件上传</h2>
+<hr/>
+<div class="well">
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">附件:</label>
+                <div class="col-sm-8" id="singleFileUploadId">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">指令实现:</label>
+                <div class="col-sm-8" cs-single-upload="upload">
+
+                </div>
+            </div>
+        </div>
+    <!--    <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+            	<label class="col-sm-3 control-label">简单模式:</label>
+                <div id="testFileUpload" class="col-sm-8">
+    	
+   				 </div>
+            </div>
+            <div id="result1"> </div>
+        </div>
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+            	<label class="col-sm-3 control-label">mixed模式:</label>
+                <div id="testFileUpload2" class="col-sm-8">
+    	
+   				 </div>
+            </div>
+            <div id="result2"> </div>
+        </div>
+        <div class="col-md-12 form-horizontal">
+            <div class="form-group">
+            	<label class="col-sm-3 control-label">多文件模式:</label>
+                <div id="testFileUpload3" class="col-sm-8">
+    	
+   				 </div>
+            </div>
+            <div id="result3"> </div>
+        </div>  -->
+    </div>
+    
+    <script>
+        require(['PDUtilDir/uploader/singleFileUpload','PDUtilDir/uploader/fileUploader'],function(upload,FileUpload){
+            var settings = {
+                placeAt:"singleFileUploadId",
+                remove:function(){
+                    //点击删除时调用
+
+                },
+                uploadSuccessExt:function(file, response){
+                   //上传成功时调用
+
+                },
+                formData:{
+                    //向服务器发送额外数据
+                    bizType:'10'
+                }
+            };
+            upload.init(settings);
+         /*   
+            var options={
+            	callback:function(data){
+            		$("#result1").text("FID:"+data.fid+"\nFilePath:"+data.filePath+"\n");
+            	}
+            }
+            var ins=FileUpload.createFileUploader("testFileUpload","single","simple",options);
+            
+            var options2={
+            	parentDivId:"testFileUpload2",
+            	type:"single",
+            	mode:"mixed",
+            	options:{},
+            	callback:function(data){
+            		$("#result2").text("FID:"+data.fid+"\nFilePath:"+data.filePath+"\n");
+            	}
+            }
+            var ins2=FileUpload.createFileUploaderBySettings(options2);
+            
+            var opt3={
+            	parentDivId:"testFileUpload3",
+            	type:"multiple",
+            	mode:"mixed",
+            	options:{},
+            	callback:function(data){
+            		$("#result3").text("FID:"+data.fid+"\nFilePath:"+data.filePath+"\n");
+            	}
+            }
+            FileUpload.createFileUploaderBySettings(opt3);  */
+        })
+    </script>
+</div>
+
+<blockquote>
+    <p>
+        说明：
+    </p>
+    <div class="alert alert-warning">
+        <p>
+            由于业务的复杂性，附件上传的指令实现不属于公共部分，项目可根据实际情况封装自己的附件上传指令，方便开发
+        </p>
+    </div>
+</blockquote>

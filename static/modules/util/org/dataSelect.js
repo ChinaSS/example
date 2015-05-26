@@ -10,11 +10,11 @@ config = {
 	hideTag : false, //当tagData只有一条数据时,选择是否隐藏标签
 	realTimeData : false, //强制刷新层级树
 	dataRefill : true, //数据回填
-	simpleData : false, //是否返回简单数据数组,和一个简单数据映射集
+	simpleReturnData : false, //是否返回简单数据数组,和一个简单数据映射集
 	callback : function(data){}, //处理数据的回调函数
 }
 */
-define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDir/css/dataSelect.css","ZTree","css!ZTreeCss"],function(Dialog,template){
+define(["PDUtilDir/dialog","text!PDUtilDir/org/template/dataSelect.html","css!PDUtilDir/css/dataSelect.css","ZTree","css!ZTreeCss"],function(Dialog,template){
 	var dataCacheObj = {},
 		hasParentData = {
 			group : true,
@@ -162,8 +162,11 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 			return false;
 		}
 		var data={};
+		/*
 		data[typeList[type].key.data.code]=text;
 		data[typeList[type].key.data.name]=text;
+		*/
+		data.param = text;
 		data[typeList[type].key.tree.id]=id;
 		$.ajax({
 			type:"GET",
@@ -202,6 +205,9 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 		return $input.is(":checked");
 	}
 
+    function transformation(string){
+        return string.replace(/[\.\[\]\s]/,"\\\\$&");
+    }
 	//ZTree辅助函数
 
 	function resetZTreeStatus(id){
@@ -288,8 +294,8 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 		//bind selectList event
 		this.$selectList.children(".list").on("dblclick","li",function(event){
 			var type = $(this).parent().attr("class"),
-				code = $(this).data("code");
-			_this.delSelectData(_this.selectData[type][code],type);
+				id = $(this).data("id");
+			_this.delSelectData(_this.selectData[type][id],type);
 			_this.setSelectAllData();
 		}).on("click","li",function(event){
 			$(this).closest(".list").find("li").removeClass("cur");
@@ -301,7 +307,7 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 				type = $li.parent().attr("class");
 			if (!$li.length) {return false;}
 			if (className.indexOf("remove")>-1) {
-				_this.delSelectData(_this.selectData[type][$li.data("code")],type);
+				_this.delSelectData(_this.selectData[type][$li.data("id")],type);
 				_this.setSelectAllData();
 			} else {
 				if (className.indexOf("up")>-1) {
@@ -354,9 +360,9 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
             	callback : function(){
             		_this.save();
             		_this.config.callback?(function(){
-            			if(_this.config.simpleData){
-            				var simpleData = _this.getSimpleData();
-            				_this.config.callback(simpleData.data,simpleData.set);
+            			if(_this.config.simpleReturnData){
+            				var simpleReturnData = _this.getSimpleReturnData();
+            				_this.config.callback(simpleReturnData.data,simpleReturnData.set);
             			}else{
             				_this.config.callback($.extend({},dataCacheObj[_this.config.id]));
             			}
@@ -457,14 +463,14 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 			$li;
 		for(var i=0,cur;i<dataArr.length;i++){
 			curData = dataArr[i];
-			$li = $('<li class="code_'+(curData[typeList[type].key.data.code]||'')+'">'+
+			$li = $('<li id="data_'+(curData[typeList[type].key.data.id]||'')+'">'+
 					'<span class="name">'+(curData[typeList[type].key.data.name]||'')+'</span>'+
 					'<span class="code">'+(curData[typeList[type].key.data.code]||'')+'</span>'+
 					'<span class="pname">'+(curData[typeList[type].key.data.pname]||'')+'</span>'+
 					'</li>');
 			$li.prepend('<span class="type"><input type="'+(this.config.multi?'checkbox':'radio')+'" name="listItem"></span>');
 			$li.data("data",curData);
-			if (this.selectData[type][curData[typeList[type].key.data.code]]) {
+			if (this.selectData[type][curData[typeList[type].key.data.id]]) {
 				toggleInputStatus($li.find("input"),true);
 			}
 			$frag.append($li);
@@ -485,13 +491,12 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 
 	DataSelect.prototype.initSelectList = function(dataListObj){
 		if (!dataListObj) {console.log("数据初始化终止,缓存数据为空");return false;}
-		var $list = this.$selectList.children(".list"),
-			$wrap,dataList;
+		var $list = this.$selectList.children(".list");
 		$list.empty();
 		for(var type in dataListObj){
-			dataList = dataListObj[type];
+            if(!dataListObj.hasOwnProperty(type)||!dataListObj[type].length){continue}
 			$list.append('<ul class="'+type+'"></ul>');
-			this.addSelectData(dataList,type);
+			this.addSelectData(dataListObj[type],type);
 		}
 	};
 
@@ -536,14 +541,20 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 		this.initTree($tree,curType).addClass("on");
 	};
 
-	DataSelect.prototype.initSelectData = function(tagData){
+	DataSelect.prototype.initSelectData = function(tagData,initData){
 		this.selectData = {};
-		//初始化selectData数据结构
-		for (var i = 0; i < tagData.length; i++) {
-			this.selectData[tagData[i]] = {};
+        var curDataCacheObj = dataCacheObj[this.config.id]||{};
+		//清空selectData数据,合并初始化选中数据
+		for (var i = 0,type; i < tagData.length; i++) {
+            type = tagData[i];
+			this.selectData[type] = {};
+            if(initData&&initData[type]){
+                curDataCacheObj[type] = curDataCacheObj[type]||[];
+                curDataCacheObj[type] = curDataCacheObj[type].concat(initData[type]);
+            }
 		}
 		//初始化selectList
-		this.config.dataRefill?this.initSelectList(dataCacheObj[this.config.id]):false;
+		this.config.dataRefill?this.initSelectList(curDataCacheObj):false;
 	};
 
 	DataSelect.prototype.clearSelectData = function(){
@@ -552,11 +563,14 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 
 	DataSelect.prototype.cacheSelectData = function(){
 		var dataListObj={},selectData=this.selectData,
-			dataList,type,code;
+			dataList,type,id;
 		for(type in selectData){
+            if(!selectData.hasOwnProperty(type)){continue}
 			dataList = [];
-			for(code in selectData[type]){
-				selectData[type][code]?dataList.push(selectData[type][code]):null;
+			for(id in selectData[type]){
+                if(selectData[type].hasOwnProperty(id)){
+                    selectData[type][id]?dataList.push(selectData[type][id]):null;
+                }
 			}
 			dataListObj[type]=dataList;
 		}
@@ -566,7 +580,7 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 
 	DataSelect.prototype.toggleSelectData = function(data,type){
 		var key = typeList[type].key.data;
-		if(!this.selectData[type]||!this.selectData[type][data[key.code]]){
+		if(!this.selectData[type]||!this.selectData[type][data[key.id]]){
 			this.addSelectData(data,type);
 		}else{
 			this.delSelectData(data,type);
@@ -594,16 +608,18 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 			}
 			$wrap.empty().siblings().remove();
 			for(var tag in this.selectData){
+                if(!this.selectData.hasOwnProperty(tag)){continue}
 				this.selectData[tag]={};
 			}
 		}
 		for (var i = 0,curData; i < dataArr.length; i++) {
 			curData = dataArr[i];
-			$li = $('<li class="code_'+(curData[key.code]||'')+'"><span class="text">'+(curData[key.name]||'null')+'/'+(curData[key.code]||'null')+'/'+(curData[key.pname]||'null')+'</span></li>');
-			$li.data("code",curData[key.code]);
+            if(!!this.selectData[type][curData[key.id]]){continue}
+			$li = $('<li id="select_'+(curData[key.id]||'')+'"><span class="text">'+(curData[key.name]||'null')+'/'+(curData[key.code]||'null')+'/'+(curData[key.pname]||'null')+'</span></li>');
+			$li.data("id",curData[key.id]);
 			$wrap.append($li);
-			toggleInputStatus($target.find(".code_"+curData[key.code]+" input"),true);
-			this.selectData[type][curData[key.code]]=curData;
+			toggleInputStatus($target.find("#data_"+transformation(curData[key.id])+" input"),true);
+			this.selectData[type][curData[key.id]]=curData;
 		}
 	};
 
@@ -616,28 +632,31 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 
 		for (var i = 0,curData; i < dataArr.length; i++) {
 			curData = dataArr[i];
-			delete this.selectData[type][curData[key.code]];
-			$wrap.children(".code_"+curData[key.code]).remove();
-			toggleInputStatus($target.find(".code_"+curData[key.code]+" input"),false);
+            if(!this.selectData[type][curData[key.id]]){continue}
+			delete this.selectData[type][curData[key.id]];
+			$wrap.children("#select_"+transformation(curData[key.id])).remove();
+			toggleInputStatus($target.find("#data_"+transformation(curData[key.id])+" input"),false);
 		}
 		if (!$wrap.children().length) {
 			$wrap.remove();
 		}
 	};
 
-	DataSelect.prototype.getSimpleData = function(){
+	DataSelect.prototype.getSimpleReturnData = function(){
 		var selectData = this.selectData,
-			simpleData = {
+			simpleReturnData = {
 				data : [],
 				set : {}
 			},
 			key=null,data=null;
-		simpleData.set = selectData;
+		simpleReturnData.set = selectData;
 		for(var type in selectData){
+            if(!selectData.hasOwnProperty(type)){continue}
 			key = typeList[type].key.data;
-			for(var code in selectData[type]){
-				data = selectData[type][code];
-				simpleData.data.push({
+			for(var id in selectData[type]){
+                if(!selectData[type].hasOwnProperty(id)){continue}
+				data = selectData[type][id];
+				simpleReturnData.data.push({
 					id : data[key.id],
 					code : data[key.code],
 					name : data[key.name],
@@ -645,32 +664,41 @@ define(["UtilDir/dialog","text!UtilDir/org/template/dataSelect.html","css!UtilDi
 				});
 			}
 		}
-		return simpleData;
+		return simpleReturnData;
 	};
 
 	DataSelect.prototype.setInfo = function(type,pos){
 		if (!!type) {
-			this.$dataTree.find(".curType span").text(typeList[type].name).parent().data("type",type);
+			this.$dataTree.find(".curType span").text(typeList[type].name).attr("title",typeList[type].name).
+						   parent().data("type",type);
 		}
 		this.$dataTree.find(".curPos span").text(pos.name).attr("title",pos.name).parent().data("pos",pos.id);
 	};
 
-	DataSelect.prototype.setCss = function(config){
-		var	width = config.width?config.width:"800px",
-			height = config.height?config.height:"320px";
-		this.dialog.$getDialog().find(".modal-dialog").css("width",width).
-								 find(".modal-body").css("height",height);
+	DataSelect.prototype.setCss = function(){
+		this.dialog.$getDialog().
+				find(".modal-dialog").css("width",this.config.width).
+				find(".modal-body").css("height",this.config.height);
 	};
 
 	DataSelect.prototype.init = function(config){
-		if (!config) {console.log("参数错误");return false;}
-		!config.tagData?config.tagData=[]:null;
-		$.extend(this.config,config);
+		if (!config||!config.id) {console.log("参数错误");return false;}
+		//初始化配置参数
+		$.extend(this.config,{
+			multi : false,
+			tagData : [],
+			width : "800px",
+			height : "320px",
+			hideTag : false,
+			dataRefill : true,
+			realTimeData : false,
+			simpleReturnData : false
+		},config);
 		this.dialog.setTitle(config.title||"数据选择");
-		this.setCss(config);//设置当前组件宽高样式
+		this.setCss();//设置当前配置样式
 		this.setInfo(config.tagData[0],{id:null,name:"全部"});
 		this.initTypeTag(config.tagData);
-		this.initSelectData(config.tagData);
+		this.initSelectData(config.tagData,config.initData);
 	};
 
 	DataSelect.prototype.save = function(){

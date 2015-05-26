@@ -12,6 +12,11 @@ jQuery.validator.addMethod("chineseLength", function(value, element, param) {
 jQuery.validator.addMethod("alnum", function(value, element) {
 	return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
 }, "只能包括英文字母和数字");
+//  正则表达式校验
+jQuery.validator.addMethod("regex", function(value, element, params) {  
+    var exp = new RegExp(params);  
+    return exp.test(value);  
+}, "正则校验格式错误"); 
 // 邮政编码验证
 jQuery.validator.addMethod("zipcode", function(value, element) {
 	var tel = /^[0-9]{6}$/;

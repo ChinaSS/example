@@ -1,4 +1,4 @@
-[
+{"model":[
   { "id": "root", "name": "资源树","open": true},
   { "id": "01", "pId":"root", "name": "艺术家模块","open":true},
   { "id": "0101", "pId":"01", "name": "艺术家添加"},
@@ -6,4 +6,4 @@
   { "id": "02", "pId":"root", "name": "作品模块","open":true},
   { "id": "0201", "pId":"02", "name": "作品添加"},
   { "id": "0202", "pId":"02", "name": "作品删除"}
-]
+]}

@@ -1,0 +1,87 @@
+<h2>组合样例treeAndGridDialog</h2>
+<hr/>
+<blockquote>ztree Grid  dialog组合</blockquote>
+<div class="alert alert-info" role="alert">
+    <button id="btn" class="btn btn-success">click me!</button>
+</div>
+<!-- javascript -->
+<script type="text/javascript">
+    $("#btn").on("click", function(){
+        require(["PDExamplesDir/collaboration/treeAndGridDialog/treeAndGridDialog","jquery"],function(treeAndGridDialog,$){
+            //ztree的数据
+            var treeData = [
+                {"id":1,    "pId":0,    "name":"父节点1",  "t":"我有子节点",    "open":true},
+                {"id":11,   "pId":1,    "name":"子节点11", "t":"我的父节点是1"},
+                {"id":12,   "pId":1,    "name":"子节点12", "t":"我的父节点是1"},
+                {"id":13,   "pId":1,    "name":"子节点13", "t":"我的父节点是1"},
+                {"id":21,   "pId":2,    "name":"子节点21", "t":"我的父节点是2"},
+                {"id":22,   "pId":2,    "name":"子节点22", "t":"我的父节点是2"},
+                {"id":23,   "pId":2,    "name":"子节点23", "t":"我的父节点是2"},
+                {"id":3,    "pId":0,    "name":"父节点2",  "t":"我没有子节点",   "isParent":true}
+            ];
+            var tree = {
+                isCache : true,             //是否缓存ztree数据,默认为true;不缓存则显示即时数据
+                data: treeData
+            };
+            var grid = {
+                id:"DemoOne",
+                placeAt:"DemoGirdDivId",                    //存放Grid的容器ID
+                pageSize:5,                                 //一页多少条数据
+                hidden:false,                               //表格是否可隐藏，只显示标题，默认false
+                index:"checkbox",                           //首列为单选[radio]还是多选[checkbox],默认checkbox
+                layout:[
+                    {name:"姓名",field:"Name",sort:true,click:function(e){
+                        console.log(e.data);
+                    }},
+                    {name:"性别",field:"Sex",sort:"asc"},
+                    {name:"电话",field:"Phone",style:"width:10%;"},
+                    {name:"邮件",field:"Email"},
+                    {name:"地址",field:"Address",format:function(obj){
+                        //console.log(obj);
+                        return "BJ"
+                    }}
+                ],
+                data:[
+                    {Name:"张三1",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"CQ"},
+                    {Name:"张三2",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"BJ"},
+                    {Name:"张三3",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"CQ"},
+                    {Name:"张三4",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"BJ"},
+                    {Name:"张三5",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"CQ"},
+                    {Name:"张三6",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"BJ"},
+                    {Name:"张三7",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"CQ"},
+                    {Name:"张三8",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"BJ"},
+                    {Name:"张三9",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"CQ"},
+                    {Name:"张三10",Sex:"男",Phone:"123456",Email:"zhangsan@gmail.com",Address:"BJ"}
+                ]
+            };
+            var nodeObj=[
+                {id:1,pId:0,name:"父节点1",t:"我有子节点",open:true},
+                {id:11,pId:1,name:"子节点11",t:"我的父节点是1"},
+                {id:12,pId:1,name:"子节点12",t:"我的父节点是1"},
+                {id:13,pId:1,name:"子节点13",t:"我的父节点是1"},
+                {id:2,pId:0,name:"父节点2",t:"我有子节点"},
+                {id:21,pId:2,name:"子节点21",t:"我的父节点是2"},
+                {id:22,pId:2,name:"子节点22",t:"我的父节点是2"},
+                {id:23,pId:2,name:"子节点23",t:"我的父节点是2"},
+                {id:3,pId:0,name:"父节点2",t:"我没有子节点",isParent:true},
+            ];
+            treeAndGridDialog({
+                title : "TreeAndGridDialog",
+                //表格信息对象
+                grid : grid,
+                //ztree信息对象
+                tree : tree,
+                callback : function(data){
+                    var text = [];
+                    for(var i=data.length;i--;){
+                        text.push("我是 "+data[i].name+"\n");
+                    }
+                    console.log(text.join(""));
+                }
+            });
+        });
+    });
+</script>
+<div class="alert alert-warning">
+    注：此样例只是为了演示ztree、grid、dialog是怎么组合使用的，仅作参考
+</div>

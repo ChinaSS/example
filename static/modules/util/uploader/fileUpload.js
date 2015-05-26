@@ -1,4 +1,4 @@
-define(['WebUploader','jquery','css!UtilDir/css/util.css','css!WebUploaderCss'],function(WebUploader){
+define(['WebUploader','jquery','css!PDUtilDir/css/util.css','css!WebUploaderCss'],function(WebUploader){
 
     /**
      * 附件上传控件初始化

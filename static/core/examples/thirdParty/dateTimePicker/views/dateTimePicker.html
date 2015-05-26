@@ -1,0 +1,117 @@
+<!-- html -->
+<h2>dateTimePicker - <small><a href="http://www.bootcss.com/p/bootstrap-datetimepicker/demo.htm" target="_blank">更多官方Demo</a></small></h2>
+<hr/>
+<div class="well">
+        <form class="form-horizontal" role="form">
+            <!------------------ 日期 ------------------>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="date">日期</label>
+                <div class="col-md-6">
+                    <input id="date" class="form-control" type="text" />
+                </div>
+            </div>
+            <!------------------ 时间 ------------------>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="date">时间</label>
+                <div class="col-md-6">
+                    <input id="time" class="form-control" type="text" />
+                </div>
+            </div>
+            <!------------------ 组件 ------------------>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="date">组件</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input id="component" type="text" class="form-control">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <!------------------ 复杂 ------------------>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="date">复杂</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input id="complex" type="text" class="form-control">
+                        <a id="complex_del" class="input-group-addon"><i class="fa fa-times"></i></a>
+                        <a id="complex_show" class="input-group-addon"><i class="fa fa-calendar"></i></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+<!-- javascript -->
+<script type="text/javascript">
+    require(["jquery", "Date","DateCN", "css!DateCss"],function($){
+        /*------------------------ 日期 ------------------------- */
+        $("#date").datetimepicker({
+            //设置使用语言：cn是自定义的中文版本，还可以扩展其他语言版本
+            language : "cn",
+            //输出格式化
+            format : 'yyyy-mm-dd',
+            //直接选择‘今天’
+            todayBtn : true,
+            //设置最精确的时间选择视图
+            minView : 'month',
+            //高亮当天日期
+            todayHighlight : true,
+            //选择完毕后自动关闭
+            autoclose : true
+        });
+        /*------------------------ 时间 ------------------------- */
+        $("#time").datetimepicker({
+            //设置使用语言：cn是自定义的中文版本，还可以扩展其他语言版本
+            language : "cn",
+            //输出格式化
+            format : 'yyyy-mm-dd hh:ii:ss',
+            //直接选择‘今天’
+            todayBtn : true,
+            //设置最精确的时间选择视图
+            minView : 'hour',
+            //高亮当天日期
+            todayHighlight : true,
+            //显示“上午”“下午”
+            showMeridian : true,
+            //选择完毕后自动关闭
+            autoclose : true
+        });
+        /*------------------------ 组件 ------------------------- */
+        $("#component").datetimepicker({
+            //设置使用语言：cn是自定义的中文版本，还可以扩展其他语言版本
+            language : "cn",
+            //输出格式化
+            format : 'yyyy-mm-dd',
+            //直接选择‘今天’
+            todayBtn : true,
+            //设置最精确的时间选择视图
+            minView : 'month',
+            //高亮当天日期
+            todayHighlight : true,
+            //选择完毕后自动关闭
+            autoclose : true
+        });
+        /*------------------------ 复杂 ------------------------- */
+        $("#complex").datetimepicker({
+            //设置使用语言：cn是自定义的中文版本，还可以扩展其他语言版本
+            language : "cn",
+            //输出格式化
+            format : 'yyyy-mm-dd',
+            //直接选择‘今天’
+            todayBtn : true,
+            //设置最精确的时间选择视图
+            minView : 'month',
+            //高亮当天日期
+            todayHighlight : true,
+            //选择完毕后自动关闭
+            autoclose : true
+        });
+        /* 删除按钮 */
+        $("#complex_show").on("click", function(){
+            $('#complex').datetimepicker('show');
+        });
+        /* 显示按钮 */
+        $("#complex_del").on("click", function(){
+            $("#complex").val("");
+        });
+    });
+</script>

@@ -1,0 +1,121 @@
+<h1 >多附件上传</h1>
+<blockquote>
+    <p>1.基于<a href="http://fex-team.github.io/webuploader/">WebUploader</a>装UI展现层<br>2.所有参数为基于WebUpload扩展，webUploader大部分<a href="http://fex-team.github.io/webuploader/doc/index.html">API</a>同样适用  </p>
+</blockquote>
+<h2 id="-">使用样例</h2>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="source js"><span class="support function js"><span>require</span></span><span class="meta brace round js"><span>(</span></span><span class="meta brace square js"><span>[</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>PDUtilDir/uploader/fileUpload</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta brace square js"><span>]</span></span><span class="meta delimiter object comma js"><span>,</span></span><span class="meta function js"><span class="storage type function js"><span>function</span></span><span class="punctuation definition parameters begin js"><span>(</span></span><span class="variable parameter function js"><span>upload</span></span><span class="punctuation definition parameters end js"><span>)</span></span></span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="storage modifier js"><span>var</span></span><span>&nbsp;settings&nbsp;</span><span class="keyword operator js"><span>=</span></span><span>&nbsp;</span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;placeAt</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>fileUploadId</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formData</span><span class="keyword operator js"><span>:</span></span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bizType</span><span class="keyword operator js"><span>:</span></span><span class="string quoted single js"><span class="punctuation definition string begin js"><span>'</span></span><span>10</span><span class="punctuation definition string end js"><span>'</span></span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>额外发送的参数</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data</span><span class="keyword operator js"><span>:</span></span><span class="meta brace square js"><span>[</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</span><span class="keyword operator js"><span>:</span></span><span class="string quoted single js"><span class="punctuation definition string begin js"><span>'</span></span><span>测试文档.doc</span><span class="punctuation definition string end js"><span>'</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>10M</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploadDate</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>2014-11-23</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span class="punctuation whitespace comment leading js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>附件上传成功时后端返回的数据</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;responseData</span><span class="keyword operator js"><span>:</span></span><span class="meta brace curly js"><span>{</span></span><span>entity</span><span class="keyword operator js"><span>:</span></span><span class="meta brace curly js"><span>{</span></span><span>fileId</span><span class="keyword operator js"><span>:</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>DAFDA2355DSAFDSA</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta brace curly js"><span>}</span><span>}</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace square js"><span>]</span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta function json js"><span class="entity name function js"><span>downloadFile</span></span><span>:</span><span class="storage type function js"><span>function</span></span><span class="punctuation definition parameters begin js"><span>(</span></span><span class="variable parameter function js"><span>file</span></span><span class="punctuation definition parameters end js"><span>)</span></span></span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span class="punctuation whitespace comment leading js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>点击下载默认调用的方法</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span class="punctuation whitespace comment leading js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>window.location&nbsp;=&nbsp;getServer()&nbsp;+&nbsp;'/file/download?fileId='&nbsp;+&nbsp;file.backEndData.entity.fileId&nbsp;+&nbsp;'&amp;bizType='&nbsp;+&nbsp;config.formData.bizType;</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta function json js"><span class="entity name function js"><span>delFile</span></span><span>:</span><span class="storage type function js"><span>function</span></span><span class="punctuation definition parameters begin js"><span>(</span></span><span class="variable parameter function js"><span>file</span></span><span class="punctuation definition parameters end js"><span>)</span></span></span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span class="punctuation whitespace comment leading js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>删除附件默认调用的方法</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;</span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta function json js"><span class="entity name function js"><span>uploadSuccessExt</span></span><span>:</span><span class="storage type function js"><span>function</span></span><span class="punctuation definition parameters begin js"><span>(</span></span><span class="variable parameter function js"><span>file</span></span><span>,&nbsp;</span><span class="variable parameter function js"><span>response</span></span><span class="punctuation definition parameters end js"><span>)</span></span></span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span class="punctuation whitespace comment leading js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>附件上传成功默认调用的方法</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;</span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span><span class="meta delimiter object comma js"><span>,</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta function json js"><span class="entity name function js"><span>afterRenderFile</span></span><span>:</span><span class="storage type function js"><span>function</span></span><span>&nbsp;</span><span class="punctuation definition parameters begin js"><span>(</span></span><span class="variable parameter function js"><span>file</span></span><span class="punctuation definition parameters end js"><span>)</span></span></span><span>&nbsp;</span><span class="meta brace curly js"><span>{</span></span></span></div><div class="line"><span class="source js"><span class="punctuation whitespace comment leading js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>附件列表结束渲染默认调用的方法</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;</span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="meta brace curly js"><span>}</span></span><span class="punctuation terminator statement js"><span>;</span></span></span></div><div class="line"><span class="source js"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="storage modifier js"><span>var</span></span><span>&nbsp;fileUpload&nbsp;</span><span class="keyword operator js"><span>=</span></span><span>&nbsp;upload</span><span class="meta delimiter method period js"><span>.</span></span><span>init</span><span class="meta brace round js"><span>(</span></span><span>settings</span><span class="meta brace round js"><span>)</span></span><span class="punctuation terminator statement js"><span>;</span></span></span></div><div class="line"><span class="source js"><span class="meta brace curly js"><span>}</span></span><span class="meta brace round js"><span>)</span></span><span class="punctuation terminator statement js"><span>;</span></span></span></div></pre>
+<h2 id="settings-">settings对象</h2>
+<blockquote>
+    <p>以下是常用的，由于webuploader的初始化参数也是使用的settings对象，
+        所以其它不常用的参数可查询Weuploader官方<a href="http://fex-team.github.io/webuploader/doc/index.html" target="_blank">API</a></p>
+</blockquote>
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th style="text-align:center">属性名称</th>
+        <th style="text-align:center">是否必选</th>
+        <th style="text-align:center">说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="text-align:center">placeAt</td>
+        <td style="text-align:center">必选</td>
+        <td style="text-align:center">把附件上传组件放在指定容器的id，可为<code>DOM对象</code></td>
+    </tr>
+    <tr>
+        <td style="text-align:center">data</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center"><code>Array</code>,已上传的附件数组</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">server</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center">附件接收后端action地址，默认为<code>getServer() +"/file/upload"</code></td>
+    </tr>
+    <tr>
+        <td style="text-align:center">downloadFile</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center">点击下载时默认会调用的方法</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">delFile</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center">点击删除时默认会调用的方法</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">uploadSuccessExt</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center">附件上传成功时默认会调用的方法</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">afterRenderFile</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center">附件列表结束渲染默认调用的方法</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">formData</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center">额外向服务器发送的参数</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">accept</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center">允许上传的文件类型，详见Weuploader官方<a href="http://fex-team.github.io/webuploader/doc/index.html" target="_blank">API</a></td>
+    </tr>
+    <tr>
+        <td style="text-align:center">fileSizeLimit</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center">文件总大小限制，详见Weuploader官方<a href="http://fex-team.github.io/webuploader/doc/index.html" target="_blank">API</a></td>
+    </tr>
+    <tr>
+        <td style="text-align:center">fileSingleSizeLimit</td>
+        <td style="text-align:center">可选</td>
+        <td style="text-align:center">允许上传的单个文件大小，详见Weuploader官方<a href="http://fex-team.github.io/webuploader/doc/index.html" target="_blank">API</a></td>
+    </tr>
+    </tbody>
+</table>
+<h2 id="fileupload-">fileUpload对象属性</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th style="text-align:center">属性名称</th>
+        <th style="text-align:center">说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="text-align:center">webUploader</td>
+        <td style="text-align:center">WebUploader对象</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">queuedFiles</td>
+        <td style="text-align:center">待上传文件数组</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">savedFiles</td>
+        <td style="text-align:center">已上传文件数组</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">$container</td>
+        <td style="text-align:center">整个上传组件DOM对象</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">$toolbar</td>
+        <td style="text-align:center">操作栏DOM对象</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">$table</td>
+        <td style="text-align:center">文件列表DOM对象</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">$status</td>
+        <td style="text-align:center">状态栏DOM对象</td>
+    </tr>
+    <tr>
+        <td style="text-align:center">settings</td>
+        <td style="text-align:center">所有settings对象</td>
+    </tr>
+    </tbody>
+</table>
+<pre class="editor-colors lang-javascript"><div class="line"><span class="source js"><span class="storage modifier js"><span>var</span></span><span>&nbsp;fileUpload&nbsp;</span><span class="keyword operator js"><span>=</span></span><span>&nbsp;upload</span><span class="meta delimiter method period js"><span>.</span></span><span>init</span><span class="meta brace round js"><span>(</span></span><span>settings</span><span class="meta brace round js"><span>)</span></span><span class="punctuation terminator statement js"><span>;</span></span></span></div><div class="line"><span class="source js"><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>获取属性值</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span class="storage modifier js"><span>var</span></span><span>&nbsp;p&nbsp;</span><span class="keyword operator js"><span>=</span></span><span>&nbsp;fileUpload</span><span class="meta brace square js"><span>[</span></span><span class="string quoted double js"><span class="punctuation definition string begin js"><span>"</span></span><span>属性</span><span class="punctuation definition string end js"><span>"</span></span></span><span class="meta brace square js"><span>]</span></span></span></div></pre>

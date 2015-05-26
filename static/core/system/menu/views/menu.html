@@ -1,0 +1,60 @@
+<div class="tab-header">
+    <div class="title">
+        <i class="fa fa-bars"></i><span>菜单</span>
+    </div>
+    <div class="tool">
+        <button id="btn_menu_save" class="btn btn-default"><i class="fa fa-save"></i>保存</button>
+    </div>
+</div>
+<div class="single-panel">
+    <form id="form_menu" class="form-horizontal">
+        <input type="hidden" id="menuId" name="menuId" />
+        <input type="hidden" id="menuPid" name="menuPid" />
+        <input type="hidden" id="menuType" name="menuType" value="2" />
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="menuName">菜单名称</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="menuName" name="menuName" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="menuUrl">菜单地址</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="menuUrl" name="menuUrl" />
+            </div>  
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="menuOpen">打开方式</label>
+            <div class="col-sm-8">
+                <select class="form-control" id="menuOpen" name="menuOpen">
+                	<option value="1">本窗口</option>
+                	<option value="2">新窗口</option>
+                </select>
+            </div>  
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="menuIcon">菜单图标</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="menuIcon" name="menuIcon" />
+            </div>  
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="menuOrder">索引</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="menuOrder" name="menuOrder" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="menuDesc">菜单描述</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="menuDesc" name="menuDesc" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="menuPid">所属分类</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="menuParent" name="menuParent" readonly />
+            </div>
+        </div>
+    </form>
+</div>

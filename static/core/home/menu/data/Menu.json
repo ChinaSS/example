@@ -1,51 +1,69 @@
 [
     {
-        "name":"开发样例",
-        "iCoin":"fa fa-bars",
-        "sidebars":[
-            {"name":"Util",
-             "sidebars":[
-                 {"name":"Util","href":"#util"},
-                 {"name":"typeahead","href":"#typeahead"},
-                 {"name":"inputSelect","href":"#inputSelect"},
-                 {"name":"弹出框","href":"#dialog"},
-                 {"name":"表格","href":"#grid"},
-                 {"name":"单附件上传","href":"#singleFileUpload"},
-                 {"name":"多附件上传","href":"#fileUpload"},
-                 {"name":"图片裁剪","href":"#crop"}
-             ]
-            },
-            {"name":"第三方组件",
-             "sidebars":[
-                 {"name":"树","href":"#zTree"},
-                 {"name":"日期","href":"#dateTimePicker"},
-                 {"name":"图表","href":"#ECharts"},
-                 {"name":"图标","href":"#fontawesome"},
-                 {"name":"Div折叠","href":"#divfold"},
-                 {"name":"滚动条美化","href":"#mcScrollbar"}
-             ]
-            },
-            {"name":"组件组合",
-             "sidebars":[
-                 {"name":"treeDialog","href":"#treeDialog"},
-                 {"name":"treeAndGridDialog","href":"#treeAndGridDialog"}
-             ]
-            },
-            {"name":"模板",
-             "sidebars":[
-                 {"name":"表单模板"},
-                 {"name":"侧边栏模板"}
+        "menu" : {
+	        "menuName":"开发样例",
+	        "menuIcon":"fa fa-bars"
+	    },
+        "subMenu":[{
+       		"menu" : {
+       			"menuName":"Util"
+       		},
+         	"subMenu":[
+                 {"menu":{"menuName":"Util","menuUrl":"#util"}},
+                 {"menu":{"menuName":"typeahead","menuUrl":"#typeahead"}},
+                 {"menu":{"menuName":"inputSelect","menuUrl":"#inputSelect"}},
+                 {"menu":{"menuName":"弹出框","menuUrl":"#dialog"}},
+                 {"menu":{"menuName":"表格","menuUrl":"#grid"}},
+                 {"menu":{"menuName":"附件上传","menuUrl":"#fileUploader"}},
+                 {"menu":{"menuName":"图片裁剪","menuUrl":"#crop"}},
+                 {"menu":{"menuName":"人员选择","menuUrl":"#psnSelect"}},
+                 {"menu":{"menuName":"部门选择","menuUrl":"#deptSelect"}}
+ 			]
+        },{
+	        "menu" : {
+	        	"menuName":"第三方组件"
+	    	},
+ 			"subMenu":[
+			     {"menu":{"menuName":"树","menuUrl":"#zTree"}},
+			     {"menu":{"menuName":"日期","menuUrl":"#dateTimePicker"}},
+			     {"menu":{"menuName":"表单验证","menuUrl":"#validate"}},
+			     {"menu":{"menuName":"图表","menuUrl":"#ECharts"}},
+			     {"menu":{"menuName":"图标","menuUrl":"#fontawesome"}},
+			     {"menu":{"menuName":"Div折叠","menuUrl":"#divfold"}},
+			     {"menu":{"menuName":"滚动条美化","menuUrl":"#mcScrollbar"}},
+			     {"menu":{"menuName":"DOM元素托管","menuUrl":"#floatTouch"}}
+			]
+        },{
+            "menu": {
+            	"menuName":"组件组合"
+        	},
+            "subMenu":[
+ 				{"menu":{"menuName":"treeDialog","menuUrl":"#treeDialog"}},
+ 				{"menu":{"menuName":"treeAndGridDialog","menuUrl":"#treeAndGridDialog"}},
+				{"menu":{"menuName":"uploaderAndGrid","menuUrl":"#uploaderAndGrid"}}
+            ]
+        },{
+        	"menu":{
+        		"menuName":"模板"
+    		},
+            "subMenu":[
+                 {"menu":{"menuName":"表单模板"}},
+                 {"menu":{"menuName":"侧边栏模板"}}
              ]
             }
         ]
-    },
-    {   "name":"系统管理",
-        "iCoin":"fa-cog",
-        "sidebars":[
-            {"name":"流程管理","href":"#flow"},
-            {"name":"组织管理","href":"#org"},
-            {"name":"消息中心","href":"#msg"},
-            {"name":"权限管理","href":"#acl"}
+    },{
+    	"menu" : {
+    		"menuName":"系统管理",
+        	"menuIcon":"fa-cog"
+    	},
+        "subMenu":[
+            {"menu":{"menuName":"流程管理","menuUrl":"#flow"}},
+            {"menu":{"menuName":"组织管理","menuUrl":"#org"}},
+            {"menu":{"menuName":"菜单管理","menuUrl":"#menu"}},
+            {"menu":{"menuName":"消息中心","menuUrl":"#msg"}},
+            {"menu":{"menuName":"权限管理","menuUrl":"#acl"}},
+            {"menu":{"menuName":"字典管理","menuUrl":"#dict"}}
         ]
     }
 ]

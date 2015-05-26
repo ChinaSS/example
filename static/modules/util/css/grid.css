@@ -12,6 +12,10 @@
     font-family:'Open Sans';
 }
 
+.s_grid .s_grid_table{
+    border: 1px solid #ddd;
+}
+
 
 /*表格标题*/
 .s_grid .s_grid_title{
@@ -32,7 +36,6 @@
 
 /*操作栏*/
 .s_grid_toolbar{
-    border-bottom:#DDDDDD 1px solid;
     overflow: hidden;
 }
 .s_grid_toolbar ul{
@@ -65,27 +68,35 @@
 
 
 /*表格标题排序样式*/
+.s_grid thead tr{
+    background-image: none;
+    background-color: #f9f9f9;
+}
 .s_grid thead tr i{
     margin-left: 4px;
     color:#307ECC;
     cursor:pointer
 }
 
+.s_grid table tr th{
+    border-bottom:none;
+    border-top: 1px solid #ddd;
+    color: #a8a8a8;
+    font-weight: normal;
+}
+
+/* 表格行样式 */
 .s_grid table tr td:hover{
     color:#307ECC;
     cursor:pointer
 }
-.s_grid table tr td{
-    border-bottom: 1px solid #ddd;
-}
 
-/*空行不显示边框*/
 .s_grid table .emptyRow td{
     border-color: transparent;
-    cursor: auto;
 }
-.s_grid .emptyRow:hover td{
+.s_grid .emptyRow td:hover{
     background: transparent;
+    cursor: default;
 }
 
 /* 导航栏定位处理 */
@@ -99,8 +110,7 @@
     position: absolute;
     bottom: -39px;
     left: 0;
-    border-bottom:#DDDDDD 1px solid;
-    border-top:#DDDDDD 1px solid;
+    border:#ddd 1px solid;
     background-color: #fff;
     padding: 5px;
     height: 40px;

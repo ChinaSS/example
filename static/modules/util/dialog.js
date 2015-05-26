@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 弹出框组件
 config = {
     id:"TestDialog",
@@ -12,7 +12,7 @@ config = {
     callback : function(dialog){}
 };
 **/
-define(["jquery"],function($){
+define(["jquery", "Bootstrap"],function($){
     var cache={};
 
     function DialogInit(config){
