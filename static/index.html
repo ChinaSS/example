@@ -372,11 +372,11 @@
 
 <script type="text/javascript">
     function getServer() {
-        var contextPath = '/';
+        var contextPath = '/example';
         return contextPath;
     }
     function getStaticPath() {
-        return getServer() + "static";
+        return getServer() + "/static";
     }
     require.config({
         baseUrl : getServer(),
