@@ -384,16 +384,15 @@ define(["jquery","css!PDUtilDir/css/grid.css"],function($){
                         $checkAll.removeAttr("checked");
                     }
                 });
-                for(var evt in this._config.trEvent){
+                for(var k = 0; k < this._config.trEvent.length; k++){
                     (function(trEvent){
-                        var type = evt;
-                        $tableBody.on(type,"tr",function(event){
+                        $tableBody.on(trEvent.type,"tr",function(event){
                             event.data = {
                                 "row" : _this._pageInfo.pageData[$(this).data("index")]
                             };
-                            trEvent[type](event);
+                            trEvent.callback(event);
                         });
-                    })(this._config.trEvent);
+                    })(this._config.trEvent[k]);
                 }
                 $tableBody.data("bindEvent",true);
             }
